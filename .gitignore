@@ -1,0 +1,13 @@
+*.classpath
+*.project
+*.pydevproject
+*.settings
+target/
+test-output/
+bin/
+lib/
+Songs
+PlaylistInput
+PlaylistOutput
+dependency-reduced-pom.xml
+temp/
