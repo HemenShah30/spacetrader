@@ -2,9 +2,13 @@
 *.project
 *.pydevproject
 *.settings
+*.iml
 target/
 test-output/
 bin/
 lib/
-dependency-reduced-pom.xml
 temp/
+.idea/
+.gradle/
+gradle/
+build/
