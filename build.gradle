@@ -1,6 +1,6 @@
 apply plugin: 'java'
 
-defaultTasks 'clean','compileJava', 'compileTest', 'javadoc', 'jar'
+defaultTasks 'clean','compileJava', 'compileTest', 'test', 'javadoc', 'jar'
 sourceCompatibility = 1.8
 version = '0.0.1'
 

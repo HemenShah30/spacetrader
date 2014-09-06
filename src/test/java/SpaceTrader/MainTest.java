@@ -1,15 +1,15 @@
 package SpaceTrader;
 
-import SpaceTrader.Main;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * Basic test to make sure Main class exists
+ * Basic test to make sure gradle runs tests properly
  */
 public class MainTest {
 
     @Test
     public void testMain() {
-        Main m = new Main();
+        Assert.assertTrue(2+2==4);
     }
 }
