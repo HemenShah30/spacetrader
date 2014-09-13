@@ -5,24 +5,29 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SpaceTrader.CharacterCreatorController">
    <children>
       <VBox prefHeight="400.0" prefWidth="600.0">
          <children>
-            <TextField promptText="What should the universe know you as?" />
-            <Label text="Skills" />
+            <TextField fx:id="name" promptText="What should the universe know you as?" />
+            <Label text="Where do your strengths lie?" />
             <Label text="Piloting" />
-            <Slider majorTickUnit="9.0" max="10.0" min="1.0" minorTickCount="8" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
-            <Label text="Engineering" />
-            <Slider majorTickUnit="9.0" max="10.0" min="1.0" minorTickCount="8" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
-            <Label text="Fighting" />
-            <Slider majorTickUnit="9.0" max="10.0" min="1.0" minorTickCount="8" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+            <Slider fx:id="pilot" majorTickUnit="9.0" max="10.0" min="1.0" minorTickCount="8" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
             <Label text="Trading" />
-            <Slider majorTickUnit="9.0" max="10.0" min="1.0" minorTickCount="8" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+            <Slider fx:id="trade" majorTickUnit="9.0" max="10.0" min="1.0" minorTickCount="8" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+            <Label text="Fighting" />
+            <Slider fx:id="fight" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+            <Label text="Engineering" />
+            <Slider fx:id="engineer" majorTickUnit="9.0" max="10.0" min="1.0" minorTickCount="8" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
             <Label text="Investing" />
-            <Slider majorTickUnit="9.0" max="10.0" min="1.0" minorTickCount="8" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
-            <Label text="Skill points left: 15" />
+            <Slider fx:id="invest" majorTickUnit="9.0" max="10.0" min="1.0" minorTickCount="8" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+            <Label fx:id="pointsLeft" text="Skill points left: 15" />
+            <AnchorPane prefHeight="66.0" prefWidth="600.0">
+               <children>
+                  <Button fx:id="back" layoutX="14.0" layoutY="21.0" mnemonicParsing="false" text="Back" />
+                  <Button fx:id="newGame" layoutX="449.0" layoutY="21.0" mnemonicParsing="false" text="Join your new universe" />
+               </children>
+            </AnchorPane>
          </children>
       </VBox>
    </children>

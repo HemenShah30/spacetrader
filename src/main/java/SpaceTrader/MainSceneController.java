@@ -1,21 +1,18 @@
 package SpaceTrader;
 
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-/**
- * Controller for the MainScene scene
- */
 public class MainSceneController {
-	@FXML Button beginButton;
+	@FXML Button newGame;
+	@FXML Button loadGame;
+	@FXML Button settings;
 	
 	/*
-	 * Transition to next screen 
+	 * goes to charater creator screen and starts new game
 	 */
-	@FXML private void begin(Event e) {
-		// testing code
-		beginButton.setText("something happened");
+	@FXML private void newGame(Event e) {
+		
 	}
 }
