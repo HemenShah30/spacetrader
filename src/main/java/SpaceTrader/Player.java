@@ -153,4 +153,12 @@ public class Player {
 	public void setInvestor(int points) {
 		investorSkill = points;
 	}
+
+	@Override
+	public String toString() {
+		return "Player: " + name + ", Pilot Skill: " + pilotSkill
+				+ ", Fighter Skill: " + fighterSkill + ", Trader Skill: "
+				+ traderSkill + ", Engineer Skill: " + engineerSkill
+				+ ", Investor Skill: " + investorSkill;
+	}
 }

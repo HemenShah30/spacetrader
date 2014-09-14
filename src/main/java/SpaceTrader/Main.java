@@ -12,7 +12,9 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 	//This will be the main To-Do list for any specific code level items that need to be taken care of
-	//TODO: Create methods for creating a character
+	//TODO: Set up alerts to the user for trying to create an invalid character
+	//TODO: Modify FXML to look for enter key press events on the main screen, so that clicking isn't necessary
+	//TODO: Create some sort of screen that replaces going back to the main screen upon character creation
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {

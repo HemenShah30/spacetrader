@@ -12,15 +12,15 @@
             <TextField fx:id="name" promptText="What should the universe know you as?" />
             <Label text="Where do your strengths lie?" />
             <Label text="Piloting" />
-            <Slider fx:id="pilot" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" onMouseClicked="#validateAndUpdateSkillPoints" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+            <Slider fx:id="pilotSlider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" onMouseClicked="#validateAndUpdateSkillPoints" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
             <Label text="Trading" />
-            <Slider fx:id="trade" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" onMouseClicked="#validateAndUpdateSkillPoints" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+            <Slider fx:id="traderSlider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" onMouseClicked="#validateAndUpdateSkillPoints" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
             <Label text="Fighting" />
-            <Slider fx:id="fight" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" onMouseClicked="#validateAndUpdateSkillPoints" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+            <Slider fx:id="fightingSlider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" onMouseClicked="#validateAndUpdateSkillPoints" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
             <Label text="Engineering" />
-            <Slider fx:id="engineer" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" onMouseClicked="#validateAndUpdateSkillPoints" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+            <Slider fx:id="engineerSlider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" onMouseClicked="#validateAndUpdateSkillPoints" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
             <Label text="Investing" />
-            <Slider fx:id="invest" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" onMouseClicked="#validateAndUpdateSkillPoints" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+            <Slider fx:id="investorSlider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" onMouseClicked="#validateAndUpdateSkillPoints" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
             <Label fx:id="pointsLeft" text="Skill points left: 10" />
             <AnchorPane prefHeight="66.0" prefWidth="600.0">
                <children>

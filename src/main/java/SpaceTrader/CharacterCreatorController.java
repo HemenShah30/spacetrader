@@ -18,15 +18,15 @@ import javafx.event.Event;
  */
 public class CharacterCreatorController {
 	@FXML
-	Slider pilot;
+	Slider pilotSlider;
 	@FXML
-	Slider fight;
+	Slider fightingSlider;
 	@FXML
-	Slider invest;
+	Slider investorSlider;
 	@FXML
-	Slider engineer;
+	Slider engineerSlider;
 	@FXML
-	Slider trade;
+	Slider traderSlider;
 	@FXML
 	Label pointsLeft;
 	@FXML
@@ -45,8 +45,9 @@ public class CharacterCreatorController {
 	 */
 	@FXML
 	protected void validateAndUpdateSkillPoints(Event e) {
-		double totalPoints = pilot.getValue() + fight.getValue()
-				+ invest.getValue() + engineer.getValue() + trade.getValue();
+		double totalPoints = pilotSlider.getValue() + fightingSlider.getValue()
+				+ investorSlider.getValue() + engineerSlider.getValue()
+				+ traderSlider.getValue();
 		if (totalPoints > 15) {
 			Slider slider = ((Slider) e.getSource());
 			double points = 15 - (totalPoints - slider.getValue());
@@ -66,17 +67,21 @@ public class CharacterCreatorController {
 	@FXML
 	protected void startNewGame(Event e) {
 		String playerName = name.getText().trim();
-		double totalPoints = pilot.getValue() + fight.getValue()
-				+ invest.getValue() + engineer.getValue() + trade.getValue();
+		double totalPoints = pilotSlider.getValue() + fightingSlider.getValue()
+				+ investorSlider.getValue() + engineerSlider.getValue()
+				+ traderSlider.getValue();
 
 		if (playerName.equals("")) {
 			// fire some sort of alert at the user about user name
 		} else if (totalPoints != 15) {
 			// fire some sort of alert at the user about unallocated points
 		} else {
-			Player p = new Player(playerName, (int) pilot.getValue(),
-					(int) fight.getValue(), (int) trade.getValue(),
-					(int) engineer.getValue(), (int) invest.getValue());
+			Player p = new Player(playerName, (int) pilotSlider.getValue(),
+					(int) fightingSlider.getValue(),
+					(int) traderSlider.getValue(),
+					(int) engineerSlider.getValue(),
+					(int) investorSlider.getValue());
+			System.out.println(p);
 			try {
 				Parent charCreateScene = FXMLLoader.load(getClass()
 						.getResource("MainScene.fxml"));
