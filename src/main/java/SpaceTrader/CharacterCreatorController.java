@@ -43,7 +43,7 @@ public class CharacterCreatorController {
 	 *            Event that fired the method
 	 */
 	@FXML
-	private void validateAndUpdateSkillPoints(Event e) {
+	protected void validateAndUpdateSkillPoints(Event e) {
 		System.out.println("CHECKED");
 	}
 
@@ -54,7 +54,7 @@ public class CharacterCreatorController {
 	 *            The event that fired the method
 	 */
 	@FXML
-	private void startNewGame(Event e) {
+	protected void startNewGame(Event e) {
 
 	}
 
@@ -65,7 +65,7 @@ public class CharacterCreatorController {
 	 *            The event that fired the method
 	 */
 	@FXML
-	private void backToMainMenu(Event e) {
+	protected void backToMainMenu(Event e) {
 		try {
 			Parent charCreateScene = FXMLLoader.load(getClass().getResource(
 					"MainScene.fxml"));

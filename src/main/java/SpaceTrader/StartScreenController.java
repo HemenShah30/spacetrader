@@ -18,7 +18,7 @@ public class StartScreenController {
 	 *            The event that fired the method
 	 */
 	@FXML
-	private void begin(Event e) {
+	protected void begin(Event e) {
 		// testing code
 		beginButton.setText("something happened");
 	}

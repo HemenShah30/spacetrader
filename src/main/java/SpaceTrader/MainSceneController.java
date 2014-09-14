@@ -31,7 +31,7 @@ public class MainSceneController {
 	 *            Event that fired the method
 	 */
 	@FXML
-	private void startNewGame(Event e) {
+	protected void startNewGame(Event e) {
 		try {
 			Parent charCreateScene = FXMLLoader.load(getClass().getResource(
 					"CharacterCreator.fxml"));
@@ -43,12 +43,12 @@ public class MainSceneController {
 	}
 
 	@FXML
-	private void loadGame(Event e) {
+	protected void loadGame(Event e) {
 
 	}
 
 	@FXML
-	private void openSettingsMenu(Event e) {
+	protected void openSettingsMenu(Event e) {
 
 	}
 }
