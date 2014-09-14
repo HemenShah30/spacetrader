@@ -11,7 +11,9 @@ import javafx.stage.Stage;
  * @author Jack Croft
  */
 public class Main extends Application {
-
+	//This will be the main To-Do list for any specific code level items that need to be taken care of
+	//TODO: Create methods for creating a character
+	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		Parent root = FXMLLoader.load(getClass().getResource("MainScene.fxml"));
