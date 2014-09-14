@@ -43,8 +43,8 @@ public class CharacterCreatorController {
 	 *            Event that fired the method
 	 */
 	@FXML
-	private void check(Event e) {
-
+	private void validateAndUpdateSkillPoints(Event e) {
+		System.out.println("CHECKED");
 	}
 
 	/**
