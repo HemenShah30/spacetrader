@@ -1,13 +1,20 @@
 package SpaceTrader;
 
+import java.io.IOException;
+
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 /**
  * Controller for the MainScene
+ * 
  * @author Hemen Shah
- *
+ * 
  */
 public class MainSceneController {
 	@FXML
@@ -25,6 +32,13 @@ public class MainSceneController {
 	 */
 	@FXML
 	private void newGame(Event e) {
-
+		try {
+			Parent charCreateScene = FXMLLoader.load(getClass().getResource(
+					"CharacterCreator.fxml"));
+			Stage stage = (Stage) newGame.getScene().getWindow();
+			stage.setScene(new Scene(charCreateScene, 600, 500));
+		} catch (IOException ie) {
+			ie.printStackTrace();
+		}
 	}
 }
