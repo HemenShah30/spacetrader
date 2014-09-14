@@ -12,15 +12,15 @@
             <TextField fx:id="name" promptText="What should the universe know you as?" />
             <Label text="Where do your strengths lie?" />
             <Label text="Piloting" />
-            <Slider fx:id="pilot" majorTickUnit="9.0" max="10.0" min="1.0" minorTickCount="8" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+            <Slider fx:id="pilot" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
             <Label text="Trading" />
-            <Slider fx:id="trade" majorTickUnit="9.0" max="10.0" min="1.0" minorTickCount="8" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+            <Slider fx:id="trade" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
             <Label text="Fighting" />
             <Slider fx:id="fight" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
             <Label text="Engineering" />
-            <Slider fx:id="engineer" majorTickUnit="9.0" max="10.0" min="1.0" minorTickCount="8" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+            <Slider fx:id="engineer" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
             <Label text="Investing" />
-            <Slider fx:id="invest" majorTickUnit="9.0" max="10.0" min="1.0" minorTickCount="8" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+            <Slider fx:id="invest" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
             <Label fx:id="pointsLeft" text="Skill points left: 15" />
             <AnchorPane prefHeight="66.0" prefWidth="600.0">
                <children>
