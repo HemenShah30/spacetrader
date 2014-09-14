@@ -35,6 +35,7 @@ public class CharacterCreatorController {
 	Button back;
 	@FXML
 	Button newGame;
+	private int totalSkills = 20;
 
 	/**
 	 * Validates the total amount of skill points allocated and updates the
@@ -48,14 +49,14 @@ public class CharacterCreatorController {
 		double totalPoints = pilotSlider.getValue() + fightingSlider.getValue()
 				+ investorSlider.getValue() + engineerSlider.getValue()
 				+ traderSlider.getValue();
-		if (totalPoints > 15) {
+		if (totalPoints > totalSkills) {
 			Slider slider = ((Slider) e.getSource());
-			double points = 15 - (totalPoints - slider.getValue());
+			double points = totalSkills - (totalPoints - slider.getValue());
 			slider.setValue(points);
-			totalPoints = 15;
+			totalPoints = totalSkills;
 		}
 
-		pointsLeft.setText("Points Left: " + (int) (15 - totalPoints));
+		pointsLeft.setText("Points Left: " + (int) (totalSkills - totalPoints));
 	}
 
 	/**
@@ -73,7 +74,7 @@ public class CharacterCreatorController {
 
 		if (playerName.equals("")) {
 			// fire some sort of alert at the user about user name
-		} else if (totalPoints != 15) {
+		} else if (totalPoints != totalSkills) {
 			// fire some sort of alert at the user about unallocated points
 		} else {
 			Player p = new Player(playerName, (int) pilotSlider.getValue(),
