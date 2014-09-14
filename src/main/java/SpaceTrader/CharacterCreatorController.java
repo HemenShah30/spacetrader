@@ -37,14 +37,24 @@ public class CharacterCreatorController {
 	Button newGame;
 
 	/**
-	 * checks total skill points left
+	 * Validates the total amount of skill points allocated and updates the
+	 * amount of skill points left
 	 * 
 	 * @param e
-	 *            Event that fired the method
+	 *            The event that fired the method
 	 */
 	@FXML
 	protected void validateAndUpdateSkillPoints(Event e) {
-		System.out.println("CHECKED");
+		double totalPoints = pilot.getValue() + fight.getValue()
+				+ invest.getValue() + engineer.getValue() + trade.getValue();
+		if (totalPoints > 15) {
+			Slider slider = ((Slider) e.getSource());
+			double points = 15 - (totalPoints - slider.getValue());
+			slider.setValue(points);
+			totalPoints = 15;
+		}
+
+		pointsLeft.setText("Points Left: " + (int) (15 - totalPoints));
 	}
 
 	/**

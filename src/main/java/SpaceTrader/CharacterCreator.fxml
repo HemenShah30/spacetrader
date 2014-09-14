@@ -21,7 +21,7 @@
             <Slider fx:id="engineer" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" onMouseClicked="#validateAndUpdateSkillPoints" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
             <Label text="Investing" />
             <Slider fx:id="invest" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" onMouseClicked="#validateAndUpdateSkillPoints" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
-            <Label fx:id="pointsLeft" text="Skill points left: 15" />
+            <Label fx:id="pointsLeft" text="Skill points left: 10" />
             <AnchorPane prefHeight="66.0" prefWidth="600.0">
                <children>
                   <Button fx:id="back" layoutX="14.0" layoutY="21.0" mnemonicParsing="false" onMouseClicked="#backToMainMenu" text="Back" />
