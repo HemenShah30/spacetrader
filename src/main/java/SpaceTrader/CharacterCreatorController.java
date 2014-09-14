@@ -65,7 +65,27 @@ public class CharacterCreatorController {
 	 */
 	@FXML
 	protected void startNewGame(Event e) {
+		String playerName = name.getText().trim();
+		double totalPoints = pilot.getValue() + fight.getValue()
+				+ invest.getValue() + engineer.getValue() + trade.getValue();
 
+		if (playerName.equals("")) {
+			// fire some sort of alert at the user about user name
+		} else if (totalPoints != 15) {
+			// fire some sort of alert at the user about unallocated points
+		} else {
+			Player p = new Player(playerName, (int) pilot.getValue(),
+					(int) fight.getValue(), (int) trade.getValue(),
+					(int) engineer.getValue(), (int) invest.getValue());
+			try {
+				Parent charCreateScene = FXMLLoader.load(getClass()
+						.getResource("MainScene.fxml"));
+				Stage stage = (Stage) newGame.getScene().getWindow();
+				stage.setScene(new Scene(charCreateScene, 600, 500));
+			} catch (IOException ie) {
+				ie.printStackTrace();
+			}
+		}
 	}
 
 	/**
