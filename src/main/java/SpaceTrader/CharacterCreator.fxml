@@ -24,8 +24,8 @@
             <Label fx:id="pointsLeft" text="Skill points left: 15" />
             <AnchorPane prefHeight="66.0" prefWidth="600.0">
                <children>
-                  <Button fx:id="back" layoutX="14.0" layoutY="21.0" mnemonicParsing="false" onMouseClicked="#backToMainMenu" text="Back" />
-                  <Button fx:id="newGame" layoutX="449.0" layoutY="21.0" mnemonicParsing="false" onMouseClicked="#startNewGame" text="Join your new universe" />
+                  <Button fx:id="back" layoutX="14.0" layoutY="21.0" mnemonicParsing="false" onKeyPressed="#backToMainMenu" onMouseClicked="#backToMainMenu" text="Back" />
+                  <Button fx:id="newGame" layoutX="449.0" layoutY="21.0" mnemonicParsing="false" onKeyPressed="#startNewGame" onMouseClicked="#startNewGame" text="Join your new universe" />
                </children>
             </AnchorPane>
          </children>

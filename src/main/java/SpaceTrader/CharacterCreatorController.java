@@ -10,6 +10,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.event.Event;
 
@@ -67,29 +69,37 @@ public class CharacterCreatorController {
 	 */
 	@FXML
 	protected void startNewGame(Event e) {
-		String playerName = name.getText().trim();
-		double totalPoints = pilotSlider.getValue() + fightingSlider.getValue()
-				+ investorSlider.getValue() + engineerSlider.getValue()
-				+ traderSlider.getValue();
+		boolean shouldStart = true;
+		if (e.getEventType().getName() == "KEY_PRESSED"
+				&& ((KeyEvent) e).getCode() != KeyCode.ENTER) {
+			shouldStart = false;
+		}
 
-		if (playerName.equals("")) {
-			// fire some sort of alert at the user about user name
-		} else if (totalPoints != totalSkills) {
-			// fire some sort of alert at the user about unallocated points
-		} else {
-			Player p = new Player(playerName, (int) pilotSlider.getValue(),
-					(int) fightingSlider.getValue(),
-					(int) traderSlider.getValue(),
-					(int) engineerSlider.getValue(),
-					(int) investorSlider.getValue());
-			System.out.println(p);
-			try {
-				Parent charCreateScene = FXMLLoader.load(getClass()
-						.getResource("MainScene.fxml"));
-				Stage stage = (Stage) newGame.getScene().getWindow();
-				stage.setScene(new Scene(charCreateScene, 600, 500));
-			} catch (IOException ie) {
-				ie.printStackTrace();
+		if (shouldStart) {
+			String playerName = name.getText().trim();
+			double totalPoints = pilotSlider.getValue()
+					+ fightingSlider.getValue() + investorSlider.getValue()
+					+ engineerSlider.getValue() + traderSlider.getValue();
+
+			if (playerName.equals("")) {
+				// fire some sort of alert at the user about user name
+			} else if (totalPoints != totalSkills) {
+				// fire some sort of alert at the user about unallocated points
+			} else {
+				Player p = new Player(playerName, (int) pilotSlider.getValue(),
+						(int) fightingSlider.getValue(),
+						(int) traderSlider.getValue(),
+						(int) engineerSlider.getValue(),
+						(int) investorSlider.getValue());
+				System.out.println(p);
+				try {
+					Parent charCreateScene = FXMLLoader.load(getClass()
+							.getResource("StartScreen.fxml"));
+					Stage stage = (Stage) newGame.getScene().getWindow();
+					stage.setScene(new Scene(charCreateScene, 600, 500));
+				} catch (IOException ie) {
+					ie.printStackTrace();
+				}
 			}
 		}
 	}
@@ -102,13 +112,21 @@ public class CharacterCreatorController {
 	 */
 	@FXML
 	protected void backToMainMenu(Event e) {
-		try {
-			Parent charCreateScene = FXMLLoader.load(getClass().getResource(
-					"MainScene.fxml"));
-			Stage stage = (Stage) back.getScene().getWindow();
-			stage.setScene(new Scene(charCreateScene, 600, 500));
-		} catch (IOException ie) {
-			ie.printStackTrace();
+		boolean shouldGoBack = true;
+		if (e.getEventType().getName() == "KEY_PRESSED"
+				&& ((KeyEvent) e).getCode() != KeyCode.ENTER) {
+			shouldGoBack = false;
+		}
+
+		if (shouldGoBack) {
+			try {
+				Parent charCreateScene = FXMLLoader.load(getClass()
+						.getResource("MainScene.fxml"));
+				Stage stage = (Stage) back.getScene().getWindow();
+				stage.setScene(new Scene(charCreateScene, 600, 500));
+			} catch (IOException ie) {
+				ie.printStackTrace();
+			}
 		}
 	}
 }

@@ -9,6 +9,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 /**
  * Controller for the MainScene
@@ -32,23 +34,47 @@ public class MainSceneController {
 	 */
 	@FXML
 	protected void startNewGame(Event e) {
-		try {
-			Parent charCreateScene = FXMLLoader.load(getClass().getResource(
-					"CharacterCreator.fxml"));
-			Stage stage = (Stage) newGame.getScene().getWindow();
-			stage.setScene(new Scene(charCreateScene, 600, 500));
-		} catch (IOException ie) {
-			ie.printStackTrace();
+		boolean shouldStart = true;
+		if (e.getEventType().getName() == "KEY_PRESSED"
+				&& ((KeyEvent) e).getCode() != KeyCode.ENTER) {
+			shouldStart = false;
+		}
+
+		if (shouldStart) {
+			try {
+				Parent charCreateScene = FXMLLoader.load(getClass()
+						.getResource("CharacterCreator.fxml"));
+				Stage stage = (Stage) newGame.getScene().getWindow();
+				stage.setScene(new Scene(charCreateScene, 600, 500));
+			} catch (IOException ie) {
+				ie.printStackTrace();
+			}
 		}
 	}
 
 	@FXML
 	protected void loadGame(Event e) {
+		boolean shouldLoad = true;
+		if (e.getEventType().getName() == "KEY_PRESSED"
+				&& ((KeyEvent) e).getCode() != KeyCode.ENTER) {
+			shouldLoad = false;
+		}
 
+		if (shouldLoad) {
+			System.out.println("Load Game");
+		}
 	}
 
 	@FXML
 	protected void openSettingsMenu(Event e) {
+		boolean shouldOpen = true;
+		if (e.getEventType().getName() == "KEY_PRESSED"
+				&& ((KeyEvent) e).getCode() != KeyCode.ENTER) {
+			shouldOpen = false;
+		}
 
+		if (shouldOpen) {
+			System.out.println("Open Settings");
+		}
 	}
 }
