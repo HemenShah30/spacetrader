@@ -2,6 +2,10 @@ package SpaceTrader;
 
 import java.io.IOException;
 
+import org.controlsfx.control.action.Action;
+import org.controlsfx.dialog.Dialog;
+import org.controlsfx.dialog.Dialogs;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -82,9 +86,16 @@ public class CharacterCreatorController {
 					+ engineerSlider.getValue() + traderSlider.getValue();
 
 			if (playerName.equals("")) {
-				// fire some sort of alert at the user about user name
+				Dialogs.create().owner(newGame.getScene().getWindow())
+						.title("Error")
+						.message("You must enter a name for your character")
+						.showError();
+
 			} else if (totalPoints != totalSkills) {
-				// fire some sort of alert at the user about unallocated points
+				Dialogs.create().owner(newGame.getScene().getWindow())
+				.title("Error")
+				.message("You must allocate all your skill poinst for your character")
+				.showError();
 			} else {
 				Player p = new Player(playerName, (int) pilotSlider.getValue(),
 						(int) fightingSlider.getValue(),
