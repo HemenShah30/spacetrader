@@ -2,8 +2,6 @@ package SpaceTrader;
 
 import java.io.IOException;
 
-import org.controlsfx.control.action.Action;
-import org.controlsfx.dialog.Dialog;
 import org.controlsfx.dialog.Dialogs;
 
 import javafx.fxml.FXML;
@@ -92,10 +90,12 @@ public class CharacterCreatorController {
 						.showError();
 
 			} else if (totalPoints != totalSkills) {
-				Dialogs.create().owner(newGame.getScene().getWindow())
-				.title("Error")
-				.message("You must allocate all your skill poinst for your character")
-				.showError();
+				Dialogs.create()
+						.owner(newGame.getScene().getWindow())
+						.title("Error")
+						.message(
+								"You must allocate all your skill poinst for your character")
+						.showError();
 			} else {
 				Player p = new Player(playerName, (int) pilotSlider.getValue(),
 						(int) fightingSlider.getValue(),
