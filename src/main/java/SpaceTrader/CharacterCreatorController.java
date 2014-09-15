@@ -2,6 +2,8 @@ package SpaceTrader;
 
 import java.io.IOException;
 
+import org.controlsfx.control.Notifications;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -83,6 +85,7 @@ public class CharacterCreatorController {
 
 			if (playerName.equals("")) {
 				// fire some sort of alert at the user about user name
+//				Notifications noName = new Notifications();
 			} else if (totalPoints != totalSkills) {
 				// fire some sort of alert at the user about unallocated points
 			} else {
