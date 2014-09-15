@@ -13,10 +13,6 @@ import javafx.stage.Stage;
 public class Main extends Application {
 	//This will be the main To-Do list for any specific code level items that need to be taken care of
 	//TODO: Set up alerts to the user for trying to create an invalid character
-	//TODO: Modify FXML to look for enter key press events on the main screen, so that clicking isn't necessary
-	//TODO: Create some sort of screen that replaces going back to the main screen upon character creation
-	//TODO: Fix the StartScreen to not break upon loading
-	//TODO: Make the sliders on the character creation screen listen for key presses, so they change even when they are not clicked
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {

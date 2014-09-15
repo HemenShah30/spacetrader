@@ -11,17 +11,17 @@
 
 <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SpaceTrader.MainSceneController">
    <children>
-      <Button fx:id="newGame" mnemonicParsing="false" onMouseClicked="#startNewGame" text="Start New Game">
+      <Button fx:id="newGame" mnemonicParsing="false" onKeyPressed="#startNewGame" onMouseClicked="#startNewGame" text="Start New Game">
          <VBox.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="50.0" />
          </VBox.margin>
       </Button>
-      <Button fx:id="loadGame" mnemonicParsing="false" onMouseClicked="#loadGame" text="Load Game">
+      <Button fx:id="loadGame" mnemonicParsing="false" onKeyPressed="#loadGame" onMouseClicked="#loadGame" text="Load Game">
          <VBox.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </VBox.margin>
       </Button>
-      <Button fx:id="settings" mnemonicParsing="false" onMouseClicked="#openSettingsMenu" text="Settings">
+      <Button fx:id="settings" mnemonicParsing="false" onKeyPressed="#openSettingsMenu" onMouseClicked="#openSettingsMenu" text="Settings">
          <VBox.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </VBox.margin>
