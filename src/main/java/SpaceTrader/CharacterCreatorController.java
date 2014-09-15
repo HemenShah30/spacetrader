@@ -2,12 +2,10 @@ package SpaceTrader;
 
 import java.io.IOException;
 
-<<<<<<< HEAD
-import org.controlsfx.control.Notifications;
-=======
-import org.controlsfx.dialog.Dialogs;
->>>>>>> 238c473243ab500f121bedb025666c9cfc698161
 
+
+//import org.controlsfx.control.Notifications;
+import org.controlsfx.dialog.Dialogs;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -88,16 +86,10 @@ public class CharacterCreatorController {
 					+ engineerSlider.getValue() + traderSlider.getValue();
 
 			if (playerName.equals("")) {
-<<<<<<< HEAD
-				// fire some sort of alert at the user about user name
-//				Notifications noName = new Notifications();
-=======
 				Dialogs.create().owner(newGame.getScene().getWindow())
 						.title("Error")
 						.message("You must enter a name for your character")
 						.showError();
-
->>>>>>> 238c473243ab500f121bedb025666c9cfc698161
 			} else if (totalPoints != totalSkills) {
 				Dialogs.create()
 						.owner(newGame.getScene().getWindow())
