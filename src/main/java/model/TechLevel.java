@@ -1,4 +1,4 @@
-package SpaceTrader;
+package model;
 
 /**
  * Class representing the tech level of a planet

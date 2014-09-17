@@ -1,4 +1,4 @@
-package SpaceTrader;
+package model;
 
 /**
  * Class representing a game player

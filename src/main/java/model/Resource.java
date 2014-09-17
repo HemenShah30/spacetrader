@@ -1,4 +1,4 @@
-package SpaceTrader;
+package model;
 
 /**
  * Class representing the resource of a planet
