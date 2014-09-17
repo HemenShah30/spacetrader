@@ -10,6 +10,6 @@ public class MainTest {
 
     @Test
     public void testMain() {
-        Assert.assertTrue(2+2==4);
+        Assert.assertTrue(true);
     }
 }
