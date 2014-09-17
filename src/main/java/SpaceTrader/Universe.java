@@ -13,10 +13,16 @@ public class Universe {
 
 	private List<Planet> planets;
 
+	/**
+	 * Simple universe constructor, just creating a blank planet array
+	 */
 	public Universe() {
 		planets = new ArrayList<Planet>();
 	}
 
+	/**
+	 * Method for creating all the planets for the universe, setting up their tech level and resources
+	 */
 	public void createPlanets() {
 		Reader reader = new Reader();
 		List<String> planetNames = reader
