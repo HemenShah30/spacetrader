@@ -1,4 +1,4 @@
-package SpaceTrader;
+package controller;
 
 import java.io.IOException;
 
@@ -94,7 +94,7 @@ public class CharacterCreatorController {
 						.owner(newGame.getScene().getWindow())
 						.title("Error")
 						.message(
-								"You must allocate all your skill poinst for your character")
+								"You must allocate all your skill points for your character")
 						.showError();
 			} else {
 				Player p = new Player(playerName, (int) pilotSlider.getValue(),
@@ -105,7 +105,7 @@ public class CharacterCreatorController {
 				System.out.println(p);
 				try {
 					Parent charCreateScene = FXMLLoader.load(getClass()
-							.getResource("StartScreen.fxml"));
+							.getResource("../view/StartScreen.fxml"));
 					Stage stage = (Stage) newGame.getScene().getWindow();
 					stage.setScene(new Scene(charCreateScene, 600, 500));
 				} catch (IOException ie) {
@@ -132,7 +132,7 @@ public class CharacterCreatorController {
 		if (shouldGoBack) {
 			try {
 				Parent charCreateScene = FXMLLoader.load(getClass()
-						.getResource("MainScene.fxml"));
+						.getResource("../view/MainScene.fxml"));
 				Stage stage = (Stage) back.getScene().getWindow();
 				stage.setScene(new Scene(charCreateScene, 600, 500));
 			} catch (IOException ie) {

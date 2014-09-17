@@ -20,7 +20,7 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("MainScene.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("../view/MainScene.fxml"));
 		primaryStage.setTitle("Space Traders");
 		primaryStage.setScene(new Scene(root, 600, 400));
 		primaryStage.show();
@@ -35,7 +35,7 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		Reader r = new Reader();
 		List<String> planets = r.readPlanetNames(".\\src\\main\\resources\\PlanetNames.txt");
-		System.out.println(planets);
+	//	System.out.println(planets);
 		
 		launch(args);
 	}

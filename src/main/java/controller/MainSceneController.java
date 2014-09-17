@@ -1,4 +1,4 @@
-package SpaceTrader;
+package controller;
 
 import java.io.IOException;
 
@@ -43,7 +43,7 @@ public class MainSceneController {
 		if (shouldStart) {
 			try {
 				Parent charCreateScene = FXMLLoader.load(getClass()
-						.getResource("CharacterCreator.fxml"));
+						.getResource("../view/CharacterCreator.fxml"));
 				Stage stage = (Stage) newGame.getScene().getWindow();
 				stage.setScene(new Scene(charCreateScene, 600, 500));
 			} catch (IOException ie) {
