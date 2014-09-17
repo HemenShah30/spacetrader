@@ -3,6 +3,8 @@ package SpaceTrader;
 import java.io.IOException;
 
 import org.controlsfx.dialog.Dialogs;
+
+import SpaceTrader.Player;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

@@ -1,5 +1,7 @@
 package SpaceTrader;
 
+import java.util.List;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -31,6 +33,10 @@ public class Main extends Application {
 	 *            Command line arguments
 	 */
 	public static void main(String[] args) {
+		Reader r = new Reader();
+		List<String> planets = r.readPlanetNames(".\\src\\main\\resources\\PlanetNames.txt");
+		System.out.println(planets);
+		
 		launch(args);
 	}
 }
