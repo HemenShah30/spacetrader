@@ -8,12 +8,14 @@ import javafx.stage.Stage;
 
 /**
  * Main class which starts off the program
+ * 
  * @author Jack Croft
  */
 public class Main extends Application {
-	//This will be the main To-Do list for any specific code level items that need to be taken care of
-	//TODO: Set up alerts to the user for trying to create an invalid character
-	
+	// This will be the main To-Do list for any specific code level items that
+	// need to be taken care of
+	// TODO:
+
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		Parent root = FXMLLoader.load(getClass().getResource("MainScene.fxml"));

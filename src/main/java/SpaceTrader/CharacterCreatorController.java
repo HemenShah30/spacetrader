@@ -2,9 +2,6 @@ package SpaceTrader;
 
 import java.io.IOException;
 
-
-
-//import org.controlsfx.control.Notifications;
 import org.controlsfx.dialog.Dialogs;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

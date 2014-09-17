@@ -9,9 +9,7 @@ package SpaceTrader;
 public class Planet {
 	TechLevel techLevel;
 	Resource resource;
-	
-	
-	
+
 	@Override
 	public String toString() {
 		return "";

@@ -53,6 +53,10 @@ public class MainSceneController {
 	}
 
 	@FXML
+	/**
+	 * Method for loading a previously saved game
+	 * @param e The event that fired the method
+	 */
 	protected void loadGame(Event e) {
 		boolean shouldLoad = true;
 		if (e.getEventType().getName() == "KEY_PRESSED"
@@ -66,6 +70,10 @@ public class MainSceneController {
 	}
 
 	@FXML
+	/**
+	 * Method for opening the settings menu
+	 * @param e The event that fired the method
+	 */
 	protected void openSettingsMenu(Event e) {
 		boolean shouldOpen = true;
 		if (e.getEventType().getName() == "KEY_PRESSED"
