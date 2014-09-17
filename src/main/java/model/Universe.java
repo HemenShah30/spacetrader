@@ -29,7 +29,7 @@ public class Universe {
 
 		for (int i = 0; i < planetNames.size(); i++) {
 			TechLevel[] levels = TechLevel.values();
-			Resource[] resources = Resource.values();
+			SpecialResource[] resources = SpecialResource.values();
 			Government[] governments = Government.values();
 			int l = (int) (Math.random() * levels.length);
 			int r = (int) (Math.random() * resources.length);

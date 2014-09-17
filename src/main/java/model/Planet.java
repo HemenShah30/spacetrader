@@ -10,7 +10,7 @@ package model;
 public class Planet {
 	private String name;
 	private TechLevel techLevel;
-	private Resource resource;
+	private SpecialResource resource;
 	private Government government;
 
 	/**
@@ -25,7 +25,7 @@ public class Planet {
 	 * @param g
 	 * 			  The government type of the planet
 	 */
-	public Planet(String n, TechLevel tech, Resource r, Government g) {
+	public Planet(String n, TechLevel tech, SpecialResource r, Government g) {
 		setName(n);
 		setTechLevel(tech);
 		setResource(r);
@@ -62,7 +62,7 @@ public class Planet {
 	 * @param r
 	 *            The resource of the planet to be set
 	 */
-	private void setResource(Resource r) {
+	private void setResource(SpecialResource r) {
 		if (r == null)
 			throw new IllegalArgumentException();
 		resource = r;
@@ -103,7 +103,7 @@ public class Planet {
 	 * 
 	 * @return The resource of the planet
 	 */
-	public Resource getResource() {
+	public SpecialResource getResource() {
 		return resource;
 	}
 	
