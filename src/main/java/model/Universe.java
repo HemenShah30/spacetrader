@@ -2,7 +2,6 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
-
 /**
  * Class representing the entire universe
  * 
@@ -31,9 +30,11 @@ public class Universe {
 		for (int i = 0; i < planetNames.size(); i++) {
 			TechLevel[] levels = TechLevel.values();
 			Resource[] resources = Resource.values();
+			Government[] governments = Government.values();
 			int l = (int) (Math.random() * levels.length);
 			int r = (int) (Math.random() * resources.length);
-			Planet p = new Planet(planetNames.get(i), levels[l], resources[r]);
+			int g = (int) (Math.random() * governments.length);
+			Planet p = new Planet(planetNames.get(i), levels[l], resources[r], governments[g]);
 			planets.add(p);
 		}
 		System.out.println(planets);
