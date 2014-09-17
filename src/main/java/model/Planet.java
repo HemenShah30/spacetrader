@@ -11,6 +11,7 @@ public class Planet {
 	private String name;
 	private TechLevel techLevel;
 	private Resource resource;
+	private Government government;
 
 	/**
 	 * Basic Planet constructor taking a tech level and a resource
@@ -21,11 +22,14 @@ public class Planet {
 	 *            The resource for the planet
 	 * @param n
 	 *            The name of the planet
+	 * @param g
+	 * 			  The government type of the planet
 	 */
-	public Planet(String n, TechLevel tech, Resource r) {
+	public Planet(String n, TechLevel tech, Resource r, Government g) {
 		setName(n);
 		setTechLevel(tech);
 		setResource(r);
+		setGovernment(g);
 	}
 
 	/**
@@ -65,6 +69,18 @@ public class Planet {
 	}
 
 	/**
+	 * Private setter for government type validation
+	 * 
+	 * @param r
+	 *            The government type of the planet to be set
+	 */
+	private void setGovernment(Government g) {
+		if (g == null)
+			throw new IllegalArgumentException();
+		government = g;
+	}
+	
+	/**
 	 * Getter for the name of the planet
 	 * 
 	 * @return The name of the planet
@@ -90,9 +106,18 @@ public class Planet {
 	public Resource getResource() {
 		return resource;
 	}
+	
+	/**
+	 * Getter for the government type of the planet
+	 * 
+	 * @return The government of the planet
+	 */
+	public Government getGovernment() {
+		return government;
+	}
 
 	@Override
 	public String toString() {
-		return name + ", Tech Level: " + techLevel + ", Resource: " + resource;
+		return name + ", Tech Level: " + techLevel + ", Resource: " + resource + ", Goverment: " + government;
 	}
 }
