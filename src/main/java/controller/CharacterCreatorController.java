@@ -106,7 +106,7 @@ public class CharacterCreatorController {
 				System.out.println(p);
 				try {
 					Parent charCreateScene = FXMLLoader.load(getClass()
-							.getResource("../view/StartScreen.fxml"));
+							.getResource("../view/PlanetScreen.fxml"));
 					Stage stage = (Stage) newGame.getScene().getWindow();
 					stage.setScene(new Scene(charCreateScene, 600, 500));
 				} catch (IOException ie) {
