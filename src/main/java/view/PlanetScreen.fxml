@@ -10,40 +10,26 @@
    <center>
       <AnchorPane prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="210.0" layoutY="117.0" mnemonicParsing="false" text="Layout is still being figured out" />
-            <Button layoutX="261.0" layoutY="148.0" mnemonicParsing="false" text="Y u no work" />
-            <Button layoutX="281.0" layoutY="179.0" mnemonicParsing="false" text="Y!!!!!" />
+            <Button layoutX="265.0" layoutY="117.0" mnemonicParsing="false" text="Trade stuff" />
+            <Button layoutX="269.0" layoutY="148.0" mnemonicParsing="false" text="Get ships" />
+            <Button layoutX="244.0" layoutY="179.0" mnemonicParsing="false" text="Layout in progress" />
          </children>
       </AnchorPane>
    </center>
    <bottom>
       <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label text="Money's">
-               <HBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </HBox.margin>
-            </Label>
-            <Label text="Goods?">
-               <HBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </HBox.margin>
-            </Label>
-            <Label text="Screen that does nothing yet">
-               <HBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </HBox.margin>
-            </Label>
-         </children>
          <BorderPane.margin>
             <Insets />
          </BorderPane.margin>
+         <children>
+            <Label text="Player Info" />
+         </children>
       </HBox>
    </bottom>
    <top>
       <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="How to layout?" />
+            <Label text="Planet Info" />
          </children>
       </HBox>
    </top>
