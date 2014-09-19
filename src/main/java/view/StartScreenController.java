@@ -40,7 +40,7 @@ public class StartScreenController {
 				Parent charCreateScene = FXMLLoader.load(getClass()
 						.getResource("../view/MainScene.fxml"));
 				Stage stage = (Stage) beginButton.getScene().getWindow();
-				stage.setScene(new Scene(charCreateScene, 600, 500));
+				stage.setScene(new Scene(charCreateScene, 600, 400));
 			} catch (IOException ie) {
 				ie.printStackTrace();
 			}

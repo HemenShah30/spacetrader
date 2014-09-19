@@ -45,7 +45,7 @@ public class MainSceneController {
 				Parent charCreateScene = FXMLLoader.load(getClass()
 						.getResource("../view/CharacterCreator.fxml"));
 				Stage stage = (Stage) newGame.getScene().getWindow();
-				stage.setScene(new Scene(charCreateScene, 600, 500));
+				stage.setScene(new Scene(charCreateScene, 600, 400));
 			} catch (IOException ie) {
 				ie.printStackTrace();
 			}
