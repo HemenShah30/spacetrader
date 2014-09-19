@@ -1,6 +1,5 @@
 package model;
 
-
 /**
  * Class representing a planet
  * 
@@ -23,7 +22,7 @@ public class Planet {
 	 * @param n
 	 *            The name of the planet
 	 * @param g
-	 * 			  The government type of the planet
+	 *            The government type of the planet
 	 */
 	public Planet(String n, TechLevel tech, SpecialResource r, Government g) {
 		setName(n);
@@ -79,7 +78,7 @@ public class Planet {
 			throw new IllegalArgumentException();
 		government = g;
 	}
-	
+
 	/**
 	 * Getter for the name of the planet
 	 * 
@@ -106,7 +105,7 @@ public class Planet {
 	public SpecialResource getResource() {
 		return resource;
 	}
-	
+
 	/**
 	 * Getter for the government type of the planet
 	 * 
@@ -118,6 +117,7 @@ public class Planet {
 
 	@Override
 	public String toString() {
-		return name + ", Tech Level: " + techLevel + ", Resource: " + resource + ", Goverment: " + government;
+		return name + ", Tech Level: " + techLevel + ", Resource: " + resource
+				+ ", Goverment: " + government;
 	}
 }

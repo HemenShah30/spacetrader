@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * Class representing the entire universe
  * 
@@ -20,7 +21,8 @@ public class Universe {
 	}
 
 	/**
-	 * Method for creating all the planets for the universe, setting up their tech level and resources
+	 * Method for creating all the planets for the universe, setting up their
+	 * tech level and resources
 	 */
 	public void createPlanets() {
 		Reader reader = new Reader();
@@ -34,7 +36,8 @@ public class Universe {
 			int l = (int) (Math.random() * levels.length);
 			int r = (int) (Math.random() * resources.length);
 			int g = (int) (Math.random() * governments.length);
-			Planet p = new Planet(planetNames.get(i), levels[l], resources[r], governments[g]);
+			Planet p = new Planet(planetNames.get(i), levels[l], resources[r],
+					governments[g]);
 			planets.add(p);
 		}
 		System.out.println(planets);
