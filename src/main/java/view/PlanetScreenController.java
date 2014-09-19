@@ -1,4 +1,4 @@
-package controller;
+package view;
 
 /**
  * Controller for the planet screen window
