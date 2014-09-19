@@ -3,6 +3,7 @@ package view;
 import java.io.IOException;
 
 import model.Player;
+import model.Universe;
 
 import org.controlsfx.dialog.Dialogs;
 
@@ -110,6 +111,8 @@ public class CharacterCreatorController {
 							.getResource("../view/PlanetScreen.fxml"));
 					Stage stage = (Stage) newGame.getScene().getWindow();
 					stage.setScene(new Scene(charCreateScene, 600, 400));
+					Universe u = new Universe();
+					u.createPlanets();
 				} catch (IOException ie) {
 					ie.printStackTrace();
 				}
