@@ -109,7 +109,7 @@ public class CharacterCreatorController {
 					Parent charCreateScene = FXMLLoader.load(getClass()
 							.getResource("../view/PlanetScreen.fxml"));
 					Stage stage = (Stage) newGame.getScene().getWindow();
-					stage.setScene(new Scene(charCreateScene, 600, 500));
+					stage.setScene(new Scene(charCreateScene, 600, 400));
 				} catch (IOException ie) {
 					ie.printStackTrace();
 				}
@@ -136,7 +136,7 @@ public class CharacterCreatorController {
 				Parent charCreateScene = FXMLLoader.load(getClass()
 						.getResource("../view/MainScene.fxml"));
 				Stage stage = (Stage) back.getScene().getWindow();
-				stage.setScene(new Scene(charCreateScene, 600, 500));
+				stage.setScene(new Scene(charCreateScene, 600, 400));
 			} catch (IOException ie) {
 				ie.printStackTrace();
 			}
