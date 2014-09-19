@@ -11,6 +11,7 @@ public class Planet {
 	private TechLevel techLevel;
 	private SpecialResource resource;
 	private Government government;
+	private Location location;
 
 	/**
 	 * Basic Planet constructor taking a tech level and a resource
@@ -118,6 +119,6 @@ public class Planet {
 	@Override
 	public String toString() {
 		return name + ", Tech Level: " + techLevel + ", Resource: " + resource
-				+ ", Goverment: " + government;
+				+ ", Goverment: " + government + "\n";
 	}
 }
