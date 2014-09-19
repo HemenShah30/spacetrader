@@ -15,6 +15,6 @@ dependencies {
 
 jar {
     manifest {
-        attributes 'Main-Class': 'SpaceTrader.Main'
+        attributes 'Main-Class': 'spaceTrader.Main'
     }
 }
