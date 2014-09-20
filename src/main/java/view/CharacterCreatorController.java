@@ -22,6 +22,7 @@ import javafx.event.Event;
 
 /**
  * Controller for the CharacterCreator scene
+ * 
  * @author Hemen Shah
  */
 public class CharacterCreatorController {

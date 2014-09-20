@@ -9,7 +9,7 @@ package model;
 public class Location {
 	private int x;
 	private int y;
-	
+
 	/**
 	 * Basic Location constructor taking in coordinate values
 	 * 
@@ -22,7 +22,7 @@ public class Location {
 		setX(x);
 		setY(y);
 	}
-	
+
 	/**
 	 * Private setter for x coordinate
 	 * 
@@ -32,7 +32,7 @@ public class Location {
 	private void setX(int x) {
 		this.x = x;
 	}
-	
+
 	/**
 	 * Private setter for y coordinate
 	 * 
@@ -42,8 +42,7 @@ public class Location {
 	private void setY(int y) {
 		this.y = y;
 	}
-	
-	
+
 	/**
 	 * Returns the x coordinate of the planet
 	 * 
@@ -52,7 +51,7 @@ public class Location {
 	public int getX() {
 		return x;
 	}
-	
+
 	/**
 	 * Returns the y coordinate of the planet
 	 * 
@@ -61,7 +60,7 @@ public class Location {
 	public int getY() {
 		return y;
 	}
-	
+
 	/**
 	 * Checks if an Object is the same Location
 	 * 
@@ -69,14 +68,19 @@ public class Location {
 	 */
 	@Override
 	public boolean equals(Object other) {
-		if (other == null)
-			throw new IllegalArgumentException();
+		if (other == null || !(other instanceof Location))
+			return false;
 		Location that = (Location) other;
-		return (getX()==that.getX() && getY()==that.getY());
+		return (getX() == that.getX() && getY() == that.getY());
 	}
-	
+
+	@Override
+	public int hashCode() {
+		return toString().hashCode();
+	}
+
 	@Override
 	public String toString() {
-		return "X: " + x + " Y: " + y;
+		return "(" + x + ", " + y + ")";
 	}
 }

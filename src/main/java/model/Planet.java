@@ -25,7 +25,8 @@ public class Planet {
 	 * @param g
 	 *            The government type of the planet
 	 */
-	public Planet(String n, TechLevel tech, SpecialResource r, Government g, Location l) {
+	public Planet(String n, TechLevel tech, SpecialResource r, Government g,
+			Location l) {
 		setName(n);
 		setTechLevel(tech);
 		setResource(r);
@@ -80,7 +81,7 @@ public class Planet {
 			throw new IllegalArgumentException();
 		government = g;
 	}
-	
+
 	/**
 	 * Private setter for Location type validation
 	 * 
@@ -137,10 +138,10 @@ public class Planet {
 	public Location getLocation() {
 		return location;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "\n" + name + " Location: " + location + ", Tech Level: " + techLevel + ", Resource: " + resource
-				+ ", Goverment: " + government;
+		return name + " Location: " + location + ", Tech Level: " + techLevel
+				+ ", Resource: " + resource + ", Goverment: " + government;
 	}
 }
