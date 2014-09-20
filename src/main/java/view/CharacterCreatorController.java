@@ -1,23 +1,13 @@
 package view;
 
-import java.io.IOException;
-
 import model.Player;
-import model.Universe;
-
 import org.controlsfx.dialog.Dialogs;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.stage.Stage;
 import javafx.event.Event;
 
 /**
@@ -76,13 +66,7 @@ public class CharacterCreatorController {
 	 */
 	@FXML
 	protected void startNewGame(Event e) {
-		boolean shouldStart = true;
-		if (e.getEventType().getName() == "KEY_PRESSED"
-				&& ((KeyEvent) e).getCode() != KeyCode.ENTER) {
-			shouldStart = false;
-		}
-
-		if (shouldStart) {
+		if (MultiPageController.isValidAction(e)) {
 			String playerName = name.getText().trim();
 			double totalPoints = pilotSlider.getValue()
 					+ fightingSlider.getValue() + investorSlider.getValue()
@@ -107,16 +91,7 @@ public class CharacterCreatorController {
 						(int) engineerSlider.getValue(),
 						(int) investorSlider.getValue());
 				System.out.println(p);
-				try {
-					Parent charCreateScene = FXMLLoader.load(getClass()
-							.getResource("../view/PlanetScreen.fxml"));
-					Stage stage = (Stage) newGame.getScene().getWindow();
-					stage.setScene(new Scene(charCreateScene, 600, 400));
-					Universe u = new Universe();
-					u.createPlanets();
-				} catch (IOException ie) {
-					ie.printStackTrace();
-				}
+				MultiPageController.loadView(this, newGame, "PlanetScreen");
 			}
 		}
 	}
@@ -129,21 +104,8 @@ public class CharacterCreatorController {
 	 */
 	@FXML
 	protected void backToMainMenu(Event e) {
-		boolean shouldGoBack = true;
-		if (e.getEventType().getName() == "KEY_PRESSED"
-				&& ((KeyEvent) e).getCode() != KeyCode.ENTER) {
-			shouldGoBack = false;
-		}
-
-		if (shouldGoBack) {
-			try {
-				Parent charCreateScene = FXMLLoader.load(getClass()
-						.getResource("../view/MainScene.fxml"));
-				Stage stage = (Stage) back.getScene().getWindow();
-				stage.setScene(new Scene(charCreateScene, 600, 400));
-			} catch (IOException ie) {
-				ie.printStackTrace();
-			}
+		if (MultiPageController.isValidAction(e)) {
+			MultiPageController.loadView(this, back, "MainScene");
 		}
 	}
 }
