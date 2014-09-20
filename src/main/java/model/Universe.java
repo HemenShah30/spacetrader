@@ -12,6 +12,8 @@ import java.util.List;
 public class Universe {
 
 	private List<Planet> planets;
+	private static final double universeLength = 100;
+	private static final double universeWidth = 150;
 
 	/**
 	 * Simple universe constructor, just creating a blank planet array
@@ -33,11 +35,15 @@ public class Universe {
 			TechLevel[] levels = TechLevel.values();
 			SpecialResource[] resources = SpecialResource.values();
 			Government[] governments = Government.values();
-			int l = (int) (Math.random() * levels.length);
+			
+			int t = (int) (Math.random() * levels.length);
 			int r = (int) (Math.random() * resources.length);
 			int g = (int) (Math.random() * governments.length);
-			Planet p = new Planet(planetNames.get(i), levels[l], resources[r],
-					governments[g]);
+			int x = (int) (Math.random() * universeLength);
+			int y = (int) (Math.random() * universeWidth);
+			Location l = new Location(x, y);
+			Planet p = new Planet(planetNames.get(i), levels[t], resources[r],
+					governments[g], l);
 			planets.add(p);
 		}
 		System.out.println(planets);
