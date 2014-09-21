@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- * Main class which starts off the program
+ * Main class which starts off the application
  * 
  * @author Jack Croft
  */
@@ -18,7 +18,6 @@ public class Main extends Application {
 	// TODO: Add in logging
 	// TODO: Begin implementing Save and Load functions
 	// TODO: Add exit button to MainScene
-	// TODO: Fix JAR by getting correct setup of resources through Gradle
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -30,7 +29,7 @@ public class Main extends Application {
 	}
 
 	/**
-	 * Main method for running the whole program
+	 * Main method for running the whole application
 	 * 
 	 * @param args
 	 *            Command line arguments

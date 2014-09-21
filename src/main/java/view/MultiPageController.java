@@ -38,6 +38,14 @@ public class MultiPageController {
 		return isValidAction;
 	}
 
+	/**
+	 * Loads up a new view using the given Node and the name of the view
+	 * 
+	 * @param node
+	 *            The FX object that will find the scene
+	 * @param viewName
+	 *            The name of the view
+	 */
 	public static void loadView(Node node, String viewName) {
 		try {
 			Parent newScene = new FXMLLoader().load(ClassLoader
