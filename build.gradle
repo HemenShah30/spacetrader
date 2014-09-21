@@ -1,4 +1,7 @@
 apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = "spaceTrader.Main"
 
 defaultTasks 'clean','compileJava', 'compileTest', 'test', 'javadoc', 'jar'
 sourceCompatibility = 1.8
@@ -6,6 +9,15 @@ version = '0.0.1'
 
 repositories {
     mavenCentral()
+}
+
+sourceSets {
+  main {
+    resources {
+        srcDirs = ["src/main/java"]
+        includes = ["**/*.fxml"]
+    }
+  }
 }
 
 dependencies {

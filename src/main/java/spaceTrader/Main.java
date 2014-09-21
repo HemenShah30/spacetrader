@@ -14,7 +14,11 @@ import javafx.stage.Stage;
 public class Main extends Application {
 	// This will be the main To-Do list for any specific code level items that
 	// need to be taken care of
-	// TODO: Determine how to implement the location system for the game
+	// TODO: Create main planet scene and implement the actions
+	// TODO: Add in logging upon approval of group
+	// TODO: Fix broken JAR file by getting it to know about controlsFX
+	// TODO: Begin implementing Save and Load functions
+	// TODO: Add exit button to MainScene
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
