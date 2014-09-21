@@ -13,6 +13,7 @@
             <Button layoutX="265.0" layoutY="117.0" mnemonicParsing="false" text="Trade stuff" />
             <Button layoutX="269.0" layoutY="148.0" mnemonicParsing="false" text="Get ships" />
             <Button layoutX="244.0" layoutY="179.0" mnemonicParsing="false" text="Layout in progress" />
+            <Button fx:id="saveGameBtn" layoutX="520.0" layoutY="294.0" mnemonicParsing="false" onKeyPressed="#saveGame" onMouseClicked="#saveGame" text="Save Game" />
          </children>
       </AnchorPane>
    </center>

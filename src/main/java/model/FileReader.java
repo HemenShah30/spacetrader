@@ -11,7 +11,7 @@ import java.util.Scanner;
  * @author Jack Croft
  *
  */
-public class Reader {
+public class FileReader {
 
 	/**
 	 * Reader for planet names from a given file
@@ -32,5 +32,24 @@ public class Reader {
 		reader.close();
 
 		return planetNames;
+	}
+
+	/**
+	 * Loads the saved game data from file
+	 * 
+	 * @return The Player then the Universe in that order from file
+	 */
+	public Object[] loadGameData() {
+		Object[] gameData = new Object[2];
+		Universe u = new Universe();
+		InputStream is = ClassLoader
+				.getSystemResourceAsStream("model/GameData");
+		Scanner input=new Scanner(is);
+		input.useDelimiter("\n");
+		
+		
+		input.close();
+		gameData[1] = u;
+		return gameData;
 	}
 }

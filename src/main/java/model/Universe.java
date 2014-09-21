@@ -23,13 +23,21 @@ public class Universe {
 	public Universe() {
 		planets = new ArrayList<Planet>();
 	}
+	
+	/**
+	 * Constructor for a universe taking in a list of planets to begin with
+	 * @param p
+	 */
+	public Universe(List<Planet> p) {
+		planets = p;
+	}
 
 	/**
 	 * Method for creating all the planets for the universe, setting up their
 	 * tech level and resources
 	 */
 	public void createPlanets() {
-		Reader reader = new Reader();
+		FileReader reader = new FileReader();
 		List<String> planetNames = reader
 				.readPlanetNames("model/PlanetNames.txt");
 
@@ -64,5 +72,13 @@ public class Universe {
 		}
 		for (int i = 0; i < planets.size(); i++)
 			System.out.println(planets.get(i) + "\n");
+	}
+	
+	/**
+	 * Gets the list of planets in the universe
+	 * @return The list of planets in the universe
+	 */
+	public List<Planet> getPlanets() {
+		return planets;
 	}
 }
