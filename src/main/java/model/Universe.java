@@ -31,7 +31,7 @@ public class Universe {
 	public void createPlanets() {
 		Reader reader = new Reader();
 		List<String> planetNames = reader
-				.readPlanetNames(".\\src\\main\\resources\\PlanetNames.txt");
+				.readPlanetNames("src\\main\\resources\\PlanetNames.txt");
 
 		Set<Location> uniqueLocations = new HashSet<Location>();
 		for (int i = 0; i < planetNames.size(); i++) {

@@ -27,7 +27,7 @@ public class MainSceneController {
 	@FXML
 	protected void startNewGame(Event e) {
 		if (MultiPageController.isValidAction(e)) {
-			MultiPageController.loadView(this, newGame, "CharacterCreator");
+			MultiPageController.loadView(newGame, "CharacterCreator");
 		}
 	}
 
