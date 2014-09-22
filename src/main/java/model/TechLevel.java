@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Class representing the tech level of a planet
+ * Enum representing the tech level of a planet
  * 
  * @author Larry He
  * 
@@ -15,6 +15,11 @@ public enum TechLevel {
 		this.value = value;
 	}
 	
+	/**
+	 * Getter for value of a tech level. Used in calculating price of a good.
+	 * 
+	 * @return Value of a tech level
+	 */
 	public int getValue() {
 		return value;
 	}

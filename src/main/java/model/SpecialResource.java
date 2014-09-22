@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Class representing the resource of a planet
+ * Enum representing the resource of a planet
  * 
  * @author Larry He
  * 
