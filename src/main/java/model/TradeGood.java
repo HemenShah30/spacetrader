@@ -18,9 +18,9 @@ public class TradeGood {
 	}
 	
 	public int generatePrice(Planet planet) {
-		price = type.getBasePrice() + type.getIPL()
-				* (planet.getTechLevel().getValue() - type.getMTLP())
-				+ (int) (2 * Math.random() * type.getVar() - type.getVar());
+		price = type.getBasePrice() + type.getIncPerTechLevel()
+				* (planet.getTechLevel().getValue() - type.getMinTechLevel())
+				+ (int) (2 * Math.random() * type.getVariance() - type.getVariance());
 		return price;
 	}
 	
