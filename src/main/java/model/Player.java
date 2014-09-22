@@ -10,6 +10,7 @@ public class Player {
 	private String name;
 	private int pilotSkill, fighterSkill, traderSkill, engineerSkill,
 			investorSkill;
+	private double credits;
 
 	/**
 	 * Constructor for the player taking all the appropriate instance variables
@@ -35,6 +36,7 @@ public class Player {
 		this.traderSkill = trader;
 		this.engineerSkill = engineer;
 		this.investorSkill = investor;
+		credits = 1000;
 	}
 
 	/**
@@ -89,6 +91,15 @@ public class Player {
 	 */
 	public int getInvestorSkill() {
 		return investorSkill;
+	}
+	
+	/**
+	 * Returns the player's credits
+	 * 
+	 * @return The player's credits
+	 */
+	public double getCredits() {
+		return credits;
 	}
 
 	/**
@@ -153,12 +164,33 @@ public class Player {
 	public void setInvestor(int points) {
 		investorSkill = points;
 	}
+	
+	/**
+	 * Increases the player's credits
+	 * 
+	 * @param increase
+	 *            The player's increase in credits
+	 */
+	public void increaseCredits(double increase) {
+		credits += increase;
+	}
 
+	/**
+	 * Decreases the player's credits
+	 * 
+	 * @param decrease
+	 *            The player's decrease in credits
+	 */
+	public void decreaseCredits(double decrease) {
+		credits += decrease;
+	}
+	
 	@Override
 	public String toString() {
 		return "Player: " + name + ", Pilot Skill: " + pilotSkill
 				+ ", Fighter Skill: " + fighterSkill + ", Trader Skill: "
 				+ traderSkill + ", Engineer Skill: " + engineerSkill
-				+ ", Investor Skill: " + investorSkill;
+				+ ", Investor Skill: " + investorSkill + ", Credits: "
+				+ credits;
 	}
 }
