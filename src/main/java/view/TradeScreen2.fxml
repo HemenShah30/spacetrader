@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.HBox?>
+
+<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane prefHeight="50.0" prefWidth="600.0" />
+      <HBox>
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Resources">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label text="Water">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label text="Furs">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label text="Food">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label text="Ore">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label text="Games">
+                     <padding>
+                        <Insets bottom="2.0" left="2.0" right="2.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label text="Medicine">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label text="Firearms" textFill="#e42020">
+                     <padding>
+                        <Insets bottom="2.0" left="2.0" right="2.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label text="Machines">
+                     <padding>
+                        <Insets bottom="2.0" left="2.0" right="2.0" top="5.0" />
+                     </padding>
+                  </Label>
+                  <Label text="Narcotics" textFill="#e42020">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label text="Robots">
+                     <padding>
+                        <Insets bottom="2.0" left="2.0" right="2.0" top="4.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox>
+               <children>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Label text="Sell">
+                           <padding>
+                              <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="200.0">
+                           <children>
+                              <TextField maxWidth="35.0" prefWidth="40.0" />
+                              <TextField maxWidth="35.0" prefWidth="20.0" />
+                              <TextField maxWidth="35.0" prefWidth="20.0" />
+                              <TextField maxWidth="35.0" prefWidth="20.0" />
+                              <TextField maxWidth="35.0" prefWidth="20.0" />
+                              <TextField maxWidth="35.0" prefWidth="20.0" />
+                              <TextField maxWidth="35.0" prefWidth="20.0" />
+                              <TextField maxWidth="35.0" prefWidth="20.0" />
+                              <TextField maxWidth="35.0" prefWidth="20.0" />
+                              <TextField maxWidth="35.0" prefWidth="20.0" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0">
+                           <children>
+                              <Button mnemonicParsing="false" text="Sell" />
+                              <Button mnemonicParsing="false" text="Sell" />
+                              <Button mnemonicParsing="false" text="Sell" />
+                              <Button mnemonicParsing="false" text="Sell" />
+                              <Button mnemonicParsing="false" text="Sell" />
+                              <Button mnemonicParsing="false" text="Sell" />
+                              <Button mnemonicParsing="false" text="Sell" />
+                              <Button mnemonicParsing="false" text="Sell" />
+                              <Button mnemonicParsing="false" text="Sell" />
+                              <Button mnemonicParsing="false" text="Sell" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0">
+                           <children>
+                              <Button mnemonicParsing="false" text="Sell All" />
+                              <Button mnemonicParsing="false" text="Sell All" />
+                              <Button mnemonicParsing="false" text="Sell All" />
+                              <Button mnemonicParsing="false" text="Sell All" />
+                              <Button mnemonicParsing="false" text="Sell All" />
+                              <Button mnemonicParsing="false" text="Sell All" />
+                              <Button mnemonicParsing="false" text="Sell All" />
+                              <Button mnemonicParsing="false" text="Sell All" />
+                              <Button mnemonicParsing="false" text="Sell All" />
+                              <Button mnemonicParsing="false" text="Sell All" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Current Cargo">
+                     <padding>
+                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="cargoWater" text="0">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="cargoFur" text="0">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="cargoFood" text="0">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="cargoOre" text="0">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="cargoGames" text="0">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="cargoMedicine" text="0">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="cargoFirearms" text="0" textFill="#e42020">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="cargoMachines" text="0">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="cargoNarcotics" text="0" textFill="#e42020">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="cargoRobots" text="0">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox>
+               <children>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Label text="Buy">
+                           <padding>
+                              <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="200.0">
+                           <children>
+                              <TextField maxWidth="35.0" prefWidth="40.0" />
+                              <TextField maxWidth="35.0" prefWidth="20.0" />
+                              <TextField maxWidth="35.0" prefWidth="20.0" />
+                              <TextField maxWidth="35.0" prefWidth="20.0" />
+                              <TextField maxWidth="35.0" prefWidth="20.0" />
+                              <TextField maxWidth="35.0" prefWidth="20.0" />
+                              <TextField maxWidth="35.0" prefWidth="20.0" />
+                              <TextField maxWidth="35.0" prefWidth="20.0" />
+                              <TextField maxWidth="35.0" prefWidth="20.0" />
+                              <TextField maxWidth="35.0" prefWidth="20.0" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0">
+                           <children>
+                              <Button mnemonicParsing="false" text="Sell" />
+                              <Button mnemonicParsing="false" text="Sell" />
+                              <Button mnemonicParsing="false" text="Sell" />
+                              <Button mnemonicParsing="false" text="Sell" />
+                              <Button mnemonicParsing="false" text="Sell" />
+                              <Button mnemonicParsing="false" text="Sell" />
+                              <Button mnemonicParsing="false" text="Sell" />
+                              <Button mnemonicParsing="false" text="Sell" />
+                              <Button mnemonicParsing="false" text="Sell" />
+                              <Button mnemonicParsing="false" text="Sell" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0">
+                           <children>
+                              <Button mnemonicParsing="false" text="Sell All" />
+                              <Button mnemonicParsing="false" text="Sell All" />
+                              <Button mnemonicParsing="false" text="Sell All" />
+                              <Button mnemonicParsing="false" text="Sell All" />
+                              <Button mnemonicParsing="false" text="Sell All" />
+                              <Button mnemonicParsing="false" text="Sell All" />
+                              <Button mnemonicParsing="false" text="Sell All" />
+                              <Button mnemonicParsing="false" text="Sell All" />
+                              <Button mnemonicParsing="false" text="Sell All" />
+                              <Button mnemonicParsing="false" text="Sell All" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox prefHeight="100.0" prefWidth="200.0" />
+   </children>
+</VBox>
