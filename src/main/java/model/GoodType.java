@@ -61,6 +61,14 @@ public enum GoodType {
 		return basePrice;
 	}
 	
+	public int getIPL() {
+		return IPL;
+	}
+	
+	public int getVar() {
+		return Var;
+	}
+	
 	public Condition getIE() {
 		return IE;
 	}
@@ -79,10 +87,5 @@ public enum GoodType {
 	
 	public int getMTH() {
 		return MTH;
-	}
-	
-	@Override
-	public String toString() {
-		return basePrice + "";
 	}
 }
