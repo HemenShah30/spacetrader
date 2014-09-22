@@ -30,8 +30,9 @@ public enum GoodType {
 	private int minTraderPrice; //Min price offered in space trade with random trader (not on a planet)
 	private int maxTraderPrice; //Max price offered in space trade with random trader (not on a planet)
 	
-	private GoodType(int minTechLevel, int maxTechLevel, int biggestProducer, int basePrice, int IPL, 
-			int Var, Condition IE, SpecialResource CR, SpecialResource ER, int MTL, int MTH) {
+	private GoodType(int minTechLevel, int maxTechLevel, int biggestProducer, int basePrice, int incPerTechLevel, 
+			int variance, Condition event, SpecialResource cheapCondition, SpecialResource expensiveCondition,
+			int minTraderPrice, int maxTraderPrice) {
 		this.minTechLevel = minTechLevel;
 		this.maxTechLevel = maxTechLevel;
 		this.biggestProducer = biggestProducer;
