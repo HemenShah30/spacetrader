@@ -22,7 +22,7 @@ public class StartScreenController {
 	@FXML
 	protected void begin(Event e) {
 		if (MultiPageController.isValidAction(e)) {
-			MultiPageController.loadView(this, beginButton, "MainScene");
+			MultiPageController.loadView(beginButton, "MainScene");
 		}
 	}
 }

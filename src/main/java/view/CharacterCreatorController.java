@@ -1,6 +1,8 @@
 package view;
 
 import model.Player;
+import model.Universe;
+
 import org.controlsfx.dialog.Dialogs;
 
 import javafx.fxml.FXML;
@@ -91,7 +93,9 @@ public class CharacterCreatorController {
 						(int) engineerSlider.getValue(),
 						(int) investorSlider.getValue());
 				System.out.println(p);
-				MultiPageController.loadView(this, newGame, "PlanetScreen");
+				Universe u = new Universe();
+				u.createPlanets();
+				MultiPageController.loadView(newGame, "PlanetScreen");
 			}
 		}
 	}
@@ -105,7 +109,7 @@ public class CharacterCreatorController {
 	@FXML
 	protected void backToMainMenu(Event e) {
 		if (MultiPageController.isValidAction(e)) {
-			MultiPageController.loadView(this, back, "MainScene");
+			MultiPageController.loadView(back, "MainScene");
 		}
 	}
 }

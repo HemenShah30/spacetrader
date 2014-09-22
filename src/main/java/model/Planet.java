@@ -24,6 +24,8 @@ public class Planet {
 	 *            The name of the planet
 	 * @param g
 	 *            The government type of the planet
+	 * @param l
+	 *            The location of the planet in space
 	 */
 	public Planet(String n, TechLevel tech, SpecialResource r, Government g,
 			Location l) {

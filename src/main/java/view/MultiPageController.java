@@ -38,10 +38,18 @@ public class MultiPageController {
 		return isValidAction;
 	}
 
-	public static void loadView(Object controller, Node node, String viewName) {
+	/**
+	 * Loads up a new view using the given Node and the name of the view
+	 * 
+	 * @param node
+	 *            The FX object that will find the scene
+	 * @param viewName
+	 *            The name of the view
+	 */
+	public static void loadView(Node node, String viewName) {
 		try {
-			Parent newScene = FXMLLoader.load(controller.getClass()
-					.getResource("../view/" + viewName + ".fxml"));
+			Parent newScene = new FXMLLoader().load(ClassLoader
+					.getSystemResourceAsStream("view/" + viewName + ".fxml"));
 			Stage stage = (Stage) node.getScene().getWindow();
 			stage.setScene(new Scene(newScene, 600, 400));
 		} catch (IOException ie) {

@@ -61,11 +61,6 @@ public class Location {
 		return y;
 	}
 
-	/**
-	 * Checks if an Object is the same Location
-	 * 
-	 * @return boolean
-	 */
 	@Override
 	public boolean equals(Object other) {
 		if (other == null || !(other instanceof Location))
