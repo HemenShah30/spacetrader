@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Class representing the type of good a good is
+ * Class representing the type of good a good is. Info holder.
  * 
  * @author Larry He
  * 
@@ -43,6 +43,42 @@ public enum GoodType {
 		this.ER = ER;
 		this.MTL = MTL;
 		this.MTH = MTH;
+	}
+	
+	public int getMTLP() {
+		return MTLP;
+	}
+	
+	public int getMTLU() {
+		return MTLU;
+	}
+	
+	public int getTTP() {
+		return TTP;
+	}
+	
+	public int getBasePrice() {
+		return basePrice;
+	}
+	
+	public Condition getIE() {
+		return IE;
+	}
+	
+	public SpecialResource getCR() {
+		return CR;
+	}
+	
+	public SpecialResource getER() {
+		return ER;
+	}
+	
+	public int getMTL() {
+		return MTL;
+	}
+	
+	public int getMTH() {
+		return MTH;
 	}
 	
 	@Override

@@ -10,7 +10,9 @@ public class MarketPlace {
 	
 	public static void main(String[] args) {
 		for (GoodType good : GoodType.values()) {
-			System.out.println(good);
+			TradeGood tradegood = new TradeGood(good);
+			tradegood.generatePrice(null);
+			System.out.println(tradegood);
 		}
 	}
 }
