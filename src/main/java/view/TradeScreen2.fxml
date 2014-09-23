@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.HBox?>
 
-<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TradeScreenController">
    <children>
       <AnchorPane prefHeight="50.0" prefWidth="600.0" />
       <HBox>
@@ -151,16 +151,16 @@
             <VBox alignment="CENTER" prefHeight="200.0">
                <children>
                   <Label text="Buy" />
-                  <Button mnemonicParsing="false" text="Buy" />
-                  <Button mnemonicParsing="false" text="Sell" />
-                  <Button mnemonicParsing="false" text="Sell" />
-                  <Button mnemonicParsing="false" text="Sell" />
-                  <Button mnemonicParsing="false" text="Sell" />
-                  <Button mnemonicParsing="false" text="Sell" />
-                  <Button mnemonicParsing="false" text="Sell" />
-                  <Button mnemonicParsing="false" text="Sell" />
-                  <Button mnemonicParsing="false" text="Sell" />
-                  <Button mnemonicParsing="false" text="Sell" />
+                  <Button fx:id="buyWaterBtn" mnemonicParsing="false" onKeyPressed="#buyGood" onMouseClicked="#buyGood" text="Buy" />
+                  <Button fx:id="buyFursBtn" mnemonicParsing="false" onKeyPressed="#buyGood" onMouseClicked="#buyGood" text="Buy" />
+                  <Button fx:id="buyFoodBtn" mnemonicParsing="false" onKeyPressed="#buyGood" onMouseClicked="#buyGood" text="Buy" />
+                  <Button fx:id="buyOreBtn" mnemonicParsing="false" onKeyPressed="#buyGood" onMouseClicked="#buyGood" text="Buy" />
+                  <Button fx:id="buyGamesBtn" mnemonicParsing="false" onKeyPressed="#buyGood" onMouseClicked="#buyGood" text="Buy" />
+                  <Button fx:id="buyMedicineBtn" mnemonicParsing="false" onKeyPressed="#buyGood" onMouseClicked="#buyGood" text="Buy" />
+                  <Button fx:id="buyFirearmsBtn" mnemonicParsing="false" onKeyPressed="#buyGood" onMouseClicked="#buyGood" text="Buy" />
+                  <Button fx:id="buyMachinesBtn" mnemonicParsing="false" onKeyPressed="#buyGood" onMouseClicked="#buyGood" text="Buy" />
+                  <Button fx:id="buyNarcoticsBtn" mnemonicParsing="false" onKeyPressed="#buyGood" onMouseClicked="#buyGood" text="Buy" />
+                  <Button fx:id="buyRobotsBtn" mnemonicParsing="false" onKeyPressed="#buyGood" onMouseClicked="#buyGood" text="Buy" />
                </children>
             </VBox>
          </children>

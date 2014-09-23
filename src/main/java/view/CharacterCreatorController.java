@@ -95,7 +95,7 @@ public class CharacterCreatorController {
 				System.out.println(p);
 				Universe u = new Universe();
 				u.createPlanets();
-				MultiPageController.loadView(newGame, "PlanetScreen");
+				MultiPageController.loadView(newGame, "TradeScreen2");
 			}
 		}
 	}

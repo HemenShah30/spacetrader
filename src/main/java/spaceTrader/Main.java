@@ -1,9 +1,5 @@
 package spaceTrader;
 
-import model.FileReader;
-import model.FileWriter;
-import model.Player;
-import model.Universe;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -39,14 +35,14 @@ public class Main extends Application {
 	 *            Command line arguments
 	 */
 	public static void main(String[] args) {
-		Universe u = new Universe();
-		u.createPlanets();
-		Player p = new Player("Jack",1,10,7,1,1);
-		FileWriter w = new FileWriter();
-		w.saveGameData(p, u);
-	//	FileReader r = new FileReader();
-	//	Object[] data=r.loadGameData();
-		
+		// Universe u = new Universe();
+		// / u.createPlanets();
+		// Player p = new Player("Jack",1,10,7,1,1);
+		// FileWriter w = new FileWriter();
+		// w.saveGameData(p, u);
+		// FileReader r = new FileReader();
+		// Object[] data=r.loadGameData();
+
 		launch(args);
 	}
 }
