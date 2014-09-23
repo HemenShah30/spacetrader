@@ -70,63 +70,23 @@
                   </Label>
                </children>
             </VBox>
-            <VBox>
+            <VBox alignment="CENTER" prefHeight="200.0">
                <children>
-                  <HBox alignment="CENTER">
-                     <children>
-                        <Label text="Sell">
-                           <padding>
-                              <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
-                           </padding>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox>
-                     <children>
-                        <VBox alignment="CENTER" prefHeight="200.0">
-                           <children>
-                              <TextField maxWidth="35.0" prefWidth="40.0" />
-                              <TextField maxWidth="35.0" prefWidth="20.0" />
-                              <TextField maxWidth="35.0" prefWidth="20.0" />
-                              <TextField maxWidth="35.0" prefWidth="20.0" />
-                              <TextField maxWidth="35.0" prefWidth="20.0" />
-                              <TextField maxWidth="35.0" prefWidth="20.0" />
-                              <TextField maxWidth="35.0" prefWidth="20.0" />
-                              <TextField maxWidth="35.0" prefWidth="20.0" />
-                              <TextField maxWidth="35.0" prefWidth="20.0" />
-                              <TextField maxWidth="35.0" prefWidth="20.0" />
-                           </children>
-                        </VBox>
-                        <VBox alignment="CENTER" prefHeight="200.0">
-                           <children>
-                              <Button mnemonicParsing="false" text="Sell" />
-                              <Button mnemonicParsing="false" text="Sell" />
-                              <Button mnemonicParsing="false" text="Sell" />
-                              <Button mnemonicParsing="false" text="Sell" />
-                              <Button mnemonicParsing="false" text="Sell" />
-                              <Button mnemonicParsing="false" text="Sell" />
-                              <Button mnemonicParsing="false" text="Sell" />
-                              <Button mnemonicParsing="false" text="Sell" />
-                              <Button mnemonicParsing="false" text="Sell" />
-                              <Button mnemonicParsing="false" text="Sell" />
-                           </children>
-                        </VBox>
-                        <VBox alignment="CENTER" prefHeight="200.0">
-                           <children>
-                              <Button mnemonicParsing="false" text="Sell All" />
-                              <Button mnemonicParsing="false" text="Sell All" />
-                              <Button mnemonicParsing="false" text="Sell All" />
-                              <Button mnemonicParsing="false" text="Sell All" />
-                              <Button mnemonicParsing="false" text="Sell All" />
-                              <Button mnemonicParsing="false" text="Sell All" />
-                              <Button mnemonicParsing="false" text="Sell All" />
-                              <Button mnemonicParsing="false" text="Sell All" />
-                              <Button mnemonicParsing="false" text="Sell All" />
-                              <Button mnemonicParsing="false" text="Sell All" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
+                  <Label text="Sell">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Button mnemonicParsing="false" text="Sell" />
+                  <Button mnemonicParsing="false" text="Sell" />
+                  <Button mnemonicParsing="false" text="Sell" />
+                  <Button mnemonicParsing="false" text="Sell" />
+                  <Button mnemonicParsing="false" text="Sell" />
+                  <Button mnemonicParsing="false" text="Sell" />
+                  <Button mnemonicParsing="false" text="Sell" />
+                  <Button mnemonicParsing="false" text="Sell" />
+                  <Button mnemonicParsing="false" text="Sell" />
+                  <Button mnemonicParsing="false" text="Sell" />
                </children>
             </VBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
@@ -188,63 +148,19 @@
                   </Label>
                </children>
             </VBox>
-            <VBox>
+            <VBox alignment="CENTER" prefHeight="200.0">
                <children>
-                  <HBox alignment="CENTER">
-                     <children>
-                        <Label text="Buy">
-                           <padding>
-                              <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
-                           </padding>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox>
-                     <children>
-                        <VBox alignment="CENTER" prefHeight="200.0">
-                           <children>
-                              <TextField maxWidth="35.0" prefWidth="40.0" />
-                              <TextField maxWidth="35.0" prefWidth="20.0" />
-                              <TextField maxWidth="35.0" prefWidth="20.0" />
-                              <TextField maxWidth="35.0" prefWidth="20.0" />
-                              <TextField maxWidth="35.0" prefWidth="20.0" />
-                              <TextField maxWidth="35.0" prefWidth="20.0" />
-                              <TextField maxWidth="35.0" prefWidth="20.0" />
-                              <TextField maxWidth="35.0" prefWidth="20.0" />
-                              <TextField maxWidth="35.0" prefWidth="20.0" />
-                              <TextField maxWidth="35.0" prefWidth="20.0" />
-                           </children>
-                        </VBox>
-                        <VBox alignment="CENTER" prefHeight="200.0">
-                           <children>
-                              <Button mnemonicParsing="false" text="Sell" />
-                              <Button mnemonicParsing="false" text="Sell" />
-                              <Button mnemonicParsing="false" text="Sell" />
-                              <Button mnemonicParsing="false" text="Sell" />
-                              <Button mnemonicParsing="false" text="Sell" />
-                              <Button mnemonicParsing="false" text="Sell" />
-                              <Button mnemonicParsing="false" text="Sell" />
-                              <Button mnemonicParsing="false" text="Sell" />
-                              <Button mnemonicParsing="false" text="Sell" />
-                              <Button mnemonicParsing="false" text="Sell" />
-                           </children>
-                        </VBox>
-                        <VBox alignment="CENTER" prefHeight="200.0">
-                           <children>
-                              <Button mnemonicParsing="false" text="Sell All" />
-                              <Button mnemonicParsing="false" text="Sell All" />
-                              <Button mnemonicParsing="false" text="Sell All" />
-                              <Button mnemonicParsing="false" text="Sell All" />
-                              <Button mnemonicParsing="false" text="Sell All" />
-                              <Button mnemonicParsing="false" text="Sell All" />
-                              <Button mnemonicParsing="false" text="Sell All" />
-                              <Button mnemonicParsing="false" text="Sell All" />
-                              <Button mnemonicParsing="false" text="Sell All" />
-                              <Button mnemonicParsing="false" text="Sell All" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
+                  <Label text="Buy" />
+                  <Button mnemonicParsing="false" text="Buy" />
+                  <Button mnemonicParsing="false" text="Sell" />
+                  <Button mnemonicParsing="false" text="Sell" />
+                  <Button mnemonicParsing="false" text="Sell" />
+                  <Button mnemonicParsing="false" text="Sell" />
+                  <Button mnemonicParsing="false" text="Sell" />
+                  <Button mnemonicParsing="false" text="Sell" />
+                  <Button mnemonicParsing="false" text="Sell" />
+                  <Button mnemonicParsing="false" text="Sell" />
+                  <Button mnemonicParsing="false" text="Sell" />
                </children>
             </VBox>
          </children>
