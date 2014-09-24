@@ -9,9 +9,9 @@
 <VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TradeScreenController">
    <children>
       <AnchorPane prefHeight="50.0" prefWidth="600.0" />
-      <HBox>
+      <HBox alignment="CENTER">
          <children>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="85.0">
                <children>
                   <Label text="Resources">
                      <padding>
@@ -70,68 +70,130 @@
                   </Label>
                </children>
             </VBox>
-            <VBox alignment="CENTER" prefHeight="275.0" prefWidth="130.0">
+            <VBox alignment="CENTER" prefHeight="275.0" prefWidth="85.0">
                <children>
-                  <Label text="Marketplace Cargo">
+                  <Label text="Marketplace">
                      <padding>
                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="cargoWater1" text="0">
+                  <Label fx:id="marketWater" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="cargoFur1" text="0">
+                  <Label fx:id="marketFur" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="cargoFood1" text="0">
+                  <Label fx:id="marketFood" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="cargoOre1" text="0">
+                  <Label fx:id="marketOre" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="cargoGames1" text="0">
+                  <Label fx:id="marketGames" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="cargoMedicine1" text="0">
+                  <Label fx:id="marketMedicine" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="cargoFirearms1" text="0" textFill="#e42020">
+                  <Label fx:id="marketFirearms" text="0" textFill="#e42020">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="cargoMachines1" text="0">
+                  <Label fx:id="marketMachines" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="cargoNarcotics1" text="0" textFill="#e42020">
+                  <Label fx:id="marketNarcotics" text="0" textFill="#e42020">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="cargoRobots1" text="0">
+                  <Label fx:id="marketRobots" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
                </children>
             </VBox>
-            <VBox alignment="CENTER" prefHeight="200.0">
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="85.0">
                <children>
-                  <Label text="Buy" />
+                  <Label text="Buy Prices">
+                     <padding>
+                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="buyPriceWater" text="0">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="buyPriceFur" text="0">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="buyPriceFood" text="0">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="buyPriceOre" text="0">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="buyPriceGame" text="0">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="buyPriceMedicine" text="0">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="buyPriceFirearm" text="0" textFill="#e42020">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="buyPriceMachine" text="0">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="buyPriceNarcotics" text="0" textFill="#e42020">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="buyPriceRobot" text="0">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="85.0">
+               <children>
+                  <Label text="Buy">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding></Label>
                   <Button fx:id="buyWaterBtn" mnemonicParsing="false" onKeyPressed="#buyGood" onMouseClicked="#buyGood" text="Buy..." />
                   <Button fx:id="buyFursBtn" mnemonicParsing="false" onKeyPressed="#buyGood" onMouseClicked="#buyGood" text="Buy..." />
                   <Button fx:id="buyFoodBtn" mnemonicParsing="false" onKeyPressed="#buyGood" onMouseClicked="#buyGood" text="Buy..." />
@@ -144,7 +206,7 @@
                   <Button fx:id="buyRobotsBtn" mnemonicParsing="false" onKeyPressed="#buyGood" onMouseClicked="#buyGood" text="Buy..." />
                </children>
             </VBox>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="85.0">
                <children>
                   <Label text="Current Cargo">
                      <padding>
@@ -203,7 +265,66 @@
                   </Label>
                </children>
             </VBox>
-            <VBox alignment="CENTER" prefHeight="200.0">
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="85.0">
+               <children>
+                  <Label text="Sell Prices">
+                     <padding>
+                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="sellPriceWater" text="0">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="sellPriceFur" text="0">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="sellPriceFood" text="0">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="sellPriceOre" text="0">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="sellPriceGames" text="0">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="sellPriceMedicine" text="0">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="sellPriceFirearm" text="0" textFill="#e42020">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="sellPriceMachine" text="0">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="sellPriceNarcotics" text="0" textFill="#e42020">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="sellPriceRobot" text="0">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="85.0">
                <children>
                   <Label text="Sell">
                      <padding>
@@ -220,65 +341,6 @@
                   <Button fx:id="sellMachinesBtn" mnemonicParsing="false" onKeyPressed="#sellGood" onMouseClicked="#sellGood" text="Sell..." />
                   <Button fx:id="sellNarcoticsBtn" mnemonicParsing="false" onKeyPressed="#sellGood" onMouseClicked="#sellGood" text="Sell..." />
                   <Button fx:id="sellRobotsBtn" mnemonicParsing="false" onKeyPressed="#sellGood" onMouseClicked="#sellGood" text="Sell..." />
-               </children>
-            </VBox>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <Label text="Prices">
-                     <padding>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                     </padding>
-                  </Label>
-                  <Label fx:id="cargoWater2" text="0">
-                     <padding>
-                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
-                     </padding>
-                  </Label>
-                  <Label fx:id="cargoFur2" text="0">
-                     <padding>
-                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
-                     </padding>
-                  </Label>
-                  <Label fx:id="cargoFood2" text="0">
-                     <padding>
-                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
-                     </padding>
-                  </Label>
-                  <Label fx:id="cargoOre2" text="0">
-                     <padding>
-                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
-                     </padding>
-                  </Label>
-                  <Label fx:id="cargoGames2" text="0">
-                     <padding>
-                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
-                     </padding>
-                  </Label>
-                  <Label fx:id="cargoMedicine2" text="0">
-                     <padding>
-                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
-                     </padding>
-                  </Label>
-                  <Label fx:id="cargoFirearms2" text="0" textFill="#e42020">
-                     <padding>
-                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
-                     </padding>
-                  </Label>
-                  <Label fx:id="cargoMachines2" text="0">
-                     <padding>
-                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
-                     </padding>
-                  </Label>
-                  <Label fx:id="cargoNarcotics2" text="0" textFill="#e42020">
-                     <padding>
-                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
-                     </padding>
-                  </Label>
-                  <Label fx:id="cargoRobots2" text="0">
-                     <padding>
-                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
-                     </padding>
-                  </Label>
                </children>
             </VBox>
          </children>

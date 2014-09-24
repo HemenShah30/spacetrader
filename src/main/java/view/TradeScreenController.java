@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -20,64 +21,125 @@ import javafx.stage.Stage;
 public class TradeScreenController {
 
 	@FXML
-	Button buyWaterBtn;
-
+	private Label buyPriceGame;
 	@FXML
-	Button buyFursBtn;
-
+	private Label sellPriceFirearm;
 	@FXML
-	Button buyFoodBtn;
-
+	private Button buyWaterBtn;
 	@FXML
-	Button buyOreBtn;
-
+	private Button sellMedicineBtn;
 	@FXML
-	Button buyGamesBtn;
-
+	private Label buyPriceNarcotics;
 	@FXML
-	Button buyMedicineBtn;
-
+	private Label buyPriceFur;
 	@FXML
-	Button buyFirearmsBtn;
-
+	private Label marketNarcotics;
 	@FXML
-	Button buyMachinesBtn;
-
+	private Button sellFursBtn;
 	@FXML
-	Button buyNarcoticsBtn;
-
+	private Label sellPriceMachine;
 	@FXML
-	Button buyRobotsBtn;
-
+	private Label sellPriceNarcotics;
 	@FXML
-	Button sellWaterBtn;
-
+	private Button sellNarcoticsBtn;
 	@FXML
-	Button sellFursBtn;
-
+	private Label buyPriceRobot;
 	@FXML
-	Button sellFoodBtn;
-
+	private Label buyPriceFood;
 	@FXML
-	Button sellOreBtn;
-
+	private Label buyPriceMachine;
 	@FXML
-	Button sellGamesBtn;
-
+	private Label sellPriceMedicine;
 	@FXML
-	Button sellMedicineBtn;
-
+	private Button sellGamesBtn;
 	@FXML
-	Button sellFirearmsBtn;
-
+	private Button buyRobotsBtn;
 	@FXML
-	Button sellMachinesBtn;
-
+	private Label cargoFur;
 	@FXML
-	Button sellNarcoticsBtn;
-
+	private Label cargoMedicine;
 	@FXML
-	Button sellRobotsBtn;
+	private Label marketFirearms;
+	@FXML
+	private Button sellFirearmsBtn;
+	@FXML
+	private Label sellPriceWater;
+	@FXML
+	private Label cargoWater;
+	@FXML
+	private Label buyPriceFirearm;
+	@FXML
+	private Label marketFood;
+	@FXML
+	private Label marketWater;
+	@FXML
+	private Label sellPriceRobot;
+	@FXML
+	private Label cargoMachines;
+	@FXML
+	private Label sellPriceFood;
+	@FXML
+	private Button sellRobotsBtn;
+	@FXML
+	private Label cargoOre;
+	@FXML
+	private Button sellMachinesBtn;
+	@FXML
+	private Label cargoNarcotics;
+	@FXML
+	private Button buyFoodBtn;
+	@FXML
+	private Label cargoRobots;
+	@FXML
+	private Label marketGames;
+	@FXML
+	private Button sellFoodBtn;
+	@FXML
+	private Label marketOre;
+	@FXML
+	private Button buyMedicineBtn;
+	@FXML
+	private Label buyPriceOre;
+	@FXML
+	private Label cargoGames;
+	@FXML
+	private Button buyFirearmsBtn;
+	@FXML
+	private Label marketRobots;
+	@FXML
+	private Label sellPriceOre;
+	@FXML
+	private Label buyPriceMedicine;
+	@FXML
+	private Label buyPriceWater;
+	@FXML
+	private Label cargoFood;
+	@FXML
+	private Button buyGamesBtn;
+	@FXML
+	private Label sellPriceGames;
+	@FXML
+	private Button sellWaterBtn;
+	@FXML
+	private Button sellOreBtn;
+	@FXML
+	private Button buyFursBtn;
+	@FXML
+	private Label marketFur;
+	@FXML
+	private Button buyOreBtn;
+	@FXML
+	private Button buyNarcoticsBtn;
+	@FXML
+	private Label cargoFirearms;
+	@FXML
+	private Label sellPriceFur;
+	@FXML
+	private Label marketMedicine;
+	@FXML
+	private Label marketMachines;
+	@FXML
+	private Button buyMachinesBtn;
 
 	/**
 	 * Handles all the buy buttons in the trade scene
