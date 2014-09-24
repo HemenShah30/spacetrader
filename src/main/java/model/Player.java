@@ -92,7 +92,7 @@ public class Player {
 	public int getInvestorSkill() {
 		return investorSkill;
 	}
-	
+
 	/**
 	 * Returns the player's credits
 	 * 
@@ -164,7 +164,7 @@ public class Player {
 	public void setInvestor(int points) {
 		investorSkill = points;
 	}
-	
+
 	/**
 	 * Increases the player's credits
 	 * 
@@ -184,7 +184,7 @@ public class Player {
 	public void decreaseCredits(double decrease) {
 		credits += decrease;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Player: " + name + ", Pilot Skill: " + pilotSkill

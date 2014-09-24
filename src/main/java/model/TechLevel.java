@@ -7,14 +7,15 @@ package model;
  * 
  */
 public enum TechLevel {
-	PREAGRICULTURE(0), AGRICULTURE(1), MEDIEVAL(2), RENAISSANCE(3), EARLYINDUSTRIAL(4), INDUSTRIAL(5), POSTINDUSTRIAL(6), HITECH(7);
-	
+	PREAGRICULTURE(0), AGRICULTURE(1), MEDIEVAL(2), RENAISSANCE(3), EARLYINDUSTRIAL(
+			4), INDUSTRIAL(5), POSTINDUSTRIAL(6), HITECH(7);
+
 	private int value;
-	
+
 	private TechLevel(int value) {
 		this.value = value;
 	}
-	
+
 	/**
 	 * Getter for value of a tech level. Used in calculating price of a good.
 	 * 
