@@ -49,6 +49,36 @@ public class TradeScreenController {
 	@FXML
 	Button buyRobotsBtn;
 
+	@FXML
+	Button sellWaterBtn;
+
+	@FXML
+	Button sellFursBtn;
+
+	@FXML
+	Button sellFoodBtn;
+
+	@FXML
+	Button sellOreBtn;
+
+	@FXML
+	Button sellGamesBtn;
+
+	@FXML
+	Button sellMedicineBtn;
+
+	@FXML
+	Button sellFirearmsBtn;
+
+	@FXML
+	Button sellMachinesBtn;
+
+	@FXML
+	Button sellNarcoticsBtn;
+
+	@FXML
+	Button sellRobotsBtn;
+
 	/**
 	 * Handles all the buy buttons in the trade scene
 	 * 
@@ -72,6 +102,19 @@ public class TradeScreenController {
 			} catch (IOException ie) {
 				ie.printStackTrace();
 			}
+		}
+	}
+
+	/**
+	 * Handles all the sell buttons in the trade screen
+	 * 
+	 * @param e
+	 *            The event that fired the method
+	 */
+	@FXML
+	protected void sellGood(Event e) {
+		if (MultiPageController.isValidAction(e)) {
+			System.out.println("Selling good");
 		}
 	}
 }

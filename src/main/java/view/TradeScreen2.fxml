@@ -77,16 +77,16 @@
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Button mnemonicParsing="false" text="Sell" />
-                  <Button mnemonicParsing="false" text="Sell" />
-                  <Button mnemonicParsing="false" text="Sell" />
-                  <Button mnemonicParsing="false" text="Sell" />
-                  <Button mnemonicParsing="false" text="Sell" />
-                  <Button mnemonicParsing="false" text="Sell" />
-                  <Button mnemonicParsing="false" text="Sell" />
-                  <Button mnemonicParsing="false" text="Sell" />
-                  <Button mnemonicParsing="false" text="Sell" />
-                  <Button mnemonicParsing="false" text="Sell" />
+                  <Button fx:id="sellWaterBtn" mnemonicParsing="false" onKeyPressed="#sellGood" onMouseClicked="#sellGood" text="Sell" />
+                  <Button fx:id="sellFursBtn" mnemonicParsing="false" onKeyPressed="#sellGood" onMouseClicked="#sellGood" text="Sell" />
+                  <Button fx:id="sellFoodBtn" mnemonicParsing="false" onKeyPressed="#sellGood" onMouseClicked="#sellGood" text="Sell" />
+                  <Button fx:id="sellOreBtn" mnemonicParsing="false" onKeyPressed="#sellGood" onMouseClicked="#sellGood" text="Sell" />
+                  <Button fx:id="sellGamesBtn" mnemonicParsing="false" onKeyPressed="#sellGood" onMouseClicked="#sellGood" text="Sell" />
+                  <Button fx:id="sellMedicineBtn" mnemonicParsing="false" onKeyPressed="#sellGood" onMouseClicked="#sellGood" text="Sell" />
+                  <Button fx:id="sellFirearmsBtn" mnemonicParsing="false" onKeyPressed="#sellGood" onMouseClicked="#sellGood" text="Sell" />
+                  <Button fx:id="sellMachinesBtn" mnemonicParsing="false" onKeyPressed="#sellGood" onMouseClicked="#sellGood" text="Sell" />
+                  <Button fx:id="sellNarcoticsBtn" mnemonicParsing="false" onKeyPressed="#sellGood" onMouseClicked="#sellGood" text="Sell" />
+                  <Button fx:id="sellRobotsBtn" mnemonicParsing="false" onKeyPressed="#sellGood" onMouseClicked="#sellGood" text="Sell" />
                </children>
             </VBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
