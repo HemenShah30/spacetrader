@@ -12,6 +12,7 @@ public class Planet {
 	private SpecialResource resource;
 	private Government government;
 	private Location location;
+	private MarketPlace marketplace;
 
 	/**
 	 * Basic Planet constructor taking a tech level and a resource
