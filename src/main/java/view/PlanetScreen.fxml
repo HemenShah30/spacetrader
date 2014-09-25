@@ -10,8 +10,8 @@
    <center>
       <AnchorPane prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="265.0" layoutY="117.0" mnemonicParsing="false" text="Trade stuff" />
-            <Button layoutX="269.0" layoutY="148.0" mnemonicParsing="false" text="Get ships" />
+            <Button fx:id="toMarketPlaceBtn" layoutX="244.0" layoutY="117.0" mnemonicParsing="false" onMouseClicked="#goToMarketPlace" text="Go to MarketPlace" />
+            <Button fx:id="toShipYardBtn" layoutX="252.0" layoutY="148.0" mnemonicParsing="false" onMouseClicked="#goToShipYard" text="Go to Shipyard" />
             <Button layoutX="244.0" layoutY="179.0" mnemonicParsing="false" text="Layout in progress" />
             <Button fx:id="saveGameBtn" layoutX="520.0" layoutY="294.0" mnemonicParsing="false" onKeyPressed="#saveGame" onMouseClicked="#saveGame" text="Save Game" />
          </children>
