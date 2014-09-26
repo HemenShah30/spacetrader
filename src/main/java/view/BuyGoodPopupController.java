@@ -110,9 +110,9 @@ public class BuyGoodPopupController {
 		popupStage.close();
 	}
 
-	public void initializePage(int buyAll, GoodType good) {
+	public void initializePage(GoodType good) {
 		game = GameEngine.getGameEngine();
-		buyAllAmount = buyAll;
+		buyAllAmount = game.getMaximumGood(good, true);
 		tradeGood = good;
 		cargoAmountLbl.setText("Enter amount or Buy All for " + buyAllAmount
 				+ " " + good.getFormattedName());

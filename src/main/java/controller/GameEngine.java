@@ -89,4 +89,18 @@ public class GameEngine {
 		return tradeEngine.sell(good, quantity, player.getPlanet()
 				.getMarketplace());
 	}
+
+	/**
+	 * Returns the maximum good amount that can be bought or sold by the player
+	 * for a given good
+	 * 
+	 * @param type
+	 *            The type of good being bought or sold
+	 * @param buying
+	 *            Whether or not the player is buying
+	 * @return The maximum amount that can be bought or sold by the player
+	 */
+	public int getMaximumGood(GoodType type, boolean buying) {
+		return 40000;
+	}
 }

@@ -121,9 +121,9 @@ public class SellGoodPopupController {
 	 * @param good
 	 *            The GoodType to be sold
 	 */
-	public void initializePage(int sellAll, GoodType good) {
+	public void initializePage(GoodType good) {
 		game = GameEngine.getGameEngine();
-		sellAllAmount = sellAll;
+		sellAllAmount = game.getMaximumGood(good, false);
 		tradeGood = good;
 		cargoAmountLbl.setText("Enter amount or Sell All to sell "
 				+ sellAllAmount + " " + good.getFormattedName());

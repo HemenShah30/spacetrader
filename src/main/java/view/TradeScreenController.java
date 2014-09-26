@@ -200,7 +200,7 @@ public class TradeScreenController {
 				buyPopup.setScene(new Scene(newScene, 300, 125));
 
 				BuyGoodPopupController controller = loader.getController();
-				controller.initializePage(40000, type);
+				controller.initializePage(type);
 				buyPopup.show();
 
 			} catch (IOException ie) {
@@ -268,7 +268,7 @@ public class TradeScreenController {
 				sellPopup.setScene(new Scene(newScene, 300, 125));
 
 				SellGoodPopupController controller = loader.getController();
-				controller.initializePage(40000, type);
+				controller.initializePage(type);
 				sellPopup.show();
 
 			} catch (IOException ie) {
