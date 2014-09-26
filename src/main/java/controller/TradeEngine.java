@@ -1,7 +1,12 @@
-package model;
+package controller;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import model.GoodType;
+import model.Marketplace;
+import model.Player;
+import model.Ship;
 
 /**
  * Class providing methods for trade interactions

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.controlsfx.dialog.Dialogs;
 
-import model.GameEngine;
+import controller.GameEngine;
 import model.GoodType;
 import javafx.event.Event;
 import javafx.fxml.FXML;

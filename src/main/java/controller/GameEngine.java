@@ -1,6 +1,12 @@
-package model;
+package controller;
 
 import java.util.List;
+
+import model.GoodType;
+import model.Player;
+import model.Ship;
+import model.ShipType;
+import model.Universe;
 
 /**
  * The main game coordinator that will connect the views and the controllers
