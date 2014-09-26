@@ -126,7 +126,7 @@ public class SellGoodPopupController {
 		sellAllAmount = game.getMaximumGood(good, false);
 		tradeGood = good;
 		cargoAmountLbl.setText("Enter amount or Sell All to sell "
-				+ sellAllAmount + " " + good.getFormattedName());
+				+ sellAllAmount + " " + good);
 	}
 
 	/**

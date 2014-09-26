@@ -41,7 +41,7 @@ public class TradeEngine {
 	 * @return The errors from the transaction, if any
 	 */
 	public List<String> buy(GoodType tradeGood, int quantity, Marketplace market) {
-		double cost = market.generatePrice(tradeGood) * quantity;
+		double cost = market.getPrice(tradeGood) * quantity;
 		List<String> errors = validateBuy(cost, quantity);
 		if (errors.isEmpty()) {
 			ship.addToCargo(tradeGood, quantity);
@@ -85,7 +85,7 @@ public class TradeEngine {
 	 */
 	public List<String> sell(GoodType tradeGood, int quantity,
 			Marketplace market) {
-		double cost = market.generatePrice(tradeGood) * quantity;
+		double cost = market.getPrice(tradeGood) * quantity;
 		List<String> errors = validateSell(tradeGood, quantity);
 		if (errors.isEmpty()) {
 			ship.removeFromCargo(tradeGood, quantity);
@@ -107,11 +107,9 @@ public class TradeEngine {
 		List<String> errors = new ArrayList<String>();
 
 		if (ship.amountInCargo(tradeGood) == 0) {
-			errors.add("You have no " + tradeGood.getFormattedName()
-					+ " to sell");
+			errors.add("You have no " + tradeGood + " to sell");
 		} else if (ship.amountInCargo(tradeGood) - quantity < 0) {
-			errors.add("You do not have that many of "
-					+ tradeGood.getFormattedName());
+			errors.add("You do not have that many of " + tradeGood);
 		}
 
 		return errors;

@@ -2,7 +2,11 @@ package view;
 
 import java.io.IOException;
 
+import controller.GameEngine;
 import model.GoodType;
+import model.Planet;
+import model.Player;
+import model.TechLevel;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -142,17 +146,17 @@ public class TradeScreenController {
 	@FXML
 	private Button buyMachinesBtn;
 	@FXML
-	private Label planetName;
+	private Label planetNameLbl;
 	@FXML
-	private Label techLevel;
+	private Label techLevelLbl;
 	@FXML
-	private Label government;
+	private Label governmentLbl;
 	@FXML
-	private Label playerName;
+	private Label playerNameLbl;
 	@FXML
-	private Label numCredits;
+	private Label numCreditsLbl;
 	@FXML
-	private Label cargoSpace;
+	private Label cargoSpaceLbl;
 
 	/**
 	 * Handles all the buy buttons in the trade scene
@@ -287,5 +291,27 @@ public class TradeScreenController {
 				ie.printStackTrace();
 			}
 		}
+	}
+
+	/**
+	 * Initializes the page with all the data needed at startup
+	 */
+	public void initializePage() {
+		GameEngine game = GameEngine.getGameEngine();
+		Player player = game.getPlayer();
+		Planet planet = player.getPlanet();
+		planetNameLbl.setText(planet.getName());
+		techLevelLbl.setText("Tech Level: " + planet.getTechLevel());
+		governmentLbl.setText("Government: " + planet.getGovernment());
+		for (TechLevel tech : TechLevel.values()) {
+			// TODO: create standard naming technique for labels and instantiate
+			// all values
+		}
+		// resource marketplace quantity/buy price
+		// current cargo/sell price
+		playerNameLbl.setText(player.getName());
+		numCreditsLbl.setText("Credits: " + (int) (player.getCredits()));
+		cargoSpaceLbl.setText("Cargo Space: " + player.getShip().getCurrCargo()
+				+ "/" + player.getShip().getCargoSize());
 	}
 }

@@ -89,6 +89,14 @@ public class GameEngine {
 		return tradeEngine.sell(good, quantity, player.getPlanet()
 				.getMarketplace());
 	}
+	
+	/**
+	 * Returns the main game player
+	 * @return The main game player
+	 */
+	public Player getPlayer() {
+		return player;
+	}
 
 	/**
 	 * Returns the maximum good amount that can be bought or sold by the player

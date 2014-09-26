@@ -55,9 +55,9 @@ public class BuyGoodPopupController {
 				Stage popupStage = (Stage) buyBtn.getScene().getWindow();
 				popupStage.close();
 			} else {
-				String errorMsg ="";
-				for(String error: errors)
-					errorMsg += error+"\n";
+				String errorMsg = "";
+				for (String error : errors)
+					errorMsg += error + "\n";
 				displayError(errorMsg);
 			}
 		}
@@ -76,20 +76,23 @@ public class BuyGoodPopupController {
 			try {
 				goodAmount = Integer.parseInt(cargoAmountTxt.getText());
 				if (goodAmount > 0 && goodAmount <= buyAllAmount) {
-					List<String> errors = game.marketplaceTrade(tradeGood, goodAmount, true);
+					List<String> errors = game.marketplaceTrade(tradeGood,
+							goodAmount, true);
 					if (errors.isEmpty()) {
 						updateTradeScreen();
-						Stage popupStage = (Stage) buyBtn.getScene().getWindow();
+						Stage popupStage = (Stage) buyBtn.getScene()
+								.getWindow();
 						popupStage.close();
 					} else {
-						String errorMsg ="";
-						for(String error: errors)
-							errorMsg += error+"\n";
+						String errorMsg = "";
+						for (String error : errors)
+							errorMsg += error + "\n";
 						displayError(errorMsg);
 					}
 
 				} else {
-					displayError("You must enter a number between 1 and "+ buyAllAmount);
+					displayError("You must enter a number between 1 and "
+							+ buyAllAmount);
 				}
 
 			} catch (NumberFormatException nfe) {
@@ -115,7 +118,7 @@ public class BuyGoodPopupController {
 		buyAllAmount = game.getMaximumGood(good, true);
 		tradeGood = good;
 		cargoAmountLbl.setText("Enter amount or Buy All for " + buyAllAmount
-				+ " " + good.getFormattedName());
+				+ " " + good);
 	}
 
 	/**
