@@ -1,6 +1,7 @@
 package model;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Class representing the marketplace of a planet
@@ -9,7 +10,8 @@ import java.util.ArrayList;
  * 
  */
 public class Marketplace {
-	private ArrayList<GoodType> inventory;
+	private Map<GoodType, Double> prices;
+	private Map<GoodType, Integer> quantities;
 	private Planet planet;
 
 	/**
@@ -19,9 +21,13 @@ public class Marketplace {
 	 *            The location of the marketplace
 	 */
 	public Marketplace(Planet planet) {
-		inventory = new ArrayList<GoodType>();
+		prices = new HashMap<GoodType, Double>();
+		quantities = new HashMap<GoodType, Integer>();
 		for (GoodType type : GoodType.values()) {
-			inventory.add(type);
+			double price = generatePrice(type);
+			prices.put(type, price);
+			int quantity = generateQuantity(type);
+			quantities.put(type, quantity);
 		}
 
 		this.planet = planet;
@@ -43,5 +49,28 @@ public class Marketplace {
 				+ (int) (2 * Math.random() * type.getVariance() - type
 						.getVariance());
 		return price;
+	}
+	
+	
+	/**
+	 * Generates the quantity of the good at random based on various GoodType
+	 * parameters
+	 * 
+	 * @param good
+	 *            The TradeGood whose quantity is being determined
+	 * @return The quantity of the TradeGood
+	 */
+	public int generateQuantity(GoodType type) {
+		TechLevel techlevel = planet.getTechLevel();
+		if (techlevel.getValue() < type.getMinTechLevel() || techlevel.getValue() > type.getMaxTechLevel()) {
+			return 0;
+		}
+		int quantity = (techlevel.getValue() - type.getMinTechLevel())^2
+				+ (int) (2 * Math.random() * type.getVariance() - type
+						.getVariance());
+		if (techlevel.getValue() == type.getBiggestProducer()) {
+			quantity += type.getBiggestProducer();
+		}
+		return quantity;
 	}
 }
