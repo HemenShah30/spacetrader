@@ -8,8 +8,6 @@ package model;
  */
 public class TradeGood {
 	private GoodType type;
-	private int price;
-	private int quantity;
 
 	/**
 	 * Constructor for the trade good taking in a good type
@@ -28,44 +26,6 @@ public class TradeGood {
 	 */
 	public GoodType getType() {
 		return type;
-	}
-	
-	/**
-	 * Returns the price of the trade good
-	 * 
-	 * @return The price of the trade good
-	 */
-	public int getPrice() {
-		return price;
-	}
-
-	/**
-	 * Returns the quantity of the trade good
-	 * 
-	 * @return The quantity of the trade good
-	 */
-	public int getQuantity() {
-		return quantity;
-	}
-
-	/**
-	 * Setter for the price of the trade good
-	 * 
-	 * @param price
-	 *            The new price of the trade good
-	 */
-	public void setPrice(int price) {
-		this.price = price;
-	}
-
-	/**
-	 * Setter for the quantity of the trade good
-	 * 
-	 * @param quantity
-	 *            The new quantity for the trade good
-	 */
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
 	}
 
 	@Override

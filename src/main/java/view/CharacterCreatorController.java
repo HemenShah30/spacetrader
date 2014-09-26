@@ -1,7 +1,7 @@
 package view;
 
+import model.GameEngine;
 import model.Player;
-import model.Universe;
 
 import org.controlsfx.dialog.Dialogs;
 
@@ -87,14 +87,12 @@ public class CharacterCreatorController {
 								"You must allocate all your skill points for your character")
 						.showError();
 			} else {
-				Player p = new Player(playerName, (int) pilotSlider.getValue(),
+				GameEngine game = GameEngine.getGameEngine();
+				game.setPlayer(playerName, (int) pilotSlider.getValue(),
 						(int) fightingSlider.getValue(),
 						(int) traderSlider.getValue(),
 						(int) engineerSlider.getValue(),
-						(int) investorSlider.getValue(), null); // put in default ship here
-				System.out.println(p);
-				Universe u = new Universe();
-				u.createPlanets();
+						(int) investorSlider.getValue());
 				MultiPageController.loadView(newGame, "TradeScreen2");
 			}
 		}

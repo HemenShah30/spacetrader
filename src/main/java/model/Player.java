@@ -185,7 +185,7 @@ public class Player {
 	 *            The player's decrease in credits
 	 */
 	public void decreaseCredits(double decrease) {
-		credits += decrease;
+		credits -= decrease;
 	}
 
 	public Ship getShip() {

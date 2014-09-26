@@ -12,7 +12,7 @@ public class Planet {
 	private SpecialResource resource;
 	private Government government;
 	private Location location;
-	private MarketPlace marketplace;
+	private Marketplace marketplace;
 
 	/**
 	 * Basic Planet constructor taking a tech level and a resource
@@ -35,6 +35,7 @@ public class Planet {
 		setResource(r);
 		setGovernment(g);
 		setLocation(l);
+		marketplace = new Marketplace(this);
 	}
 
 	/**

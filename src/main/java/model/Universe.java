@@ -70,8 +70,6 @@ public class Universe {
 			uniqueLocations.add(l);
 			planets.add(p);
 		}
-		for (int i = 0; i < planets.size(); i++)
-			System.out.println(planets.get(i) + "\n");
 	}
 	
 	/**

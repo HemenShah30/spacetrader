@@ -1,44 +1,31 @@
-/**
- * Class representing a ship
- * 
- * @author Eric Wan
- * 
- */
 package model;
 
 import java.util.Map;
 
 /**
+ * Class representing a player's ship
+ * 
  * @author Eric Wan
- *
- *         Class representing a player's ship
+ * 
  */
 public class Ship {
-	// private ShipType shipType;
-	private int totalHP, currHP, currFuel, cargoSize, currCargo;
+	private ShipType shipType;
+	private int totalHP, currHP, fuel, cargoSize, currCargo;
 	// private List<Mercenary> mercenaries;
 	private Map<TradeGood, Integer> cargo;
 
 	/**
-	 * Constructor class for Ship taking all appropriate instance variables
-	 * 
-	 * @param totalHP
-	 *            The total HP of the ship
-	 * @param currHP
-	 *            The current HP of the ship
-	 * @param currFuel
-	 *            The current fuel of the ship
-	 * @param cargo
-	 *            The current cargo of the ship
+	 * Constructor for a ship taking in the starting fuel and the ship type
+	 * @param f The starting fuel for the ship
+	 * @param sT The ShipType for the ship
 	 */
-	public Ship(int totalHP, int currHP, int currFuel, int cargoSize,
-			Map<TradeGood, Integer> cargo) {
-		setTotalHP(totalHP);
-		setCurrHP(currHP);
-		setCurrFuel(currFuel);
-		setCargoSize(cargoSize);
-		this.cargo = cargo;
-		// this.shipType = shipType;
+	public Ship(ShipType sT) {
+		setShipType(sT);
+		//need to set fuel, totalHP, currHP, and cargoSize based on ShipType parameters
+		fuel = 14;
+		totalHP = 100;
+		currHP = 100;
+		cargoSize = 15;
 		// this.mercenaries = mercenaries;
 	}
 
@@ -88,15 +75,15 @@ public class Ship {
 	 * 
 	 * @return the current fuel of the ship
 	 */
-	public int getCurrFuel() {
-		return currFuel;
+	public int getFuel() {
+		return fuel;
 	}
 
 	/**
 	 * Sets currFuel of the ship
 	 */
-	public void setCurrFuel(int currFuel) {
-		this.currFuel = currFuel;
+	public void setFuel(int f) {
+		this.fuel = f;
 	}
 
 	/**
@@ -181,5 +168,14 @@ public class Ship {
 		}
 		return cargo.get(goodType);
 	}
-
+	
+	/**
+	 * Private setter for the ship type of the ship
+	 * @param sT
+	 */
+	private void setShipType(ShipType sT) {
+		if(sT == null)
+			throw new IllegalArgumentException();
+		shipType = sT;
+	}
 }
