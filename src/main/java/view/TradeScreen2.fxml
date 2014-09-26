@@ -10,7 +10,20 @@
    <children>
       <HBox prefHeight="60.0">
          <children>
-            <Label text="PlanetName" />
+            <Label fx:id="planetName" text="PlanetName">
+               <padding>
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+               </padding></Label>
+            <Label fx:id="techLevel" text="Tech Level: ">
+               <padding>
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+               </padding>
+            </Label>
+            <Label fx:id="government" text="Government: ">
+               <padding>
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+               </padding>
+            </Label>
          </children>
       </HBox>
       <HBox alignment="CENTER">
@@ -349,6 +362,23 @@
             </VBox>
          </children>
       </HBox>
-      <HBox prefHeight="60.0" />
+      <HBox prefHeight="60.0">
+         <children>
+            <Label fx:id="playerName" text="PlayerName">
+               <padding>
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+               </padding>
+            </Label>
+            <Label fx:id="numCredits" text="Credits: ">
+               <padding>
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+               </padding>
+            </Label>
+            <Label fx:id="cargoSpace" text="Cargo space 0/X">
+               <padding>
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+               </padding>
+            </Label>
+         </children></HBox>
    </children>
 </VBox>

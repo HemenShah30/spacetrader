@@ -141,6 +141,18 @@ public class TradeScreenController {
 	private Label marketMachines;
 	@FXML
 	private Button buyMachinesBtn;
+	@FXML
+	private Label planetName;
+	@FXML
+	private Label techLevel;
+	@FXML
+	private Label government;
+	@FXML
+	private Label playerName;
+	@FXML
+	private Label numCredits;
+	@FXML
+	private Label cargoSpace;
 
 	/**
 	 * Handles all the buy buttons in the trade scene
