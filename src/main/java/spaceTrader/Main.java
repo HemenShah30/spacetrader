@@ -18,6 +18,7 @@ public class Main extends Application {
 	// TODO: Add in logging
 	// TODO: Begin implementing Save and Load functions
 	// TODO: Add exit button to MainScene
+	// TODO: Combine buy/sell popup controllers into one class
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {

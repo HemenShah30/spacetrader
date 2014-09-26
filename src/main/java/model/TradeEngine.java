@@ -102,9 +102,11 @@ public class TradeEngine {
 		List<String> errors = new ArrayList<String>();
 
 		if (ship.amountInCargo(tradeGood) == 0) {
-			errors.add("You have no " + tradeGood.getFormattedName() + "to sell");
+			errors.add("You have no " + tradeGood.getFormattedName()
+					+ " to sell");
 		} else if (ship.amountInCargo(tradeGood) - quantity < 0) {
-			errors.add("You do not have that many of " + tradeGood.getFormattedName());
+			errors.add("You do not have that many of "
+					+ tradeGood.getFormattedName());
 		}
 
 		return errors;

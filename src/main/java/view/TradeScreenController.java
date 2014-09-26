@@ -218,7 +218,62 @@ public class TradeScreenController {
 	@FXML
 	protected void sellGood(Event e) {
 		if (MultiPageController.isValidAction(e)) {
-			System.out.println("Selling good");
+			Button btn = (Button) e.getSource();
+			String id = btn.getId();
+			GoodType type;
+			switch (id) {
+			case "sellWaterBtn":
+				type = GoodType.WATER;
+				break;
+			case "sellFursBtn":
+				type = GoodType.FURS;
+				break;
+			case "sellFoodBtn":
+				type = GoodType.FOOD;
+				break;
+			case "sellOreBtn":
+				type = GoodType.ORE;
+				break;
+			case "sellGamesBtn":
+				type = GoodType.GAMES;
+				break;
+			case "sellMedicineBtn":
+				type = GoodType.MEDICINE;
+				break;
+			case "sellFirearmsBtn":
+				type = GoodType.FIREARMS;
+				break;
+			case "sellMachinesBtn":
+				type = GoodType.MACHINES;
+				break;
+			case "sellNarcoticsBtn":
+				type = GoodType.NARCOTICS;
+				break;
+			case "sellRobotsBtn":
+				type = GoodType.ROBOTS;
+				break;
+			default:
+				throw new IllegalArgumentException();
+			}
+
+			try {
+				Stage sellPopup = new Stage();
+				sellPopup.initModality(Modality.APPLICATION_MODAL);
+				sellPopup.initOwner((Stage) btn.getScene().getWindow());
+
+				FXMLLoader loader = new FXMLLoader(
+						ClassLoader
+								.getSystemResource("view/SellGoodPopup.fxml"));
+				Parent newScene = loader.load();
+				sellPopup.setScene(new Scene(newScene, 300, 125));
+
+				SellGoodPopupController controller = loader.getController();
+				controller.initializePage(40000, type);
+				sellPopup.show();
+
+			} catch (IOException ie) {
+				ie.printStackTrace();
+			}
 		}
 	}
 }
