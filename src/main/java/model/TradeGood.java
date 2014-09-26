@@ -22,21 +22,14 @@ public class TradeGood {
 	}
 
 	/**
-	 * Generates the price of the good at random based on various GoodType
-	 * parameters
+	 * Returns the type of the trade good
 	 * 
-	 * @param Techlevel of the current planet
-	 * @return price of good
+	 * @return The type of the trade good
 	 */
-	public int generatePrice(TechLevel techlevel) {
-		price = type.getBasePrice()
-				+ type.getIncPerTechLevel()
-				* (techlevel.getValue() - type.getMinTechLevel())
-				+ (int) (2 * Math.random() * type.getVariance() - type
-						.getVariance());
-		return price;
+	public GoodType getType() {
+		return type;
 	}
-
+	
 	/**
 	 * Returns the price of the trade good
 	 * 
@@ -77,6 +70,6 @@ public class TradeGood {
 
 	@Override
 	public String toString() {
-		return "Type: " + type + ", Price: " + price;
+		return "Type: " + type;
 	}
 }

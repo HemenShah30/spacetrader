@@ -91,7 +91,7 @@ public class CharacterCreatorController {
 						(int) fightingSlider.getValue(),
 						(int) traderSlider.getValue(),
 						(int) engineerSlider.getValue(),
-						(int) investorSlider.getValue());
+						(int) investorSlider.getValue(), null); // put in default ship here
 				System.out.println(p);
 				Universe u = new Universe();
 				u.createPlanets();

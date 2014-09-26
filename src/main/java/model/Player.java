@@ -11,6 +11,7 @@ public class Player {
 	private int pilotSkill, fighterSkill, traderSkill, engineerSkill,
 			investorSkill;
 	private double credits;
+	private Ship ship;
 
 	/**
 	 * Constructor for the player taking all the appropriate instance variables
@@ -29,14 +30,16 @@ public class Player {
 	 *            The amount of investor skill points
 	 */
 	public Player(String name, int pilot, int fighter, int trader,
-			int engineer, int investor) {
+			int engineer, int investor, Ship ship) {
 		setName(name);
 		this.pilotSkill = pilot;
 		this.fighterSkill = fighter;
 		this.traderSkill = trader;
 		this.engineerSkill = engineer;
 		this.investorSkill = investor;
+		this.ship = ship;
 		credits = 1000;
+		
 	}
 
 	/**
@@ -185,6 +188,14 @@ public class Player {
 		credits += decrease;
 	}
 
+	public Ship getShip() {
+		return ship;
+	}
+	
+	public void setShip(Ship ship) {
+		this.ship = ship;
+	}
+	
 	@Override
 	public String toString() {
 		return "Player: " + name + ", Pilot Skill: " + pilotSkill
