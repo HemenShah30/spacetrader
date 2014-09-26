@@ -91,7 +91,7 @@ public class CharacterCreatorController {
 						(int) traderSlider.getValue(),
 						(int) engineerSlider.getValue(),
 						(int) investorSlider.getValue());
-				MultiPageController.loadView(newGame, "TradeScreen2");
+				MultiPageController.loadView(newGame, "PlanetScreen");
 			}
 		}
 	}
