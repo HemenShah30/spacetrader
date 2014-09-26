@@ -7,16 +7,16 @@ package model;
  * 
  */
 public enum GoodType {
-	WATER		(0, 0, 2, 30, 3, 4, Condition.DROUGHT, SpecialResource.LOTSOFWATER, SpecialResource.DESERT, 30, 50, "Water"),
-	FURS 		(0, 0, 0, 250, 10, 10, Condition.COLD, SpecialResource.RICHFAUNA, SpecialResource.LIFELESS, 230, 180, "Furs"),
-	FOOD 		(1, 0, 1, 100, 5, 5, Condition.CROPFAIL, SpecialResource.RICHSOIL, SpecialResource.POORSOIL, 90, 160, "Food"),
-	ORE 		(2, 2, 3, 350, 20, 10, Condition.WAR, SpecialResource.MINERALRICH, SpecialResource.MINERALPOOR, 350, 420, "Ore"),
-	GAMES 		(3, 1, 6, 250, -10, 5, Condition.BOREDOM, SpecialResource.ARTISTIC, SpecialResource.NEVER, 160, 720, "Games"),
-	FIREARMS 	(3, 1, 5, 1250, -75, 100, Condition.WAR, SpecialResource.WARLIKE, SpecialResource.NEVER, 600, 1100, "Firearms"),
-	MEDICINE 	(4, 1, 6, 650, -20, 10, Condition.PLAGUE, SpecialResource.LOTSOFHERBS, SpecialResource.NEVER, 400, 700, "Medicine"),
-	MACHINES 	(4, 3, 5, 900, -30, 5, Condition.LACKOFWORKERS, SpecialResource.NEVER, SpecialResource.NEVER, 600, 800, "Machines"),
-	NARCOTICS 	(5, 0, 5, 3500, -125, 150, Condition.BOREDOM, SpecialResource.WEIRDMUSHROOMS, SpecialResource.NEVER, 2000, 3000, "Narcotics"),
-	ROBOTS 		(6, 4, 7, 5000, -150, 100, Condition.LACKOFWORKERS, SpecialResource.NEVER, SpecialResource.NEVER, 3500, 5000, "Robots");
+	WATER		(0, 0, 2, 30, 3, 4, Condition.DROUGHT, SpecialResource.LOTSOFWATER, SpecialResource.DESERT, 30, 50),
+	FURS 		(0, 0, 0, 250, 10, 10, Condition.COLD, SpecialResource.RICHFAUNA, SpecialResource.LIFELESS, 230, 180),
+	FOOD 		(1, 0, 1, 100, 5, 5, Condition.CROPFAIL, SpecialResource.RICHSOIL, SpecialResource.POORSOIL, 90, 160),
+	ORE 		(2, 2, 3, 350, 20, 10, Condition.WAR, SpecialResource.MINERALRICH, SpecialResource.MINERALPOOR, 350, 420),
+	GAMES 		(3, 1, 6, 250, -10, 5, Condition.BOREDOM, SpecialResource.ARTISTIC, SpecialResource.NEVER, 160, 720),
+	FIREARMS 	(3, 1, 5, 1250, -75, 100, Condition.WAR, SpecialResource.WARLIKE, SpecialResource.NEVER, 600, 1100),
+	MEDICINE 	(4, 1, 6, 650, -20, 10, Condition.PLAGUE, SpecialResource.LOTSOFHERBS, SpecialResource.NEVER, 400, 700),
+	MACHINES 	(4, 3, 5, 900, -30, 5, Condition.LACKOFWORKERS, SpecialResource.NEVER, SpecialResource.NEVER, 600, 800),
+	NARCOTICS 	(5, 0, 5, 3500, -125, 150, Condition.BOREDOM, SpecialResource.WEIRDMUSHROOMS, SpecialResource.NEVER, 2000, 3000),
+	ROBOTS 		(6, 4, 7, 5000, -150, 100, Condition.LACKOFWORKERS, SpecialResource.NEVER, SpecialResource.NEVER, 3500, 5000);
 	
 	private int minTechLevel; //Minimum Tech Level to produce this resource
 	private int maxTechLevel; //Maximum Tech Level to use this resource
@@ -29,11 +29,11 @@ public enum GoodType {
 	private SpecialResource expensiveCondition; //Expensive condition: When this condition is present, the resource is expensive
 	private int minTraderPrice; //Min price offered in space trade with random trader (not on a planet)
 	private int maxTraderPrice; //Max price offered in space trade with random trader (not on a planet)
-	private String formattedName; //String value for the good type that is nicely formatted
-	
-	private GoodType(int minTechLevel, int maxTechLevel, int biggestProducer, int basePrice, int incPerTechLevel, 
-			int variance, Condition event, SpecialResource cheapCondition, SpecialResource expensiveCondition,
-			int minTraderPrice, int maxTraderPrice, String formattedName) {
+
+	private GoodType(int minTechLevel, int maxTechLevel, int biggestProducer,
+			int basePrice, int incPerTechLevel, int variance, Condition event,
+			SpecialResource cheapCondition, SpecialResource expensiveCondition,
+			int minTraderPrice, int maxTraderPrice) {
 		this.minTechLevel = minTechLevel;
 		this.maxTechLevel = maxTechLevel;
 		this.biggestProducer = biggestProducer;
@@ -45,9 +45,8 @@ public enum GoodType {
 		this.expensiveCondition = expensiveCondition;
 		this.minTraderPrice = minTraderPrice;
 		this.maxTraderPrice = maxTraderPrice;
-		this.formattedName = formattedName;
 	}
-	
+
 	/**
 	 * Getter for the minimum technology level to produce
 	 * 
@@ -56,7 +55,7 @@ public enum GoodType {
 	public int getMinTechLevel() {
 		return minTechLevel;
 	}
-	
+
 	/**
 	 * Getter for the minimum technology level to use
 	 * 
@@ -65,17 +64,17 @@ public enum GoodType {
 	public int getMaxTechLevel() {
 		return maxTechLevel;
 	}
-	
+
 	/**
-	 * Getter for the top tech producer
-	 * (i.e. indicates what tech level will produce the most of this good)
+	 * Getter for the top tech producer (i.e. indicates what tech level will
+	 * produce the most of this good)
 	 * 
 	 * @return Top tech producer
 	 */
 	public int getBiggestProducer() {
 		return biggestProducer;
 	}
-	
+
 	/**
 	 * Getter for the base price of a good
 	 * 
@@ -84,17 +83,16 @@ public enum GoodType {
 	public int getBasePrice() {
 		return basePrice;
 	}
-	
+
 	/**
-	 * Getter for increase per level
-	 * (i.e. higher tech level means higher cost)
+	 * Getter for increase per level (i.e. higher tech level means higher cost)
 	 * 
 	 * @return Increase per level
 	 */
 	public int getIncPerTechLevel() {
 		return incPerTechLevel;
 	}
-	
+
 	/**
 	 * Getter for the random variation of price
 	 * 
@@ -103,17 +101,17 @@ public enum GoodType {
 	public int getVariance() {
 		return variance;
 	}
-	
+
 	/**
-	 * Getter for increase event
-	 * (i.e. events that cause certain goods to be very expensive)
+	 * Getter for increase event (i.e. events that cause certain goods to be
+	 * very expensive)
 	 * 
 	 * @return Increase event of a planet
 	 */
 	public Condition getEvent() {
 		return event;
 	}
-	
+
 	/**
 	 * Getter for the special resource that causes certain goods to be cheaper
 	 * 
@@ -122,16 +120,17 @@ public enum GoodType {
 	public SpecialResource getCheapCondition() {
 		return cheapCondition;
 	}
-	
+
 	/**
-	 * Getter for the special resource that causes certain goods to be more expensive
+	 * Getter for the special resource that causes certain goods to be more
+	 * expensive
 	 * 
 	 * @return Special resource that makes things more expensive
 	 */
 	public SpecialResource getExpensiveCondition() {
 		return expensiveCondition;
 	}
-	
+
 	/**
 	 * Getter for lower bound of a good's price for a non-planet trader
 	 * 
@@ -140,7 +139,7 @@ public enum GoodType {
 	public int getMinTraderPrice() {
 		return minTraderPrice;
 	}
-	
+
 	/**
 	 * Getter for upper bound of a good's price for a non-planet trader
 	 * 
@@ -149,12 +148,32 @@ public enum GoodType {
 	public int getMaxTraderPrice() {
 		return maxTraderPrice;
 	}
-	
-	/**
-	 * Getter for the formatted name of a good type
-	 * @return The formatter name for a good type
-	 */
-	public String getFormattedName() {
-		return formattedName;
+
+	@Override
+	public String toString() {
+		switch (this) {
+		case WATER:
+			return "Water";
+		case FURS:
+			return "Furs";
+		case FOOD:
+			return "Food";
+		case ORE:
+			return "Ore";
+		case GAMES:
+			return "Games";
+		case MEDICINE:
+			return "Medicine";
+		case FIREARMS:
+			return "Firearms";
+		case MACHINES:
+			return "Machines";
+		case NARCOTICS:
+			return "Narcotics";
+		case ROBOTS:
+			return "Robots";
+		default:
+			return null;
+		}
 	}
 }

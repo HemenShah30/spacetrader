@@ -24,4 +24,28 @@ public enum TechLevel {
 	public int getValue() {
 		return value;
 	}
+
+	@Override
+	public String toString() {
+		switch (this) {
+		case PREAGRICULTURE:
+			return "Preagriculture";
+		case AGRICULTURE:
+			return "Agriculture";
+		case MEDIEVAL:
+			return "Medieval";
+		case RENAISSANCE:
+			return "Renaissance";
+		case EARLYINDUSTRIAL:
+			return "Early Industrial";
+		case INDUSTRIAL:
+			return "Industrial";
+		case POSTINDUSTRIAL:
+			return "Post-Industrial";
+		case HITECH:
+			return "High Tech";
+		default:
+			return null;
+		}
+	}
 }
