@@ -1,5 +1,11 @@
 package view;
 
+import java.util.List;
+
+import org.controlsfx.dialog.Dialogs;
+
+import model.GameEngine;
+import model.GoodType;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -14,6 +20,10 @@ import javafx.stage.Stage;
  *
  */
 public class BuyGoodPopupController {
+	private int buyAllAmount;
+	private GoodType tradeGood;
+	private GameEngine game;
+
 	@FXML
 	Button buyAllbtn;
 
@@ -38,7 +48,18 @@ public class BuyGoodPopupController {
 	@FXML
 	protected void buyAllGood(Event e) {
 		if (MultiPageController.isValidAction(e)) {
-			System.out.println("Buy All Good");
+			List<String> errors = game.marketplaceTrade(tradeGood,
+					buyAllAmount, true);
+			if (errors.isEmpty()) {
+				updateTradeScreen();
+				Stage popupStage = (Stage) buyBtn.getScene().getWindow();
+				popupStage.close();
+			} else {
+				String errorMsg ="";
+				for(String error: errors)
+					errorMsg += error+"\n";
+				displayError(errorMsg);
+			}
 		}
 	}
 
@@ -50,10 +71,30 @@ public class BuyGoodPopupController {
 	 */
 	@FXML
 	protected void buyGood(Event e) {
-		// need to validate that good entered is an actual number and in the
-		// valid range of 1-max
 		if (MultiPageController.isValidAction(e)) {
-			System.out.println("Buy " + cargoAmountTxt.getText() + " Good");
+			int goodAmount;
+			try {
+				goodAmount = Integer.parseInt(cargoAmountTxt.getText());
+				if (goodAmount > 0 && goodAmount <= buyAllAmount) {
+					List<String> errors = game.marketplaceTrade(tradeGood, goodAmount, true);
+					if (errors.isEmpty()) {
+						updateTradeScreen();
+						Stage popupStage = (Stage) buyBtn.getScene().getWindow();
+						popupStage.close();
+					} else {
+						String errorMsg ="";
+						for(String error: errors)
+							errorMsg += error+"\n";
+						displayError(errorMsg);
+					}
+
+				} else {
+					displayError("You must enter a number between 1 and "+ buyAllAmount);
+				}
+
+			} catch (NumberFormatException nfe) {
+				displayError("You must enter a number for the buy amount");
+			}
 		}
 	}
 
@@ -67,5 +108,25 @@ public class BuyGoodPopupController {
 	protected void cancelBuy(Event e) {
 		Stage popupStage = (Stage) cancelBtn.getScene().getWindow();
 		popupStage.close();
+	}
+
+	public void initializePage(int buyAll, GoodType good) {
+		game = GameEngine.getGameEngine();
+		buyAllAmount = buyAll;
+		tradeGood = good;
+		cargoAmountLbl.setText("Enter amount or Buy All for " + buyAllAmount
+				+ " " + good.getFormattedName());
+	}
+
+	/**
+	 * Updates the TradeScreen page after a buy is successful
+	 */
+	private void updateTradeScreen() {
+
+	}
+
+	private void displayError(String msg) {
+		Dialogs.create().owner(buyBtn.getScene().getWindow()).title("Error")
+				.message(msg).showError();
 	}
 }

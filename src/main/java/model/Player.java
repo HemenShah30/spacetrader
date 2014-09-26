@@ -12,6 +12,7 @@ public class Player {
 			investorSkill;
 	private double credits;
 	private Ship ship;
+	private Planet planet;
 
 	/**
 	 * Constructor for the player taking all the appropriate instance variables
@@ -188,12 +189,38 @@ public class Player {
 		credits -= decrease;
 	}
 
+	/**
+	 * Getter for the player's ship
+	 * @return The player's ship
+	 */
 	public Ship getShip() {
 		return ship;
 	}
 	
+	/**
+	 * Setter for the player's ship
+	 * @param ship The new ship for the player
+	 */
 	public void setShip(Ship ship) {
+		if(ship == null)
+			throw new IllegalArgumentException();
 		this.ship = ship;
+	}
+	
+	/**
+	 * Getter for the planet that the player is currently on
+	 * @return The planet the player is currently on
+	 */
+	public Planet getPlanet() {
+		return planet;
+	}
+	
+	/**
+	 * Setter for the planet the player is currently on, if null then player is in space
+	 * @param p The planet the player is currently on, if any
+	 */
+	public void setPlanet(Planet p) {
+		planet = p;
 	}
 	
 	@Override

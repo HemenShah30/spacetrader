@@ -1,7 +1,6 @@
 package view;
 
 import model.GameEngine;
-import model.Player;
 
 import org.controlsfx.dialog.Dialogs;
 

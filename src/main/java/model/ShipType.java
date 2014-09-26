@@ -1,7 +1,8 @@
 package model;
 
 /**
- * Enum representing the various ship tpyes
+ * Enum representing the various ship types
+ * 
  * @author Jack Croft
  *
  */

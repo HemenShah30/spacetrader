@@ -35,8 +35,7 @@ public class TradeEngine {
 	 *            The marketplace involved in the transaction
 	 * @return The errors from the transaction, if any
 	 */
-	public List<String> buy(TradeGood tradeGood, int quantity,
-			Marketplace market) {
+	public List<String> buy(GoodType tradeGood, int quantity, Marketplace market) {
 		double cost = market.generatePrice(tradeGood) * quantity;
 		List<String> errors = validateBuy(cost, quantity);
 		if (errors.isEmpty()) {
@@ -62,7 +61,7 @@ public class TradeEngine {
 			errors.add("Not enough credits");
 		}
 		if (ship.getCurrCargo() + quantity > ship.getCargoSize()) {
-			errors.add("Not enough space");
+			errors.add("Not enough space in your ship");
 		}
 
 		return errors;
@@ -79,7 +78,7 @@ public class TradeEngine {
 	 *            the marketplace involved in the transaction
 	 * @return The errors from the sell, if any
 	 */
-	public List<String> sell(TradeGood tradeGood, int quantity,
+	public List<String> sell(GoodType tradeGood, int quantity,
 			Marketplace market) {
 		double cost = market.generatePrice(tradeGood) * quantity;
 		List<String> errors = validateSell(tradeGood, quantity);
@@ -99,13 +98,13 @@ public class TradeEngine {
 	 *            The quantity of the good being sold
 	 * @return The errors from the sell, if any
 	 */
-	private List<String> validateSell(TradeGood tradeGood, int quantity) {
+	private List<String> validateSell(GoodType tradeGood, int quantity) {
 		List<String> errors = new ArrayList<String>();
 
 		if (ship.amountInCargo(tradeGood) == 0) {
-			errors.add("You have no " + tradeGood.toString());
+			errors.add("You have no " + tradeGood.getFormattedName() + "to sell");
 		} else if (ship.amountInCargo(tradeGood) - quantity < 0) {
-			errors.add("You do not have that many of " + tradeGood.toString());
+			errors.add("You do not have that many of " + tradeGood.getFormattedName());
 		}
 
 		return errors;

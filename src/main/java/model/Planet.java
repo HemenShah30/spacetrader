@@ -142,6 +142,14 @@ public class Planet {
 	public Location getLocation() {
 		return location;
 	}
+	
+	/**
+	 * Returns the marketplace for the planet
+	 * @return The marketplace for the planet
+	 */
+	public Marketplace getMarketplace() {
+		return marketplace;
+	}
 
 	@Override
 	public String toString() {

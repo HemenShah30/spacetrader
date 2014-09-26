@@ -1,5 +1,6 @@
 package model;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -12,16 +13,23 @@ public class Ship {
 	private ShipType shipType;
 	private int totalHP, currHP, fuel, cargoSize, currCargo;
 	// private List<Mercenary> mercenaries;
-	private Map<TradeGood, Integer> cargo;
+	private Map<GoodType, Integer> cargo;
 
 	/**
 	 * Constructor for a ship taking in the starting fuel and the ship type
-	 * @param f The starting fuel for the ship
-	 * @param sT The ShipType for the ship
+	 * 
+	 * @param f
+	 *            The starting fuel for the ship
+	 * @param sT
+	 *            The ShipType for the ship
 	 */
 	public Ship(ShipType sT) {
 		setShipType(sT);
-		//need to set fuel, totalHP, currHP, and cargoSize based on ShipType parameters
+		// need to set fuel, totalHP, currHP, and cargoSize based on ShipType
+		// parameters
+		cargo = new HashMap<GoodType, Integer>();
+		for (GoodType type : GoodType.values())
+			cargo.put(type, 0);
 		fuel = 14;
 		totalHP = 100;
 		currHP = 100;
@@ -66,7 +74,7 @@ public class Ship {
 	 * 
 	 * @return the cargo contents of the ship
 	 */
-	public Map<TradeGood, Integer> getCargo() {
+	public Map<GoodType, Integer> getCargo() {
 		return cargo;
 	}
 
@@ -137,7 +145,7 @@ public class Ship {
 	 * @param Integer
 	 *            The number of this good being added
 	 */
-	public void addToCargo(TradeGood goodType, Integer quantity) {
+	public void addToCargo(GoodType goodType, Integer quantity) {
 		cargo.put(goodType, quantity);
 		currCargo += quantity;
 	}
@@ -145,12 +153,12 @@ public class Ship {
 	/**
 	 * Removes a good from the cargo of the ship
 	 * 
-	 * @param TradeGood
+	 * @param goodType
 	 *            The good type
 	 * @param Integer
 	 *            The number of this good being removed
 	 */
-	public void removeFromCargo(TradeGood goodType, Integer quantity) {
+	public void removeFromCargo(GoodType goodType, Integer quantity) {
 		Integer temp = cargo.get(goodType);
 		cargo.put(goodType, temp - quantity);
 		currCargo -= quantity;
@@ -159,22 +167,33 @@ public class Ship {
 	/**
 	 * Returns quantity of a certain good in cargo (will be 0 if doesn't exist)
 	 * 
-	 * @param TradeGood
-	 *            The good type
+	 * @param goodType
+	 *            The GoodType being checked
+	 * @return The amount of the good type in cargo
 	 */
-	public int amountInCargo(TradeGood goodType) {
+	public int amountInCargo(GoodType goodType) {
 		if (!cargo.containsKey(goodType)) {
 			return 0;
 		}
 		return cargo.get(goodType);
 	}
-	
+
+	/**
+	 * Getter for the ship type for the ship
+	 * 
+	 * @return The ship type for the ship
+	 */
+	public ShipType getShipType() {
+		return shipType;
+	}
+
 	/**
 	 * Private setter for the ship type of the ship
+	 * 
 	 * @param sT
 	 */
 	private void setShipType(ShipType sT) {
-		if(sT == null)
+		if (sT == null)
 			throw new IllegalArgumentException();
 		shipType = sT;
 	}

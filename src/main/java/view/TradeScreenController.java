@@ -2,6 +2,7 @@ package view;
 
 import java.io.IOException;
 
+import model.GoodType;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -151,14 +152,55 @@ public class TradeScreenController {
 	protected void buyGood(Event e) {
 		if (MultiPageController.isValidAction(e)) {
 			Button btn = (Button) e.getSource();
+			String id = btn.getId();
+			GoodType type;
+			switch (id) {
+			case "buyWaterBtn":
+				type = GoodType.WATER;
+				break;
+			case "buyFursBtn":
+				type = GoodType.FURS;
+				break;
+			case "buyFoodBtn":
+				type = GoodType.FOOD;
+				break;
+			case "buyOreBtn":
+				type = GoodType.ORE;
+				break;
+			case "buyGamesBtn":
+				type = GoodType.GAMES;
+				break;
+			case "buyMedicineBtn":
+				type = GoodType.MEDICINE;
+				break;
+			case "buyFirearmsBtn":
+				type = GoodType.FIREARMS;
+				break;
+			case "buyMachinesBtn":
+				type = GoodType.MACHINES;
+				break;
+			case "buyNarcoticsBtn":
+				type = GoodType.NARCOTICS;
+				break;
+			case "buyRobotsBtn":
+				type = GoodType.ROBOTS;
+				break;
+			default:
+				throw new IllegalArgumentException();
+			}
+
 			try {
 				Stage buyPopup = new Stage();
 				buyPopup.initModality(Modality.APPLICATION_MODAL);
 				buyPopup.initOwner((Stage) btn.getScene().getWindow());
 
-				Parent newScene = new FXMLLoader().load(ClassLoader
-						.getSystemResourceAsStream("view/BuyGoodPopup.fxml"));
+				FXMLLoader loader = new FXMLLoader(
+						ClassLoader.getSystemResource("view/BuyGoodPopup.fxml"));
+				Parent newScene = loader.load();
 				buyPopup.setScene(new Scene(newScene, 300, 125));
+
+				BuyGoodPopupController controller = loader.getController();
+				controller.initializePage(40000, type);
 				buyPopup.show();
 
 			} catch (IOException ie) {

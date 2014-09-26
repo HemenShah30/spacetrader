@@ -23,9 +23,10 @@ public class Universe {
 	public Universe() {
 		planets = new ArrayList<Planet>();
 	}
-	
+
 	/**
 	 * Constructor for a universe taking in a list of planets to begin with
+	 * 
 	 * @param p
 	 */
 	public Universe(List<Planet> p) {
@@ -71,9 +72,10 @@ public class Universe {
 			planets.add(p);
 		}
 	}
-	
+
 	/**
 	 * Gets the list of planets in the universe
+	 * 
 	 * @return The list of planets in the universe
 	 */
 	public List<Planet> getPlanets() {

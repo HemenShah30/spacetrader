@@ -35,13 +35,28 @@ public class GameEngine {
 	}
 
 	/**
-	 * Setter for the player for the game engine
+	 * Setter for the player for the GameEngine taking in all the player info
+	 * from the view
+	 * 
+	 * @param name
+	 *            The name of the player
+	 * @param pilotSkill
+	 *            The pilot skill of the player
+	 * @param fightingSkill
+	 *            The fighting skill of the player
+	 * @param traderSkill
+	 *            The trader skill of the player
+	 * @param engineerSkill
+	 *            The engineer skill of the player
+	 * @param investorSkill
+	 *            The investor skill of the player
 	 */
 	public void setPlayer(String name, int pilotSkill, int fightingSkill,
 			int traderSkill, int engineerSkill, int investorSkill) {
 		Ship s = new Ship(ShipType.GNAT);
 		player = new Player(name, pilotSkill, fightingSkill, traderSkill,
 				engineerSkill, investorSkill, s);
+		player.setPlanet(universe.getPlanets().get(0));
 		tradeEngine = new TradeEngine(player);
 	}
 
@@ -59,10 +74,13 @@ public class GameEngine {
 	 *            Whether or not a good is being bought
 	 * @return The errors from the transaction, if any
 	 */
-	public List<String> marketplaceTrade(TradeGood good, int quantity,
-			Marketplace market, boolean buyingGood) {
+	public List<String> marketplaceTrade(GoodType good, int quantity,
+			boolean buyingGood) {
+		player.getShip();
 		if (buyingGood)
-			return tradeEngine.buy(good, quantity, market);
-		return tradeEngine.sell(good, quantity, market);
+			return tradeEngine.buy(good, quantity, player.getPlanet()
+					.getMarketplace());
+		return tradeEngine.sell(good, quantity, player.getPlanet()
+				.getMarketplace());
 	}
 }
