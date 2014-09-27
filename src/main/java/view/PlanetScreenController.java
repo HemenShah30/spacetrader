@@ -52,7 +52,7 @@ public class PlanetScreenController {
 				Stage stage = (Stage) marketplaceBtn.getScene().getWindow();
 				stage.hide();
 				FXMLLoader loader = new FXMLLoader(
-						ClassLoader.getSystemResource("view/TradeScreen2.fxml"));
+						ClassLoader.getSystemResource("view/TradeScreen.fxml"));
 				Parent newScene = loader.load();
 				stage.setScene(new Scene(newScene, 600, 400));
 				TradeScreenController controller = loader.getController();

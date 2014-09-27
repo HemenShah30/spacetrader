@@ -417,8 +417,14 @@ public class TradeScreenController {
 				+ "/" + player.getShip().getCargoSize());
 	}
 
+	/**
+	 * Sends player back to the planet screen from the market screen
+	 * @param e The event that fired the method
+	 */
 	@FXML
 	protected void toPlanetScreen(Event e) {
-		
+		if(MultiPageController.isValidAction(e)) {
+			MultiPageController.loadView(toPlanetScreenBtn, "PlanetScreen");
+		}
 	}
 }
