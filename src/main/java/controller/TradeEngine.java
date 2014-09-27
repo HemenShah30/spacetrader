@@ -46,6 +46,8 @@ public class TradeEngine {
 		if (errors.isEmpty()) {
 			ship.addToCargo(tradeGood, quantity);
 			player.decreaseCredits(cost);
+			market.setQuantity(tradeGood, market.getQuantity(tradeGood)
+					- quantity);
 		}
 		return errors;
 	}
@@ -90,6 +92,8 @@ public class TradeEngine {
 		if (errors.isEmpty()) {
 			ship.removeFromCargo(tradeGood, quantity);
 			player.increaseCredits(cost);
+			market.setQuantity(tradeGood, market.getQuantity(tradeGood)
+					+ quantity);
 		}
 		return errors;
 	}
