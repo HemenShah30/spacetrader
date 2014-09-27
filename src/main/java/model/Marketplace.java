@@ -98,4 +98,13 @@ public class Marketplace {
 	public double getPrice(GoodType good) {
 		return prices.get(good);
 	}
+	
+	/**
+	 * Sets the quantity for the good type
+	 * @param good The good type to have its quantity changed
+	 * @param quantity The new quantity of the good type
+	 */
+	public void setQuantity(GoodType good, int quantity) {
+		quantities.put(good, quantity);
+	}
 }

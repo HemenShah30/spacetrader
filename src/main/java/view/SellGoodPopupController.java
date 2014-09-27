@@ -92,8 +92,14 @@ public class SellGoodPopupController {
 					}
 
 				} else {
-					displayError("You must enter a number between 1 and "
-							+ sellAllAmount);
+					if (sellAllAmount == 0)
+						displayError("You have no " + tradeGood + " to sell");
+					else if (sellAllAmount == 1)
+						displayError("You only have 1 " + tradeGood
+								+ " to sell");
+					else
+						displayError("You must enter a number between 1 and "
+								+ sellAllAmount);
 				}
 
 			} catch (NumberFormatException nfe) {
