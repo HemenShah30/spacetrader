@@ -309,104 +309,58 @@ public class TradeScreenController {
 		for (GoodType type : GoodType.values()) {
 			switch (type) {
 			case WATER:
-				marketWaterLbl.setText(Integer.toString(market
-						.getQuantity(type)));
-				buyPriceWaterLbl.setText(Integer.toString((int) market
-						.getBuyPrice(type, player)));
-				cargoWaterLbl.setText(Integer.toString(player.getShip()
-						.amountInCargo(type)));
-				sellPriceWaterLbl.setText(Integer.toString((int) market
-						.getSellPrice(type)));
+				setLabels(type, player, market, buyWaterBtn, sellWaterBtn,
+						marketWaterLbl, buyPriceWaterLbl, cargoWaterLbl,
+						sellPriceWaterLbl);
 				break;
 			case FURS:
-				marketFurLbl
-						.setText(Integer.toString(market.getQuantity(type)));
-				buyPriceFurLbl.setText(Integer.toString((int) market
-						.getBuyPrice(type, player)));
-				cargoFurLbl.setText(Integer.toString(player.getShip()
-						.amountInCargo(type)));
-				sellPriceFurLbl.setText(Integer.toString((int) market
-						.getSellPrice(type)));
+				setLabels(type, player, market, buyFursBtn, sellFursBtn,
+						marketFurLbl, buyPriceFurLbl, cargoFurLbl,
+						sellPriceFurLbl);
 				break;
 			case FOOD:
-				marketFoodLbl
-						.setText(Integer.toString(market.getQuantity(type)));
-				buyPriceFoodLbl.setText(Integer.toString((int) market
-						.getBuyPrice(type, player)));
-				cargoFoodLbl.setText(Integer.toString(player.getShip()
-						.amountInCargo(type)));
-				sellPriceFoodLbl.setText(Integer.toString((int) market
-						.getSellPrice(type)));
+				setLabels(type, player, market, buyFoodBtn, sellFoodBtn,
+						marketFoodLbl, buyPriceFoodLbl, cargoFoodLbl,
+						sellPriceFoodLbl);
 				break;
 			case ORE:
-				marketOreLbl
-						.setText(Integer.toString(market.getQuantity(type)));
-				buyPriceOreLbl.setText(Integer.toString((int) market
-						.getBuyPrice(type, player)));
-				cargoOreLbl.setText(Integer.toString(player.getShip()
-						.amountInCargo(type)));
-				sellPriceOreLbl.setText(Integer.toString((int) market
-						.getSellPrice(type)));
+				setLabels(type, player, market, buyOreBtn, sellOreBtn,
+						marketOreLbl, buyPriceOreLbl, cargoOreLbl,
+						sellPriceOreLbl);
 				break;
 			case GAMES:
-				marketGamesLbl.setText(Integer.toString(market
-						.getQuantity(type)));
-				buyPriceGamesLbl.setText(Integer.toString((int) market
-						.getBuyPrice(type, player)));
-				cargoGamesLbl.setText(Integer.toString(player.getShip()
-						.amountInCargo(type)));
-				sellPriceGamesLbl.setText(Integer.toString((int) market
-						.getSellPrice(type)));
+				setLabels(type, player, market, buyGamesBtn, sellGamesBtn,
+						marketGamesLbl, buyPriceGamesLbl, cargoGamesLbl,
+						sellPriceGamesLbl);
 				break;
 			case MEDICINE:
-				marketMedicineLbl.setText(Integer.toString(market
-						.getQuantity(type)));
-				buyPriceMedicineLbl.setText(Integer.toString((int) market
-						.getBuyPrice(type, player)));
-				cargoMedicineLbl.setText(Integer.toString(player.getShip()
-						.amountInCargo(type)));
-				sellPriceMedicineLbl.setText(Integer.toString((int) market
-						.getSellPrice(type)));
+				setLabels(type, player, market, buyMedicineBtn,
+						sellMedicineBtn, marketMedicineLbl,
+						buyPriceMedicineLbl, cargoMedicineLbl,
+						sellPriceMedicineLbl);
 				break;
 			case FIREARMS:
-				marketFirearmsLbl.setText(Integer.toString(market
-						.getQuantity(type)));
-				buyPriceFirearmsLbl.setText(Integer.toString((int) market
-						.getBuyPrice(type, player)));
-				cargoFirearmsLbl.setText(Integer.toString(player.getShip()
-						.amountInCargo(type)));
-				sellPriceFirearmsLbl.setText(Integer.toString((int) market
-						.getSellPrice(type)));
+				setLabels(type, player, market, buyFirearmsBtn,
+						sellFirearmsBtn, marketFirearmsLbl,
+						buyPriceFirearmsLbl, cargoFirearmsLbl,
+						sellPriceFirearmsLbl);
 				break;
 			case MACHINES:
-				marketMachinesLbl.setText(Integer.toString(market
-						.getQuantity(type)));
-				buyPriceMachinesLbl.setText(Integer.toString((int) market
-						.getBuyPrice(type, player)));
-				cargoMachinesLbl.setText(Integer.toString(player.getShip()
-						.amountInCargo(type)));
-				sellPriceMachinesLbl.setText(Integer.toString((int) market
-						.getSellPrice(type)));
+				setLabels(type, player, market, buyMachinesBtn,
+						sellMachinesBtn, marketMachinesLbl,
+						buyPriceMachinesLbl, cargoMachinesLbl,
+						sellPriceMachinesLbl);
 				break;
 			case NARCOTICS:
-				marketNarcoticsLbl.setText(Integer.toString(market
-						.getQuantity(type)));
-				buyPriceNarcoticsLbl.setText(Integer.toString((int) market
-						.getBuyPrice(type, player)));
-				cargoNarcoticsLbl.setText(Integer.toString(player.getShip()
-						.amountInCargo(type)));
-				sellPriceNarcoticsLbl.setText(Integer.toString((int) market
-						.getSellPrice(type)));
+				setLabels(type, player, market, buyNarcoticsBtn,
+						sellNarcoticsBtn, marketNarcoticsLbl,
+						buyPriceNarcoticsLbl, cargoNarcoticsLbl,
+						sellPriceNarcoticsLbl);
 				break;
 			case ROBOTS:
-				marketRobotsLbl.setText(Integer.toString(market
-						.getQuantity(type)));
-				buyPriceRobotsLbl.setText(Integer.toString((int) market
-						.getBuyPrice(type, player)));
-				cargoRobotsLbl.setText(Integer.toString(player.getShip()
-						.amountInCargo(type)));
-				sellPriceRobotsLbl.setText(Integer.toString((int) market
-						.getSellPrice(type)));
+				setLabels(type, player, market, buyRobotsBtn, sellRobotsBtn,
+						marketRobotsLbl, buyPriceRobotsLbl, cargoRobotsLbl,
+						sellPriceRobotsLbl);
 				break;
 			default:
 			}
@@ -415,6 +369,27 @@ public class TradeScreenController {
 		numCreditsLbl.setText("Credits: " + (int) (player.getCredits()));
 		cargoSpaceLbl.setText("Cargo Space: " + player.getShip().getCurrCargo()
 				+ "/" + player.getShip().getCargoSize());
+	}
+
+	private void setLabels(GoodType type, Player player, Marketplace market,
+			Button buyButton, Button sellButton, Label marketLbl,
+			Label buyPriceLbl, Label cargoLbl, Label sellPriceLbl) {
+		marketLbl.setText(Integer.toString(market.getQuantity(type)));
+		int buyPrice = (int) market.getBuyPrice(type, player);
+		if (buyPrice != -1)
+			buyPriceLbl.setText(Integer.toString(buyPrice));
+		else {
+			buyPriceLbl.setText("0");
+			buyButton.setDisable(true);
+		}
+		cargoLbl.setText(Integer.toString(player.getShip().amountInCargo(type)));
+		int sellPrice = (int) market.getSellPrice(type);
+		if (sellPrice != -1)
+			sellPriceLbl.setText(Integer.toString(sellPrice));
+		else {
+			sellPriceLbl.setText("0");
+			sellButton.setDisable(true);
+		}
 	}
 
 	/**

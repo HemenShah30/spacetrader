@@ -87,6 +87,8 @@ public class Marketplace {
 	 * @return The price of the good in the marketplace
 	 */
 	public double getSellPrice(GoodType good) {
+		if (good.getMinTechLevelToUse() > planet.getTechLevel().getValue())
+			return -1;
 		return prices.get(good);
 	}
 
@@ -101,7 +103,10 @@ public class Marketplace {
 	 * @return The price of the good
 	 */
 	public double getBuyPrice(GoodType good, Player player) {
-		return (1 + (.025 * (10 - player.getTraderSkill()))) * prices.get(good);
+		if (good.getMinTechLevelToProduce() > planet.getTechLevel().getValue())
+			return -1;
+		return (int) (1 + (.025 * (10 - player.getTraderSkill())))
+				* prices.get(good);
 	}
 
 	/**

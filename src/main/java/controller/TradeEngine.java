@@ -70,7 +70,8 @@ public class TradeEngine {
 		if (ship.getCurrCargo() + quantity > ship.getCargoSize()) {
 			errors.add("Not enough space in your ship");
 		}
-
+		if (cost == -1)
+			errors.add("Planet cannot sell this good");
 		return errors;
 	}
 
@@ -88,12 +89,14 @@ public class TradeEngine {
 	public List<String> sell(GoodType tradeGood, int quantity,
 			Marketplace market) {
 		double cost = market.getSellPrice(tradeGood) * quantity;
-		List<String> errors = validateSell(tradeGood, quantity);
+		List<String> errors = validateSell(tradeGood, quantity, market);
 		if (errors.isEmpty()) {
+			if (market.getBuyPrice(tradeGood, player) != -1) {
+				market.setQuantity(tradeGood, market.getQuantity(tradeGood)
+						+ quantity);
+			}
 			ship.removeFromCargo(tradeGood, quantity);
 			player.increaseCredits(cost);
-			market.setQuantity(tradeGood, market.getQuantity(tradeGood)
-					+ quantity);
 		}
 		return errors;
 	}
@@ -107,7 +110,8 @@ public class TradeEngine {
 	 *            The quantity of the good being sold
 	 * @return The errors from the sell, if any
 	 */
-	private List<String> validateSell(GoodType tradeGood, int quantity) {
+	private List<String> validateSell(GoodType tradeGood, int quantity,
+			Marketplace market) {
 		List<String> errors = new ArrayList<String>();
 
 		if (ship.amountInCargo(tradeGood) == 0) {
@@ -115,6 +119,8 @@ public class TradeEngine {
 		} else if (ship.amountInCargo(tradeGood) - quantity < 0) {
 			errors.add("You do not have that many of " + tradeGood);
 		}
+		if (market.getSellPrice(tradeGood) == -1)
+			errors.add("Planet cannot purchase this good");
 
 		return errors;
 	}
@@ -129,10 +135,12 @@ public class TradeEngine {
 	 */
 	public int getMaximumBuyGoodAmount(GoodType good) {
 		Marketplace market = player.getPlanet().getMarketplace();
-		return Math.min(
-				Math.min(ship.getCargoSize() - ship.getCurrCargo(),
-						market.getQuantity(good)),
-				((int) player.getCredits() / (int) market.getBuyPrice(good, player)));
+		if (market.getBuyPrice(good, player) == -1)
+			return 0;
+		return Math.min(Math.min(ship.getCargoSize() - ship.getCurrCargo(),
+				market.getQuantity(good)),
+				((int) player.getCredits() / (int) market.getBuyPrice(good,
+						player)));
 	}
 
 	/**
@@ -144,6 +152,9 @@ public class TradeEngine {
 	 * @return The amount of a good that a user can sell
 	 */
 	public int getMaximumSellGoodAmount(GoodType good) {
+		Marketplace market = player.getPlanet().getMarketplace();
+		if (market.getSellPrice(good) == -1)
+			return 0;
 		return ship.amountInCargo(good);
 	}
 }
