@@ -18,8 +18,8 @@ public enum GoodType {
 	NARCOTICS 	(5, 0, 5, 3500, -125, 150, Condition.BOREDOM, SpecialResource.WEIRDMUSHROOMS, SpecialResource.NEVER, 2000, 3000),
 	ROBOTS 		(6, 4, 7, 5000, -150, 100, Condition.LACKOFWORKERS, SpecialResource.NEVER, SpecialResource.NEVER, 3500, 5000);
 	
-	private int minTechLevelToProduce; //Minimum Tech Level to produce this resource
-	private int minTechLevelToUse; //Minimum Tech Level to use this resource
+	private int minTechLevel; //Minimum Tech Level to produce this resource
+	private int maxTechLevel; //Maximum Tech Level to use this resource
 	private int biggestProducer; //Tech Level that produces the most of this item
 	private int basePrice;
 	private int incPerTechLevel; //Price increase per Tech Level
@@ -30,12 +30,12 @@ public enum GoodType {
 	private int minTraderPrice; //Min price offered in space trade with random trader (not on a planet)
 	private int maxTraderPrice; //Max price offered in space trade with random trader (not on a planet)
 
-	private GoodType(int minTechLevelToProduce, int minTechLevelToUse, int biggestProducer,
+	private GoodType(int minTechLevel, int maxTechLevel, int biggestProducer,
 			int basePrice, int incPerTechLevel, int variance, Condition event,
 			SpecialResource cheapCondition, SpecialResource expensiveCondition,
 			int minTraderPrice, int maxTraderPrice) {
-		this.minTechLevelToProduce = minTechLevelToProduce;
-		this.minTechLevelToUse = minTechLevelToUse;
+		this.minTechLevel = minTechLevel;
+		this.maxTechLevel = maxTechLevel;
 		this.biggestProducer = biggestProducer;
 		this.basePrice = basePrice;
 		this.incPerTechLevel = incPerTechLevel;
@@ -52,8 +52,8 @@ public enum GoodType {
 	 * 
 	 * @return Minimum technology level to produce
 	 */
-	public int getMinTechLevelToProduce() {
-		return minTechLevelToProduce;
+	public int getMinTechLevel() {
+		return minTechLevel;
 	}
 
 	/**
@@ -61,8 +61,8 @@ public enum GoodType {
 	 * 
 	 * @return Minimum technology level to use
 	 */
-	public int getMinTechLevelToUse() {
-		return minTechLevelToUse;
+	public int getMaxTechLevel() {
+		return maxTechLevel;
 	}
 
 	/**
