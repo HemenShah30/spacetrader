@@ -76,4 +76,9 @@ public class PlanetScreenController {
 			System.out.println("Going to shipyard");
 		}
 	}
+	
+	@FXML
+	protected void goToSpace(Event e) {
+		
+	}
 }
