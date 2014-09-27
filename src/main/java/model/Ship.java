@@ -146,7 +146,8 @@ public class Ship {
 	 *            The number of this good being added
 	 */
 	public void addToCargo(GoodType goodType, Integer quantity) {
-		cargo.put(goodType, quantity);
+		Integer temp = cargo.get(goodType);
+		cargo.put(goodType, temp + quantity);
 		currCargo += quantity;
 	}
 
