@@ -56,7 +56,7 @@ public class PlanetScreenController {
 				Parent newScene = loader.load();
 				stage.setScene(new Scene(newScene, 600, 400));
 				TradeScreenController controller = loader.getController();
-				controller.initializePage();
+				controller.updatePage();
 				stage.show();
 			} catch (IOException ie) {
 				ie.printStackTrace();
@@ -79,6 +79,8 @@ public class PlanetScreenController {
 	
 	@FXML
 	protected void goToSpace(Event e) {
-		
+		if (MultiPageController.isValidAction(e)) {
+			System.out.println("Going to space");
+		}
 	}
 }

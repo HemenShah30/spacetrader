@@ -23,6 +23,7 @@ public class BuyGoodPopupController {
 	private int buyAllAmount;
 	private GoodType tradeGood;
 	private GameEngine game;
+	private TradeScreenController tradeScreen;
 
 	@FXML
 	Button buyAllbtn;
@@ -51,7 +52,7 @@ public class BuyGoodPopupController {
 			List<String> errors = game.marketplaceTrade(tradeGood,
 					buyAllAmount, true);
 			if (errors.isEmpty()) {
-				updateTradeScreen();
+				tradeScreen.updatePage();
 				Stage popupStage = (Stage) buyBtn.getScene().getWindow();
 				popupStage.close();
 			} else {
@@ -79,7 +80,7 @@ public class BuyGoodPopupController {
 					List<String> errors = game.marketplaceTrade(tradeGood,
 							goodAmount, true);
 					if (errors.isEmpty()) {
-						updateTradeScreen();
+						tradeScreen.updatePage();
 						Stage popupStage = (Stage) buyBtn.getScene()
 								.getWindow();
 						popupStage.close();
@@ -113,19 +114,13 @@ public class BuyGoodPopupController {
 		popupStage.close();
 	}
 
-	public void initializePage(GoodType good) {
+	public void initializePage(GoodType good, TradeScreenController ts) {
 		game = GameEngine.getGameEngine();
+		tradeScreen = ts;
 		buyAllAmount = game.getMaximumGood(good, true);
 		tradeGood = good;
 		cargoAmountLbl.setText("Enter amount or Buy All for " + buyAllAmount
 				+ " " + good);
-	}
-
-	/**
-	 * Updates the TradeScreen page after a buy is successful
-	 */
-	private void updateTradeScreen() {
-
 	}
 
 	private void displayError(String msg) {

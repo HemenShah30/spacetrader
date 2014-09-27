@@ -94,52 +94,52 @@
                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="marketWater" text="0">
+                  <Label fx:id="marketWaterLbl" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="marketFur" text="0">
+                  <Label fx:id="marketFurLbl" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="marketFood" text="0">
+                  <Label fx:id="marketFoodLbl" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="marketOre" text="0">
+                  <Label fx:id="marketOreLbl" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="marketGames" text="0">
+                  <Label fx:id="marketGamesLbl" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="marketMedicine" text="0">
+                  <Label fx:id="marketMedicineLbl" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="marketFirearms" text="0" textFill="#e42020">
+                  <Label fx:id="marketFirearmsLbl" text="0" textFill="#e42020">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="marketMachines" text="0">
+                  <Label fx:id="marketMachinesLbl" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="marketNarcotics" text="0" textFill="#e42020">
+                  <Label fx:id="marketNarcoticsLbl" text="0" textFill="#e42020">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="marketRobots" text="0">
+                  <Label fx:id="marketRobotsLbl" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
@@ -153,52 +153,52 @@
                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="buyPriceWater" text="0">
+                  <Label fx:id="buyPriceWaterLbl" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="buyPriceFur" text="0">
+                  <Label fx:id="buyPriceFurLbl" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="buyPriceFood" text="0">
+                  <Label fx:id="buyPriceFoodLbl" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="buyPriceOre" text="0">
+                  <Label fx:id="buyPriceOreLbl" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="buyPriceGame" text="0">
+                  <Label fx:id="buyPriceGamesLbl" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="buyPriceMedicine" text="0">
+                  <Label fx:id="buyPriceMedicineLbl" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="buyPriceFirearm" text="0" textFill="#e42020">
+                  <Label fx:id="buyPriceFirearmsLbl" text="0" textFill="#e42020">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="buyPriceMachine" text="0">
+                  <Label fx:id="buyPriceMachinesLbl" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="buyPriceNarcotics" text="0" textFill="#e42020">
+                  <Label fx:id="buyPriceNarcoticsLbl" text="0" textFill="#e42020">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="buyPriceRobot" text="0">
+                  <Label fx:id="buyPriceRobotsLbl" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
@@ -230,52 +230,52 @@
                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="cargoWater" text="0">
+                  <Label fx:id="cargoWaterLbl" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="cargoFur" text="0">
+                  <Label fx:id="cargoFurLbl" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="cargoFood" text="0">
+                  <Label fx:id="cargoFoodLbl" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="cargoOre" text="0">
+                  <Label fx:id="cargoOreLbl" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="cargoGames" text="0">
+                  <Label fx:id="cargoGamesLbl" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="cargoMedicine" text="0">
+                  <Label fx:id="cargoMedicineLbl" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="cargoFirearms" text="0" textFill="#e42020">
+                  <Label fx:id="cargoFirearmsLbl" text="0" textFill="#e42020">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="cargoMachines" text="0">
+                  <Label fx:id="cargoMachinesLbl" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="cargoNarcotics" text="0" textFill="#e42020">
+                  <Label fx:id="cargoNarcoticsLbl" text="0" textFill="#e42020">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="cargoRobots" text="0">
+                  <Label fx:id="cargoRobotsLbl" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
@@ -289,52 +289,52 @@
                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="sellPriceWater" text="0">
+                  <Label fx:id="sellPriceWaterLbl" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="sellPriceFur" text="0">
+                  <Label fx:id="sellPriceFurLbl" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="sellPriceFood" text="0">
+                  <Label fx:id="sellPriceFoodLbl" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="sellPriceOre" text="0">
+                  <Label fx:id="sellPriceOreLbl" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="sellPriceGames" text="0">
+                  <Label fx:id="sellPriceGamesLbl" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="sellPriceMedicine" text="0">
+                  <Label fx:id="sellPriceMedicineLbl" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="sellPriceFirearm" text="0" textFill="#e42020">
+                  <Label fx:id="sellPriceFirearmsLbl" text="0" textFill="#e42020">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="sellPriceMachine" text="0">
+                  <Label fx:id="sellPriceMachinesLbl" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="sellPriceNarcotics" text="0" textFill="#e42020">
+                  <Label fx:id="sellPriceNarcoticsLbl" text="0" textFill="#e42020">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="sellPriceRobot" text="0">
+                  <Label fx:id="sellPriceRobotsLbl" text="0">
                      <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </padding>

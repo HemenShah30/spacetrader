@@ -109,6 +109,8 @@ public class GameEngine {
 	 * @return The maximum amount that can be bought or sold by the player
 	 */
 	public int getMaximumGood(GoodType type, boolean buying) {
-		return 40000;
+		if(buying)
+			return tradeEngine.getMaximumBuyGoodAmount(type);
+		return tradeEngine.getMaximumSellGoodAmount(type);
 	}
 }

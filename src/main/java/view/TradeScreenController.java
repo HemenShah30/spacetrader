@@ -4,9 +4,9 @@ import java.io.IOException;
 
 import controller.GameEngine;
 import model.GoodType;
+import model.Marketplace;
 import model.Planet;
 import model.Player;
-import model.TechLevel;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,103 +26,103 @@ import javafx.stage.Stage;
 public class TradeScreenController {
 
 	@FXML
-	private Label buyPriceGame;
+	private Label buyPriceGamesLbl;
 	@FXML
-	private Label sellPriceFirearm;
+	private Label sellPriceFirearmsLbl;
 	@FXML
 	private Button buyWaterBtn;
 	@FXML
 	private Button sellMedicineBtn;
 	@FXML
-	private Label buyPriceNarcotics;
+	private Label buyPriceNarcoticsLbl;
 	@FXML
-	private Label buyPriceFur;
+	private Label buyPriceFurLbl;
 	@FXML
-	private Label marketNarcotics;
+	private Label marketNarcoticsLbl;
 	@FXML
 	private Button sellFursBtn;
 	@FXML
-	private Label sellPriceMachine;
+	private Label sellPriceMachinesLbl;
 	@FXML
-	private Label sellPriceNarcotics;
+	private Label sellPriceNarcoticsLbl;
 	@FXML
 	private Button sellNarcoticsBtn;
 	@FXML
-	private Label buyPriceRobot;
+	private Label buyPriceRobotsLbl;
 	@FXML
-	private Label buyPriceFood;
+	private Label buyPriceFoodLbl;
 	@FXML
-	private Label buyPriceMachine;
+	private Label buyPriceMachinesLbl;
 	@FXML
-	private Label sellPriceMedicine;
+	private Label sellPriceMedicineLbl;
 	@FXML
 	private Button sellGamesBtn;
 	@FXML
 	private Button buyRobotsBtn;
 	@FXML
-	private Label cargoFur;
+	private Label cargoFurLbl;
 	@FXML
-	private Label cargoMedicine;
+	private Label cargoMedicineLbl;
 	@FXML
-	private Label marketFirearms;
+	private Label marketFirearmsLbl;
 	@FXML
 	private Button sellFirearmsBtn;
 	@FXML
-	private Label sellPriceWater;
+	private Label sellPriceWaterLbl;
 	@FXML
-	private Label cargoWater;
+	private Label cargoWaterLbl;
 	@FXML
-	private Label buyPriceFirearm;
+	private Label buyPriceFirearmsLbl;
 	@FXML
-	private Label marketFood;
+	private Label marketFoodLbl;
 	@FXML
-	private Label marketWater;
+	private Label marketWaterLbl;
 	@FXML
-	private Label sellPriceRobot;
+	private Label sellPriceRobotsLbl;
 	@FXML
-	private Label cargoMachines;
+	private Label cargoMachinesLbl;
 	@FXML
-	private Label sellPriceFood;
+	private Label sellPriceFoodLbl;
 	@FXML
 	private Button sellRobotsBtn;
 	@FXML
-	private Label cargoOre;
+	private Label cargoOreLbl;
 	@FXML
 	private Button sellMachinesBtn;
 	@FXML
-	private Label cargoNarcotics;
+	private Label cargoNarcoticsLbl;
 	@FXML
 	private Button buyFoodBtn;
 	@FXML
-	private Label cargoRobots;
+	private Label cargoRobotsLbl;
 	@FXML
-	private Label marketGames;
+	private Label marketGamesLbl;
 	@FXML
 	private Button sellFoodBtn;
 	@FXML
-	private Label marketOre;
+	private Label marketOreLbl;
 	@FXML
 	private Button buyMedicineBtn;
 	@FXML
-	private Label buyPriceOre;
+	private Label buyPriceOreLbl;
 	@FXML
-	private Label cargoGames;
+	private Label cargoGamesLbl;
 	@FXML
 	private Button buyFirearmsBtn;
 	@FXML
-	private Label marketRobots;
+	private Label marketRobotsLbl;
 	@FXML
-	private Label sellPriceOre;
+	private Label sellPriceOreLbl;
 	@FXML
-	private Label buyPriceMedicine;
+	private Label buyPriceMedicineLbl;
 	@FXML
-	private Label buyPriceWater;
+	private Label buyPriceWaterLbl;
 	@FXML
-	private Label cargoFood;
+	private Label cargoFoodLbl;
 	@FXML
 	private Button buyGamesBtn;
 	@FXML
-	private Label sellPriceGames;
+	private Label sellPriceGamesLbl;
 	@FXML
 	private Button sellWaterBtn;
 	@FXML
@@ -130,19 +130,19 @@ public class TradeScreenController {
 	@FXML
 	private Button buyFursBtn;
 	@FXML
-	private Label marketFur;
+	private Label marketFurLbl;
 	@FXML
 	private Button buyOreBtn;
 	@FXML
 	private Button buyNarcoticsBtn;
 	@FXML
-	private Label cargoFirearms;
+	private Label cargoFirearmsLbl;
 	@FXML
-	private Label sellPriceFur;
+	private Label sellPriceFurLbl;
 	@FXML
-	private Label marketMedicine;
+	private Label marketMedicineLbl;
 	@FXML
-	private Label marketMachines;
+	private Label marketMachinesLbl;
 	@FXML
 	private Button buyMachinesBtn;
 	@FXML
@@ -216,7 +216,7 @@ public class TradeScreenController {
 				buyPopup.setScene(new Scene(newScene, 300, 125));
 
 				BuyGoodPopupController controller = loader.getController();
-				controller.initializePage(type);
+				controller.initializePage(type, this);
 				buyPopup.show();
 
 			} catch (IOException ie) {
@@ -284,7 +284,7 @@ public class TradeScreenController {
 				sellPopup.setScene(new Scene(newScene, 300, 125));
 
 				SellGoodPopupController controller = loader.getController();
-				controller.initializePage(type);
+				controller.initializePage(type, this);
 				sellPopup.show();
 
 			} catch (IOException ie) {
@@ -294,21 +294,121 @@ public class TradeScreenController {
 	}
 
 	/**
-	 * Initializes the page with all the data needed at startup
+	 * Updates the page with all new data at initial load and after buy or sell
 	 */
-	public void initializePage() {
+	public void updatePage() {
 		GameEngine game = GameEngine.getGameEngine();
 		Player player = game.getPlayer();
 		Planet planet = player.getPlanet();
 		planetNameLbl.setText(planet.getName());
 		techLevelLbl.setText("Tech Level: " + planet.getTechLevel());
 		governmentLbl.setText("Government: " + planet.getGovernment());
-		for (TechLevel tech : TechLevel.values()) {
-			// TODO: create standard naming technique for labels and instantiate
-			// all values
+		Marketplace market = planet.getMarketplace();
+		for (GoodType type : GoodType.values()) {
+			switch (type) {
+			case WATER:
+				marketWaterLbl.setText(Integer.toString(market
+						.getQuantity(type)));
+				buyPriceWaterLbl.setText(Integer.toString((int) market
+						.getPrice(type)));
+				cargoWaterLbl.setText(Integer.toString(player.getShip()
+						.amountInCargo(type)));
+				sellPriceWaterLbl.setText(Integer.toString((int) market
+						.getPrice(type)));
+				break;
+			case FURS:
+				marketFurLbl
+						.setText(Integer.toString(market.getQuantity(type)));
+				buyPriceFurLbl.setText(Integer.toString((int) market
+						.getPrice(type)));
+				cargoFurLbl.setText(Integer.toString(player.getShip()
+						.amountInCargo(type)));
+				sellPriceFurLbl.setText(Integer.toString((int) market
+						.getPrice(type)));
+				break;
+			case FOOD:
+				marketFoodLbl
+						.setText(Integer.toString(market.getQuantity(type)));
+				buyPriceFoodLbl.setText(Integer.toString((int) market
+						.getPrice(type)));
+				cargoFoodLbl.setText(Integer.toString(player.getShip()
+						.amountInCargo(type)));
+				sellPriceFoodLbl.setText(Integer.toString((int) market
+						.getPrice(type)));
+				break;
+			case ORE:
+				marketOreLbl
+						.setText(Integer.toString(market.getQuantity(type)));
+				buyPriceOreLbl.setText(Integer.toString((int) market
+						.getPrice(type)));
+				cargoOreLbl.setText(Integer.toString(player.getShip()
+						.amountInCargo(type)));
+				sellPriceOreLbl.setText(Integer.toString((int) market
+						.getPrice(type)));
+				break;
+			case GAMES:
+				marketGamesLbl.setText(Integer.toString(market
+						.getQuantity(type)));
+				buyPriceGamesLbl.setText(Integer.toString((int) market
+						.getPrice(type)));
+				cargoGamesLbl.setText(Integer.toString(player.getShip()
+						.amountInCargo(type)));
+				sellPriceGamesLbl.setText(Integer.toString((int) market
+						.getPrice(type)));
+				break;
+			case MEDICINE:
+				marketMedicineLbl.setText(Integer.toString(market
+						.getQuantity(type)));
+				buyPriceMedicineLbl.setText(Integer.toString((int) market
+						.getPrice(type)));
+				cargoMedicineLbl.setText(Integer.toString(player.getShip()
+						.amountInCargo(type)));
+				sellPriceMedicineLbl.setText(Integer.toString((int) market
+						.getPrice(type)));
+				break;
+			case FIREARMS:
+				marketFirearmsLbl.setText(Integer.toString(market
+						.getQuantity(type)));
+				buyPriceFirearmsLbl.setText(Integer.toString((int) market
+						.getPrice(type)));
+				cargoFirearmsLbl.setText(Integer.toString(player.getShip()
+						.amountInCargo(type)));
+				sellPriceFirearmsLbl.setText(Integer.toString((int) market
+						.getPrice(type)));
+				break;
+			case MACHINES:
+				marketMachinesLbl.setText(Integer.toString(market
+						.getQuantity(type)));
+				buyPriceMachinesLbl.setText(Integer.toString((int) market
+						.getPrice(type)));
+				cargoMachinesLbl.setText(Integer.toString(player.getShip()
+						.amountInCargo(type)));
+				sellPriceMachinesLbl.setText(Integer.toString((int) market
+						.getPrice(type)));
+				break;
+			case NARCOTICS:
+				marketNarcoticsLbl.setText(Integer.toString(market
+						.getQuantity(type)));
+				buyPriceNarcoticsLbl.setText(Integer.toString((int) market
+						.getPrice(type)));
+				cargoNarcoticsLbl.setText(Integer.toString(player.getShip()
+						.amountInCargo(type)));
+				sellPriceNarcoticsLbl.setText(Integer.toString((int) market
+						.getPrice(type)));
+				break;
+			case ROBOTS:
+				marketRobotsLbl.setText(Integer.toString(market
+						.getQuantity(type)));
+				buyPriceRobotsLbl.setText(Integer.toString((int) market
+						.getPrice(type)));
+				cargoRobotsLbl.setText(Integer.toString(player.getShip()
+						.amountInCargo(type)));
+				sellPriceRobotsLbl.setText(Integer.toString((int) market
+						.getPrice(type)));
+				break;
+			default:
+			}
 		}
-		// resource marketplace quantity/buy price
-		// current cargo/sell price
 		playerNameLbl.setText(player.getName());
 		numCreditsLbl.setText("Credits: " + (int) (player.getCredits()));
 		cargoSpaceLbl.setText("Cargo Space: " + player.getShip().getCurrCargo()

@@ -16,7 +16,7 @@ import model.Ship;
  */
 public class TradeEngine {
 
-	private Player p;
+	private Player player;
 	private Ship ship;
 
 	/**
@@ -25,7 +25,7 @@ public class TradeEngine {
 	 * @param p
 	 */
 	public TradeEngine(Player p) {
-		this.p = p;
+		this.player = p;
 		ship = p.getShip();
 	}
 
@@ -45,7 +45,7 @@ public class TradeEngine {
 		List<String> errors = validateBuy(cost, quantity);
 		if (errors.isEmpty()) {
 			ship.addToCargo(tradeGood, quantity);
-			p.decreaseCredits(cost);
+			player.decreaseCredits(cost);
 		}
 		return errors;
 	}
@@ -62,7 +62,7 @@ public class TradeEngine {
 	private List<String> validateBuy(double cost, int quantity) {
 		List<String> errors = new ArrayList<String>();
 
-		if (p.getCredits() < cost) {
+		if (player.getCredits() < cost) {
 			errors.add("Not enough credits");
 		}
 		if (ship.getCurrCargo() + quantity > ship.getCargoSize()) {
@@ -89,7 +89,7 @@ public class TradeEngine {
 		List<String> errors = validateSell(tradeGood, quantity);
 		if (errors.isEmpty()) {
 			ship.removeFromCargo(tradeGood, quantity);
-			p.increaseCredits(cost);
+			player.increaseCredits(cost);
 		}
 		return errors;
 	}
@@ -113,5 +113,33 @@ public class TradeEngine {
 		}
 
 		return errors;
+	}
+
+	/**
+	 * Returns the maximum amount of a good a player can buy from the
+	 * marketplace
+	 * 
+	 * @param good
+	 *            The good being bought
+	 * @return The amount of the good the user can buy
+	 */
+	public int getMaximumBuyGoodAmount(GoodType good) {
+		Marketplace market = player.getPlanet().getMarketplace();
+		return Math.min(
+				Math.min(ship.getCargoSize() - ship.getCurrCargo(),
+						market.getQuantity(good)),
+				((int) player.getCredits() / (int) market.getPrice(good)));
+	}
+
+	/**
+	 * Returns the maximum amount of a good that a player can sell to a
+	 * marketplace
+	 * 
+	 * @param good
+	 *            The good being sold
+	 * @return The amount of a good that a user can sell
+	 */
+	public int getMaximumSellGoodAmount(GoodType good) {
+		return ship.amountInCargo(good);
 	}
 }
