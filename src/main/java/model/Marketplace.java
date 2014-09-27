@@ -26,22 +26,22 @@ public class Marketplace {
 		prices = new HashMap<GoodType, Double>();
 		quantities = new HashMap<GoodType, Integer>();
 		for (GoodType type : GoodType.values()) {
-			double price = generatePrice(type);
-			prices.put(type, price);
 			int quantity = generateQuantity(type);
 			quantities.put(type, quantity);
+			double price = generateSellPrice(type);
+			prices.put(type, price);
 		}
 	}
 
 	/**
-	 * Generates the price of the good at random based on various GoodType
-	 * parameters
+	 * Generates the price of the good to be sold by the player at random based
+	 * on various GoodType parameters
 	 * 
 	 * @param good
 	 *            The TradeGood whose price is being determined
 	 * @return The price of the TradeGood
 	 */
-	private double generatePrice(GoodType type) {
+	private double generateSellPrice(GoodType type) {
 		TechLevel techlevel = planet.getTechLevel();
 		double price = type.getBasePrice()
 				+ type.getIncPerTechLevel()
@@ -64,17 +64,7 @@ public class Marketplace {
 		if (techlevel.getValue() < type.getMinTechLevelToProduce()) {
 			return 0;
 		}
-
-		// int quantity = (int) (Math.pow(
-		// techlevel.getValue() - type.getMinTechLevel(), 2) + (2
-		// * Math.random() * type.getVariance() - type.getVariance()));
-		// if (techlevel.getValue() == type.getBiggestProducer()) {
-		// quantity += type.getBiggestProducer();
-		// }
-
-		int quantity = techlevel.getValue() + (int) (10 * Math.random());
-
-		return quantity;
+		return techlevel.getValue() + (int) (10 * Math.random());
 	}
 
 	/**
@@ -89,20 +79,38 @@ public class Marketplace {
 	}
 
 	/**
-	 * Returns the price of a given good in the marketplace
+	 * Returns the price of a given good in the marketplace to be sold by the
+	 * player
 	 * 
 	 * @param good
 	 *            The good in the marketplace
 	 * @return The price of the good in the marketplace
 	 */
-	public double getPrice(GoodType good) {
+	public double getSellPrice(GoodType good) {
 		return prices.get(good);
 	}
-	
+
+	/**
+	 * Returns the price of a given good in the marketplace to be bought by the
+	 * player. Changed by the value of the player's trading skill
+	 * 
+	 * @param good
+	 *            The good to be bought
+	 * @param player
+	 *            The player buying the good
+	 * @return The price of the good
+	 */
+	public double getBuyPrice(GoodType good, Player player) {
+		return (1 + (.025 * (10 - player.getTraderSkill()))) * prices.get(good);
+	}
+
 	/**
 	 * Sets the quantity for the good type
-	 * @param good The good type to have its quantity changed
-	 * @param quantity The new quantity of the good type
+	 * 
+	 * @param good
+	 *            The good type to have its quantity changed
+	 * @param quantity
+	 *            The new quantity of the good type
 	 */
 	public void setQuantity(GoodType good, int quantity) {
 		quantities.put(good, quantity);

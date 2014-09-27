@@ -24,7 +24,7 @@
                   </Label>
                   <Label fx:id="governmentLbl" text="Government: ">
                      <padding>
-                        <Insets bottom="4.0" left="4.0" right="4.0" top="1.0" />
+                        <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                      </padding>
                   </Label>
                </children>
