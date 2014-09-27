@@ -45,7 +45,7 @@ public class Marketplace {
 		TechLevel techlevel = planet.getTechLevel();
 		double price = type.getBasePrice()
 				+ type.getIncPerTechLevel()
-				* (techlevel.getValue() - type.getMinTechLevel())
+				* (techlevel.getValue() - type.getMinTechLevelToProduce())
 				+ (int) (2 * Math.random() * type.getVariance() - type
 						.getVariance());
 		return price;
@@ -61,16 +61,18 @@ public class Marketplace {
 	 */
 	private int generateQuantity(GoodType type) {
 		TechLevel techlevel = planet.getTechLevel();
-		if (techlevel.getValue() < type.getMinTechLevel()
-				|| techlevel.getValue() > type.getMaxTechLevel()) {
+		if (techlevel.getValue() < type.getMinTechLevelToProduce()) {
 			return 0;
 		}
-		int quantity = (int) (Math.pow(
-				techlevel.getValue() - type.getMinTechLevel(), 2) + (2
-				* Math.random() * type.getVariance() - type.getVariance()));
-		if (techlevel.getValue() == type.getBiggestProducer()) {
-			quantity += type.getBiggestProducer();
-		}
+
+		// int quantity = (int) (Math.pow(
+		// techlevel.getValue() - type.getMinTechLevel(), 2) + (2
+		// * Math.random() * type.getVariance() - type.getVariance()));
+		// if (techlevel.getValue() == type.getBiggestProducer()) {
+		// quantity += type.getBiggestProducer();
+		// }
+
+		int quantity = techlevel.getValue() + (int) (10 * Math.random());
 
 		return quantity;
 	}
