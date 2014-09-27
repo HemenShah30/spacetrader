@@ -157,6 +157,8 @@ public class TradeScreenController {
 	private Label numCreditsLbl;
 	@FXML
 	private Label cargoSpaceLbl;
+	@FXML
+	private Button toPlanetScreenBtn;
 
 	/**
 	 * Handles all the buy buttons in the trade scene
@@ -413,5 +415,10 @@ public class TradeScreenController {
 		numCreditsLbl.setText("Credits: " + (int) (player.getCredits()));
 		cargoSpaceLbl.setText("Cargo Space: " + player.getShip().getCurrCargo()
 				+ "/" + player.getShip().getCargoSize());
+	}
+
+	@FXML
+	protected void toPlanetScreen(Event e) {
+		
 	}
 }
