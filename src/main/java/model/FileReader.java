@@ -26,7 +26,7 @@ public class FileReader {
 				.getSystemResourceAsStream("model/PlanetNames.txt");
 
 		Scanner reader = new Scanner(is);
-		reader.useDelimiter("\n");
+		reader.useDelimiter("\r\n");
 		while (reader.hasNext())
 			planetNames.add(reader.next());
 		reader.close();

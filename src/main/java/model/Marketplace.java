@@ -65,13 +65,13 @@ public class Marketplace {
 				|| techlevel.getValue() > type.getMaxTechLevel()) {
 			return 0;
 		}
-		int quantity = (techlevel.getValue() - type.getMinTechLevel())
-				^ 2
-				+ (int) (2 * Math.random() * type.getVariance() - type
-						.getVariance());
+		int quantity = (int) (Math.pow(
+				techlevel.getValue() - type.getMinTechLevel(), 2) + (2
+				* Math.random() * type.getVariance() - type.getVariance()));
 		if (techlevel.getValue() == type.getBiggestProducer()) {
 			quantity += type.getBiggestProducer();
 		}
+
 		return quantity;
 	}
 
