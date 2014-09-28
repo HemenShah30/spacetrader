@@ -153,7 +153,7 @@ public class Planet {
 
 	@Override
 	public String toString() {
-		return name + " Location: " + location + ", Tech Level: " + techLevel
+		return name + ", Location: " + location + ", Tech Level: " + techLevel
 				+ ", Resource: " + resource + ", Goverment: " + government;
 	}
 }

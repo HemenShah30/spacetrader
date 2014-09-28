@@ -3,6 +3,7 @@ package controller;
 import java.util.List;
 
 import model.GoodType;
+import model.Planet;
 import model.Player;
 import model.Ship;
 import model.ShipType;
@@ -27,6 +28,8 @@ public class GameEngine {
 	private GameEngine() {
 		universe = new Universe();
 		universe.createPlanets();
+		for(Planet p: universe.getPlanets())
+			System.out.println(p);
 	}
 
 	/**
