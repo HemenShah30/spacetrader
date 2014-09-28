@@ -16,7 +16,7 @@ public class Main extends Application {
 	// need to be taken care of
 	// TODO: Create main planet scene and implement the actions
 	// TODO: Add in logging
-	// TODO: Begin implementing Save and Load functions
+	// TODO: Implement Save and Load functions
 	// TODO: Add exit button to MainScene
 	// TODO: Combine buy/sell popup controllers into one class
 	// TODO: Clean up TradeScreenController to be more generalized
@@ -38,12 +38,13 @@ public class Main extends Application {
 	 */
 	public static void main(String[] args) {
 		// Universe u = new Universe();
-		// / u.createPlanets();
-		// Player p = new Player("Jack",1,10,7,1,1);
+		// u.createPlanets();
+		// Player p = new Player("Jack",1,10,7,1,1, new Ship(ShipType.FIREFLY));
 		// FileWriter w = new FileWriter();
 		// w.saveGameData(p, u);
 		// FileReader r = new FileReader();
 		// Object[] data=r.loadGameData();
+		// Arrays.toString(data);
 		launch(args);
 	}
 }

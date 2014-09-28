@@ -25,15 +25,13 @@ public class Ship {
 	 */
 	public Ship(ShipType sT) {
 		setShipType(sT);
-		// need to set fuel, totalHP, currHP, and cargoSize based on ShipType
-		// parameters
 		cargo = new HashMap<GoodType, Integer>();
 		for (GoodType type : GoodType.values())
 			cargo.put(type, 0);
-		fuel = 14;
-		totalHP = 100;
-		currHP = 100;
-		cargoSize = 15;
+		fuel = sT.getFuel();
+		totalHP = sT.getTotalHP();
+		currHP = totalHP;
+		cargoSize = sT.getCargoSize();
 		// this.mercenaries = mercenaries;
 	}
 

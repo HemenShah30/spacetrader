@@ -22,7 +22,6 @@ public class FileWriter {
 	 *            The current universe to be saved
 	 */
 	public void saveGameData(Player p, Universe u) {
-		File file = new File("model/GameData");
 		String saveData = "";
 
 		saveData += p.getName();
@@ -43,7 +42,8 @@ public class FileWriter {
 			saveData += "\n" + planet.getLocation().getY();
 		}
 		try {
-			FileOutputStream os = new FileOutputStream(file);
+			File saveFile = new File("src/main/java/model/GameData");
+			FileOutputStream os = new FileOutputStream(saveFile);
 			os.write(saveData.getBytes());
 			os.close();
 		} catch (IOException ie) {
