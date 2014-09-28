@@ -111,15 +111,6 @@ public class Ship {
 	}
 
 	// /**
-	// * Returns the ship type of ship
-	// *
-	// * @return the shipType of the ship
-	// */
-	// public ShipType getShipType() {
-	// return shipType;
-	// }
-
-	// /**
 	// * Returns the list of mercenaries
 	// *
 	// * @return the list of mercenaries
