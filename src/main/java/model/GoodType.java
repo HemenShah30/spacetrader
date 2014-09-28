@@ -7,33 +7,73 @@ package model;
  * 
  */
 public enum GoodType {
-	WATER		(0, 0, 2, 30, 3, 4, Condition.DROUGHT, SpecialResource.LOTSOFWATER, SpecialResource.DESERT, 30, 50),
-	FURS 		(0, 0, 0, 250, 10, 10, Condition.COLD, SpecialResource.RICHFAUNA, SpecialResource.LIFELESS, 230, 180),
-	FOOD 		(1, 0, 1, 100, 5, 5, Condition.CROPFAIL, SpecialResource.RICHSOIL, SpecialResource.POORSOIL, 90, 160),
-	ORE 		(2, 2, 3, 350, 20, 10, Condition.WAR, SpecialResource.MINERALRICH, SpecialResource.MINERALPOOR, 350, 420),
-	GAMES 		(3, 1, 6, 250, -10, 5, Condition.BOREDOM, SpecialResource.ARTISTIC, SpecialResource.NEVER, 160, 720),
-	FIREARMS 	(3, 1, 5, 1250, -75, 100, Condition.WAR, SpecialResource.WARLIKE, SpecialResource.NEVER, 600, 1100),
-	MEDICINE 	(4, 1, 6, 650, -20, 10, Condition.PLAGUE, SpecialResource.LOTSOFHERBS, SpecialResource.NEVER, 400, 700),
-	MACHINES 	(4, 3, 5, 900, -30, 5, Condition.LACKOFWORKERS, SpecialResource.NEVER, SpecialResource.NEVER, 600, 800),
-	NARCOTICS 	(5, 0, 5, 3500, -125, 150, Condition.BOREDOM, SpecialResource.WEIRDMUSHROOMS, SpecialResource.NEVER, 2000, 3000),
-	ROBOTS 		(6, 4, 7, 5000, -150, 100, Condition.LACKOFWORKERS, SpecialResource.NEVER, SpecialResource.NEVER, 3500, 5000);
-	
-	private int minTechLevelToProduce; //Minimum Tech Level to produce this resource
-	private int minTechLevelToUse; //Minimum Tech Level to use this resource
-	private int biggestProducer; //Tech Level that produces the most of this item
-	private int basePrice;
-	private int incPerTechLevel; //Price increase per Tech Level
-	private int variance; //Maximum percentage the price can vary above or below the base
-	private Condition event; //Radical price increase event
-	private SpecialResource cheapCondition; //Cheap condition: When this condition is present, the resource is low
-	private SpecialResource expensiveCondition; //Expensive condition: When this condition is present, the resource is expensive
-	private int minTraderPrice; //Min price offered in space trade with random trader (not on a planet)
-	private int maxTraderPrice; //Max price offered in space trade with random trader (not on a planet)
+	WATER(0, 0, 2, 30, 3, 4, Condition.DROUGHT, SpecialResource.LOTSOFWATER,
+			SpecialResource.DESERT, 30, 50), FURS(0, 0, 0, 250, 10, 10,
+			Condition.COLD, SpecialResource.RICHFAUNA,
+			SpecialResource.LIFELESS, 230, 180), FOOD(1, 0, 1, 100, 5, 5,
+			Condition.CROPFAIL, SpecialResource.RICHSOIL,
+			SpecialResource.POORSOIL, 90, 160), ORE(2, 2, 3, 350, 20, 10,
+			Condition.WAR, SpecialResource.MINERALRICH,
+			SpecialResource.MINERALPOOR, 350, 420), GAMES(3, 1, 6, 250, -10, 5,
+			Condition.BOREDOM, SpecialResource.ARTISTIC, SpecialResource.NEVER,
+			160, 720), FIREARMS(3, 1, 5, 1250, -75, 100, Condition.WAR,
+			SpecialResource.WARLIKE, SpecialResource.NEVER, 600, 1100), MEDICINE(
+			4, 1, 6, 650, -20, 10, Condition.PLAGUE,
+			SpecialResource.LOTSOFHERBS, SpecialResource.NEVER, 400, 700), MACHINES(
+			4, 3, 5, 900, -30, 5, Condition.LACKOFWORKERS,
+			SpecialResource.NEVER, SpecialResource.NEVER, 600, 800), NARCOTICS(
+			5, 0, 5, 3500, -125, 150, Condition.BOREDOM,
+			SpecialResource.WEIRDMUSHROOMS, SpecialResource.NEVER, 2000, 3000), ROBOTS(
+			6, 4, 7, 5000, -150, 100, Condition.LACKOFWORKERS,
+			SpecialResource.NEVER, SpecialResource.NEVER, 3500, 5000);
 
-	private GoodType(int minTechLevelToProduce, int minTechLevelToUse, int biggestProducer,
-			int basePrice, int incPerTechLevel, int variance, Condition event,
-			SpecialResource cheapCondition, SpecialResource expensiveCondition,
-			int minTraderPrice, int maxTraderPrice) {
+	private int minTechLevelToProduce;
+	private int minTechLevelToUse;
+	private int biggestProducer;
+	private int basePrice;
+	private int incPerTechLevel;
+	private int variance;
+	private Condition event;
+	private SpecialResource cheapCondition;
+	private SpecialResource expensiveCondition;
+	private int minTraderPrice;
+	private int maxTraderPrice;
+
+	/**
+	 * Constructor for the GoodType enum
+	 * 
+	 * @param minTechLevelToProduce
+	 *            Minimum Tech Level to produce this resource
+	 * @param minTechLevelToUse
+	 *            Minimum Tech Level to use this resource
+	 * @param biggestProducer
+	 *            Tech Level that produces the most of this item
+	 * @param basePrice
+	 *            Base Price of the good
+	 * @param incPerTechLevel
+	 *            Price increase per Tech Level
+	 * @param variance
+	 *            Maximum percentage the price can vary above or below the base
+	 * @param event
+	 *            Radical price increase event
+	 * @param cheapCondition
+	 *            Cheap condition: When this condition is present, the resource
+	 *            is low
+	 * @param expensiveCondition
+	 *            Expensive condition: When this condition is present, the
+	 *            resource is expensive
+	 * @param minTraderPrice
+	 *            Minimum price offered in space trade with random trader (not
+	 *            on a planet)
+	 * @param maxTraderPrice
+	 *            Maximum price offered in space trade with random trader (not
+	 *            on a planet)
+	 */
+	private GoodType(int minTechLevelToProduce, int minTechLevelToUse,
+			int biggestProducer, int basePrice, int incPerTechLevel,
+			int variance, Condition event, SpecialResource cheapCondition,
+			SpecialResource expensiveCondition, int minTraderPrice,
+			int maxTraderPrice) {
 		this.minTechLevelToProduce = minTechLevelToProduce;
 		this.minTechLevelToUse = minTechLevelToUse;
 		this.biggestProducer = biggestProducer;

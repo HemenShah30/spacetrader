@@ -136,9 +136,9 @@ public class Ship {
 	 * @param Integer
 	 *            The number of this good being added
 	 */
-	public void addToCargo(GoodType goodType, Integer quantity) {
-		Integer temp = cargo.get(goodType);
-		cargo.put(goodType, temp + quantity);
+	public void addToCargo(GoodType goodType, int quantity) {
+		int currentGoodCargo = cargo.get(goodType);
+		cargo.put(goodType, currentGoodCargo + quantity);
 		currCargo += quantity;
 	}
 
@@ -150,9 +150,9 @@ public class Ship {
 	 * @param Integer
 	 *            The number of this good being removed
 	 */
-	public void removeFromCargo(GoodType goodType, Integer quantity) {
-		Integer temp = cargo.get(goodType);
-		cargo.put(goodType, temp - quantity);
+	public void removeFromCargo(GoodType goodType, int quantity) {
+		int currentGoodCargo = cargo.get(goodType);
+		cargo.put(goodType, currentGoodCargo - quantity);
 		currCargo -= quantity;
 	}
 
