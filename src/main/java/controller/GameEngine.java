@@ -28,7 +28,7 @@ public class GameEngine {
 	private GameEngine() {
 		universe = new Universe();
 		universe.createPlanets();
-		for(Planet p: universe.getPlanets())
+		for (Planet p : universe.getPlanets())
 			System.out.println(p);
 	}
 

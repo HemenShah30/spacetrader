@@ -44,10 +44,9 @@ public class FileReader {
 		Universe u = new Universe();
 		InputStream is = ClassLoader
 				.getSystemResourceAsStream("model/GameData");
-		Scanner input=new Scanner(is);
+		Scanner input = new Scanner(is);
 		input.useDelimiter("\n");
-		
-		
+
 		input.close();
 		gameData[1] = u;
 		return gameData;

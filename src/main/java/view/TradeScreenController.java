@@ -371,6 +371,30 @@ public class TradeScreenController {
 				+ "/" + player.getShip().getCargoSize());
 	}
 
+	/**
+	 * Sets the labels corresponding to a given good type
+	 * 
+	 * @param type
+	 *            The good type having its labels set
+	 * @param player
+	 *            The player that is buying or selling the good
+	 * @param market
+	 *            The marketplace buying or selling the goods
+	 * @param buyButton
+	 *            The button that is pressed to initiate a buy
+	 * @param sellButton
+	 *            The button that is pressed to initiate a sell
+	 * @param marketLbl
+	 *            The label for the quantity the marketplace has of the good
+	 * @param buyPriceLbl
+	 *            The label for the price of the good in the marketplace for
+	 *            buying
+	 * @param cargoLbl
+	 *            The label for the quantity of the good the player has in cargo
+	 * @param sellPriceLbl
+	 *            The label for the price the user can sell a good to the
+	 *            marketplace
+	 */
 	private void setLabels(GoodType type, Player player, Marketplace market,
 			Button buyButton, Button sellButton, Label marketLbl,
 			Label buyPriceLbl, Label cargoLbl, Label sellPriceLbl) {

@@ -12,6 +12,12 @@ public enum TechLevel {
 
 	private int value;
 
+	/**
+	 * Constructor for the enum, taking in the value for the TechLevel
+	 * 
+	 * @param value
+	 *            The value of the tech level
+	 */
 	private TechLevel(int value) {
 		this.value = value;
 	}

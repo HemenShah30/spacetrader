@@ -119,6 +119,14 @@ public class BuyGoodPopupController {
 		popupStage.close();
 	}
 
+	/**
+	 * Initializes the popup with the given good values for buying the good
+	 * 
+	 * @param good
+	 *            The good to be bought by the player
+	 * @param ts
+	 *            The TradeScreenController responsible for creating this popup
+	 */
 	public void initializePage(GoodType good, TradeScreenController ts) {
 		game = GameEngine.getGameEngine();
 		tradeScreen = ts;
@@ -128,6 +136,12 @@ public class BuyGoodPopupController {
 				+ " " + good);
 	}
 
+	/**
+	 * Creates a dialog error box with the given message
+	 * 
+	 * @param msg
+	 *            The message for the error dialog to display
+	 */
 	private void displayError(String msg) {
 		Dialogs.create().owner(buyBtn.getScene().getWindow()).title("Error")
 				.message(msg).showError();

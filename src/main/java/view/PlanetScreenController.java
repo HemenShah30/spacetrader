@@ -76,7 +76,13 @@ public class PlanetScreenController {
 			System.out.println("Going to shipyard");
 		}
 	}
-	
+
+	/**
+	 * Sends the player to the menu for going to another planet
+	 * 
+	 * @param e
+	 *            The event that fired the method
+	 */
 	@FXML
 	protected void goToSpace(Event e) {
 		if (MultiPageController.isValidAction(e)) {

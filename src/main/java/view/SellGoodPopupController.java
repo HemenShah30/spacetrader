@@ -137,6 +137,12 @@ public class SellGoodPopupController {
 				+ sellAllAmount + " " + good);
 	}
 
+	/**
+	 * Creates a dialog error box with the given message
+	 * 
+	 * @param msg
+	 *            The message for the error dialog to display
+	 */
 	private void displayError(String msg) {
 		Dialogs.create().owner(sellBtn.getScene().getWindow()).title("Error")
 				.message(msg).showError();
