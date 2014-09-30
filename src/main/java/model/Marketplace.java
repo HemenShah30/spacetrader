@@ -44,10 +44,10 @@ public class Marketplace {
 	private double generateSellPrice(GoodType type) {
 		TechLevel techlevel = planet.getTechLevel();
 		double price = type.getBasePrice()
-				+ type.getIncPerTechLevel()
-				* (techlevel.getValue() - type.getMinTechLevelToProduce())
-				+ (int) (2 * Math.random() * type.getVariance() - type
-						.getVariance());
+				+ type.getPriceIncPerTechLevel()
+				* (techlevel.getValue() - type.getMinTechLevelToProduce());
+		price = price + price * (2 * Math.random() * type.getVariance() - type
+				.getVariance())/100;
 		return price;
 	}
 
@@ -64,7 +64,12 @@ public class Marketplace {
 		if (techlevel.getValue() < type.getMinTechLevelToProduce()) {
 			return 0;
 		}
-		return techlevel.getValue() + (int) (10 * Math.random());
+		int quantity = type.getBaseQuantity()
+				+ type.getQuantityIncPerTechLevel()
+				* (techlevel.getValue() - type.getMinTechLevelToProduce());
+		quantity = quantity + (int) (quantity * (2 * Math.random() * type.getVariance() - type
+				.getVariance()))/100;
+		return quantity;
 	}
 
 	/**
@@ -105,8 +110,8 @@ public class Marketplace {
 	public double getBuyPrice(GoodType good, Player player) {
 		if (good.getMinTechLevelToProduce() > planet.getTechLevel().getValue())
 			return -1;
-		return (int) (1 + (.025 * (10 - player.getTraderSkill())))
-				* prices.get(good);
+		return (int) ((1 + (.025 * (10 - player.getTraderSkill())))
+				* prices.get(good));
 	}
 
 	/**
