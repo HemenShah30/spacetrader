@@ -46,8 +46,8 @@ public class Marketplace {
 		double price = type.getBasePrice()
 				+ type.getPriceIncPerTechLevel()
 				* (techlevel.getValue() - type.getMinTechLevelToProduce());
-		price = price + price * (2 * Math.random() * type.getVariance() - type
-				.getVariance())/100;
+		price = price + (2 * Math.random() * type.getVariance() - type
+				.getVariance());
 		return price;
 	}
 
@@ -67,8 +67,11 @@ public class Marketplace {
 		int quantity = type.getBaseQuantity()
 				+ type.getQuantityIncPerTechLevel()
 				* (techlevel.getValue() - type.getMinTechLevelToProduce());
-		quantity = quantity + (int) (quantity * (2 * Math.random() * type.getVariance() - type
-				.getVariance()))/100;
+		quantity = quantity + (int) (10 * Math.random());
+		//quantity is increased if a planet is the biggest producer of that quantity
+		if (techlevel.getValue() == type.getBiggestProducer()) {
+			quantity = (int) (quantity * (0.5 * Math.random() + 1.5));
+		}
 		return quantity;
 	}
 
@@ -108,10 +111,16 @@ public class Marketplace {
 	 * @return The price of the good
 	 */
 	public double getBuyPrice(GoodType good, Player player) {
+		TechLevel techlevel = planet.getTechLevel();
 		if (good.getMinTechLevelToProduce() > planet.getTechLevel().getValue())
 			return -1;
-		return (int) ((1 + (.025 * (10 - player.getTraderSkill())))
+		int buyPrice = (int) ((1 + (.025 * (10 - player.getTraderSkill())))
 				* prices.get(good));
+		//price to buy is decreased if a planet is the biggest producer of that quantity
+		if (techlevel.getValue() == good.getBiggestProducer()) {
+			buyPrice = (int) (buyPrice * (0.2 * Math.random() + 0.7));
+		}
+		return buyPrice;
 	}
 
 	/**

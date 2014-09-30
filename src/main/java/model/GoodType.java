@@ -46,7 +46,7 @@ public enum GoodType {
 	 * @param priceIncPerTechLevel
 	 *            Price increase per Tech Level
 	 * @param variance
-	 *            Maximum percentage the price can vary above or below the base
+	 *            Maximum difference the price can vary above or below the base
 	 * @param event
 	 *            Radical price increase event
 	 * @param cheapCondition
