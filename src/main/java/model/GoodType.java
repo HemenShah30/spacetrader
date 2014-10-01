@@ -11,12 +11,12 @@ public enum GoodType {
 	FURS(0, 0, 0, 250, 10, 10, Condition.COLD, SpecialResource.RICHFAUNA, SpecialResource.LIFELESS, 230, 180, 5, 4),
 	FOOD(1, 0, 1, 100, 5, 5, Condition.CROPFAIL, SpecialResource.RICHSOIL, SpecialResource.POORSOIL, 90, 160, 10, 5),
 	ORE(2, 2, 3, 350, 20, 10, Condition.WAR, SpecialResource.MINERALRICH, SpecialResource.MINERALPOOR, 350, 420, 10, 5),
-	GAMES(3, 1, 6, 250, -10, 5, Condition.BOREDOM, SpecialResource.ARTISTIC, SpecialResource.NEVER, 160, 720, 10, 4),
-	FIREARMS(3, 1, 5, 1250, -75, 100, Condition.WAR, SpecialResource.WARLIKE, SpecialResource.NEVER, 600, 1100, 15, 4),
-	MEDICINE(4, 1, 6, 650, -20, 10, Condition.PLAGUE, SpecialResource.LOTSOFHERBS, SpecialResource.NEVER, 400, 700, 10, 5),
-	MACHINES(4, 3, 5, 900, -30, 5, Condition.LACKOFWORKERS, SpecialResource.NEVER, SpecialResource.NEVER, 600, 800, 10, 4),
-	NARCOTICS(5, 0, 5, 3500, -125, 150, Condition.BOREDOM, SpecialResource.WEIRDMUSHROOMS, SpecialResource.NEVER, 2000, 3000, 10, 4),
-	ROBOTS(6, 4, 7, 5000, -150, 100, Condition.LACKOFWORKERS, SpecialResource.NEVER, SpecialResource.NEVER, 3500, 5000, 15, 4);
+	GAMES(3, 1, 6, 250, -10, 5, Condition.BOREDOM, SpecialResource.ARTISTIC, SpecialResource.NONE, 160, 720, 10, 4),
+	FIREARMS(3, 1, 5, 1250, -75, 100, Condition.WAR, SpecialResource.WARLIKE, SpecialResource.NONE, 600, 1100, 15, 4),
+	MEDICINE(4, 1, 6, 650, -20, 10, Condition.PLAGUE, SpecialResource.LOTSOFHERBS, SpecialResource.NONE, 400, 700, 10, 5),
+	MACHINES(4, 3, 5, 900, -30, 5, Condition.LACKOFWORKERS, SpecialResource.NONE, SpecialResource.NONE, 600, 800, 10, 4),
+	NARCOTICS(5, 0, 5, 3500, -125, 150, Condition.BOREDOM, SpecialResource.WEIRDMUSHROOMS, SpecialResource.NONE, 2000, 3000, 10, 4),
+	ROBOTS(6, 4, 7, 5000, -150, 100, Condition.LACKOFWORKERS, SpecialResource.NONE, SpecialResource.NONE, 3500, 5000, 15, 4);
 
 	private int minTechLevelToProduce;
 	private int minTechLevelToUse;
@@ -24,9 +24,9 @@ public enum GoodType {
 	private int basePrice;
 	private int priceIncPerTechLevel;
 	private int variance;
-	private Condition event;
-	private SpecialResource cheapCondition;
-	private SpecialResource expensiveCondition;
+	private Condition condition;
+	private SpecialResource cheapResource;
+	private SpecialResource expensiveResource;
 	private int minTraderPrice;
 	private int maxTraderPrice;
 	private int baseQuantity;
@@ -47,12 +47,12 @@ public enum GoodType {
 	 *            Price increase per Tech Level
 	 * @param variance
 	 *            Maximum difference the price can vary above or below the base
-	 * @param event
-	 *            Radical price increase event
-	 * @param cheapCondition
+	 * @param condition
+	 *            Radical price increase condition
+	 * @param cheapResource
 	 *            Cheap condition: When this condition is present, the resource
 	 *            is low
-	 * @param expensiveCondition
+	 * @param expensiveResource
 	 *            Expensive condition: When this condition is present, the
 	 *            resource is expensive
 	 * @param minTraderPrice
@@ -68,8 +68,8 @@ public enum GoodType {
 	 */
 	private GoodType(int minTechLevelToProduce, int minTechLevelToUse,
 			int biggestProducer, int basePrice, int priceIncPerTechLevel,
-			int variance, Condition event, SpecialResource cheapCondition,
-			SpecialResource expensiveCondition, int minTraderPrice,
+			int variance, Condition condition, SpecialResource cheapResource,
+			SpecialResource expensiveResource, int minTraderPrice,
 			int maxTraderPrice, int baseQuantity, int quantityIncPerTechLevel) {
 		this.minTechLevelToProduce = minTechLevelToProduce;
 		this.minTechLevelToUse = minTechLevelToUse;
@@ -77,9 +77,9 @@ public enum GoodType {
 		this.basePrice = basePrice;
 		this.priceIncPerTechLevel = priceIncPerTechLevel;
 		this.variance = variance;
-		this.event = event;
-		this.cheapCondition = cheapCondition;
-		this.expensiveCondition = expensiveCondition;
+		this.condition = condition;
+		this.cheapResource = cheapResource;
+		this.expensiveResource = expensiveResource;
 		this.minTraderPrice = minTraderPrice;
 		this.maxTraderPrice = maxTraderPrice;
 		this.baseQuantity = baseQuantity;
@@ -142,13 +142,13 @@ public enum GoodType {
 	}
 
 	/**
-	 * Getter for increase event (i.e. events that cause certain goods to be
+	 * Getter for increase condition (i.e. conditions that cause certain goods to be
 	 * very expensive)
 	 * 
-	 * @return Increase event of a planet
+	 * @return Increase condition of a planet
 	 */
-	public Condition getEvent() {
-		return event;
+	public Condition getCondition() {
+		return condition;
 	}
 
 	/**
@@ -156,8 +156,8 @@ public enum GoodType {
 	 * 
 	 * @return Special resource that makes things cheaper
 	 */
-	public SpecialResource getCheapCondition() {
-		return cheapCondition;
+	public SpecialResource getCheapResource() {
+		return cheapResource;
 	}
 
 	/**
@@ -166,8 +166,8 @@ public enum GoodType {
 	 * 
 	 * @return Special resource that makes things more expensive
 	 */
-	public SpecialResource getExpensiveCondition() {
-		return expensiveCondition;
+	public SpecialResource getExpensiveResource() {
+		return expensiveResource;
 	}
 
 	/**
