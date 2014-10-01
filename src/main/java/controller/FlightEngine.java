@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,14 +22,19 @@ public class FlightEngine {
 	private Universe universe;
 
 	/**
-	 * Constructor for the flight engine, taking in a given ship
+	 * Constructor for the FlightEngine
 	 * 
 	 * @param s
+	 *            The ship that's traveling in space
+	 * @param p
+	 *            The player piloting the ship
+	 * @param u
+	 *            The universe the ship is moving in
 	 */
-	public FlightEngine(Ship s, Player p, Universe universe) {
+	public FlightEngine(Ship s, Player p, Universe u) {
 		ship = s;
 		player = p;
-		this.universe = universe;
+		universe = u;
 	}
 
 	/**
@@ -41,8 +47,9 @@ public class FlightEngine {
 	 *            The origin planet
 	 * @return All planets within travel range of the origin planet
 	 */
-	public List<Planet> getPlanetsWithinRange(Universe universe, Planet origin) {
-		List<Planet> withinRange = new ArrayList<Planet>();
+	public Map<Planet, Integer> getPlanetsWithinRange(Universe universe,
+			Planet origin) {
+		Map<Planet, Integer> withinRange = new HashMap<Planet, Integer>();
 		for (Planet planet : universe.getPlanets()) {
 			double xDifferenceSquared = Math.pow(planet.getLocation().getX()
 					- origin.getLocation().getX(), 2);
@@ -51,7 +58,7 @@ public class FlightEngine {
 			int distance = (int) Math.ceil(Math.sqrt(xDifferenceSquared
 					+ yDifferenceSquared));
 			if (distance <= ship.getFuel())
-				withinRange.add(planet);
+				withinRange.put(planet, distance);
 		}
 		return withinRange;
 	}
@@ -67,9 +74,9 @@ public class FlightEngine {
 		Planet origin = player.getPlanet();
 		player.setPlanet(p);
 		// encounters go here
-//		Map<Planet, Integer> withinRange = getPlanetsWithinRange(universe,
-//				origin);
-//		ship.setFuel(ship.getFuel() - withinRange.get(p));
+		Map<Planet, Integer> withinRange = getPlanetsWithinRange(universe,
+				origin);
+		ship.setFuel(ship.getFuel() - withinRange.get(p));
 
 	}
 }

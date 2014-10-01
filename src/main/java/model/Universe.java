@@ -50,7 +50,7 @@ public class Universe {
 			SpecialResource[] resources = SpecialResource.values();
 			Government[] governments = Government.values();
 			Condition[] conditions = Condition.values();
-			
+
 			int t = (int) (Math.random() * levels.length);
 			int r = (int) (Math.random() * resources.length);
 			int g = (int) (Math.random() * governments.length);
@@ -58,10 +58,14 @@ public class Universe {
 			int x = (int) (Math.random() * universeLength);
 			int y = (int) (Math.random() * universeWidth);
 
-			if (Math.random() < percentNoneCondition) { c = 0; }
-			
-			if (Math.random() < percentNoneResource) { r = 0; }
-			
+			if (Math.random() < percentNoneCondition) {
+				c = 0;
+			}
+
+			if (Math.random() < percentNoneResource) {
+				r = 0;
+			}
+
 			boolean uniqueLocation = false;
 			Location l = null;
 			while (!uniqueLocation) {
