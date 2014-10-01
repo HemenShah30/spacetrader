@@ -13,6 +13,7 @@ public class Planet {
 	private Government government;
 	private Location location;
 	private Marketplace marketplace;
+	private Condition condition;
 
 	/**
 	 * Basic Planet constructor taking a tech level and a resource
@@ -27,14 +28,17 @@ public class Planet {
 	 *            The government type of the planet
 	 * @param l
 	 *            The location of the planet in space
+	 * @param c
+	 * 			  The condition of the planet
 	 */
 	public Planet(String n, TechLevel tech, SpecialResource r, Government g,
-			Location l) {
+			Location l, Condition c) {
 		setName(n);
 		setTechLevel(tech);
 		setResource(r);
 		setGovernment(g);
 		setLocation(l);
+		setCondition(c);
 		marketplace = new Marketplace(this);
 	}
 
@@ -77,7 +81,7 @@ public class Planet {
 	/**
 	 * Private setter for government type validation
 	 * 
-	 * @param r
+	 * @param g
 	 *            The government type of the planet to be set
 	 */
 	private void setGovernment(Government g) {
@@ -89,7 +93,7 @@ public class Planet {
 	/**
 	 * Private setter for Location type validation
 	 * 
-	 * @param r
+	 * @param l
 	 *            The location of the planet to be set
 	 */
 	private void setLocation(Location l) {
@@ -98,6 +102,18 @@ public class Planet {
 		location = l;
 	}
 
+	/**
+	 * Private setter for Condition type validation
+	 * 
+	 * @param c
+	 *            The condition of the planet to be set
+	 */
+	private void setCondition(Condition c) {
+		if (c == null)
+			throw new IllegalArgumentException();
+		condition = c;
+	}
+	
 	/**
 	 * Getter for the name of the planet
 	 * 
@@ -144,6 +160,15 @@ public class Planet {
 	}
 
 	/**
+	 * Getter for the condition of the planet
+	 * 
+	 * @return The condition of the planet
+	 */
+	public Condition getCondition() {
+		return condition;
+	}
+	
+	/**
 	 * Returns the marketplace for the planet
 	 * 
 	 * @return The marketplace for the planet
@@ -155,6 +180,6 @@ public class Planet {
 	@Override
 	public String toString() {
 		return name + ", Location: " + location + ", Tech Level: " + techLevel
-				+ ", Resource: " + resource + ", Goverment: " + government;
+				+ ", Resource: " + resource + ", Goverment: " + government + ", Condition: " + condition;
 	}
 }

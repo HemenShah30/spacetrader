@@ -2,8 +2,10 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import model.Planet;
+import model.Player;
 import model.Ship;
 import model.Universe;
 
@@ -15,14 +17,18 @@ import model.Universe;
  */
 public class FlightEngine {
 	private Ship ship;
+	private Player player;
+	private Universe universe;
 
 	/**
 	 * Constructor for the flight engine, taking in a given ship
 	 * 
 	 * @param s
 	 */
-	public FlightEngine(Ship s) {
+	public FlightEngine(Ship s, Player p, Universe universe) {
 		ship = s;
+		player = p;
+		this.universe = universe;
 	}
 
 	/**
@@ -48,5 +54,22 @@ public class FlightEngine {
 				withinRange.add(planet);
 		}
 		return withinRange;
+	}
+
+	/**
+	 * Sends player to a different planet, calculates and creates possible
+	 * encounters, and sets fuel to correct future value
+	 * 
+	 * @param p
+	 *            The planet being clicked on to travel to
+	 */
+	public void goClick(Planet p) {
+		Planet origin = player.getPlanet();
+		player.setPlanet(p);
+		// encounters go here
+//		Map<Planet, Integer> withinRange = getPlanetsWithinRange(universe,
+//				origin);
+//		ship.setFuel(ship.getFuel() - withinRange.get(p));
+
 	}
 }
