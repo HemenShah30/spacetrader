@@ -23,14 +23,27 @@
             <Insets />
          </BorderPane.margin>
          <children>
-            <Label text="Player Info" />
+            <Label fx:id="playerNameLbl" text="Player Name">
+               <HBox.margin>
+                  <Insets right="15.0" />
+               </HBox.margin></Label>
+            <Label fx:id="playerCreditsLbl" text="Credits: " />
          </children>
       </HBox>
    </bottom>
    <top>
       <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Planet Info" />
+            <Label fx:id="planetNameLbl" text="Planet Name">
+               <HBox.margin>
+                  <Insets right="15.0" />
+               </HBox.margin></Label>
+            <Label fx:id="planetTechLevelLbl" text="Tech Level:">
+               <HBox.margin>
+                  <Insets right="15.0" />
+               </HBox.margin>
+            </Label>
+            <Label fx:id="planetResourceLbl" text="Resource:" />
          </children>
       </HBox>
    </top>

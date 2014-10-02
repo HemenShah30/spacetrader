@@ -2,12 +2,16 @@ package view;
 
 import java.io.IOException;
 
+import model.Planet;
+import model.Player;
+import controller.GameEngine;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 /**
@@ -25,6 +29,21 @@ public class PlanetScreenController {
 
 	@FXML
 	Button shipyardBtn;
+
+	@FXML
+	Label planetNameLbl;
+
+	@FXML
+	Label planetTechLevelLbl;
+
+	@FXML
+	Label planetResourceLbl;
+
+	@FXML
+	Label playerNameLbl;
+
+	@FXML
+	Label playerCreditsLbl;
 
 	/**
 	 * Method for saving the current game data
@@ -88,5 +107,21 @@ public class PlanetScreenController {
 		if (MultiPageController.isValidAction(e)) {
 			System.out.println("Going to space");
 		}
+	}
+
+	/**
+	 * Initializes the main page with the relevant label data
+	 */
+	public void initializePage() {
+		GameEngine game = GameEngine.getGameEngine();
+		Player player = game.getPlayer();
+		Planet planet = player.getPlanet();
+		planetNameLbl.setText(planet.getName());
+		planetTechLevelLbl.setText("Tech Level: "
+				+ planet.getTechLevel().toString());
+		planetResourceLbl.setText("Resource: "
+				+ planet.getResource().toString());
+		playerNameLbl.setText(player.getName());
+		playerCreditsLbl.setText("Credits: " + (int) player.getCredits());
 	}
 }

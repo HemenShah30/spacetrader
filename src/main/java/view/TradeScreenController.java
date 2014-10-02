@@ -425,7 +425,19 @@ public class TradeScreenController {
 	@FXML
 	protected void toPlanetScreen(Event e) {
 		if (MultiPageController.isValidAction(e)) {
-			MultiPageController.loadView(toPlanetScreenBtn, "PlanetScreen");
+			try {
+				Stage stage = (Stage) toPlanetScreenBtn.getScene().getWindow();
+				stage.hide();
+				FXMLLoader loader = new FXMLLoader(
+						ClassLoader.getSystemResource("view/PlanetScreen.fxml"));
+				Parent newScene = loader.load();
+				stage.setScene(new Scene(newScene, 600, 400));
+				PlanetScreenController controller = loader.getController();
+				controller.initializePage();
+				stage.show();
+			} catch (IOException ie) {
+				ie.printStackTrace();
+			}
 		}
 	}
 }
