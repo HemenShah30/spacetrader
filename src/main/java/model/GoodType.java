@@ -11,12 +11,12 @@ public enum GoodType {
 	FURS(0, 0, 0, 250, 10, 10, Condition.COLD, SpecialResource.RICHFAUNA, SpecialResource.LIFELESS, 230, 180, 5, 4),
 	FOOD(1, 0, 1, 100, 5, 5, Condition.CROPFAIL, SpecialResource.RICHSOIL, SpecialResource.POORSOIL, 90, 160, 10, 5),
 	ORE(2, 2, 3, 350, 20, 10, Condition.WAR, SpecialResource.MINERALRICH, SpecialResource.MINERALPOOR, 350, 420, 10, 5),
-	GAMES(3, 1, 6, 250, -10, 5, Condition.BOREDOM, SpecialResource.ARTISTIC, SpecialResource.NONE, 160, 720, 10, 4),
-	FIREARMS(3, 1, 5, 1250, -75, 100, Condition.WAR, SpecialResource.WARLIKE, SpecialResource.NONE, 600, 1100, 15, 4),
-	MEDICINE(4, 1, 6, 650, -20, 10, Condition.PLAGUE, SpecialResource.LOTSOFHERBS, SpecialResource.NONE, 400, 700, 10, 5),
-	MACHINES(4, 3, 5, 900, -30, 5, Condition.LACKOFWORKERS, SpecialResource.NONE, SpecialResource.NONE, 600, 800, 10, 4),
-	NARCOTICS(5, 0, 5, 3500, -125, 150, Condition.BOREDOM, SpecialResource.WEIRDMUSHROOMS, SpecialResource.NONE, 2000, 3000, 10, 4),
-	ROBOTS(6, 4, 7, 5000, -150, 100, Condition.LACKOFWORKERS, SpecialResource.NONE, SpecialResource.NONE, 3500, 5000, 15, 4);
+	GAMES(3, 1, 6, 250, -10, 5, Condition.BOREDOM, SpecialResource.ARTISTIC, null, 160, 720, 10, 4),
+	FIREARMS(3, 1, 5, 1250, -75, 100, Condition.WAR, SpecialResource.WARLIKE, null, 600, 1100, 15, 4),
+	MEDICINE(4, 1, 6, 650, -20, 10, Condition.PLAGUE, SpecialResource.LOTSOFHERBS, null, 400, 700, 10, 5),
+	MACHINES(4, 3, 5, 900, -30, 5, Condition.LACKOFWORKERS, null, null, 600, 800, 10, 4),
+	NARCOTICS(5, 0, 5, 3500, -125, 150, Condition.BOREDOM, SpecialResource.WEIRDMUSHROOMS, null, 2000, 3000, 10, 4),
+	ROBOTS(6, 4, 7, 5000, -150, 100, Condition.LACKOFWORKERS, null, null, 3500, 5000, 15, 4);
 
 	private int minTechLevelToProduce;
 	private int minTechLevelToUse;

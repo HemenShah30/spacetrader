@@ -17,7 +17,7 @@ public class Universe {
 	private final double universeLength = 100;
 	private final double universeWidth = 150;
 	private final double percentNoneCondition = 0.5;
-	private final double percentNoneResource = 0.5;
+	private final double percentNoSpecialResource = 0.5;
 
 	/**
 	 * Simple universe constructor, just creating a blank planet array
@@ -62,7 +62,7 @@ public class Universe {
 				c = 0;
 			}
 
-			if (Math.random() < percentNoneResource) {
+			if (Math.random() < percentNoSpecialResource) {
 				r = 0;
 			}
 
