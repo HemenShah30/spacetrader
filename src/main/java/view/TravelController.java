@@ -3,7 +3,6 @@ package view;
 import controller.GameEngine;
 import model.Planet;
 import model.Universe;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
@@ -55,8 +54,10 @@ public class TravelController {
 
 	}
 	
-	@FXML
-	void loadUniverse(Event e) {
+	/**
+	 * Loads up the travel screen
+	 */
+	public void initializePage() {
 		localGC = localMap.getGraphicsContext2D();
 		Universe u = GameEngine.getGameEngine().getUniverse();
 		int x, y;

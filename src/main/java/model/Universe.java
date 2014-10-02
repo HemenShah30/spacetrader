@@ -49,7 +49,7 @@ public class Universe {
 		Set<Location> uniqueLocations = new HashSet<Location>();
 		Random rand = new Random();
 		int x, y;
-//		int uniSize = (int) Math.ceil(Math.sqrt(planetNames.size()));
+		// int uniSize = (int) Math.ceil(Math.sqrt(planetNames.size()));
 		int uniSize = 10;
 		for (int i = 0; i < planetNames.size(); i++) {
 			TechLevel[] levels = TechLevel.values();
@@ -61,8 +61,8 @@ public class Universe {
 			int r = (int) (Math.random() * resources.length);
 			int g = (int) (Math.random() * governments.length);
 			int c = (int) (Math.random() * conditions.length);
-//			int x = (int) (Math.random() * universeLength);
-//			int y = (int) (Math.random() * universeWidth);
+			// int x = (int) (Math.random() * universeLength);
+			// int y = (int) (Math.random() * universeWidth);
 
 			if (Math.random() < percentNoneCondition) {
 				c = 0;
@@ -72,18 +72,14 @@ public class Universe {
 				r = 0;
 			}
 
-/*			boolean uniqueLocation = false;
-			Location l = null;
-			while (!uniqueLocation) {
-				l = new Location(x, y);
-				if (!uniqueLocations.contains(l))
-					uniqueLocation = true;
-				else {
-					x = (int) (Math.random() * universeLength);
-					y = (int) (Math.random() * universeWidth);
-				}
-			}
-*/
+			/*
+			 * boolean uniqueLocation = false; Location l = null; while
+			 * (!uniqueLocation) { l = new Location(x, y); if
+			 * (!uniqueLocations.contains(l)) uniqueLocation = true; else { x =
+			 * (int) (Math.random() * universeLength); y = (int) (Math.random()
+			 * * universeWidth); } }
+			 */
+
 			if (i < 100) {
 				x = i / uniSize;
 				y = i % uniSize;
