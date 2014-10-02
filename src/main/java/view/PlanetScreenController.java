@@ -28,7 +28,10 @@ public class PlanetScreenController {
 	Button marketplaceBtn;
 
 	@FXML
-	Button shipyardBtn;
+	Button toShipYardBtn;
+	
+	@FXML
+	Button toSpaceBtn;
 
 	@FXML
 	Label planetNameLbl;
@@ -105,7 +108,19 @@ public class PlanetScreenController {
 	@FXML
 	protected void goToSpace(Event e) {
 		if (MultiPageController.isValidAction(e)) {
-			System.out.println("Going to space");
+			try {
+				Stage stage = (Stage) toSpaceBtn.getScene().getWindow();
+				stage.hide();
+				FXMLLoader loader = new FXMLLoader(
+						ClassLoader.getSystemResource("view/TravelScreen.fxml"));
+				Parent newScene = loader.load();
+				stage.setScene(new Scene(newScene, 600, 400));
+				TravelController controller = loader.getController();
+				controller.loadUniverse(null);
+				stage.show();
+			} catch (IOException ie) {
+				ie.printStackTrace();
+			}
 		}
 	}
 
