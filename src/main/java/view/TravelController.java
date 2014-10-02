@@ -1,9 +1,15 @@
 package view;
 
+import controller.GameEngine;
+import model.Planet;
+import model.Universe;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.paint.Color;
 
 public class TravelController {
 
@@ -21,30 +27,46 @@ public class TravelController {
 
 	@FXML
 	private Button nextBtn;
+	
+	private GraphicsContext localGC;
 
 	@FXML
-	void showNextPlanet(ActionEvent event) {
+	void showNextPlanet(Event e) {
 
 	}
 
 	@FXML
-	void selectRegionOfSpace(ActionEvent event) {
+	void selectRegionOfSpace(Event e) {
 
 	}
 
 	@FXML
-	void selectPlanet(ActionEvent event) {
+	void selectPlanet(Event e) {
 
 	}
 
 	@FXML
-	void backToPlanetScreen(ActionEvent event) {
+	void backToPlanetScreen(Event e) {
 
 	}
 
 	@FXML
-	void goToSelectedPlanet(ActionEvent event) {
+	void goToSelectedPlanet(Event e) {
 
+	}
+	
+	@FXML
+	void loadUniverse(Event e) {
+		localGC = localMap.getGraphicsContext2D();
+		Universe u = GameEngine.getGameEngine().getUniverse();
+		int x, y;
+		int rad = 3;
+		localGC.setFill(Color.DARKTURQUOISE);
+		for (Planet p: u.getPlanets()) {
+			x = p.getLocation().getX();
+			y = p.getLocation().getY();
+			localGC.fillOval(x, y, rad, rad);
+		}
 	}
 
 }

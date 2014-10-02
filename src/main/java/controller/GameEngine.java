@@ -117,4 +117,8 @@ public class GameEngine {
 			return tradeEngine.getMaximumBuyGoodAmount(type);
 		return tradeEngine.getMaximumSellGoodAmount(type);
 	}
+	
+	public Universe getUniverse() {
+		return universe;
+	}
 }
