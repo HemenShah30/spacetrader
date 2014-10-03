@@ -116,7 +116,7 @@ public class PlanetScreenController {
 				Parent newScene = loader.load();
 				stage.setScene(new Scene(newScene, 600, 400));
 				TravelController controller = loader.getController();
-				controller.loadUniverse(null);
+				controller.initializePage();
 				stage.show();
 			} catch (IOException ie) {
 				ie.printStackTrace();
