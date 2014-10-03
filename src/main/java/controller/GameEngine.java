@@ -77,8 +77,6 @@ public class GameEngine {
 	 *            The TradeGood being bought or sold
 	 * @param quantity
 	 *            The quantity of the good being bought or sold
-	 * @param market
-	 *            The marketplace involved in the transaction
 	 * @param buyingGood
 	 *            Whether or not a good is being bought
 	 * @return The errors from the transaction, if any
@@ -117,7 +115,7 @@ public class GameEngine {
 			return tradeEngine.getMaximumBuyGoodAmount(type);
 		return tradeEngine.getMaximumSellGoodAmount(type);
 	}
-	
+
 	public Universe getUniverse() {
 		return universe;
 	}

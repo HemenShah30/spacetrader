@@ -22,10 +22,10 @@ public class TradeEngine {
 	/**
 	 * Constructor for the TradeEngine, taking in the main game player
 	 * 
-	 * @param p
+	 * @param p The player that will be trading with the marketplace
 	 */
 	public TradeEngine(Player p) {
-		this.player = p;
+		player = p;
 		ship = p.getShip();
 	}
 

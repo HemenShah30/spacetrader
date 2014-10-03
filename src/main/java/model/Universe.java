@@ -32,6 +32,7 @@ public class Universe {
 	 * Constructor for a universe taking in a list of planets to begin with
 	 * 
 	 * @param p
+	 *            The list of planets for the Universe to start with
 	 */
 	public Universe(List<Planet> p) {
 		planets = p;

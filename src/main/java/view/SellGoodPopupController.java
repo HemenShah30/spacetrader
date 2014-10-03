@@ -123,10 +123,10 @@ public class SellGoodPopupController {
 	/**
 	 * Method to initialize the page with the proper initial values
 	 * 
-	 * @param sellAll
-	 *            The max selling amount for the cargo
 	 * @param good
 	 *            The GoodType to be sold
+	 * @param ts
+	 *            The TradeScreenController that created the popup
 	 */
 	public void initializePage(GoodType good, TradeScreenController ts) {
 		game = GameEngine.getGameEngine();

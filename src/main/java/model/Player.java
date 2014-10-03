@@ -29,6 +29,8 @@ public class Player {
 	 *            The amount of engineer skill points
 	 * @param investor
 	 *            The amount of investor skill points
+	 * @param ship
+	 *            The ship the player is flying in
 	 */
 	public Player(String name, int pilot, int fighter, int trader,
 			int engineer, int investor, Ship ship) {

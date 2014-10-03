@@ -37,7 +37,7 @@ public enum SpecialResource {
 		case WARLIKE:
 			return "Warlike";
 		case NOSPECIALRESOURCES:
-			return "None";
+			return "No Special Resource";
 		default:
 			return null;
 		}
