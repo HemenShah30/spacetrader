@@ -15,6 +15,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -84,7 +85,10 @@ public class TravelScreenController {
 	 */
 	@FXML
 	private void selectRegionOfSpace(Event e) {
-		System.out.println("Select region of space");
+		MouseEvent event = (MouseEvent) e;
+		double x = event.getX();
+		double y = event.getY();
+		System.out.println("You clicked (" + x + ", " + y + ")");
 	}
 
 	/**
@@ -95,7 +99,10 @@ public class TravelScreenController {
 	 */
 	@FXML
 	private void selectPlanet(Event e) {
-		System.out.println("Selecting planet, working on");
+		MouseEvent event = (MouseEvent) e;
+		double x = event.getX();
+		double y = event.getY();
+		System.out.println("You clicked (" + x + ", " + y + ")");
 	}
 
 	/**
@@ -135,6 +142,7 @@ public class TravelScreenController {
 		// make sure planet is selected
 		// make sure not already on planet
 		// make sure have enough fuel
+		System.out.println("Going to planet");
 	}
 
 	/**
@@ -145,12 +153,12 @@ public class TravelScreenController {
 		game = GameEngine.getGameEngine();
 		Universe u = game.getUniverse();
 		int x, y;
-		int rad = 3;
+		int radius = 3;
 		localGC.setFill(Color.DARKTURQUOISE);
 		for (Planet p : u.getPlanets()) {
 			x = p.getLocation().getX();
 			y = p.getLocation().getY();
-			localGC.fillOval(x, y, rad, rad);
+			localGC.fillOval(x, y, radius, radius);
 		}
 		selectedPlanet = game.getPlayer().getPlanet();
 		setPlanetInfo();
