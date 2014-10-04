@@ -26,7 +26,7 @@ public class Database {
 		try {
 			connection = DriverManager
 					.getConnection(
-							"jdbc:postgresql:spacetraders.cucctpybeipt.us-west-2.rds.amazonaws.com:5432/spacetraders",
+							"jdbc:postgresql:spacetraders.cucctpybeipt.us-west-2.rds.amazonaws.com:5432/SpaceTraders",
 							"meep366", "chromium");
 		} catch (SQLException e) {
 			System.out.println("Connection Failed! Check output console");

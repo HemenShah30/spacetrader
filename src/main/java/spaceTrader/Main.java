@@ -45,6 +45,7 @@ public class Main extends Application {
 		// FileReader r = new FileReader();
 		// Object[] data=r.loadGameData();
 		// Arrays.toString(data);
+		// Database db = new Database();
 		launch(args);
 	}
 }

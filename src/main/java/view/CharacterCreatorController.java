@@ -50,7 +50,7 @@ public class CharacterCreatorController {
 	 *            The event that fired the method
 	 */
 	@FXML
-	protected void validateAndUpdateSkillPoints(Event e) {
+	private void validateAndUpdateSkillPoints(Event e) {
 		double totalPoints = pilotSlider.getValue() + fightingSlider.getValue()
 				+ investorSlider.getValue() + engineerSlider.getValue()
 				+ traderSlider.getValue();
@@ -71,7 +71,7 @@ public class CharacterCreatorController {
 	 *            The event that fired the method
 	 */
 	@FXML
-	protected void startNewGame(Event e) {
+	private void startNewGame(Event e) {
 		if (MultiPageController.isValidAction(e)) {
 			String playerName = name.getText().trim();
 			double totalPoints = pilotSlider.getValue()
@@ -123,7 +123,7 @@ public class CharacterCreatorController {
 	 *            The event that fired the method
 	 */
 	@FXML
-	protected void backToMainMenu(Event e) {
+	private void backToMainMenu(Event e) {
 		if (MultiPageController.isValidAction(e)) {
 			MultiPageController.loadView(back, "MainScene");
 		}

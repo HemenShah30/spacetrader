@@ -25,7 +25,7 @@ public class MainSceneController {
 	 *            Event that fired the method
 	 */
 	@FXML
-	protected void startNewGame(Event e) {
+	private void startNewGame(Event e) {
 		if (MultiPageController.isValidAction(e)) {
 			MultiPageController.loadView(newGame, "CharacterCreator");
 		}
@@ -36,7 +36,7 @@ public class MainSceneController {
 	 * Method for loading a previously saved game
 	 * @param e The event that fired the method
 	 */
-	protected void loadGame(Event e) {
+	private void loadGame(Event e) {
 		if (MultiPageController.isValidAction(e)) {
 			System.out.println("Load Game");
 		}
@@ -47,7 +47,7 @@ public class MainSceneController {
 	 * Method for opening the settings menu
 	 * @param e The event that fired the method
 	 */
-	protected void openSettingsMenu(Event e) {
+	private void openSettingsMenu(Event e) {
 		if (MultiPageController.isValidAction(e)) {
 			System.out.println("Open Settings");
 		}

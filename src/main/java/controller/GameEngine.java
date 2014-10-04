@@ -18,6 +18,7 @@ import model.Universe;
 public class GameEngine {
 	private static GameEngine gameEngine;
 	private TradeEngine tradeEngine;
+	private FlightEngine flightEngine;
 	private Universe universe;
 	private Player player;
 
@@ -67,6 +68,7 @@ public class GameEngine {
 				engineerSkill, investorSkill, s);
 		player.setPlanet(universe.getPlanets().get(0));
 		tradeEngine = new TradeEngine(player);
+		flightEngine = new FlightEngine(player, universe);
 	}
 
 	/**
@@ -116,7 +118,23 @@ public class GameEngine {
 		return tradeEngine.getMaximumSellGoodAmount(type);
 	}
 
+	/**
+	 * Returns the universe that the player is currently in
+	 * 
+	 * @return The universe that the player is currently in
+	 */
 	public Universe getUniverse() {
 		return universe;
+	}
+
+	/**
+	 * Returns the distance from the player's planet to the destination planet
+	 * 
+	 * @param destination
+	 *            The planet the player wishes to travel to
+	 * @return The distance to the given planet
+	 */
+	public int getDistanceToPlanet(Planet destination) {
+		return flightEngine.getDistanceToPlanet(destination);
 	}
 }

@@ -29,7 +29,7 @@ public class PlanetScreenController {
 
 	@FXML
 	Button toShipYardBtn;
-	
+
 	@FXML
 	Button toSpaceBtn;
 
@@ -55,7 +55,7 @@ public class PlanetScreenController {
 	 *            The event that fired the method
 	 */
 	@FXML
-	protected void saveGame(Event e) {
+	private void saveGame(Event e) {
 		if (MultiPageController.isValidAction(e)) {
 			System.out.println("Save Game");
 		}
@@ -68,7 +68,7 @@ public class PlanetScreenController {
 	 *            The event that fired the method
 	 */
 	@FXML
-	protected void goToMarketplace(Event e) {
+	private void goToMarketplace(Event e) {
 		if (MultiPageController.isValidAction(e)) {
 			try {
 				Stage stage = (Stage) marketplaceBtn.getScene().getWindow();
@@ -93,7 +93,7 @@ public class PlanetScreenController {
 	 *            The event that fired the method
 	 */
 	@FXML
-	protected void goToShipyard(Event e) {
+	private void goToShipyard(Event e) {
 		if (MultiPageController.isValidAction(e)) {
 			System.out.println("Going to shipyard");
 		}
@@ -106,7 +106,7 @@ public class PlanetScreenController {
 	 *            The event that fired the method
 	 */
 	@FXML
-	protected void goToSpace(Event e) {
+	private void goToSpace(Event e) {
 		if (MultiPageController.isValidAction(e)) {
 			try {
 				Stage stage = (Stage) toSpaceBtn.getScene().getWindow();
@@ -115,7 +115,7 @@ public class PlanetScreenController {
 						ClassLoader.getSystemResource("view/TravelScreen.fxml"));
 				Parent newScene = loader.load();
 				stage.setScene(new Scene(newScene, 600, 400));
-				TravelController controller = loader.getController();
+				TravelScreenController controller = loader.getController();
 				controller.initializePage();
 				stage.show();
 			} catch (IOException ie) {

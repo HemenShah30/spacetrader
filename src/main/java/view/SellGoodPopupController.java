@@ -47,7 +47,7 @@ public class SellGoodPopupController {
 	 *            The event that fired the method
 	 */
 	@FXML
-	protected void sellAllGood(Event e) {
+	private void sellAllGood(Event e) {
 		if (MultiPageController.isValidAction(e)) {
 			List<String> errors = game.marketplaceTrade(tradeGood,
 					sellAllAmount, false);
@@ -71,7 +71,7 @@ public class SellGoodPopupController {
 	 *            The event that fires the method
 	 */
 	@FXML
-	protected void sellGood(Event e) {
+	private void sellGood(Event e) {
 		if (MultiPageController.isValidAction(e)) {
 			int goodAmount;
 			try {
@@ -115,7 +115,7 @@ public class SellGoodPopupController {
 	 *            The event that fired the method
 	 */
 	@FXML
-	protected void cancelBuy(Event e) {
+	private void cancelBuy(Event e) {
 		Stage popupStage = (Stage) cancelBtn.getScene().getWindow();
 		popupStage.close();
 	}

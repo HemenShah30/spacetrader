@@ -1,8 +1,6 @@
 package controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import model.Planet;
@@ -31,9 +29,9 @@ public class FlightEngine {
 	 * @param u
 	 *            The universe the ship is moving in
 	 */
-	public FlightEngine(Ship s, Player p, Universe u) {
-		ship = s;
+	public FlightEngine(Player p, Universe u) {
 		player = p;
+		ship = player.getShip();
 		universe = u;
 	}
 
@@ -64,13 +62,30 @@ public class FlightEngine {
 	}
 
 	/**
+	 * Gets the distance from the player's current planet to another
+	 * 
+	 * @param destination
+	 *            The destination planet
+	 * @return The distance to the destination planet
+	 */
+	public int getDistanceToPlanet(Planet destination) {
+		Planet origin = player.getPlanet();
+		double xDifferenceSquared = Math.pow(destination.getLocation().getX()
+				- origin.getLocation().getX(), 2);
+		double yDifferenceSquared = Math.pow(destination.getLocation().getY()
+				- origin.getLocation().getY(), 2);
+		return (int) Math.ceil(Math.sqrt(xDifferenceSquared
+				+ yDifferenceSquared));
+	}
+
+	/**
 	 * Sends player to a different planet, calculates and creates possible
 	 * encounters, and sets fuel to correct future value
 	 * 
 	 * @param p
 	 *            The planet being clicked on to travel to
 	 */
-	public void goClick(Planet p) {
+	public void goToPlanet(Planet p) {
 		Planet origin = player.getPlanet();
 		player.setPlanet(p);
 		// encounters go here
