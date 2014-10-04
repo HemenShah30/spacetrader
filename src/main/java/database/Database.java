@@ -18,7 +18,6 @@ public class Database {
 			System.out.println("Where is your PostgreSQL JDBC Driver?"
 					+ "Include in your library path!");
 			e.printStackTrace();
-			return;
 		}
 
 		System.out.println("PostgreSQL JDBC Driver Registered!");
@@ -26,12 +25,11 @@ public class Database {
 		try {
 			connection = DriverManager
 					.getConnection(
-							"jdbc:postgresql:spacetraders.cucctpybeipt.us-west-2.rds.amazonaws.com:5432/SpaceTraders",
+							"jdbc:postgresql://spacetraders.cucctpybeipt.us-west-2.rds.amazonaws.com:5432/SpaceTraders",
 							"meep366", "chromium");
 		} catch (SQLException e) {
 			System.out.println("Connection Failed! Check output console");
 			e.printStackTrace();
-			return;
 		}
 	}
 }
