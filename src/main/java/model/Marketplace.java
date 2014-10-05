@@ -84,7 +84,6 @@ public class Marketplace {
 				* (techlevel.getValue() - type.getMinTechLevelToProduce());
 		quantity = quantity + (int) (10 * Math.random());
 		// quantity is increased if a planet is the biggest producer of that
-		// quantity
 		if (techlevel.getValue() == type.getBiggestProducer()) {
 			quantity = (int) (quantity * (0.5 * Math.random() + 1.5));
 		}

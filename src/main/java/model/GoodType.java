@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Random;
+
 /**
  * Enum representing the type of good a good is. Info holder.
  * 
