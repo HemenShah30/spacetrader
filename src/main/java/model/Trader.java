@@ -15,13 +15,12 @@ public class Trader extends NPC {
 	private GoodType goodOfInterest = GoodType.WATER; //determines which good the Trader wants to trade
 	
 	public Trader(int pilot, int fighter, int trader,
-			int engineer, int investor, Ship ship) {
+			int engineer, int investor) {
 		setPilot(pilot);
 		setFighter(fighter);
 		setTrader(trader);
 		setEngineer(engineer);
 		setInvestor(investor);
-		setShip(ship);
 		generateIsSelling();
 		generateGood();
 		generatePrice();
@@ -37,8 +36,10 @@ public class Trader extends NPC {
 	}
 	
 	private void generateGood() {
-		//not sure if this is the best way to do this. please let me know if you can think of a better way
-		this.goodOfInterest = goodOfInterest.getRandomGoodType();
+		Random random = new Random();
+		GoodType[] goods = GoodType.values();
+		int goodIndex = random.nextInt(goods.length);
+		this.goodOfInterest = goods[goodIndex];
 	}
 	
 	private void generatePrice() {
