@@ -6,7 +6,7 @@ package model;
  * @author Larry He
  * 
  */
-public class Planet {
+public class Planet implements Boundary{
 	private String name;
 	private TechLevel techLevel;
 	private SpecialResource resource;
@@ -181,5 +181,10 @@ public class Planet {
 	public String toString() {
 		return name + ", Location: " + location + ", Tech Level: " + techLevel
 				+ ", Resource: " + resource + ", Goverment: " + government + ", Condition: " + condition;
+	}
+	
+	public boolean isLocationInside(Location location) {
+		//check corners of box here or something
+		return true;
 	}
 }

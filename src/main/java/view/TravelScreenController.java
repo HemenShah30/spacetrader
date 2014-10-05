@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import controller.GameEngine;
 import model.EncounterRate;
+import model.Location;
 import model.Planet;
 import model.Universe;
 import javafx.event.Event;
@@ -102,7 +103,10 @@ public class TravelScreenController {
 		MouseEvent event = (MouseEvent) e;
 		double x = event.getX();
 		double y = event.getY();
-		System.out.println("You clicked (" + x + ", " + y + ")");
+		Planet p = game.getUniverse().getPlanetAtLocation(
+				new Location((int) x, (int) y));
+		selectedPlanet = p;
+		setPlanetInfo();
 	}
 
 	/**

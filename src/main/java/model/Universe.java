@@ -20,6 +20,7 @@ public class Universe {
 	private final double universeWidth = 100;
 	private final double percentNoneCondition = 0.5;
 	private final double percentNoSpecialResource = 0.5;
+	private BoundaryTree planetLocations;
 
 	/**
 	 * Simple universe constructor, just creating a blank planet array
@@ -98,7 +99,7 @@ public class Universe {
 			uniqueLocations.add(l);
 			planets.add(p);
 		}
-		System.out.println(planetNames.size());
+		planetLocations = new BoundaryTree(400, 400, planets);
 	}
 
 	/**
@@ -108,5 +109,16 @@ public class Universe {
 	 */
 	public List<Planet> getPlanets() {
 		return planets;
+	}
+
+	/**
+	 * Returns the planet at the given location or null if no planet is there
+	 * 
+	 * @param loc
+	 *            The location where the planet is being searched for
+	 * @return The planet at the location, or null if no planet is there
+	 */
+	public Planet getPlanetAtLocation(Location loc) {
+		return planetLocations.getPlanetAtLocation(loc);
 	}
 }

@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import model.Player;
+import model.Universe;
+
 public class Database {
 	private Connection connection;
 
@@ -31,5 +34,11 @@ public class Database {
 			System.out.println("Connection Failed! Check output console");
 			e.printStackTrace();
 		}
+	}
+	
+	//universe data - a.k.a. planet data needs saving
+	//player data needs saving
+	public void saveGame(Universe universe, Player p) {
+		
 	}
 }
