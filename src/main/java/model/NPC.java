@@ -7,15 +7,17 @@ package model;
  * 
  */
 public abstract class NPC {
-	private int threatLevel; //represents how dangerous the ship is.
-							//ex. if player has bad reputation, the threatlevel of police ships will be higher, resulting in a tougher enemy
+	private int threatLevel; // represents how dangerous the ship is.
+								// ex. if player has bad reputation, the
+								// threatlevel of police ships will be higher,
+								// resulting in a tougher enemy
 	// *** we should have a pirateRep, policeRep, and a traderRep for the player
 	private int pilotSkill, fighterSkill, traderSkill, engineerSkill,
-	investorSkill;
+			investorSkill;
 	private double credits;
 	private Ship ship;
 	private boolean isFleeing, isFighting, isSurrenduring;
-	
+
 	/**
 	 * Returns the NPC's piloting skill
 	 * 
@@ -69,7 +71,7 @@ public abstract class NPC {
 	public double getCredits() {
 		return credits;
 	}
-	
+
 	/**
 	 * Returns true if the NPC is trying to flee
 	 * 
@@ -78,7 +80,7 @@ public abstract class NPC {
 	public boolean getIsFleeing() {
 		return isFleeing;
 	}
-	
+
 	/**
 	 * Returns true if the NPC is wants to fight
 	 * 
@@ -87,7 +89,7 @@ public abstract class NPC {
 	public boolean getIsFighting() {
 		return isFighting;
 	}
-	
+
 	/**
 	 * Returns true if the NPC surrenders
 	 * 
@@ -96,7 +98,7 @@ public abstract class NPC {
 	public boolean getIsSurrendering() {
 		return isSurrenduring;
 	}
-	
+
 	/**
 	 * Sets the NPC's pilot skill points
 	 * 
@@ -146,17 +148,17 @@ public abstract class NPC {
 	public void setInvestor(int points) {
 		investorSkill = points;
 	}
-	
+
 	/**
 	 * Randomly generates the ship the NPC is using
 	 */
 	public void generateShip() {
-//		ShipType[] shiptypes = ShipType.values();
-//		int index = (int) (Math.random() * shiptypes.length);
-//		ShipType shiptype = shiptypes[index];
-//		ship = new Ship(shiptype);
+		// ShipType[] shiptypes = ShipType.values();
+		// int index = (int) (Math.random() * shiptypes.length);
+		// ShipType shiptype = shiptypes[index];
+		// ship = new Ship(shiptype);
 	}
-	
+
 	/**
 	 * Gets the ship of the NPC
 	 * 
@@ -165,7 +167,7 @@ public abstract class NPC {
 	public Ship getShip() {
 		return ship;
 	}
-	
+
 	/**
 	 * Sets if the NPC wants to flee
 	 * 
@@ -175,7 +177,7 @@ public abstract class NPC {
 	public void setIsFleeing(boolean flee) {
 		isFleeing = flee;
 	}
-	
+
 	/**
 	 * Sets if the NPC wants to fight
 	 * 
@@ -185,7 +187,7 @@ public abstract class NPC {
 	public void setIsFighting(boolean fight) {
 		isFighting = fight;
 	}
-	
+
 	/**
 	 * Sets if the NPC wants to surrender
 	 * 
@@ -194,5 +196,15 @@ public abstract class NPC {
 	 */
 	public void setIsSurrenduring(boolean surrender) {
 		isSurrenduring = surrender;
+	}
+
+	/**
+	 * Sets the NPCs credits
+	 * 
+	 * @param credits
+	 *            NPC's credits
+	 */
+	public void setCredits(double credits) {
+		this.credits = credits;
 	}
 }

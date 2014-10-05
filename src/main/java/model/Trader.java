@@ -122,10 +122,7 @@ public class Trader extends NPC {
 	 */
 	private void generateShip(int rep) {
 		ShipType[] shiptypes = ShipType.values();
-		int index = rep / 2;
-		if (index < 1) {
-			index++;
-		}
+		int index = (rep - 1) / 2;
 		ShipType shiptype = shiptypes[index];
 		ship = new Ship(shiptype);
 	}
