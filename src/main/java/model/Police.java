@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Abstract class representing Police.
+ * Class representing Police.
  * 
  * @author Eric Wan and Larry He
  * 

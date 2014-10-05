@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Abstract class representing Pirates.
+ * Class representing Pirates.
  * 
  * @author Eric Wan and Larry He
  * 
