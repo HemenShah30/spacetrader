@@ -9,6 +9,7 @@ package model;
 public abstract class NPC {
 	private int threatLevel; //represents how dangerous the ship is.
 							//ex. if player has bad reputation, the threatlevel of police ships will be higher, resulting in a tougher enemy
+	// *** we should have a pirateRep, policeRep, and a traderRep for the player
 	private int pilotSkill, fighterSkill, traderSkill, engineerSkill,
 	investorSkill;
 	private double credits;
@@ -150,10 +151,19 @@ public abstract class NPC {
 	 * Randomly generates the ship the NPC is using
 	 */
 	public void generateShip() {
-		ShipType[] shiptypes = ShipType.values();
-		int index = (int) (Math.random() * shiptypes.length);
-		ShipType shiptype = shiptypes[index];
-		ship = new Ship(shiptype);
+//		ShipType[] shiptypes = ShipType.values();
+//		int index = (int) (Math.random() * shiptypes.length);
+//		ShipType shiptype = shiptypes[index];
+//		ship = new Ship(shiptype);
+	}
+	
+	/**
+	 * Gets the ship of the NPC
+	 * 
+	 * @return Ship of the NPC
+	 */
+	public Ship getShip() {
+		return ship;
 	}
 	
 	/**
