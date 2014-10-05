@@ -8,113 +8,126 @@ package model;
  */
 public abstract class NPC {
 	private int dangerLevel; //represents how dangerous the ship is.
-							//ex. if player has very bad reputations, the dangerlevel of police ships will be higher, resulting in a tougher enemy
+							//ex. if NPC has very bad reputations, the dangerlevel of police ships will be higher, resulting in a tougher enemy
 	private int pilotSkill, fighterSkill, traderSkill, engineerSkill,
 	investorSkill;
 	private double credits;
 	private Ship ship;
+	private boolean isFleeing, isFighting;
 	
 	/**
-	 * Returns the player's piloting skill
+	 * Returns the NPC's piloting skill
 	 * 
-	 * @return The player's piloting skill
+	 * @return The NPC's piloting skill
 	 */
-	public int getPilotSkill() {
+	public int getPilot() {
 		return pilotSkill;
 	}
 
 	/**
-	 * Returns the player's fighter skill
+	 * Returns the NPC's fighter skill
 	 * 
-	 * @return The player's fighter skill
+	 * @return The NPC's fighter skill
 	 */
-	public int getFighterSkill() {
+	public int getFighter() {
 		return fighterSkill;
 	}
 
 	/**
-	 * Returns the player's trader skill
+	 * Returns the NPC's trader skill
 	 * 
-	 * @return The player's trader skill
+	 * @return The NPC's trader skill
 	 */
-	public int getTraderSkill() {
+	public int getTrader() {
 		return traderSkill;
 	}
 
 	/**
-	 * Returns the player's Engineer skill
+	 * Returns the NPC's Engineer skill
 	 * 
-	 * @return The player's engineer skill
+	 * @return The NPC's engineer skill
 	 */
-	public int getEngineerSkill() {
+	public int getEngineer() {
 		return engineerSkill;
 	}
 
 	/**
-	 * Returns the player's investor skill
+	 * Returns the NPC's investor skill
 	 * 
-	 * @return The player's investor skill
+	 * @return The NPC's investor skill
 	 */
-	public int getInvestorSkill() {
+	public int getInvestor() {
 		return investorSkill;
 	}
 
 	/**
-	 * Returns the player's credits
+	 * Returns the NPC's credits
 	 * 
-	 * @return The player's credits
+	 * @return The NPC's credits
 	 */
 	public double getCredits() {
 		return credits;
 	}
 	
 	/**
-	 * Sets the player's pilot skill points
+	 * Sets the NPC's pilot skill points
 	 * 
 	 * @param points
-	 *            The player's new pilot skill points
+	 *            The NPC's new pilot skill points
 	 */
 	public void setPilot(int points) {
 		pilotSkill = points;
 	}
 
 	/**
-	 * Sets the player's fighter skill points
+	 * Sets the NPC's fighter skill points
 	 * 
 	 * @param points
-	 *            The player's new fighter skill points
+	 *            The NPC's new fighter skill points
 	 */
 	public void setFighter(int points) {
 		fighterSkill = points;
 	}
 
 	/**
-	 * Set's the player's trader skill points
+	 * Set's the NPC's trader skill points
 	 * 
 	 * @param points
-	 *            The player's new trader skill points
+	 *            The NPC's new trader skill points
 	 */
 	public void setTrader(int points) {
 		traderSkill = points;
 	}
 
 	/**
-	 * Sets the player's engineer skill points
+	 * Sets the NPC's engineer skill points
 	 * 
 	 * @param points
-	 *            The player's new engineer skill points
+	 *            The NPC's new engineer skill points
 	 */
 	public void setEngineer(int points) {
 		engineerSkill = points;
 	}
 
 	/**
-	 * Sets the player's investor skill points
+	 * Sets the NPC's investor skill points
 	 * 
 	 * @param points
-	 *            The player's new investor skill points
+	 *            The NPC's new investor skill points
 	 */
 	public void setInvestor(int points) {
 		investorSkill = points;
+	}
+	
+	/**
+	 * Setter for the NPC's ship
+	 * 
+	 * @param ship
+	 *            The new ship for the NPC
+	 */
+	public void setShip(Ship ship) {
+		if (ship == null)
+			throw new IllegalArgumentException();
+		this.ship = ship;
 	}
 }

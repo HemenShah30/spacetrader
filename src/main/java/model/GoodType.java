@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Random;
+
 /**
  * Enum representing the type of good a good is. Info holder.
  * 
@@ -204,6 +206,35 @@ public enum GoodType {
 	 */
 	public int getQuantityIncPerTechLevel() {
 		return quantityIncPerTechLevel;
+	}
+	
+	public GoodType getRandomGoodType() {
+		Random random = new Random();
+		int randomNumber = random.nextInt(10);
+		switch (randomNumber) {
+		case 0:
+			return GoodType.WATER;
+		case 1:
+			return GoodType.FURS;
+		case 2:
+			return GoodType.FOOD;
+		case 3:
+			return GoodType.ORE;
+		case 4:
+			return GoodType.GAMES;
+		case 5:
+			return GoodType.MEDICINE;
+		case 6:
+			return GoodType.FIREARMS;
+		case 7:
+			return GoodType.MACHINES;
+		case 8:
+			return GoodType.NARCOTICS;
+		case 9:
+			return GoodType.ROBOTS;
+		default:
+			return null;
+		}
 	}
 	
 	@Override
