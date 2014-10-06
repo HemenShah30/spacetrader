@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public class Ship {
 	private ShipType shipType;
-	private int totalHP, currHP, fuel, cargoSize, currCargo;
+	private int currHP, fuel, cargoSize;
 	// private List<Mercenary> mercenaries;
 	private Map<GoodType, Integer> cargo;
 
@@ -27,8 +27,7 @@ public class Ship {
 		for (GoodType type : GoodType.values())
 			cargo.put(type, 0);
 		fuel = sT.getFuel();
-		totalHP = sT.getTotalHP();
-		currHP = totalHP;
+		currHP = sT.getTotalHP();
 		cargoSize = sT.getCargoSize();
 		// this.mercenaries = mercenaries;
 	}
@@ -39,17 +38,7 @@ public class Ship {
 	 * @return the totalHP of the ship
 	 */
 	public int getTotalHP() {
-		return totalHP;
-	}
-
-	/**
-	 * Sets totalHP of ship
-	 * 
-	 * @param totalHP
-	 *            the new totalHP of the ship
-	 */
-	public void setTotalHP(int totalHP) {
-		this.totalHP = totalHP;
+		return shipType.getTotalHP();
 	}
 
 	/**
@@ -133,6 +122,10 @@ public class Ship {
 	 * @return the current cargo capacity of the ship
 	 */
 	public int getCurrCargo() {
+		int currCargo = 0;
+		for (GoodType good : cargo.keySet())
+			currCargo += cargo.get(good);
+
 		return currCargo;
 	}
 
@@ -147,7 +140,6 @@ public class Ship {
 	public void addToCargo(GoodType goodType, int quantity) {
 		int currentGoodCargo = cargo.get(goodType);
 		cargo.put(goodType, currentGoodCargo + quantity);
-		currCargo += quantity;
 	}
 
 	/**
@@ -161,7 +153,6 @@ public class Ship {
 	public void removeFromCargo(GoodType goodType, int quantity) {
 		int currentGoodCargo = cargo.get(goodType);
 		cargo.put(goodType, currentGoodCargo - quantity);
-		currCargo -= quantity;
 	}
 
 	/**
@@ -191,7 +182,7 @@ public class Ship {
 	 * Private setter for the ship type of the ship
 	 * 
 	 * @param sT
-	 *            The ship type the shup will have
+	 *            The ship type the ship will have
 	 */
 	private void setShipType(ShipType sT) {
 		if (sT == null)

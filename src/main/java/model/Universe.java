@@ -16,8 +16,6 @@ import java.util.Set;
 public class Universe {
 
 	private List<Planet> planets;
-//	private final double universeLength = 100;
-//	private final double universeWidth = 100;
 	private final double universeSize = 100;
 	private final double percentNoneCondition = 0.5;
 	private final double percentNoSpecialResource = 0.5;

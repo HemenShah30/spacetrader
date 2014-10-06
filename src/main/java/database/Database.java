@@ -36,8 +36,13 @@ public class Database {
 		}
 	}
 	
-	//universe data - a.k.a. planet data needs saving
-	//player data needs saving
+
+	//Things to save:
+	//Planet - TechLevel, SpecialResource, Government, Location, Condition, PoliceEncounterRate, PirateEnconuterRate, Marketplace
+	//Marketplace - prices, quantities, planet, radius, color
+	//Player - name, pilotSkill, fighterSkill, traderSkill, engineerSkill, investorSkill, traderRep, policeRep, pirateRep, credits, planet, Ship
+	//Ship - shipType, currHP, fuel, cargoSize, cargo(GoodType/quantity), weapons, shields, upgrades, mercenaries, insurance
+	//Mercenary - dailyCost, fighterSkill, pilotSkill, engineerSkill
 	public void saveGame(Universe universe, Player p) {
 		
 	}
