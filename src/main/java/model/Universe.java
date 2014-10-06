@@ -58,11 +58,14 @@ public class Universe {
 			SpecialResource[] resources = SpecialResource.values();
 			Government[] governments = Government.values();
 			Condition[] conditions = Condition.values();
+			EncounterRate[] encounterRates = EncounterRate.values();
 
 			int t = (int) (Math.random() * levels.length);
 			int r = (int) (Math.random() * resources.length);
 			int g = (int) (Math.random() * governments.length);
 			int c = (int) (Math.random() * conditions.length);
+			int pirate = (int) (Math.random() * encounterRates.length);
+			int police = (int) (Math.random() * encounterRates.length);
 			// int x = (int) (Math.random() * universeLength);
 			// int y = (int) (Math.random() * universeWidth);
 
@@ -95,7 +98,8 @@ public class Universe {
 			}
 			Location l = new Location(x, y);
 			Planet p = new Planet(planetNames.get(i), levels[t], resources[r],
-					governments[g], l, conditions[c]);
+					governments[g], l, conditions[c], encounterRates[police],
+					encounterRates[pirate]);
 			uniqueLocations.add(l);
 			planets.add(p);
 		}

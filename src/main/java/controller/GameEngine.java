@@ -1,8 +1,10 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import model.GoodType;
+import model.Location;
 import model.Planet;
 import model.Player;
 import model.Ship;
@@ -136,5 +138,36 @@ public class GameEngine {
 	 */
 	public int getDistanceToPlanet(Planet destination) {
 		return flightEngine.getDistanceToPlanet(destination);
+	}
+
+	/**
+	 * Player flies to a new planet
+	 * 
+	 * @param planet
+	 *            The planet the player is going to
+	 */
+	public void goToPlanet(Planet planet) {
+		flightEngine.goToPlanet(planet);
+	}
+
+	/**
+	 * Gets a planet at the given location
+	 * 
+	 * @param location
+	 *            The location to find the planet
+	 * @return The planet at the location, or null if no planet
+	 */
+	public Planet getPlanetAtLocation(Location location) {
+		return universe.getPlanetAtLocation(location);
+	}
+
+	/**
+	 * Gets all the planets within range of the player
+	 * 
+	 * @return All planets within range of the player's ship
+	 */
+	public List<Planet> getPlanetsWithinRange() {
+		return new ArrayList<Planet>(flightEngine.getPlanetsWithinRange(
+				universe, player.getPlanet()).keySet());
 	}
 }

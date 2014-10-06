@@ -2,10 +2,12 @@ package view;
 
 import java.io.IOException;
 
+import org.controlsfx.dialog.Dialogs;
+
 import controller.GameEngine;
-import model.EncounterRate;
 import model.Location;
 import model.Planet;
+import model.Player;
 import model.Universe;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -74,6 +76,7 @@ public class TravelScreenController {
 	@FXML
 	private void showNextPlanet(Event e) {
 		if (MultiPageController.isValidAction(e)) {
+
 			System.out.println("Show next planet");
 		}
 	}
@@ -103,10 +106,11 @@ public class TravelScreenController {
 		MouseEvent event = (MouseEvent) e;
 		double x = event.getX();
 		double y = event.getY();
-		Planet p = game.getUniverse().getPlanetAtLocation(
-				new Location((int) x, (int) y));
-		selectedPlanet = p;
-		setPlanetInfo();
+		Planet p = game.getPlanetAtLocation(new Location((int) x, (int) y));
+		if (p != null) {
+			selectedPlanet = p;
+			setPlanetInfo();
+		}
 	}
 
 	/**
@@ -143,10 +147,17 @@ public class TravelScreenController {
 	 */
 	@FXML
 	private void goToSelectedPlanet(Event e) {
-		// make sure planet is selected
-		// make sure not already on planet
-		// make sure have enough fuel
-		System.out.println("Going to planet");
+		int distance = game.getDistanceToPlanet(selectedPlanet);
+		Player p = game.getPlayer();
+		if (selectedPlanet != p.getPlanet()) {
+			if (p.getShip().getFuel() >= distance) {
+				game.goToPlanet(selectedPlanet);
+			} else {
+				displayError("You do not have enough fuel");
+			}
+		} else {
+			displayError("You are already on this planet");
+		}
 	}
 
 	/**
@@ -181,7 +192,20 @@ public class TravelScreenController {
 				+ selectedPlanet.getTechLevel());
 		distanceToPlanetLbl.setText("Distance: "
 				+ game.getDistanceToPlanet(selectedPlanet) + " parsecs");
-		policeLevelLbl.setText("Police Level: " + EncounterRate.SWARMS);
-		pirateLevelLbl.setText("Pirate Level: " + EncounterRate.SWARMS);
+		policeLevelLbl.setText("Police Level: "
+				+ selectedPlanet.getPoliceEncounterRate());
+		pirateLevelLbl.setText("Pirate Level: "
+				+ selectedPlanet.getPirateEncounterRate());
+	}
+
+	/**
+	 * Creates a dialog error box with the given message
+	 * 
+	 * @param msg
+	 *            The message for the error dialog to display
+	 */
+	private void displayError(String msg) {
+		Dialogs.create().owner(goBtn.getScene().getWindow()).title("Error")
+				.message(msg).showError();
 	}
 }

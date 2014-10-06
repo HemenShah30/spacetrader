@@ -14,6 +14,8 @@ public class Planet implements Boundary{
 	private Location location;
 	private Marketplace marketplace;
 	private Condition condition;
+	private EncounterRate policeEncounterRate;
+	private EncounterRate pirateEncounterRate;
 
 	/**
 	 * Basic Planet constructor taking a tech level and a resource
@@ -32,13 +34,15 @@ public class Planet implements Boundary{
 	 * 			  The condition of the planet
 	 */
 	public Planet(String n, TechLevel tech, SpecialResource r, Government g,
-			Location l, Condition c) {
+			Location l, Condition c, EncounterRate policeRate, EncounterRate pirateRate) {
 		setName(n);
 		setTechLevel(tech);
 		setResource(r);
 		setGovernment(g);
 		setLocation(l);
 		setCondition(c);
+		policeEncounterRate = policeRate;
+		pirateEncounterRate = pirateRate;
 		marketplace = new Marketplace(this);
 	}
 
@@ -150,11 +154,7 @@ public class Planet implements Boundary{
 		return government;
 	}
 
-	/**
-	 * Getter for the location of the planet
-	 * 
-	 * @return The location of the planet
-	 */
+	@Override
 	public Location getLocation() {
 		return location;
 	}
@@ -183,8 +183,25 @@ public class Planet implements Boundary{
 				+ ", Resource: " + resource + ", Goverment: " + government + ", Condition: " + condition;
 	}
 	
+	@Override
 	public boolean isLocationInside(Location location) {
-		//check corners of box here or something
+		//TODO: check corners of box here to get a more accurate location
 		return true;
+	}
+	
+	/**
+	 * Getter for the amount of police in the planet area
+	 * @return The amount of police in the planet area
+	 */
+	public EncounterRate getPoliceEncounterRate() {
+		return policeEncounterRate;
+	}
+	
+	/**
+	 * Getter for the amount of pirates in the planet area
+	 * @return The amount of pirates in the planet area
+	 */
+	public EncounterRate getPirateEncounterRate() {
+		return pirateEncounterRate;
 	}
 }
