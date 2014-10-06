@@ -11,80 +11,76 @@
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0">
          <children>
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <AnchorPane>
                <children>
-                  <AnchorPane prefWidth="200.0">
+                  <VBox prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <Label fx:id="planetNameLbl" text="Planet Name" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0">
                            <padding>
                               <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                            </padding>
                         </Label>
-                        <Button fx:id="nextBtn" layoutX="148.0" layoutY="2.0" mnemonicParsing="false" onKeyPressed="#showNextPlanet" onMouseClicked="#showNextPlanet" text="Next" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="3.0" />
+                        <Label fx:id="governmentLbl" text="Government">
+                           <padding>
+                              <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets left="3.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label fx:id="planetTechLevelLbl" text="Tech Level">
+                           <padding>
+                              <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets left="3.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label fx:id="distanceToPlanetLbl" text="Distance (fuel used)">
+                           <padding>
+                              <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets left="3.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label fx:id="policeLevelLbl" text="Police Level">
+                           <padding>
+                              <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets left="3.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label fx:id="pirateLevelLbl" text="Pirate Level">
+                           <padding>
+                              <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets left="3.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label fx:id="fuelLbl" text="Fuel: ">
+                           <VBox.margin>
+                              <Insets left="3.0" />
+                           </VBox.margin>
+                           <padding>
+                              <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                           </padding>
+                        </Label>
                      </children>
-                  </AnchorPane>
-                  <Label fx:id="governmentLbl" text="Government">
-                     <padding>
-                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
-                     </padding>
-                     <VBox.margin>
-                        <Insets left="3.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label fx:id="planetTechLevelLbl" text="Tech Level">
-                     <padding>
-                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
-                     </padding>
-                     <VBox.margin>
-                        <Insets left="3.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label fx:id="distanceToPlanetLbl" text="Distance (fuel used)">
-                     <padding>
-                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
-                     </padding>
-                     <VBox.margin>
-                        <Insets left="3.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label fx:id="policeLevelLbl" text="Police Level">
-                     <padding>
-                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
-                     </padding>
-                     <VBox.margin>
-                        <Insets left="3.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label fx:id="pirateLevelLbl" text="Pirate Level">
-                     <padding>
-                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
-                     </padding>
-                     <VBox.margin>
-                        <Insets left="3.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label fx:id="fuelLbl" text="Fuel: ">
-                     <VBox.margin>
-                        <Insets left="3.0" />
-                     </VBox.margin>
-                     <padding>
-                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
-                     </padding>
-                  </Label>
+                  </VBox>
+                  <Button fx:id="backBtn" mnemonicParsing="false" onKeyPressed="#toPlanetScreen" onMouseClicked="#toPlanetScreen" text="Back to Current Planet" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="3.0" />
+                  <Button fx:id="nextBtn" mnemonicParsing="false" onKeyPressed="#showNextPlanet" onMouseClicked="#showNextPlanet" text="Next" AnchorPane.bottomAnchor="3.0" AnchorPane.rightAnchor="3.0" />
+                  <Button fx:id="goBtn" mnemonicParsing="false" onMouseClicked="#goToSelectedPlanet" text="Go" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="3.0" />
                </children>
-            </VBox>
+            </AnchorPane>
             <Canvas fx:id="miniMapCanvas" height="200.0" onMouseClicked="#selectRegionOfSpace" width="200.0" />
          </children>
       </VBox>
       <StackPane alignment="BOTTOM_CENTER" prefHeight="150.0" prefWidth="200.0">
          <children>
             <Canvas fx:id="localMapCanvas" height="400.0" onMouseClicked="#selectPlanet" width="400.0" />
-            <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="38.0" prefWidth="400.0">
-               <children>
-                  <Button fx:id="backBtn" layoutX="14.0" layoutY="362.0" mnemonicParsing="false" onKeyPressed="#toPlanetScreen" onMouseClicked="#toPlanetScreen" text="Back" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="3.0" />
-                  <Button fx:id="goBtn" layoutX="341.0" layoutY="374.0" mnemonicParsing="false" onMouseClicked="#goToSelectedPlanet" text="Go" AnchorPane.bottomAnchor="3.0" AnchorPane.rightAnchor="3.0" />
-               </children>
-            </AnchorPane>
          </children>
       </StackPane>
    </children>
