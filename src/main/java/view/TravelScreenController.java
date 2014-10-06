@@ -1,6 +1,7 @@
 package view;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.controlsfx.dialog.Dialogs;
 
@@ -65,6 +66,9 @@ public class TravelScreenController {
 	@FXML
 	private Label pirateLevelLbl;
 
+	@FXML
+	private Label fuelLbl;
+
 	private GraphicsContext localGC;
 
 	/**
@@ -76,8 +80,10 @@ public class TravelScreenController {
 	@FXML
 	private void showNextPlanet(Event e) {
 		if (MultiPageController.isValidAction(e)) {
-
-			System.out.println("Show next planet");
+			List<Planet> withinRange = game.getPlanetsWithinRange();
+			int index = withinRange.indexOf(selectedPlanet);
+			selectedPlanet = withinRange.get((index + 1) % withinRange.size());
+			setPlanetInfo();
 		}
 	}
 
@@ -152,6 +158,7 @@ public class TravelScreenController {
 		if (selectedPlanet != p.getPlanet()) {
 			if (p.getShip().getFuel() >= distance) {
 				game.goToPlanet(selectedPlanet);
+				setPlanetInfo();
 			} else {
 				displayError("You do not have enough fuel");
 			}
@@ -196,6 +203,7 @@ public class TravelScreenController {
 				+ selectedPlanet.getPoliceEncounterRate());
 		pirateLevelLbl.setText("Pirate Level: "
 				+ selectedPlanet.getPirateEncounterRate());
+		fuelLbl.setText("Fuel: " + game.getPlayer().getShip().getFuel());
 	}
 
 	/**

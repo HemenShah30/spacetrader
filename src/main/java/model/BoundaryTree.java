@@ -3,6 +3,7 @@ package model;
 import java.util.List;
 
 /**
+ * Boundary tree holding and organizing Boundary objects into a QuadTree
  * 
  * @author Jack Croft
  *
@@ -10,6 +11,17 @@ import java.util.List;
 public class BoundaryTree {
 	private BoundaryBox root;
 
+	/**
+	 * Constructor for the BoundaryTree taking in the Universe dimensions and
+	 * the planets in the universe
+	 * 
+	 * @param universeWidth
+	 *            The width of the universe
+	 * @param universeHeight
+	 *            The height of the universe
+	 * @param planets
+	 *            The planets within the universe
+	 */
 	public BoundaryTree(int universeWidth, int universeHeight,
 			List<Planet> planets) {
 		BoundaryBox b = new BoundaryBox(new Location(0, 0), new Location(
@@ -17,7 +29,8 @@ public class BoundaryTree {
 		root = b;
 
 		for (Planet p : planets) {
-			// 3 is radius at the moment
+			// TODO: 3 is radius at the moment, needs to be a property passed in
+			// soon
 			int topX = p.getLocation().getX() - 3;
 			int topY = p.getLocation().getY() - 3;
 			int bottomX = p.getLocation().getX() + 3;
@@ -28,25 +41,34 @@ public class BoundaryTree {
 		}
 	}
 
+	/**
+	 * Gets a planet at the given location, or returns null if there's no planet
+	 * there
+	 * 
+	 * @param location
+	 *            The location that the planet is either at or not
+	 * @return The Planet at the given location, or null if there's no planet
+	 */
 	public Planet getPlanetAtLocation(Location location) {
-		// null check?
+		if (location == null || root == null)
+			return null;
 		return (Planet) root.getBoundaryObject(location);
 	}
 
+	// TODO: remove insertLocation and replace with the .getLocation() method
+	/**
+	 * Inserts a new Boundary object into the tree structure
+	 * 
+	 * @param newBoundary
+	 *            The Boundary object to be put into the tree
+	 * @param parent
+	 *            The parent of the new Boundary object
+	 * @param insertLocation
+	 *            The location the new Boundary object is located at
+	 */
 	private void insert(BoundaryBox newBoundary, BoundaryBox parent,
 			Location insertLocation) {
-		// planets should never overlap, therefore planetBox will never contain
-		// another point
-		// IT DOESN'T MATTER WHICH REGION IS WHICH, MUAHAHAHAHHAHAH
-		// base case is isLocationInside a given region and that region is null
-
-		// do isInisde for each quadrant, if boundary is null then set value,
-		// otherwise call boundary on that object
-
-		// if something is null or it's within throw it in there, but if
-		// everything's full, then subdivide and re-add
-
-		// if something is null, then region will be just the new boundary
+		// first do a null check to see if the new boundary can just be added
 		if (parent.getTopLeft() == null) {
 			parent.setTopLeft(newBoundary);
 			return;
@@ -61,7 +83,8 @@ public class BoundaryTree {
 			return;
 		}
 
-		// if nothing is null, but something contains it, recurse there
+		// if not, then check to see if the new boundary fits inside the
+		// existing boundaries
 		if (parent.getTopLeft().isLocationInside(insertLocation)) {
 			insert(newBoundary, (BoundaryBox) parent.getTopLeft(),
 					insertLocation);
@@ -80,13 +103,19 @@ public class BoundaryTree {
 			return;
 		}
 
-		// everything is not null, and point is not contained, therefore
-		// subdivide then insert with same arguments
+		// otherwise, divide up the parent boundary into equal regions and
+		// re-add the new boundary
 		subdivide(parent);
 		insert(newBoundary, parent, insertLocation);
-
 	}
 
+	/**
+	 * Divides a given BoundaryBox into four equal parts and re-inserts the
+	 * sub-regions into their new regions
+	 * 
+	 * @param box
+	 *            The BoundaryBox being subdivided
+	 */
 	private void subdivide(BoundaryBox box) {
 		Boundary topLeft = box.getTopLeft();
 		Boundary topRight = box.getTopRight();

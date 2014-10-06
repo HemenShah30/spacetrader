@@ -31,10 +31,10 @@ public class Police extends NPC {
 	}
 
 	/**
-	 * Generates Police's ship based off player rep
+	 * Generates Police's ship based off player reputation
 	 * 
 	 * @param rep
-	 *            illegal-ness of Player
+	 *            illegality of Player
 	 */
 	private void generateShip(int rep) {
 		ShipType[] shiptypes = ShipType.values();
