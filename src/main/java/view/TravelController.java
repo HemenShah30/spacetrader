@@ -28,6 +28,8 @@ public class TravelController {
 	private Button nextBtn;
 	
 	private GraphicsContext localGC;
+	private int mapSize;
+	private int universeSize;
 
 	@FXML
 	void showNextPlanet(Event e) {
@@ -61,11 +63,13 @@ public class TravelController {
 		localGC = localMap.getGraphicsContext2D();
 		Universe u = GameEngine.getGameEngine().getUniverse();
 		int x, y;
-		int rad = 3;
-		localGC.setFill(Color.DARKTURQUOISE);
+		// rad and color might need to be set in planet constructor...
+		int rad = 4;
+//		int rad = 3;
+		localGC.setFill(Color.SLATEBLUE);
 		for (Planet p: u.getPlanets()) {
-			x = p.getLocation().getX();
-			y = p.getLocation().getY();
+			x = p.getLocation().getX() * (mapSize / universeSize);
+			y = p.getLocation().getY() * (mapSize / universeSize);
 			localGC.fillOval(x, y, rad, rad);
 		}
 	}

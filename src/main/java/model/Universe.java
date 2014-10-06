@@ -20,6 +20,7 @@ public class Universe {
 	private final double universeWidth = 100;
 	private final double percentNoneCondition = 0.5;
 	private final double percentNoSpecialResource = 0.5;
+//	private final double mapSize = 400;
 
 	/**
 	 * Simple universe constructor, just creating a blank planet array
@@ -49,8 +50,11 @@ public class Universe {
 		Set<Location> uniqueLocations = new HashSet<Location>();
 		Random rand = new Random();
 		int x, y;
-		// int uniSize = (int) Math.ceil(Math.sqrt(planetNames.size()));
-		int uniSize = 10;
+		int uniSize = (int) (Math.sqrt(planetNames.size()));
+		int uniSize2 = uniSize * uniSize;
+		int scale;
+//		int uniSize = 10;
+		Location l = new Location(0, 0);
 		for (int i = 0; i < planetNames.size(); i++) {
 			TechLevel[] levels = TechLevel.values();
 			SpecialResource[] resources = SpecialResource.values();
@@ -79,19 +83,24 @@ public class Universe {
 			 * (int) (Math.random() * universeLength); y = (int) (Math.random()
 			 * * universeWidth); } }
 			 */
-
-			if (i < 100) {
+			// checks made in else because completely random
+			//if has no checks because not completely random
+			if (i < uniSize2) {
 				x = i / uniSize;
 				y = i % uniSize;
-				x = 40 * x;
-				y = 40 * y;
-				x = x + rand.nextInt(25) + 5;
-				y = y + rand.nextInt(25) + 5;
+				x = (int) (x * universeLength / uniSize);
+				y = (int) (y * universeWidth / uniSize);
+				x = x + rand.nextInt(uniSize) + (uniSize / 4);
+				y = y + rand.nextInt(uniSize) + (uniSize / 4);
+				l = new Location(x, y);
 			} else {
-				x = rand.nextInt(400);
-				y = rand.nextInt(400);
+				while (uniqueLocations.contains(l)) {
+					x = rand.nextInt((int) universeLength);
+					y = rand.nextInt((int) universeWidth);
+					l = new Location(x, y);
+				}
+
 			}
-			Location l = new Location(x, y);
 			Planet p = new Planet(planetNames.get(i), levels[t], resources[r],
 					governments[g], l, conditions[c]);
 			uniqueLocations.add(l);
