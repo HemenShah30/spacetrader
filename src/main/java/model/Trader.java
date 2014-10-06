@@ -16,7 +16,6 @@ public class Trader extends NPC {
 								// something from the player
 	private GoodType goodOfInterest; // determines which good the Trader wants
 										// to trade
-	private Ship ship;
 	private double credits;
 
 	public Trader(int rep) {
@@ -124,7 +123,7 @@ public class Trader extends NPC {
 		ShipType[] shiptypes = ShipType.values();
 		int index = (rep - 1) / 2;
 		ShipType shiptype = shiptypes[index];
-		ship = new Ship(shiptype);
+		setShip(new Ship(shiptype));
 	}
 
 	/**
@@ -146,12 +145,4 @@ public class Trader extends NPC {
 		return credits;
 	}
 
-	/**
-	 * Return's Trader's ship
-	 * 
-	 * @return trader's ship
-	 */
-	public Ship getShip() {
-		return ship;
-	}
 }

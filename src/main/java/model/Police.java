@@ -10,7 +10,6 @@ public class Police extends NPC {
 	private boolean willCheckCargo;
 	private double minCredBribe; // minimum bribe required to avoid a search;
 									// hidden from player
-	private Ship ship;
 	private double credits;
 
 	public Police(int rep, double playerCred) {
@@ -40,7 +39,7 @@ public class Police extends NPC {
 		ShipType[] shiptypes = ShipType.values();
 		int index = (rep - 1) / 2;
 		ShipType shiptype = shiptypes[index];
-		ship = new Ship(shiptype);
+		setShip(new Ship(shiptype));
 	}
 
 	/**

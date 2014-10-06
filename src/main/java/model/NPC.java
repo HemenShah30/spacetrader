@@ -207,4 +207,14 @@ public abstract class NPC {
 	public void setCredits(double credits) {
 		this.credits = credits;
 	}
+
+	/**
+	 * Sets the NPCs ship
+	 * 
+	 * @param ship
+	 *            the ship
+	 */
+	public void setShip(Ship ship) {
+		this.ship = ship;
+	}
 }

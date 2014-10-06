@@ -9,9 +9,8 @@ import java.util.Random;
  * 
  */
 public class Pirate extends NPC {
-	private Ship ship;
 	private double credits, chanceOfAttack;
-	private boolean isAttacking;
+	private boolean isFighting;
 
 	public Pirate(int rep) {
 		setPilot((int) (rep * .6));
@@ -33,7 +32,7 @@ public class Pirate extends NPC {
 		ShipType[] shiptypes = ShipType.values();
 		int index = (rep - 1) / 2;
 		ShipType shiptype = shiptypes[index];
-		ship = new Ship(shiptype);
+		setShip(new Ship(shiptype));
 	}
 
 	/**
@@ -45,9 +44,9 @@ public class Pirate extends NPC {
 	private void generateChance(int rep) {
 		chanceOfAttack = (double) (Math.random() / 2 + (rep / 20));
 		if (Math.random() > chanceOfAttack) {
-			isAttacking = false;
+			setIsFighting(false);
 		} else {
-			isAttacking = true;
+			setIsFighting(true);
 		}
 	}
 }
