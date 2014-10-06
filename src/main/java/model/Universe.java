@@ -16,8 +16,9 @@ import java.util.Set;
 public class Universe {
 
 	private List<Planet> planets;
-	private final double universeLength = 100;
-	private final double universeWidth = 100;
+//	private final double universeLength = 100;
+//	private final double universeWidth = 100;
+	private final double universeSize = 100;
 	private final double percentNoneCondition = 0.5;
 	private final double percentNoSpecialResource = 0.5;
 	private BoundaryTree planetLocations;
@@ -91,15 +92,15 @@ public class Universe {
 			if (i < uniSize2) {
 				x = i / uniSize;
 				y = i % uniSize;
-				x = (int) (x * universeLength / uniSize);
-				y = (int) (y * universeLength / uniSize);
+				x = (int) (x * universeSize / uniSize);
+				y = (int) (y * universeSize / uniSize);
 				x = x + rand.nextInt(uniSize) + (uniSize/4);
 				y = y + rand.nextInt(uniSize) + (uniSize/4);
 				l = new Location(x, y);
 			} else {
 				while (uniqueLocations.contains(l)) {
-					x = rand.nextInt((int) universeLength);
-					y = rand.nextInt((int) universeWidth);
+					x = rand.nextInt((int) universeSize);
+					y = rand.nextInt((int) universeSize);
 					l = new Location(x, y);
 				}
 			}
@@ -132,6 +133,6 @@ public class Universe {
 		return planetLocations.getPlanetAtLocation(loc);
 	}
 	public int getUniverseSize() {
-		return (int) universeLength;
+		return (int) universeSize;
 	}
 }
