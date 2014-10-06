@@ -51,8 +51,11 @@ public class Universe {
 		Set<Location> uniqueLocations = new HashSet<Location>();
 		Random rand = new Random();
 		int x, y;
-		// int uniSize = (int) Math.ceil(Math.sqrt(planetNames.size()));
-		int uniSize = 10;
+		int uniSize = (int) Math.sqrt(planetNames.size());
+		int uniSize2 = uniSize * uniSize;
+		int scale;
+		Location l = new Location(0, 0);
+		//int uniSize = 10;
 		for (int i = 0; i < planetNames.size(); i++) {
 			TechLevel[] levels = TechLevel.values();
 			SpecialResource[] resources = SpecialResource.values();
@@ -85,18 +88,21 @@ public class Universe {
 			 * * universeWidth); } }
 			 */
 
-			if (i < 100) {
+			if (i < uniSize2) {
 				x = i / uniSize;
 				y = i % uniSize;
-				x = 40 * x;
-				y = 40 * y;
-				x = x + rand.nextInt(25) + 5;
-				y = y + rand.nextInt(25) + 5;
+				x = (int) (x * universeLength / uniSize);
+				y = (int) (y * universeLength / uniSize);
+				x = x + rand.nextInt(uniSize) + (uniSize/4);
+				y = y + rand.nextInt(uniSize) + (uniSize/4);
+				l = new Location(x, y);
 			} else {
-				x = rand.nextInt(400);
-				y = rand.nextInt(400);
+				while (uniqueLocations.contains(l)) {
+					x = rand.nextInt((int) universeLength);
+					y = rand.nextInt((int) universeWidth);
+					l = new Location(x, y);
+				}
 			}
-			Location l = new Location(x, y);
 			Planet p = new Planet(planetNames.get(i), levels[t], resources[r],
 					governments[g], l, conditions[c], encounterRates[police],
 					encounterRates[pirate]);

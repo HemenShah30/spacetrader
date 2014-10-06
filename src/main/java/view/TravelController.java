@@ -28,8 +28,8 @@ public class TravelController {
 	private Button nextBtn;
 	
 	private GraphicsContext localGC;
-	private int mapSize;
-	private int universeSize;
+	private int mapSize = 400;
+	private int universeSize = 100;
 
 	@FXML
 	void showNextPlanet(Event e) {
@@ -68,7 +68,7 @@ public class TravelController {
 //		int rad = 3;
 		localGC.setFill(Color.SLATEBLUE);
 		for (Planet p: u.getPlanets()) {
-			x = p.getLocation().getX() * (mapSize / universeSize);
+			x = p.getLocation().getX();
 			y = p.getLocation().getY() * (mapSize / universeSize);
 			localGC.fillOval(x, y, rad, rad);
 		}
