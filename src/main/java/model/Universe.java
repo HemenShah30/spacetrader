@@ -131,4 +131,7 @@ public class Universe {
 	public Planet getPlanetAtLocation(Location loc) {
 		return planetLocations.getPlanetAtLocation(loc);
 	}
+	public int getUniverseSize() {
+		return (int) universeLength;
+	}
 }

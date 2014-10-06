@@ -70,6 +70,8 @@ public class TravelScreenController {
 	private Label fuelLbl;
 
 	private GraphicsContext localGC;
+	private int universeSize;
+	private int mapSize = 400;
 
 	/**
 	 * Changes the currently selected planet to the next planet in the list
@@ -110,8 +112,8 @@ public class TravelScreenController {
 	@FXML
 	private void selectPlanet(Event e) {
 		MouseEvent event = (MouseEvent) e;
-		double x = event.getX();
-		double y = event.getY();
+		double x = event.getX() / (mapSize / universeSize);
+		double y = event.getY() / (mapSize / universeSize);
 		Planet p = game.getPlanetAtLocation(new Location((int) x, (int) y));
 		if (p != null) {
 			selectedPlanet = p;
@@ -174,12 +176,13 @@ public class TravelScreenController {
 		localGC = localMapCanvas.getGraphicsContext2D();
 		game = GameEngine.getGameEngine();
 		Universe u = game.getUniverse();
+		universeSize = u.getUniverseSize();
 		int x, y;
 		int radius = 3;
 		localGC.setFill(Color.DARKTURQUOISE);
 		for (Planet p : u.getPlanets()) {
-			x = p.getLocation().getX();
-			y = p.getLocation().getY();
+			x = p.getLocation().getX() * (mapSize / universeSize);
+			y = p.getLocation().getY() * (mapSize / universeSize);
 			localGC.fillOval(x, y, radius, radius);
 		}
 		selectedPlanet = game.getPlayer().getPlanet();
