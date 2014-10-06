@@ -1,5 +1,6 @@
 package model;
 
+
 /**
  * Enum representing the type of good a good is. Info holder.
  * 

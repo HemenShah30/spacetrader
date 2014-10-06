@@ -167,7 +167,7 @@ public class TradeScreenController {
 	 *            The event that fired the method
 	 */
 	@FXML
-	protected void buyGood(Event e) {
+	private void buyGood(Event e) {
 		if (MultiPageController.isValidAction(e)) {
 			Button btn = (Button) e.getSource();
 			String id = btn.getId();
@@ -234,7 +234,7 @@ public class TradeScreenController {
 	 *            The event that fired the method
 	 */
 	@FXML
-	protected void sellGood(Event e) {
+	private void sellGood(Event e) {
 		if (MultiPageController.isValidAction(e)) {
 			Button btn = (Button) e.getSource();
 			String id = btn.getId();
@@ -423,7 +423,7 @@ public class TradeScreenController {
 	 *            The event that fired the method
 	 */
 	@FXML
-	protected void toPlanetScreen(Event e) {
+	private void toPlanetScreen(Event e) {
 		if (MultiPageController.isValidAction(e)) {
 			try {
 				Stage stage = (Stage) toPlanetScreenBtn.getScene().getWindow();

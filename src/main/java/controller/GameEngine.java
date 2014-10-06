@@ -1,8 +1,10 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import model.GoodType;
+import model.Location;
 import model.Planet;
 import model.Player;
 import model.Ship;
@@ -18,6 +20,7 @@ import model.Universe;
 public class GameEngine {
 	private static GameEngine gameEngine;
 	private TradeEngine tradeEngine;
+	private FlightEngine flightEngine;
 	private Universe universe;
 	private Player player;
 
@@ -67,6 +70,7 @@ public class GameEngine {
 				engineerSkill, investorSkill, s);
 		player.setPlanet(universe.getPlanets().get(0));
 		tradeEngine = new TradeEngine(player);
+		flightEngine = new FlightEngine(player, universe);
 	}
 
 	/**
@@ -77,8 +81,6 @@ public class GameEngine {
 	 *            The TradeGood being bought or sold
 	 * @param quantity
 	 *            The quantity of the good being bought or sold
-	 * @param market
-	 *            The marketplace involved in the transaction
 	 * @param buyingGood
 	 *            Whether or not a good is being bought
 	 * @return The errors from the transaction, if any
@@ -117,8 +119,55 @@ public class GameEngine {
 			return tradeEngine.getMaximumBuyGoodAmount(type);
 		return tradeEngine.getMaximumSellGoodAmount(type);
 	}
-	
+
+	/**
+	 * Returns the universe that the player is currently in
+	 * 
+	 * @return The universe that the player is currently in
+	 */
 	public Universe getUniverse() {
 		return universe;
+	}
+
+	/**
+	 * Returns the distance from the player's planet to the destination planet
+	 * 
+	 * @param destination
+	 *            The planet the player wishes to travel to
+	 * @return The distance to the given planet
+	 */
+	public int getDistanceToPlanet(Planet destination) {
+		return flightEngine.getDistanceToPlanet(destination);
+	}
+
+	/**
+	 * Player flies to a new planet
+	 * 
+	 * @param planet
+	 *            The planet the player is going to
+	 */
+	public void goToPlanet(Planet planet) {
+		flightEngine.goToPlanet(planet);
+	}
+
+	/**
+	 * Gets a planet at the given location
+	 * 
+	 * @param location
+	 *            The location to find the planet
+	 * @return The planet at the location, or null if no planet
+	 */
+	public Planet getPlanetAtLocation(Location location) {
+		return universe.getPlanetAtLocation(location);
+	}
+
+	/**
+	 * Gets all the planets within range of the player
+	 * 
+	 * @return All planets within range of the player's ship
+	 */
+	public List<Planet> getPlanetsWithinRange() {
+		return new ArrayList<Planet>(flightEngine.getPlanetsWithinRange(
+				universe, player.getPlanet()).keySet());
 	}
 }

@@ -12,7 +12,7 @@
          <children>
             <Button fx:id="marketplaceBtn" layoutX="244.0" layoutY="117.0" mnemonicParsing="false" onKeyPressed="#goToMarketplace" onMouseClicked="#goToMarketplace" text="Go to Marketplace" />
             <Button fx:id="toShipYardBtn" layoutX="252.0" layoutY="148.0" mnemonicParsing="false" onKeyPressed="#goToShipyard" onMouseClicked="#goToShipyard" text="Go to Shipyard" />
-            <Button fx:id="toSpaceBtn" layoutX="255.0" layoutY="179.0" mnemonicParsing="false" onMouseClicked="#goToSpace" text="Fly Into Space" />
+            <Button fx:id="toSpaceBtn" layoutX="255.0" layoutY="179.0" mnemonicParsing="false" onKeyPressed="#goToSpace" onMouseClicked="#goToSpace" text="Fly Into Space" />
             <Button fx:id="saveGameBtn" layoutX="520.0" layoutY="294.0" mnemonicParsing="false" onKeyPressed="#saveGame" onMouseClicked="#saveGame" text="Save Game" />
          </children>
       </AnchorPane>

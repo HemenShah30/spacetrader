@@ -20,7 +20,7 @@ public class StartScreenController {
 	 *            The event that fired the method
 	 */
 	@FXML
-	protected void begin(Event e) {
+	private void begin(Event e) {
 		if (MultiPageController.isValidAction(e)) {
 			MultiPageController.loadView(beginButton, "MainScene");
 		}

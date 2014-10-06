@@ -43,24 +43,23 @@ public class Marketplace {
 	 */
 	private double generateSellPrice(GoodType type) {
 		TechLevel techlevel = planet.getTechLevel();
-		double price = type.getBasePrice()
-				+ type.getPriceIncPerTechLevel()
+		double price = type.getBasePrice() + type.getPriceIncPerTechLevel()
 				* (techlevel.getValue() - type.getMinTechLevelToProduce());
-		price = price + (2 * Math.random() * type.getVariance() - type
-				.getVariance());
-		//price is decreased if a planet is the biggest producer of that good
+		price = price
+				+ (2 * Math.random() * type.getVariance() - type.getVariance());
+		// price is decreased if a planet is the biggest producer of that good
 		if (techlevel.getValue() == type.getBiggestProducer()) {
 			price = (int) (price * (0.2 * Math.random() + 0.6));
 		}
-		//price is increased if condition affecting that good occurs
+		// price is increased if condition affecting that good occurs
 		if (planet.getCondition() == type.getCondition()) {
 			price = (int) (price * (0.2 * Math.random() + 1.2));
 		}
-		//price is decreased if special resource affecting that good occurs
+		// price is decreased if special resource affecting that good occurs
 		if (planet.getResource() == type.getCheapResource()) {
 			price = (int) (price * (0.2 * Math.random() + 0.6));
 		}
-		//price is increased if special resource affecting that good occurs
+		// price is increased if special resource affecting that good occurs
 		if (planet.getResource() == type.getCheapResource()) {
 			price = (int) (price * (0.2 * Math.random() + 1.2));
 		}
@@ -84,7 +83,7 @@ public class Marketplace {
 				+ type.getQuantityIncPerTechLevel()
 				* (techlevel.getValue() - type.getMinTechLevelToProduce());
 		quantity = quantity + (int) (10 * Math.random());
-		//quantity is increased if a planet is the biggest producer of that quantity
+		// quantity is increased if a planet is the biggest producer of that
 		if (techlevel.getValue() == type.getBiggestProducer()) {
 			quantity = (int) (quantity * (0.5 * Math.random() + 1.5));
 		}
@@ -129,9 +128,9 @@ public class Marketplace {
 	public double getBuyPrice(GoodType good, Player player) {
 		if (good.getMinTechLevelToProduce() > planet.getTechLevel().getValue())
 			return -1;
-		//Takes into account player's trade skill
-		int buyPrice = (int) ((1 + (.025 * (10 - player.getTraderSkill())))
-				* prices.get(good));
+		// Takes into account player's trade skill
+		int buyPrice = (int) ((1 + (.025 * (10 - player.getTraderSkill()))) * prices
+				.get(good));
 		return buyPrice;
 	}
 

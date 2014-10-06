@@ -14,7 +14,6 @@ import javafx.stage.Stage;
 public class Main extends Application {
 	// This will be the main To-Do list for any specific code level items that
 	// need to be taken care of
-	// TODO: Create main planet scene and implement the actions
 	// TODO: Add in logging
 	// TODO: Implement Save and Load functions
 	// TODO: Add exit button to MainScene
@@ -45,6 +44,7 @@ public class Main extends Application {
 		// FileReader r = new FileReader();
 		// Object[] data=r.loadGameData();
 		// Arrays.toString(data);
+		// Database db = new Database();
 		launch(args);
 	}
 }

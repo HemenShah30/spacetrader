@@ -20,7 +20,7 @@ public class Universe {
 	private final double universeWidth = 100;
 	private final double percentNoneCondition = 0.5;
 	private final double percentNoSpecialResource = 0.5;
-//	private final double mapSize = 400;
+	private BoundaryTree planetLocations;
 
 	/**
 	 * Simple universe constructor, just creating a blank planet array
@@ -33,6 +33,7 @@ public class Universe {
 	 * Constructor for a universe taking in a list of planets to begin with
 	 * 
 	 * @param p
+	 *            The list of planets for the Universe to start with
 	 */
 	public Universe(List<Planet> p) {
 		planets = p;
@@ -50,21 +51,21 @@ public class Universe {
 		Set<Location> uniqueLocations = new HashSet<Location>();
 		Random rand = new Random();
 		int x, y;
-		int uniSize = (int) (Math.sqrt(planetNames.size()));
-		int uniSize2 = uniSize * uniSize;
-		int scale;
-//		int uniSize = 10;
-		Location l = new Location(0, 0);
+		// int uniSize = (int) Math.ceil(Math.sqrt(planetNames.size()));
+		int uniSize = 10;
 		for (int i = 0; i < planetNames.size(); i++) {
 			TechLevel[] levels = TechLevel.values();
 			SpecialResource[] resources = SpecialResource.values();
 			Government[] governments = Government.values();
 			Condition[] conditions = Condition.values();
+			EncounterRate[] encounterRates = EncounterRate.values();
 
 			int t = (int) (Math.random() * levels.length);
 			int r = (int) (Math.random() * resources.length);
 			int g = (int) (Math.random() * governments.length);
 			int c = (int) (Math.random() * conditions.length);
+			int pirate = (int) (Math.random() * encounterRates.length);
+			int police = (int) (Math.random() * encounterRates.length);
 			// int x = (int) (Math.random() * universeLength);
 			// int y = (int) (Math.random() * universeWidth);
 
@@ -83,30 +84,26 @@ public class Universe {
 			 * (int) (Math.random() * universeLength); y = (int) (Math.random()
 			 * * universeWidth); } }
 			 */
-			// checks made in else because completely random
-			//if has no checks because not completely random
-			if (i < uniSize2) {
+
+			if (i < 100) {
 				x = i / uniSize;
 				y = i % uniSize;
-				x = (int) (x * universeLength / uniSize);
-				y = (int) (y * universeWidth / uniSize);
-				x = x + rand.nextInt(uniSize) + (uniSize / 4);
-				y = y + rand.nextInt(uniSize) + (uniSize / 4);
-				l = new Location(x, y);
+				x = 40 * x;
+				y = 40 * y;
+				x = x + rand.nextInt(25) + 5;
+				y = y + rand.nextInt(25) + 5;
 			} else {
-				while (uniqueLocations.contains(l)) {
-					x = rand.nextInt((int) universeLength);
-					y = rand.nextInt((int) universeWidth);
-					l = new Location(x, y);
-				}
-
+				x = rand.nextInt(400);
+				y = rand.nextInt(400);
 			}
+			Location l = new Location(x, y);
 			Planet p = new Planet(planetNames.get(i), levels[t], resources[r],
-					governments[g], l, conditions[c]);
+					governments[g], l, conditions[c], encounterRates[police],
+					encounterRates[pirate]);
 			uniqueLocations.add(l);
 			planets.add(p);
 		}
-		System.out.println(planetNames.size());
+		planetLocations = new BoundaryTree(400, 400, planets);
 	}
 
 	/**
@@ -116,5 +113,16 @@ public class Universe {
 	 */
 	public List<Planet> getPlanets() {
 		return planets;
+	}
+
+	/**
+	 * Returns the planet at the given location or null if no planet is there
+	 * 
+	 * @param loc
+	 *            The location where the planet is being searched for
+	 * @return The planet at the location, or null if no planet is there
+	 */
+	public Planet getPlanetAtLocation(Location loc) {
+		return planetLocations.getPlanetAtLocation(loc);
 	}
 }

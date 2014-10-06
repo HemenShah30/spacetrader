@@ -18,8 +18,6 @@ public class Ship {
 	/**
 	 * Constructor for a ship taking in the starting fuel and the ship type
 	 * 
-	 * @param f
-	 *            The starting fuel for the ship
 	 * @param sT
 	 *            The ShipType for the ship
 	 */
@@ -46,6 +44,9 @@ public class Ship {
 
 	/**
 	 * Sets totalHP of ship
+	 * 
+	 * @param totalHP
+	 *            the new totalHP of the ship
 	 */
 	public void setTotalHP(int totalHP) {
 		this.totalHP = totalHP;
@@ -61,7 +62,10 @@ public class Ship {
 	}
 
 	/**
-	 * Sets currentHP of ship
+	 * Sets the current hull points for the ship
+	 * 
+	 * @param currHP
+	 *            The new hull points for the ship
 	 */
 	public void setCurrHP(int currHP) {
 		this.currHP = currHP;
@@ -86,7 +90,10 @@ public class Ship {
 	}
 
 	/**
-	 * Sets currFuel of the ship
+	 * Sets the fuel the ship currently has
+	 * 
+	 * @param f
+	 *            The new fuel for the ship
 	 */
 	public void setFuel(int f) {
 		this.fuel = f;
@@ -102,7 +109,10 @@ public class Ship {
 	}
 
 	/**
-	 * Sets cargoSize of the ship
+	 * Sets the cargo size for the ship
+	 * 
+	 * @param cargoSize
+	 *            The new cargo size for the ship
 	 */
 	public void setCargoSize(int cargoSize) {
 		this.cargoSize = cargoSize;
@@ -129,9 +139,9 @@ public class Ship {
 	/**
 	 * Adds a good to the cargo of the ship
 	 * 
-	 * @param TradeGood
-	 *            The good type
-	 * @param Integer
+	 * @param goodType
+	 *            The good type that is being added to the ship's cargo
+	 * @param quantity
 	 *            The number of this good being added
 	 */
 	public void addToCargo(GoodType goodType, int quantity) {
@@ -144,8 +154,8 @@ public class Ship {
 	 * Removes a good from the cargo of the ship
 	 * 
 	 * @param goodType
-	 *            The good type
-	 * @param Integer
+	 *            The good type being removed from this ship's cargo
+	 * @param quantity
 	 *            The number of this good being removed
 	 */
 	public void removeFromCargo(GoodType goodType, int quantity) {
@@ -181,6 +191,7 @@ public class Ship {
 	 * Private setter for the ship type of the ship
 	 * 
 	 * @param sT
+	 *            The ship type the shup will have
 	 */
 	private void setShipType(ShipType sT) {
 		if (sT == null)

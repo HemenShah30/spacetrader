@@ -9,7 +9,7 @@ package model;
 public class Player {
 	private String name;
 	private int pilotSkill, fighterSkill, traderSkill, engineerSkill,
-			investorSkill;
+			investorSkill, traderRep, policeRep, pirateRep;
 	private double credits;
 	private Ship ship;
 	private Planet planet;
@@ -29,6 +29,8 @@ public class Player {
 	 *            The amount of engineer skill points
 	 * @param investor
 	 *            The amount of investor skill points
+	 * @param ship
+	 *            The ship the player is flying in
 	 */
 	public Player(String name, int pilot, int fighter, int trader,
 			int engineer, int investor, Ship ship) {
@@ -40,7 +42,9 @@ public class Player {
 		this.investorSkill = investor;
 		this.ship = ship;
 		credits = 1000;
-
+		traderRep = 1;
+		policeRep = 1;
+		pirateRep = 1;
 	}
 
 	/**
@@ -237,5 +241,62 @@ public class Player {
 				+ traderSkill + ", Engineer Skill: " + engineerSkill
 				+ ", Investor Skill: " + investorSkill + ", Credits: "
 				+ credits;
+	}
+
+	/**
+	 * Setter for player traderRep
+	 * 
+	 * @param rep
+	 *            int 1-10 to set rep to
+	 */
+	public void setTraderRep(int rep) {
+		traderRep = rep;
+	}
+
+	/**
+	 * Setter for player policeRep
+	 * 
+	 * @param rep
+	 *            int 1-10 to set rep to
+	 */
+	public void setPoliceRep(int rep) {
+		policeRep = rep;
+	}
+
+	/**
+	 * Setter for player pirateRep
+	 * 
+	 * @param rep
+	 *            int 1-10 to set rep to
+	 */
+	public void setPirateRep(int rep) {
+		pirateRep = rep;
+	}
+
+	/**
+	 * Getter for player traderRep
+	 * 
+	 * @return player traderRep
+	 */
+	public int getTraderRep() {
+		return traderRep;
+	}
+
+	/**
+	 * Returns player policeRep
+	 * 
+	 * @return player policeRep
+	 */
+	public int getPoliceRep() {
+		return policeRep;
+	}
+
+	/**
+	 * Returns player pirateRep
+	 * 
+	 * @return player pirateRep
+	 */
+	public int getPirateRep() {
+		return pirateRep;
 	}
 }
