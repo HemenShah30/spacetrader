@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import javafx.scene.paint.Color;
+
 /**
  * Class representing the entire universe
  * 
@@ -20,12 +22,14 @@ public class Universe {
 	private final double percentNoneCondition = 0.5;
 	private final double percentNoSpecialResource = 0.5;
 	private BoundaryTree planetLocations;
+	private Color[] approvedColors;
 
 	/**
 	 * Simple universe constructor, just creating a blank planet array
 	 */
 	public Universe() {
 		planets = new ArrayList<Planet>();
+		approvedColors = Planet.approvedColors;
 	}
 
 	/**
@@ -102,9 +106,11 @@ public class Universe {
 					l = new Location(x, y);
 				}
 			}
+			int size = 3 + rand.nextInt(4);
+			Color col = approvedColors[rand.nextInt(approvedColors.length)];
 			Planet p = new Planet(planetNames.get(i), levels[t], resources[r],
 					governments[g], l, conditions[c], encounterRates[police],
-					encounterRates[pirate]);
+					encounterRates[pirate], size, col);
 			uniqueLocations.add(l);
 			planets.add(p);
 		}

@@ -27,14 +27,15 @@ public class BoundaryTree {
 		BoundaryBox b = new BoundaryBox(new Location(0, 0), new Location(
 				universeWidth, universeHeight), null, null, null, null);
 		root = b;
-
+		int rad;
 		for (Planet p : planets) {
 			// TODO: 3 is radius at the moment, needs to be a property passed in
 			// soon
-			int topX = p.getLocation().getX() - 3;
-			int topY = p.getLocation().getY() - 3;
-			int bottomX = p.getLocation().getX() + 3;
-			int bottomY = p.getLocation().getY() + 3;
+			rad = p.getRadius();
+			int topX = p.getLocation().getX() - rad;
+			int topY = p.getLocation().getY() - rad;
+			int bottomX = p.getLocation().getX() + rad;
+			int bottomY = p.getLocation().getY() + rad;
 			BoundaryBox planetBox = new BoundaryBox(new Location(topX, topY),
 					new Location(bottomX, bottomY), p, null, null, null);
 			insert(planetBox, root, p.getLocation());

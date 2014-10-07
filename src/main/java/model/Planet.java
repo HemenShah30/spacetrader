@@ -1,5 +1,7 @@
 package model;
 
+import javafx.scene.paint.Color;
+
 /**
  * Class representing a planet
  * 
@@ -16,6 +18,10 @@ public class Planet implements Boundary{
 	private Condition condition;
 	private EncounterRate policeEncounterRate;
 	private EncounterRate pirateEncounterRate;
+	private int radius;
+	private Color color;
+	public final static Color[] approvedColors = { Color.BLUE, Color.RED,
+			Color.FORESTGREEN, Color.PERU };
 
 	/**
 	 * Basic Planet constructor taking a tech level and a resource
@@ -34,7 +40,8 @@ public class Planet implements Boundary{
 	 * 			  The condition of the planet
 	 */
 	public Planet(String n, TechLevel tech, SpecialResource r, Government g,
-			Location l, Condition c, EncounterRate policeRate, EncounterRate pirateRate) {
+			Location l, Condition c, EncounterRate policeRate, EncounterRate pirateRate,
+			int size, Color color) {
 		setName(n);
 		setTechLevel(tech);
 		setResource(r);
@@ -44,6 +51,8 @@ public class Planet implements Boundary{
 		policeEncounterRate = policeRate;
 		pirateEncounterRate = pirateRate;
 		marketplace = new Marketplace(this);
+		setRadius(size);
+		setColor(color);
 	}
 
 	/**
@@ -118,6 +127,36 @@ public class Planet implements Boundary{
 		condition = c;
 	}
 	
+	/**
+	 * private setter for size validation
+	 * sets to 3 if invalid
+	 * @param i
+	 */
+	private void setRadius(int i) {
+		if (2 < i && i < 8) {
+			radius = i;
+		} else {
+			radius = 3;
+		}
+	}
+	/**
+	 * private setter for color validation
+	 * if color is not an approved color, it is set to green
+	 * @param c
+	 */
+	private void setColor(Color c) {
+		boolean isSet = false;
+		for(Color col: approvedColors) {
+			if (col.equals(c)) {
+				color = c;
+				isSet = true;
+				break;
+			}
+		}
+		if (!isSet) {
+			color = approvedColors[2];
+		}
+	}
 	/**
 	 * Getter for the name of the planet
 	 * 
@@ -203,5 +242,21 @@ public class Planet implements Boundary{
 	 */
 	public EncounterRate getPirateEncounterRate() {
 		return pirateEncounterRate;
+	}
+	
+	/**
+	 * returns planet size
+	 * @return planet size
+	 */
+	public int getRadius() {
+		return radius;
+	}
+	
+	/**
+	 * returns planet color
+	 * @return planet color
+	 */
+	public Color getColor() {
+		return color;
 	}
 }

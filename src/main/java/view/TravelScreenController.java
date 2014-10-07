@@ -178,11 +178,14 @@ public class TravelScreenController {
 		Universe u = game.getUniverse();
 		universeSize = u.getUniverseSize();
 		int x, y;
-		int radius = 3;
-		localGC.setFill(Color.DARKTURQUOISE);
+		int radius;
+		localGC.setFill(Color.BLACK);
+		localGC.fillRect(0, 0, 400, 400);
 		for (Planet p : u.getPlanets()) {
 			x = p.getLocation().getX() * (mapSize / universeSize);
 			y = p.getLocation().getY() * (mapSize / universeSize);
+			radius = p.getRadius();
+			localGC.setFill(p.getColor());
 			localGC.fillOval(x, y, radius, radius);
 		}
 		selectedPlanet = game.getPlayer().getPlanet();
