@@ -30,19 +30,6 @@ public class Police extends NPC {
 	}
 
 	/**
-	 * Generates Police's ship based off player reputation
-	 * 
-	 * @param rep
-	 *            illegality of Player
-	 */
-	private void generateShip(int rep) {
-		ShipType[] shiptypes = ShipType.values();
-		int index = (rep - 1) / 2;
-		ShipType shiptype = shiptypes[index];
-		setShip(new Ship(shiptype));
-	}
-
-	/**
 	 * Checks to see if Police accepts the player's bribe or not
 	 * 
 	 * @param bribe
