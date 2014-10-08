@@ -152,11 +152,11 @@ public abstract class NPC {
 	/**
 	 * Randomly generates the ship the NPC is using
 	 */
-	public void generateShip() {
-		// ShipType[] shiptypes = ShipType.values();
-		// int index = (int) (Math.random() * shiptypes.length);
-		// ShipType shiptype = shiptypes[index];
-		// ship = new Ship(shiptype);
+	protected void generateShip(int rep) {
+		ShipType[] shiptypes = ShipType.values();
+		int index = (rep - 1) / 2;
+		ShipType shiptype = shiptypes[index];
+		setShip(new Ship(shiptype));
 	}
 
 	/**

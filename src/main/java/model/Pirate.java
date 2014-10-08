@@ -1,7 +1,5 @@
 package model;
 
-import java.util.Random;
-
 /**
  * Class representing Pirates.
  * 
@@ -20,19 +18,6 @@ public class Pirate extends NPC {
 		setInvestor(1);
 		generateShip(rep);
 		generateChance(rep);
-	}
-
-	/**
-	 * Generates Pirate's ship based off player rep
-	 * 
-	 * @param rep
-	 *            notoriety amongst pirates of Player
-	 */
-	private void generateShip(int rep) {
-		ShipType[] shiptypes = ShipType.values();
-		int index = (rep - 1) / 2;
-		ShipType shiptype = shiptypes[index];
-		setShip(new Ship(shiptype));
 	}
 
 	/**

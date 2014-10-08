@@ -114,19 +114,6 @@ public class Trader extends NPC {
 	}
 
 	/**
-	 * Generates a ship based off of player's tradeRep
-	 * 
-	 * @param rep
-	 *            Player's accountability with traders
-	 */
-	private void generateShip(int rep) {
-		ShipType[] shiptypes = ShipType.values();
-		int index = (rep - 1) / 2;
-		ShipType shiptype = shiptypes[index];
-		setShip(new Ship(shiptype));
-	}
-
-	/**
 	 * Generates the Trader's available credits off of player's tradeRep
 	 * 
 	 * @param rep
