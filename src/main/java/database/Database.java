@@ -7,6 +7,17 @@ import java.sql.SQLException;
 import model.Player;
 import model.Universe;
 
+//Things to save(Not a complete list):
+//Planet - TechLevel, SpecialResource, Government, Location, Condition, PoliceEncounterRate, PirateEnconuterRate, Marketplace, radius, color
+//Marketplace - prices, quantities, planet
+//Player - name, pilotSkill, fighterSkill, traderSkill, engineerSkill, investorSkill, traderRep, policeRep, pirateRep, credits, planet, Ship
+//Ship - shipType, currHP, fuel, cargoSize, cargo(GoodType/quantity), weapons, shields, upgrades, mercenaries, insurance
+//Mercenary - dailyCost, fighterSkill, pilotSkill, engineerSkill
+//Bank - interestRate, outstandingDebt
+//StockExchange - allStocks, allBonds, playerStocks, playerBonds
+//Stock: price, company
+//Bond: price, interestRate
+
 public class Database {
 	private Connection connection;
 
@@ -36,32 +47,21 @@ public class Database {
 		}
 	}
 	
-
-	//Things to save:
-	//Planet - TechLevel, SpecialResource, Government, Location, Condition, PoliceEncounterRate, PirateEnconuterRate, Marketplace, radius, color
-	//Marketplace - prices, quantities, planet
-	//Player - name, pilotSkill, fighterSkill, traderSkill, engineerSkill, investorSkill, traderRep, policeRep, pirateRep, credits, planet, Ship
-	//Ship - shipType, currHP, fuel, cargoSize, cargo(GoodType/quantity), weapons, shields, upgrades, mercenaries, insurance
-	//Mercenary - dailyCost, fighterSkill, pilotSkill, engineerSkill
-	//Bank - interestRate, outstandingDebt
-	//StockExchange - allStocks, allBonds, playerStocks, playerBonds
-	//Stock: price, company
-	//Bond: price, interestRate
-	
 	//Tables:
 	//Planet - PlanetId, TechLevelId, SpecialResourceId, GovernemntId, LocationX, LocationY, ConditionId, PoliceEncounterRateId, PirateEncounterRateId, MarketplaceId
 	//Government - GovernmentId, Name
 	//TechLevel - TechLevelId, Name, Value
 	//SpecialResource - SpecialResourceId, Name
-	//Government - GovernmentId, Name
 	//Condition - ConditionId, Name
 	//EncounterRate - EncounterRateId, Name
-	//GoodType - GoodTypeId, Name, MinTechLevelToProduct, MinTechLevelToUse, BiggestProducer, BasePrice, PriceIncreasePerTechLevel, PriceVariance, NegativeCondition, CheapSpecialResource, ExpensiveSpecialResource, MinTraderPrice, MaxTraderPrice, BaseQuantity, QuantityIncreasePerTechLevel
+	//GoodType - GoodTypeId, Name, MinTechLevelToProduce, MinTechLevelToUse, BiggestProducer, BasePrice, PriceIncreasePerTechLevel, PriceVariance, NegativeCondition, CheapSpecialResource, ExpensiveSpecialResource, MinTraderPrice, MaxTraderPrice, BaseQuantity, QuantityIncreasePerTechLevel
 	//Marketplace - MarketplaceId, PlanetId
 	//MarketplaceGoods - MarketplaceId, GoodTypeId, GoodTypeQuantity, GoodTypePrice
-	//MarketplacePrice
 	//Player - PlayerId, Name, PilotSkill, FighterSkill, TraderSkill, EngineerSkill, InvestorSkill, TraderReputation, PoliceReputation, PirateReputation, Credits, ShipId, PlanetId
 	//Ship - ShipId, ShipTypeId, CurrentHullPoints, Fuel, CargoSize, Insurance
+	//Weapons - WeaponId, Name, Price, Power
+	//Shields - ShieldId, Name, Price, MaxStrength
+	//Upgrades - UpgradeId, Name, Price, Type
 	//ShipWeapons - ShipId, WeaponId
 	//ShipShields - ShipId, ShieldId
 	//ShipUpgrades - ShipId, UpgradeId
