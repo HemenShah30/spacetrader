@@ -3,6 +3,8 @@ package database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.UUID;
 
 import model.Player;
 import model.Universe;
@@ -10,10 +12,16 @@ import model.Universe;
 public class Database {
 	private Connection connection;
 
+	/**
+	 * Creates a new Database class and attempts to connect to the database
+	 */
 	public Database() {
 		connect();
 	}
 
+	/**
+	 * Attempts a connection to the database
+	 */
 	private void connect() {
 		try {
 			Class.forName("org.postgresql.Driver");
@@ -35,6 +43,19 @@ public class Database {
 			e.printStackTrace();
 		}
 	}
+
+	/**
+	 * Closes a connection with the database
+	 */
+	public void close() {
+		System.out.println("Closing Connection");
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 
 	//Things to save:
@@ -53,26 +74,39 @@ public class Database {
 	//Government - GovernmentId, Name
 	//TechLevel - TechLevelId, Name, Value
 	//SpecialResource - SpecialResourceId, Name
-	//Government - GovernmentId, Name
 	//Condition - ConditionId, Name
 	//EncounterRate - EncounterRateId, Name
 	//GoodType - GoodTypeId, Name, MinTechLevelToProduct, MinTechLevelToUse, BiggestProducer, BasePrice, PriceIncreasePerTechLevel, PriceVariance, NegativeCondition, CheapSpecialResource, ExpensiveSpecialResource, MinTraderPrice, MaxTraderPrice, BaseQuantity, QuantityIncreasePerTechLevel
 	//Marketplace - MarketplaceId, PlanetId
 	//MarketplaceGoods - MarketplaceId, GoodTypeId, GoodTypeQuantity, GoodTypePrice
-	//MarketplacePrice
-	//Player - PlayerId, Name, PilotSkill, FighterSkill, TraderSkill, EngineerSkill, InvestorSkill, TraderReputation, PoliceReputation, PirateReputation, Credits, ShipId, PlanetId
+	//Player - PlayerId, PlayerName, PilotSkill, FighterSkill, TraderSkill, EngineerSkill, InvestorSkill, TraderReputation, PoliceReputation, PirateReputation, Credits, ShipId, PlanetId
 	//Ship - ShipId, ShipTypeId, CurrentHullPoints, Fuel, CargoSize, Insurance
-	//ShipWeapons - ShipId, WeaponId
+	//Laser - WeaponId, Name, BaseDamage, MinTechLevel, Price
+	//Shield - ShieldId, Name, MaxStrength
+	//Gadget - GadgetId, Name, Price, MinTechLevel, Ability
+	//ShipLasers - ShipId, WeaponId
 	//ShipShields - ShipId, ShieldId
-	//ShipUpgrades - ShipId, UpgradeId
+	//ShipGadgets - ShipId, GadgetId
 	//ShipMercenaries - ShipId, MercenaryId
 	//ShipCargo - ShipId, GoodTypeId, GoodTypeQuantity
 	//Mercenary - MercenaryId, DailyCost, FighterSkill, PilotSkill, EngineerSkill
+	
+	
+	
 	//Bank - BankId, PlayerId, InterestRate, OutstandingPlayerDebt
 	//StockExchange - StockExchangeId, PlayerId
 	//Stock - StockId, StockExchangeId, CompanyId, Value
 	//Bond - BondId, StockExchangeId, InterestRate, Value
 	public void saveGame(Universe universe, Player p) {
-		
+		try
+		{
+			Statement s=connection.createStatement();
+			UUID uuid = UUID.randomUUID();
+			s.execute("INSERT INTO \"Planet\" VALUES('"+uuid+"')");
+		}
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
 	}
 }
