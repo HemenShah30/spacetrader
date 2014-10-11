@@ -1,11 +1,15 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import model.GoodType;
 import model.Planet;
 import model.Player;
 import model.Ship;
+import model.ShipType;
 import model.Universe;
 
 /**
@@ -91,7 +95,106 @@ public class FlightEngine {
 		// encounters go here
 		Map<Planet, Integer> withinRange = getPlanetsWithinRange(universe,
 				origin);
+		calculateEncounters(p);
 		ship.setFuel(ship.getFuel() - withinRange.get(p));
 
+	}
+
+	/**
+	 * Determines what happens at each possibility of an encounter. 70% chance
+	 * of NPC, scaled to respective reps, 22% of npc-less encounter, 8% of
+	 * nothing
+	 * 
+	 * @param p
+	 *            the planet being traveled to
+	 */
+	private void calculateEncounters(Planet p) {
+		double totalSkill = (double) (player.getTraderRep()
+				+ player.getPirateRep() + player.getPoliceRep());
+		double trader = (player.getTraderRep() / totalSkill) * 0.70;
+		double pirate = (player.getPirateRep() / totalSkill) * 0.70 + trader;
+		double police = 0.70;
+		double random = 0.92;
+		for (int i = 0; i < p.getChances(); i++) {
+			double roll = Math.random();
+			if (roll < trader) {
+				// trader encounter method
+			} else if (roll >= trader && roll < pirate) {
+				// pirate encounter method
+			} else if (roll >= pirate && roll < police) {
+				// police encounter method
+			} else if (roll >= police && roll < random) {
+				notNPCEncounter();
+			}
+		}
+	}
+
+	/**
+	 * Randomly selects to give credits(20)/cargo(15)/weapon(5)/fuel(15), lose
+	 * credits(5)/cargo(15)/fuel(15), take shield-ship damage(10),
+	 * 
+	 * @return The String representing what happened, to be displayed to the
+	 *         player
+	 */
+	private String notNPCEncounter() {
+		double roll = Math.random();
+		String ret = "";
+		if (roll < 0.20) {
+			// give credits
+			double amount = (Math.random() / 3) * player.getCredits();
+			player.increaseCredits(amount);
+			ret = "You find some credits floating in space!";
+		} else if (roll >= 0.20 && roll < 0.35) {
+			// give cargo
+			GoodType[] goodTypes = GoodType.values();
+			int index = (int) (Math.random() * goodTypes.length);
+			GoodType good = goodTypes[index];
+			int cargoCap = ship.getCargoSize();
+			int currCargo = ship.getCurrCargo();
+			int quantity = (int) (Math.random() * 0.20 * cargoCap);
+			if (currCargo + quantity > cargoCap) {
+				quantity = cargoCap - currCargo;
+			}
+			ship.addToCargo(good, quantity);
+			ret = "You find some " + good.toString() + " floating in space!";
+		} else if (roll >= 0.35 && roll < 0.40) {
+			// give weapon
+			// ret = "You find a " + weapon.toString() + " floating in space!";
+		} else if (roll >= 0.40 && roll < 0.55) {
+			// give fuel
+			int currFuel = ship.getFuel();
+			int amount = (int) (Math.random() / 2 * currFuel);
+			ship.setFuel(currFuel + amount);
+			ret = "You find some fuel floating in space!";
+		} else if (roll >= 0.55 && roll < 0.60) {
+			// lose credits
+			double playerCred = player.getCredits();
+			double amount = Math.random() * 0.40 * playerCred;
+			player.decreaseCredits(amount);
+			ret = "You find a computer floating in a piece of debris. You boot it up and quickly realize it's a virus! It manages to siphon off some of your credits before you jettison it out the trash chute. ";
+		} else if (roll >= 0.60 && roll < 0.75) {
+			// lose cargo
+			Map<GoodType, Integer> cargo = ship.getCargo();
+			GoodType[] playerGoods = (GoodType[]) cargo.values().toArray();
+			GoodType good = playerGoods[((int) (Math.random() * playerGoods.length))];
+			int quantity = cargo.get(good) * (int) (Math.random() * 0.50);
+			ship.removeFromCargo(good, quantity);
+			ret = "An asteroid crashes into your cargo hold, and some cargo slips out into space!";
+		} else if (roll >= 0.75 && roll < 0.90) {
+			// lose fuel
+			int currFuel = ship.getFuel();
+			int amount = (int) (Math.random() * 0.33 * currFuel);
+			ship.setFuel(currFuel - amount);
+			ret = "An asteroid crashes into your fuel tank, and some fuel leaks out into space!";
+		} else {
+			// take damage
+			int newHP = ship.getCurrHP() - (int) (Math.ceil(Math.random() * 5));
+			if (newHP <= 0) {
+				// end game
+			}
+			ship.setCurrHP(newHP);
+			ret = "An asteroid glances off your ship's hull, doing some minor damage!";
+		}
+		return ret;
 	}
 }
