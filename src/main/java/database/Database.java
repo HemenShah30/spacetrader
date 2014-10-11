@@ -3,17 +3,37 @@ package database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.UUID;
 
 import model.Player;
+import model.TechLevel;
 import model.Universe;
+
+//Things to save(Not a complete list):
+//Planet - TechLevel, SpecialResource, Government, Location, Condition, PoliceEncounterRate, PirateEnconuterRate, Marketplace, radius, color
+//Marketplace - prices, quantities, planet
+//Player - name, pilotSkill, fighterSkill, traderSkill, engineerSkill, investorSkill, traderRep, policeRep, pirateRep, credits, planet, Ship
+//Ship - shipType, currHP, fuel, cargoSize, cargo(GoodType/quantity), weapons, shields, upgrades, mercenaries, insurance
+//Mercenary - dailyCost, fighterSkill, pilotSkill, engineerSkill
+//Bank - interestRate, outstandingDebt
+//StockExchange - allStocks, allBonds, playerStocks, playerBonds
+//Stock: price, company
+//Bond: price, interestRate
 
 public class Database {
 	private Connection connection;
 
+	/**
+	 * Creates a new Database class and attempts to connect to the database
+	 */
 	public Database() {
 		connect();
 	}
 
+	/**
+	 * Attempts a connection to the database
+	 */
 	private void connect() {
 		try {
 			Class.forName("org.postgresql.Driver");
@@ -35,44 +55,62 @@ public class Database {
 			e.printStackTrace();
 		}
 	}
-	
 
-	//Things to save:
-	//Planet - TechLevel, SpecialResource, Government, Location, Condition, PoliceEncounterRate, PirateEnconuterRate, Marketplace, radius, color
-	//Marketplace - prices, quantities, planet
-	//Player - name, pilotSkill, fighterSkill, traderSkill, engineerSkill, investorSkill, traderRep, policeRep, pirateRep, credits, planet, Ship
-	//Ship - shipType, currHP, fuel, cargoSize, cargo(GoodType/quantity), weapons, shields, upgrades, mercenaries, insurance
-	//Mercenary - dailyCost, fighterSkill, pilotSkill, engineerSkill
-	//Bank - interestRate, outstandingDebt
-	//StockExchange - allStocks, allBonds, playerStocks, playerBonds
-	//Stock: price, company
-	//Bond: price, interestRate
+	/**
+	 * Closes a connection with the database
+	 */
+	public void close() {
+		System.out.println("Closing Connection");
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// Tables:
+	// Planet - PlanetId, TechLevelId, SpecialResourceId, GovernemntId, LocationX, LocationY, ConditionId, PoliceEncounterRateId, PirateEncounterRateId, MarketplaceId
+	// Government - GovernmentId, GovernmentName
+	// TechLevel - TechLevelId, TechLevelName, TechLevelValue
+	// SpecialResource - SpecialResourceId, SpecialResourceName
+	// Condition - ConditionId, ConditionName
+	// EncounterRate - EncounterRateId, EncounterRateName
+	// GoodType - GoodTypeId, GoodTypeName, MinTechLevelToProduce, MinTechLevelToUse, BiggestProducer, BaseGoodTypePrice, PriceIncreasePerTechLevel, PriceVariance, Condition, CheapSpecialResource, ExpensiveSpecialResource, MinTraderPrice, MaxTraderPrice, BaseQuantity, QuantityIncreasePerTechLevel
+	// Marketplace - MarketplaceId, PlanetId
+	// MarketplaceGoods - MarketplaceId, GoodTypeId, GoodTypeQuantity, GoodTypePrice
+	// Player - PlayerId, PlayerName, PilotSkill, FighterSkill, TraderSkill, EngineerSkill, InvestorSkill, TraderReputation, PoliceReputation, PirateReputation, Credits, ShipId, PlanetId
+	// Ship - ShipId, ShipTypeId, CurrentHullPoints, CurrentFuel, Insurance
+	// ShipType - ShipTypeId, ShipName, MaxFuel, TotalHullPoints, CargoSize, WeaponSlots, ShieldSlots, GadgetSlots, CrewSpace, ShipMinTechLevel, FuelCost, ShipPrice, ShipBounty, ShipOccurrence, PoliceModifier, PirateModifier, TraderModifier, RepairCost, Size
+	// Laser - WeaponId, Name, BaseDamage, MinTechLevel, Price
+	// Shield - ShieldId, Name, MaxStrength
+	// Gadget - GadgetId, Name, Price, MinTechLevel, Ability
+	// ShipLasers - ShipId, WeaponId
+	// ShipShields - ShipId, ShieldId
+	// ShipGadgets - ShipId, GadgetId
+	// ShipMercenaries - ShipId, MercenaryId
+	// ShipCargo - ShipId, GoodTypeId, GoodTypeQuantity
+	// Mercenary - MercenaryId, DailyCost, FighterSkill, PilotSkill, EngineerSkill
 	
-	//Tables:
-	//Planet - PlanetId, TechLevelId, SpecialResourceId, GovernemntId, LocationX, LocationY, ConditionId, PoliceEncounterRateId, PirateEncounterRateId, MarketplaceId
-	//Government - GovernmentId, Name
-	//TechLevel - TechLevelId, Name, Value
-	//SpecialResource - SpecialResourceId, Name
-	//Government - GovernmentId, Name
-	//Condition - ConditionId, Name
-	//EncounterRate - EncounterRateId, Name
-	//GoodType - GoodTypeId, Name, MinTechLevelToProduct, MinTechLevelToUse, BiggestProducer, BasePrice, PriceIncreasePerTechLevel, PriceVariance, NegativeCondition, CheapSpecialResource, ExpensiveSpecialResource, MinTraderPrice, MaxTraderPrice, BaseQuantity, QuantityIncreasePerTechLevel
-	//Marketplace - MarketplaceId, PlanetId
-	//MarketplaceGoods - MarketplaceId, GoodTypeId, GoodTypeQuantity, GoodTypePrice
-	//MarketplacePrice
-	//Player - PlayerId, Name, PilotSkill, FighterSkill, TraderSkill, EngineerSkill, InvestorSkill, TraderReputation, PoliceReputation, PirateReputation, Credits, ShipId, PlanetId
-	//Ship - ShipId, ShipTypeId, CurrentHullPoints, Fuel, CargoSize, Insurance
-	//ShipWeapons - ShipId, WeaponId
-	//ShipShields - ShipId, ShieldId
-	//ShipUpgrades - ShipId, UpgradeId
-	//ShipMercenaries - ShipId, MercenaryId
-	//ShipCargo - ShipId, GoodTypeId, GoodTypeQuantity
-	//Mercenary - MercenaryId, DailyCost, FighterSkill, PilotSkill, EngineerSkill
-	//Bank - BankId, PlayerId, InterestRate, OutstandingPlayerDebt
-	//StockExchange - StockExchangeId, PlayerId
-	//Stock - StockId, StockExchangeId, CompanyId, Value
-	//Bond - BondId, StockExchangeId, InterestRate, Value
+	
+	// Bank - BankId, PlayerId, InterestRate, OutstandingPlayerDebt
+	// StockExchange - StockExchangeId, PlayerId
+	// Stock - StockId, StockExchangeId, CompanyId, Value
+	// Bond - BondId, StockExchangeId, InterestRate, Value
 	public void saveGame(Universe universe, Player p) {
-		
+		// first need to check if game exists, if so, then update as necessary,
+		// otherwise create new entries for everything
+	}
+
+	public void createEnum() {
+		try {
+			for (TechLevel c : TechLevel.values()) {
+				Statement s = connection.createStatement();
+				UUID uuid = UUID.randomUUID();
+				s.execute("INSERT INTO \"TechLevel\" VALUES('" + uuid + "','"
+						+ c.toString() + "', "+c.getValue()+")");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }
