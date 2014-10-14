@@ -1,38 +1,21 @@
 package model;
 
 /**
- * Interface encompassing the various gadgets
+ * Class encompassing the various gadgets
  * 
  * @author Caroline Zhang
  *
  */
-public interface Gadget {
-	
-//	FIVEEXTRACARGO(2000, 4),
-//	NAVIGATINGSYSTEM(25000, 5),
-//	AUTOREPAIRSYSTEM(25000, 5),
-//	TARGETINGSYSTEM(25000, 5),
-//	CLOAKINGDEVICE(40000, 6);
-//
-//  private int price;
-//	private int minTechLevel;
-//
-//	/**
-//	 * Gets the minimum tech level for the gadget
-//	 * 
-//	 * @return The minimum tech level for the gadget
-//	 */
-//	public int getMinTechLevel() {
-//		return minTechLevel;
-//	}
-//
-//	/**
-//	 * Returns the price of the gadget
-//	 * 
-//	 * @return The price of the gadget
-//	 */
-//	public int getPrice() {
-//		return price;
-//	}
+//why did we want to make a Gadget interface? pls help.
+public class Gadget {
+	private int price, minTechLevel;
 
+	public Gadget(int p, int mtl) {
+		price = p;
+		minTechLevel = mtl;
+	}
+	
+	//TODO: have some way of checking for gadgets in order to give additional stats to ship/player
+	//either before using any of the stats, or when adding the gadget to the ship
+	//if we choose to update stats when gadget is added to ship, we also need to re-update when gadget is sold
 }
