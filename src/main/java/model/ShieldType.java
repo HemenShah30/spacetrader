@@ -8,13 +8,12 @@ package model;
  */
 public enum ShieldType {
 
-	ENERGYSHIELD(50, 10000, 4),
+	ENERGYSHIELD(50, 10000, 4), 
 	REFLECTIVESHIELD(100, 35000, 5);
-	
+
 	private int shieldHP;
 	private int minTechLevel;
 	private int price;
-
 
 	/**
 	 * Constructor for the shield enums
@@ -41,7 +40,6 @@ public enum ShieldType {
 		return shieldHP;
 	}
 
-
 	/**
 	 * Gets the minimum tech level for the shield
 	 * 
@@ -60,4 +58,15 @@ public enum ShieldType {
 		return price;
 	}
 
+	@Override
+	public String toString() {
+		switch (this) {
+		case ENERGYSHIELD:
+			return "Energy Shield";
+		case REFLECTIVESHIELD:
+			return "Reflective Shield";
+		default:
+			return null;
+		}
+	}
 }

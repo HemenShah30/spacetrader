@@ -244,4 +244,22 @@ public enum ShipType {
 	public int getSize() {
 		return size;
 	}
+
+	@Override
+	public String toString() {
+		switch (this) {
+		case FLEA:
+			return "Flea";
+		case GNAT:
+			return "Gnat";
+		case FIREFLY:
+			return "Firefly";
+		case MOSQUITO:
+			return "Mosquito";
+		case BUMBLEBEE:
+			return "Bumblebee";
+		default:
+			return null;
+		}
+	}
 }

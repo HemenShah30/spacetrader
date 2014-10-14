@@ -8,14 +8,13 @@ package model;
  */
 public enum LaserType {
 
-	PULSELASER(20, 5000, 4),
-	BEAMLASER(35, 15000, 5),
+	PULSELASER(20, 5000, 4), 
+	BEAMLASER(35, 15000, 5), 
 	MILITARYLASER(60, 35000, 6);
 
 	private int baseDamage;
 	private int minTechLevel;
 	private int price;
-
 
 	/**
 	 * Constructor for the Laser enums
@@ -42,7 +41,6 @@ public enum LaserType {
 		return baseDamage;
 	}
 
-
 	/**
 	 * Gets the minimum tech level for the laser
 	 * 
@@ -61,4 +59,17 @@ public enum LaserType {
 		return price;
 	}
 
+	@Override
+	public String toString() {
+		switch (this) {
+		case PULSELASER:
+			return "Pulse Laser";
+		case BEAMLASER:
+			return "Beam Laser";
+		case MILITARYLASER:
+			return "Military Laser";
+		default:
+			return null;
+		}
+	}
 }
