@@ -1,6 +1,7 @@
 package model;
 
 import javafx.scene.paint.Color;
+import java.util.Random;
 
 /**
  * Class representing a planet
@@ -8,7 +9,7 @@ import javafx.scene.paint.Color;
  * @author Larry He
  * 
  */
-public class Planet implements Boundary{
+public class Planet implements Boundary {
 	private String name;
 	private TechLevel techLevel;
 	private SpecialResource resource;
@@ -18,7 +19,8 @@ public class Planet implements Boundary{
 	private Condition condition;
 	private EncounterRate policeEncounterRate;
 	private EncounterRate pirateEncounterRate;
-	private int radius;
+	private EncounterRate traderEncounterRate;
+	private int radius, chances;
 	private Color color;
 	public final static Color[] approvedColors = { Color.BLUE, Color.RED,
 			Color.FORESTGREEN, Color.PERU };
@@ -37,11 +39,12 @@ public class Planet implements Boundary{
 	 * @param l
 	 *            The location of the planet in space
 	 * @param c
-	 * 			  The condition of the planet
+	 *            The condition of the planet
 	 */
 	public Planet(String n, TechLevel tech, SpecialResource r, Government g,
-			Location l, Condition c, EncounterRate policeRate, EncounterRate pirateRate,
-			int size, Color color) {
+			Location l, Condition c, EncounterRate policeRate,
+			EncounterRate pirateRate, EncounterRate traderRate, int size,
+			Color color) {
 		setName(n);
 		setTechLevel(tech);
 		setResource(r);
@@ -50,9 +53,11 @@ public class Planet implements Boundary{
 		setCondition(c);
 		policeEncounterRate = policeRate;
 		pirateEncounterRate = pirateRate;
+		traderEncounterRate = traderRate;
 		marketplace = new Marketplace(this);
 		setRadius(size);
 		setColor(color);
+		setChances();
 	}
 
 	/**
@@ -126,10 +131,10 @@ public class Planet implements Boundary{
 			throw new IllegalArgumentException();
 		condition = c;
 	}
-	
+
 	/**
-	 * private setter for size validation
-	 * sets to 3 if invalid
+	 * private setter for size validation sets to 3 if invalid
+	 * 
 	 * @param i
 	 */
 	private void setRadius(int i) {
@@ -139,14 +144,16 @@ public class Planet implements Boundary{
 			radius = 3;
 		}
 	}
+
 	/**
-	 * private setter for color validation
-	 * if color is not an approved color, it is set to green
+	 * private setter for color validation if color is not an approved color, it
+	 * is set to green
+	 * 
 	 * @param c
 	 */
 	private void setColor(Color c) {
 		boolean isSet = false;
-		for(Color col: approvedColors) {
+		for (Color col : approvedColors) {
 			if (col.equals(c)) {
 				color = c;
 				isSet = true;
@@ -157,6 +164,15 @@ public class Planet implements Boundary{
 			color = approvedColors[2];
 		}
 	}
+
+	/**
+	 * Sets the number of chances to have an encounter when traveling to the
+	 * planet. Is random, 0-8
+	 */
+	private void setChances() {
+		chances = (int) (Math.random() * 10);
+	}
+
 	/**
 	 * Getter for the name of the planet
 	 * 
@@ -206,7 +222,7 @@ public class Planet implements Boundary{
 	public Condition getCondition() {
 		return condition;
 	}
-	
+
 	/**
 	 * Returns the marketplace for the planet
 	 * 
@@ -219,44 +235,67 @@ public class Planet implements Boundary{
 	@Override
 	public String toString() {
 		return name + ", Location: " + location + ", Tech Level: " + techLevel
-				+ ", Resource: " + resource + ", Goverment: " + government + ", Condition: " + condition;
+				+ ", Resource: " + resource + ", Goverment: " + government
+				+ ", Condition: " + condition;
 	}
-	
+
 	@Override
 	public boolean isLocationInside(Location location) {
-		//TODO: check corners of box here to get a more accurate location
+		// TODO: check corners of box here to get a more accurate location
 		return true;
 	}
-	
+
 	/**
 	 * Getter for the amount of police in the planet area
+	 * 
 	 * @return The amount of police in the planet area
 	 */
 	public EncounterRate getPoliceEncounterRate() {
 		return policeEncounterRate;
 	}
-	
+
 	/**
 	 * Getter for the amount of pirates in the planet area
+	 * 
 	 * @return The amount of pirates in the planet area
 	 */
 	public EncounterRate getPirateEncounterRate() {
 		return pirateEncounterRate;
 	}
-	
+
+	/**
+	 * Getter for the amount of trader in the planet area
+	 * 
+	 * @return The amount of trader in the planet area
+	 */
+	public EncounterRate getTraderEncounterRate() {
+		return traderEncounterRate;
+	}
+
 	/**
 	 * returns planet size
+	 * 
 	 * @return planet size
 	 */
 	public int getRadius() {
 		return radius;
 	}
-	
+
 	/**
 	 * returns planet color
+	 * 
 	 * @return planet color
 	 */
 	public Color getColor() {
 		return color;
+	}
+
+	/**
+	 * returns planet chances
+	 * 
+	 * @return planet chances
+	 */
+	public int getChances() {
+		return chances;
 	}
 }

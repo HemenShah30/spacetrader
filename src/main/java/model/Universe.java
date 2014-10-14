@@ -72,6 +72,7 @@ public class Universe {
 			int c = (int) (Math.random() * conditions.length);
 			int pirate = (int) (Math.random() * encounterRates.length);
 			int police = (int) (Math.random() * encounterRates.length);
+			int trader = (int) (Math.random() * encounterRates.length);
 			// int x = (int) (Math.random() * universeLength);
 			// int y = (int) (Math.random() * universeWidth);
 
@@ -110,7 +111,7 @@ public class Universe {
 			Color col = approvedColors[rand.nextInt(approvedColors.length)];
 			Planet p = new Planet(planetNames.get(i), levels[t], resources[r],
 					governments[g], l, conditions[c], encounterRates[police],
-					encounterRates[pirate], size, col);
+					encounterRates[pirate], encounterRates[trader], size, col);
 			uniqueLocations.add(l);
 			planets.add(p);
 		}
