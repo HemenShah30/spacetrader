@@ -74,6 +74,8 @@ public class GameEngine {
 		Object[] gameData = database.loadGame();
 		player = (Player) gameData[0];
 		universe = (Universe) gameData[1];
+		tradeEngine = new TradeEngine(player);
+		flightEngine = new FlightEngine(player, universe);
 		System.out.println("BAM GAME LOADED");
 	}
 	

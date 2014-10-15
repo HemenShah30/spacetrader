@@ -40,6 +40,8 @@ public class Universe {
 	 */
 	public Universe(List<Planet> p) {
 		planets = p;
+		planetLocations = new BoundaryTree(400, 400, p);
+		approvedColors = Planet.approvedColors;
 	}
 
 	/**

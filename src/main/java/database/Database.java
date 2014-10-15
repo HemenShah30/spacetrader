@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -210,99 +211,9 @@ public class Database {
 	public void saveGame(Universe universe, Player player) {
 		long startTime = System.nanoTime();
 		if (userExists()) {
-			// update existing data
+			System.out.println("User exists, implementing update here");
 		} else {
 			try {
-				PreparedStatement planetInsertStatement = connection
-						.prepareStatement("INSERT INTO \"Planet\" VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-
-				List<Planet> planets = universe.getPlanets();
-				for (Planet p : planets) {
-					UUID planetUUID = UUID.randomUUID();
-					PGobject planetUUIDObject = new PGobject();
-					planetUUIDObject.setType("uuid");
-					planetUUIDObject.setValue(planetUUID.toString());
-					planetInsertStatement.setObject(1, planetUUIDObject);
-
-					PGobject techLevelUUIDObject = new PGobject();
-					techLevelUUIDObject.setType("uuid");
-					techLevelUUIDObject.setValue(techLevelValues.get(p
-							.getTechLevel().getValue()));
-					planetInsertStatement.setObject(2, techLevelUUIDObject);
-
-					PGobject resourceUUIDObject = new PGobject();
-					resourceUUIDObject.setType("uuid");
-					resourceUUIDObject.setValue(specialResourceValues.get(p
-							.getResource().toString()));
-					planetInsertStatement.setObject(3, resourceUUIDObject);
-
-					PGobject governmentUUIDObject = new PGobject();
-					governmentUUIDObject.setType("uuid");
-					governmentUUIDObject.setValue(governmentValues.get(p
-							.getGovernment().toString()));
-					planetInsertStatement.setObject(4, governmentUUIDObject);
-
-					planetInsertStatement.setInt(5, p.getLocation().getX());
-					planetInsertStatement.setInt(6, p.getLocation().getY());
-
-					PGobject conditionUUIDObject = new PGobject();
-					conditionUUIDObject.setType("uuid");
-					conditionUUIDObject.setValue(governmentValues.get(p
-							.getCondition().toString()));
-					planetInsertStatement.setObject(7, conditionUUIDObject);
-
-					PGobject policeEncounterUUIDObject = new PGobject();
-					policeEncounterUUIDObject.setType("uuid");
-					policeEncounterUUIDObject.setValue(encounterRateValues
-							.get(p.getPoliceEncounterRate().toString()));
-					planetInsertStatement.setObject(8,
-							policeEncounterUUIDObject);
-
-					PGobject pirateEncounterUUIDObject = new PGobject();
-					pirateEncounterUUIDObject.setType("uuid");
-					pirateEncounterUUIDObject.setValue(encounterRateValues
-							.get(p.getPirateEncounterRate().toString()));
-					planetInsertStatement.setObject(9,
-							pirateEncounterUUIDObject);
-
-					planetInsertStatement.setString(10, p.getName());
-					planetInsertStatement.execute();
-
-					// PreparedStatement marketplaceInsertStatement =
-					// connection.prepareStatement("INSERT INTO \"Marketplace\" VALUES(?, ?)");
-					// UUID marketplaceUUID = UUID.randomUUID();
-					// PGobject marketplaceUUIDObject = new PGobject();
-					// marketplaceUUIDObject.setType("uuid");
-					// marketplaceUUIDObject.setValue(marketplaceUUID.toString());
-					// marketplaceInsertStatement.setObject(1,
-					// marketplaceUUIDObject);
-					//
-					// marketplaceInsertStatement.setObject(2,
-					// planetUUIDObject);
-					// marketplaceInsertStatement.execute();
-					//
-					//
-					//
-					// Marketplace m = p.getMarketplace();
-					// for(GoodType g: GoodType.values()) {
-					// PreparedStatement marketplaceGoodsInsertStatement =
-					// connection.prepareStatement("INSERT INTO \"MarketplaceGoods\" VALUES(?, ?, ?, ?)");
-					// marketplaceGoodsInsertStatement.setObject(1,
-					// marketplaceUUIDObject);
-					// PGobject marketplaceGoodTypeUUIDObject = new PGobject();
-					// marketplaceGoodTypeUUIDObject.setType("uuid");
-					// marketplaceGoodTypeUUIDObject.setValue(goodTypeValues.get(g.toString()));
-					// marketplaceGoodsInsertStatement.setObject(2,
-					// marketplaceGoodTypeUUIDObject);
-					// marketplaceGoodsInsertStatement.setInt(3,
-					// m.getQuantity(g));
-					// marketplaceGoodsInsertStatement.setInt(4, (int)
-					// m.getSellPrice(g));
-					// marketplaceGoodsInsertStatement.execute();
-					// }
-
-				}
-
 				Ship ship = player.getShip();
 				PreparedStatement shipInsertStatement = connection
 						.prepareStatement("INSERT INTO \"Ship\" VALUES(?, ?, ?, ?)");
@@ -360,17 +271,7 @@ public class Database {
 						.getCredits()));
 				playerInsertStatement.setObject(10, playerCreditsUUIDObject);
 				playerInsertStatement.setObject(11, shipUUIDObject);
-
-				Statement s = connection.createStatement();
-				ResultSet planet = s
-						.executeQuery("SELECT \"PlanetId\" FROM \"Planet\" WHERE \"PlanetName\"='"
-								+ player.getPlanet().getName() + "'");
-				planet.next();
-				String planetUUID = planet.getString("PlanetId");
-				PGobject planetUUIDObject = new PGobject();
-				planetUUIDObject.setType("uuid");
-				planetUUIDObject.setValue(planetUUID);
-				playerInsertStatement.setObject(12, planetUUIDObject);
+				playerInsertStatement.setNull(12, Types.NULL);
 				playerInsertStatement.setString(13, player.getName());
 				playerInsertStatement.execute();
 
@@ -390,6 +291,110 @@ public class Database {
 				userPlayersInsertStatement.setObject(1, userUUIDObject);
 				userPlayersInsertStatement.setObject(2, playerUUIDObject);
 				userPlayersInsertStatement.execute();
+				
+				PreparedStatement planetInsertStatement = connection
+						.prepareStatement("INSERT INTO \"Planet\" VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+				PreparedStatement playerPlanetsInsertStatement = connection
+						.prepareStatement("INSERT INTO \"PlayerPlanets\" VALUES(?, ?)");
+				List<Planet> planets = universe.getPlanets();
+				for (Planet p : planets) {
+					UUID planetUUID = UUID.randomUUID();
+					PGobject planetUUIDObject = new PGobject();
+					planetUUIDObject.setType("uuid");
+					planetUUIDObject.setValue(planetUUID.toString());
+					planetInsertStatement.setObject(1, planetUUIDObject);
+
+					PGobject techLevelUUIDObject = new PGobject();
+					techLevelUUIDObject.setType("uuid");
+					techLevelUUIDObject.setValue(techLevelValues.get(p
+							.getTechLevel().getValue()));
+					planetInsertStatement.setObject(2, techLevelUUIDObject);
+
+					PGobject resourceUUIDObject = new PGobject();
+					resourceUUIDObject.setType("uuid");
+					resourceUUIDObject.setValue(specialResourceValues.get(p
+							.getResource().toString()));
+					planetInsertStatement.setObject(3, resourceUUIDObject);
+
+					PGobject governmentUUIDObject = new PGobject();
+					governmentUUIDObject.setType("uuid");
+					governmentUUIDObject.setValue(governmentValues.get(p
+							.getGovernment().toString()));
+					planetInsertStatement.setObject(4, governmentUUIDObject);
+
+					planetInsertStatement.setInt(5, p.getLocation().getX());
+					planetInsertStatement.setInt(6, p.getLocation().getY());
+
+					PGobject conditionUUIDObject = new PGobject();
+					conditionUUIDObject.setType("uuid");
+					conditionUUIDObject.setValue(conditionValues.get(p
+							.getCondition().toString()));
+					planetInsertStatement.setObject(7, conditionUUIDObject);
+
+					PGobject policeEncounterUUIDObject = new PGobject();
+					policeEncounterUUIDObject.setType("uuid");
+					policeEncounterUUIDObject.setValue(encounterRateValues
+							.get(p.getPoliceEncounterRate().toString()));
+					planetInsertStatement.setObject(8,
+							policeEncounterUUIDObject);
+
+					PGobject pirateEncounterUUIDObject = new PGobject();
+					pirateEncounterUUIDObject.setType("uuid");
+					pirateEncounterUUIDObject.setValue(encounterRateValues
+							.get(p.getPirateEncounterRate().toString()));
+					planetInsertStatement.setObject(9,
+							pirateEncounterUUIDObject);
+
+					planetInsertStatement.setString(10, p.getName());
+					planetInsertStatement.execute();
+					
+					
+					playerPlanetsInsertStatement.setObject(1, playerUUIDObject);
+					playerPlanetsInsertStatement.setObject(2, planetUUIDObject);
+					playerPlanetsInsertStatement.execute();
+
+					// PreparedStatement marketplaceInsertStatement =
+					// connection.prepareStatement("INSERT INTO \"Marketplace\" VALUES(?, ?)");
+					// UUID marketplaceUUID = UUID.randomUUID();
+					// PGobject marketplaceUUIDObject = new PGobject();
+					// marketplaceUUIDObject.setType("uuid");
+					// marketplaceUUIDObject.setValue(marketplaceUUID.toString());
+					// marketplaceInsertStatement.setObject(1,
+					// marketplaceUUIDObject);
+					//
+					// marketplaceInsertStatement.setObject(2,
+					// planetUUIDObject);
+					// marketplaceInsertStatement.execute();
+					//
+					//
+					//
+					// Marketplace m = p.getMarketplace();
+					// for(GoodType g: GoodType.values()) {
+					// PreparedStatement marketplaceGoodsInsertStatement =
+					// connection.prepareStatement("INSERT INTO \"MarketplaceGoods\" VALUES(?, ?, ?, ?)");
+					// marketplaceGoodsInsertStatement.setObject(1,
+					// marketplaceUUIDObject);
+					// PGobject marketplaceGoodTypeUUIDObject = new PGobject();
+					// marketplaceGoodTypeUUIDObject.setType("uuid");
+					// marketplaceGoodTypeUUIDObject.setValue(goodTypeValues.get(g.toString()));
+					// marketplaceGoodsInsertStatement.setObject(2,
+					// marketplaceGoodTypeUUIDObject);
+					// marketplaceGoodsInsertStatement.setInt(3,
+					// m.getQuantity(g));
+					// marketplaceGoodsInsertStatement.setInt(4, (int)
+					// m.getSellPrice(g));
+					// marketplaceGoodsInsertStatement.execute();
+					// }
+
+				}
+				
+				Statement s = connection.createStatement();
+				ResultSet planet = s
+						.executeQuery("SELECT \"PlanetId\" FROM \"Planet\" WHERE \"PlanetName\"='"
+								+ player.getPlanet().getName() + "'");
+				planet.next();
+				String planetUUID = planet.getString("PlanetId");
+				s.execute("UPDATE \"Player\" SET \"PlanetId\"='"+planetUUID+"' WHERE \"PlayerId\"='"+playerUUID+"'");
 
 			} catch (SQLException s) {
 				s.printStackTrace();
@@ -406,9 +411,28 @@ public class Database {
 	 * @return An object[] of the universe and planets
 	 */
 	public Object[] loadGame() {
+		try {
+			Statement s = connection.createStatement();
+			ResultSet user = s
+					.executeQuery("SELECT \"UserId\" FROM \"User\" WHERE \"Username\"='"
+							+ username + "'");
+			user.next();
+			String userId = user.getString("UserId");
+			
+			ResultSet player = s
+					.executeQuery("SELECT \"PlayerId\" FROM \"UserPlayers\" WHERE \"UserId\"='"
+							+ userId + "'");
+			user.next();
+			String playerId = user.getString("UserId");
+			
+		} catch (SQLException s) {
+			s.printStackTrace();
+		}
+		
 		Universe u = new Universe();
 		u.createPlanets();
 		Player p = new Player("Jack",1,10,7,1,1,new Ship(ShipType.FIREFLY));
+		p.setPlanet(u.getPlanets().get(0));
 		return new Object[] {p,u};
 	}
 
