@@ -57,7 +57,7 @@ public class PlanetScreenController {
 	@FXML
 	private void saveGame(Event e) {
 		if (MultiPageController.isValidAction(e)) {
-			System.out.println("Save Game");
+			GameEngine.getGameEngine().saveGame();
 		}
 	}
 

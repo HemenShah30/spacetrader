@@ -20,6 +20,8 @@ public class Main extends Application {
 	// TODO: Combine buy/sell popup controllers into one class
 	// TODO: Clean up TradeScreenController to be more generalized
 
+	// Turn GameEngine into a message handling system which takes in a message
+	// and throws a GameEngineException or returns void if successful
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		Parent root = new FXMLLoader().load(ClassLoader
@@ -38,13 +40,16 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		// Universe u = new Universe();
 		// u.createPlanets();
-		// Player p = new Player("Jack",1,10,7,1,1, new Ship(ShipType.FIREFLY));
+		// Player p = new Player("Jack",1,10,7,1,1,new Ship(ShipType.FIREFLY));
 		// FileWriter w = new FileWriter();
 		// w.saveGameData(p, u);
 		// FileReader r = new FileReader();
 		// Object[] data=r.loadGameData();
 		// Arrays.toString(data);
-		// Database db = new Database();
+		// Database db = new Database("meep366");
+		// System.out.println(db.userExists());
+		// db.saveGame(u, p);
+		// db.close();
 		launch(args);
 	}
 }

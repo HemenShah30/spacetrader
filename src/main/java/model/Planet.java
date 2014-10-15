@@ -1,7 +1,6 @@
 package model;
 
 import javafx.scene.paint.Color;
-import java.util.Random;
 
 /**
  * Class representing a planet

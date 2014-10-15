@@ -3,6 +3,7 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import database.Database;
 import model.GoodType;
 import model.Location;
 import model.Planet;
@@ -19,6 +20,7 @@ import model.Universe;
  */
 public class GameEngine {
 	private static GameEngine gameEngine;
+	private Database database;
 	private TradeEngine tradeEngine;
 	private FlightEngine flightEngine;
 	private Universe universe;
@@ -31,8 +33,8 @@ public class GameEngine {
 	private GameEngine() {
 		universe = new Universe();
 		universe.createPlanets();
-		for (Planet p : universe.getPlanets())
-			System.out.println(p);
+//		for (Planet p : universe.getPlanets())
+//			System.out.println(p);
 	}
 
 	/**
@@ -44,6 +46,42 @@ public class GameEngine {
 		if (gameEngine == null)
 			gameEngine = new GameEngine();
 		return gameEngine;
+	}
+
+	/**
+	 * Creates the database for the GameEngine, given the username
+	 * 
+	 * @param username
+	 *            The username for the logged in player
+	 */
+	public void createDatabase(String username) {
+		database = new Database(username);
+	}
+
+	/**
+	 * Whether or not the user is in the database already
+	 * 
+	 * @return Whether or not the user exists
+	 */
+	public boolean userExists() {
+		return database.userExists();
+	}
+
+	/**
+	 * Loads an existing game from the database by populating the proper classes
+	 */
+	public void loadGame() {
+		Object[] gameData = database.loadGame();
+		player = (Player) gameData[0];
+		universe = (Universe) gameData[1];
+		System.out.println("BAM GAME LOADED");
+	}
+	
+	/**
+	 * Saves all the current game data to the database
+	 */
+	public void saveGame() {
+		database.saveGame(universe, player);
 	}
 
 	/**
