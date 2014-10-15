@@ -91,11 +91,11 @@ public class FlightEngine {
 	 */
 	public void goToPlanet(Planet p) {
 		Planet origin = player.getPlanet();
+		calculateEncounters(p);
 		player.setPlanet(p);
 		// encounters go here
 		Map<Planet, Integer> withinRange = getPlanetsWithinRange(universe,
 				origin);
-		calculateEncounters(p);
 		ship.setFuel(ship.getFuel() - withinRange.get(p));
 
 	}
