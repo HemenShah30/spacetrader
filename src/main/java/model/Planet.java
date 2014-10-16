@@ -166,10 +166,10 @@ public class Planet implements Boundary {
 
 	/**
 	 * Sets the number of chances to have an encounter when traveling to the
-	 * planet. Is random, 0-8
+	 * planet. Is random, 3-12
 	 */
 	private void setChances() {
-		chances = (int) (Math.random() * 10);
+		chances = (int) (Math.random() * 10) + 3;
 	}
 
 	/**

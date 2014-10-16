@@ -89,15 +89,15 @@ public class FlightEngine {
 	 * @param p
 	 *            The planet being clicked on to travel to
 	 */
-	public void goToPlanet(Planet p) {
+	public List<String> goToPlanet(Planet p) {
 		Planet origin = player.getPlanet();
-		calculateEncounters(p);
+		List<String> ret = calculateEncounters(p);
 		player.setPlanet(p);
 		// encounters go here
 		Map<Planet, Integer> withinRange = getPlanetsWithinRange(universe,
 				origin);
 		ship.setFuel(ship.getFuel() - withinRange.get(p));
-
+		return ret;
 	}
 
 	/**
@@ -108,25 +108,30 @@ public class FlightEngine {
 	 * @param p
 	 *            the planet being traveled to
 	 */
-	private void calculateEncounters(Planet p) {
+	private List<String> calculateEncounters(Planet p) {
 		double totalSkill = (double) (player.getTraderRep()
 				+ player.getPirateRep() + player.getPoliceRep());
 		double trader = (player.getTraderRep() / totalSkill) * 0.70;
 		double pirate = (player.getPirateRep() / totalSkill) * 0.70 + trader;
 		double police = 0.70;
 		double random = 0.92;
+		List<String> ret = new ArrayList<String>();
 		for (int i = 0; i < p.getChances(); i++) {
 			double roll = Math.random();
 			if (roll < trader) {
+				ret.add("You encounter a traveling trader in space!");
 				// trader encounter method
 			} else if (roll >= trader && roll < pirate) {
+				ret.add("You encounter a pirate in space!");
 				// pirate encounter method
 			} else if (roll >= pirate && roll < police) {
+				ret.add("You are pulled over, figuratively, by some police!");
 				// police encounter method
 			} else if (roll >= police && roll < random) {
-				notNPCEncounter();
+				ret.add(notNPCEncounter());
 			}
 		}
+		return ret;
 	}
 
 	/**
