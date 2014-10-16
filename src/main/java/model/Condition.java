@@ -32,4 +32,35 @@ public enum Condition {
 			return null;
 		}
 	}
+
+	/**
+	 * Returns the enum given the toString() of the enum
+	 * 
+	 * @param value
+	 *            The enum being looked for
+	 * @return The enum represented by the value string
+	 */
+	public static Condition getEnum(String value) {
+		value = value.toLowerCase();
+		switch (value) {
+		case "none":
+			return Condition.NONE;
+		case "drought":
+			return Condition.DROUGHT;
+		case "cold":
+			return Condition.COLD;
+		case "crop failure":
+			return Condition.CROPFAIL;
+		case "war":
+			return Condition.WAR;
+		case "boredom":
+			return Condition.BOREDOM;
+		case "plague":
+			return Condition.PLAGUE;
+		case "lack of workers":
+			return Condition.LACKOFWORKERS;
+		default:
+			return null;
+		}
+	}
 }
