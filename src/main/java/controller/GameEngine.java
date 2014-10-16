@@ -186,8 +186,8 @@ public class GameEngine {
 	 * @param planet
 	 *            The planet the player is going to
 	 */
-	public void goToPlanet(Planet planet) {
-		flightEngine.goToPlanet(planet);
+	public List<String> goToPlanet(Planet planet) {
+		return flightEngine.goToPlanet(planet);
 	}
 
 	/**
