@@ -192,7 +192,78 @@ public class Database {
 	public void saveGame(Universe universe, Player player) {
 		long startTime = System.nanoTime();
 		if (userExists()) {
-			System.out.println("User exists, implementing update here");
+			try {
+				Statement playerShipStatment = connection.createStatement();
+				String playerShipQuery = "SELECT up.\"PlayerId\", p.\"ShipId\" FROM \"User\" u INNER JOIN \"UserPlayers\" up ON up.\"UserId\"=u.\"UserId\" INNER JOIN \"Player\" p ON p.\"PlayerId\"=up.\"PlayerId\" WHERE u.\"Username\"='"
+						+ username
+						+ "' AND up.\"PlayerName\"='"
+						+ player.getName() + "'";
+				ResultSet playerShipSet = playerShipStatment
+						.executeQuery(playerShipQuery);
+				playerShipSet.next();
+				String playerId = playerShipSet.getString("PlayerId");
+				String shipId = playerShipSet.getString("ShipId");
+
+				connection.setAutoCommit(false);
+				for (Planet planet : universe.getPlanets()) {
+					// update marketplace info here
+				}
+				Statement s = connection.createStatement();
+				String updatePlayerCmd = "UPDATE \"Player\" SET \"PilotSkill\"="
+						+ player.getPilotSkill()
+						+ ", \"FighterSkill\"="
+						+ player.getFighterSkill()
+						+ ", \"TraderSkill\"="
+						+ player.getTraderSkill()
+						+ ", \"EngineerSkill\"="
+						+ player.getEngineerSkill()
+						+ ", \"InvestorSkill\"="
+						+ player.getInvestorSkill()
+						+ ", \"TraderReputation\"="
+						+ player.getTraderRep()
+						+ ", \"PoliceReputation\"="
+						+ player.getPoliceRep()
+						+ ", \"PirateReputation\"="
+						+ player.getPirateRep()
+						+ ", \"Credits\"="
+						+ player.getCredits()
+						+ " WHERE \"PlayerId\"='"
+						+ playerId + "'";
+				s.execute(updatePlayerCmd);
+
+				ResultSet planetSet = s
+						.executeQuery("SELECT \"PlanetId\" FROM \"Planet\" WHERE \"PlanetName\"='"
+								+ player.getPlanet().getName() + "'");
+				planetSet.next();
+				String planetId = planetSet.getString("PlanetId");
+				s.execute("UPDATE \"Player\" SET \"PlanetId\"='" + planetId
+						+ "' WHERE \"PlayerId\"='" + playerId + "'");
+
+				// need to update ship fuel and hull points
+				Ship ship = player.getShip();
+				for (GoodType g : GoodType.values()) {
+					String updateShipCargoCmd = "UPDATE \"ShipCargo\" SET \"GoodTypeQuantity\"="
+							+ ship.amountInCargo(g)
+							+ " WHERE \"ShipId\"='"
+							+ shipId
+							+ "' AND \"GoodTypeId\" = (SELECT \"GoodTypeId\" FROM \"GoodType\" WHERE \"GoodTypeName\"='"
+							+ g.toString() + "')";
+					s.execute(updateShipCargoCmd);
+				}
+
+				connection.commit();
+				connection.setAutoCommit(true);
+			} catch (SQLException s) {
+				try {
+					connection.rollback();
+					connection.setAutoCommit(true);
+				} catch (SQLException sqle) {
+					sqle.printStackTrace();
+				}
+				s.printStackTrace();
+			}
+
+			System.out.println("BAM SAVE UPDATED");
 		} else {
 			try {
 				connection.setAutoCommit(false);
@@ -270,9 +341,10 @@ public class Database {
 				userInsertStatement.execute();
 
 				PreparedStatement userPlayersInsertStatement = connection
-						.prepareStatement("INSERT INTO \"UserPlayers\" VALUES(?, ?)");
+						.prepareStatement("INSERT INTO \"UserPlayers\" VALUES(?, ?, ?)");
 				userPlayersInsertStatement.setObject(1, userUUIDObject);
 				userPlayersInsertStatement.setObject(2, playerUUIDObject);
+				userPlayersInsertStatement.setString(3, player.getName());
 				userPlayersInsertStatement.execute();
 
 				PreparedStatement planetInsertStatement = connection
@@ -396,8 +468,8 @@ public class Database {
 
 			} catch (SQLException s) {
 				try {
-					connection.setAutoCommit(true);
 					connection.rollback();
+					connection.setAutoCommit(true);
 				} catch (SQLException sqle) {
 					sqle.printStackTrace();
 				}
@@ -484,7 +556,7 @@ public class Database {
 		} catch (SQLException s) {
 			s.printStackTrace();
 		}
-
+		//need to set this planet properly
 		p.setPlanet(u.getPlanets().get(0));
 		return new Object[] { p, u };
 	}
