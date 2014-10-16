@@ -22,14 +22,23 @@ public class Ship {
 	 *            The ShipType for the ship
 	 */
 	public Ship(ShipType sT) {
+		this(sT, sT.getTotalHP(), sT.getFuel());
+	}
+	
+	/**
+	 * Ship constructor taking in values for more instance variables
+	 * @param sT The ShipType for the ship
+	 * @param hp The Hull Points for the ship
+	 * @param f The fuel for the ship
+	 */
+	public Ship(ShipType sT, int hp, int f) {
 		setShipType(sT);
 		cargo = new HashMap<GoodType, Integer>();
 		for (GoodType type : GoodType.values())
 			cargo.put(type, 0);
-		fuel = sT.getFuel();
-		currHP = sT.getTotalHP();
-		cargoSize = sT.getCargoSize();
-		// this.mercenaries = mercenaries;
+		fuel=f;
+		currHP=hp;
+		cargoSize=sT.getCargoSize();
 	}
 
 	/**

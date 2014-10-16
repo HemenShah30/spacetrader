@@ -48,6 +48,48 @@ public class Player {
 	}
 
 	/**
+	 * Constructor for player for setting all the variables for the class
+	 * 
+	 * @param name
+	 *            The name of the player
+	 * @param pilot
+	 *            The amount of pilot skill points
+	 * @param fighter
+	 *            The amount of fighter skill points
+	 * @param trader
+	 *            The amount of trader skill points
+	 * @param engineer
+	 *            The amount of engineer skill points
+	 * @param investor
+	 *            The amount of investor skill points
+	 * @param s
+	 *            The ship the player is flying in
+	 * @param c
+	 *            The credits the player currently has
+	 * @param traderR
+	 *            The reputation the player has with traders
+	 * @param policeR
+	 *            The reputation the player has with police
+	 * @param pirateR
+	 *            The reputation the player has with pirates
+	 */
+	public Player(String name, int pilot, int fighter, int trader,
+			int engineer, int investor, Ship s, double c, int traderR,
+			int policeR, int pirateR) {
+		setName(name);
+		pilotSkill = pilot;
+		fighterSkill = fighter;
+		traderSkill = trader;
+		engineerSkill = engineer;
+		investorSkill = investor;
+		ship = s;
+		credits = c;
+		traderRep = traderR;
+		policeRep = policeR;
+		pirateRep = pirateR;
+	}
+
+	/**
 	 * Returns the name of the player
 	 * 
 	 * @return The name of the player

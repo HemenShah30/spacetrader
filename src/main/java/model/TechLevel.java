@@ -54,4 +54,35 @@ public enum TechLevel {
 			return null;
 		}
 	}
+
+	/**
+	 * Returns the enum given the toString() of the enum
+	 * 
+	 * @param value
+	 *            The enum being looked for
+	 * @return The enum represented by the value string
+	 */
+	public static TechLevel getEnum(String value) {
+		value = value.toLowerCase();
+		switch (value) {
+		case "preagriculture":
+			return TechLevel.PREAGRICULTURE;
+		case "agriculture":
+			return TechLevel.AGRICULTURE;
+		case "medieval":
+			return TechLevel.MEDIEVAL;
+		case "renaissance":
+			return TechLevel.RENAISSANCE;
+		case "early industrial":
+			return TechLevel.EARLYINDUSTRIAL;
+		case "industrial":
+			return TechLevel.INDUSTRIAL;
+		case "post-industrial":
+			return TechLevel.POSTINDUSTRIAL;
+		case "high tech":
+			return TechLevel.HITECH;
+		default:
+			return null;
+		}
+	}
 }

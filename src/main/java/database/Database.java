@@ -7,30 +7,28 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javafx.scene.paint.Color;
+
 import org.postgresql.util.PGobject;
 
+import model.Condition;
+import model.EncounterRate;
 import model.GoodType;
+import model.Government;
+import model.Location;
 import model.Planet;
 import model.Player;
 import model.Ship;
 import model.ShipType;
+import model.SpecialResource;
+import model.TechLevel;
 import model.Universe;
-
-//Things to save(Not a complete list):
-//Planet - TechLevel, SpecialResource, Government, Location, Condition, PoliceEncounterRate, PirateEnconuterRate, Marketplace, radius, color
-//Marketplace - prices, quantities, planet
-//Player - name, pilotSkill, fighterSkill, traderSkill, engineerSkill, investorSkill, traderRep, policeRep, pirateRep, credits, planet, Ship
-//Ship - shipType, currHP, fuel, cargoSize, cargo(GoodType/quantity), weapons, shields, upgrades, mercenaries, insurance
-//Mercenary - dailyCost, fighterSkill, pilotSkill, engineerSkill
-//Bank - interestRate, outstandingDebt
-//StockExchange - allStocks, allBonds, playerStocks, playerBonds
-//Stock: price, company
-//Bond: price, interestRate
 
 public class Database {
 	private Connection connection;
@@ -71,7 +69,7 @@ public class Database {
 			e.printStackTrace();
 		}
 
-	//	System.out.println("PostgreSQL JDBC Driver Registered!");
+		// System.out.println("PostgreSQL JDBC Driver Registered!");
 
 		try {
 			connection = DriverManager
@@ -97,7 +95,7 @@ public class Database {
 				techLevelValues.put(techLevels.getInt("TechLevelValue"),
 						techLevels.getString("TechLevelId"));
 			}
-			
+
 			ResultSet specialResources = s
 					.executeQuery("SELECT \"SpecialResourceId\", \"SpecialResourceName\" FROM \"SpecialResource\"");
 			while (specialResources.next()) {
@@ -105,21 +103,21 @@ public class Database {
 						specialResources.getString("SpecialResourceName"),
 						specialResources.getString("SpecialResourceId"));
 			}
-			
+
 			ResultSet governments = s
 					.executeQuery("SELECT \"GovernmentId\", \"GovernmentName\" FROM \"Government\"");
 			while (governments.next()) {
 				governmentValues.put(governments.getString("GovernmentName"),
 						governments.getString("GovernmentId"));
 			}
-			
+
 			ResultSet conditions = s
 					.executeQuery("SELECT \"ConditionId\", \"ConditionName\" FROM \"Condition\"");
 			while (conditions.next()) {
 				conditionValues.put(conditions.getString("ConditionName"),
 						conditions.getString("ConditionId"));
 			}
-			
+
 			ResultSet encounterRates = s
 					.executeQuery("SELECT \"EncounterRateId\", \"EncounterRateName\" FROM \"EncounterRate\"");
 			while (encounterRates.next()) {
@@ -127,24 +125,21 @@ public class Database {
 						encounterRates.getString("EncounterRateName"),
 						encounterRates.getString("EncounterRateId"));
 			}
-			
+
 			ResultSet goodTypes = s
 					.executeQuery("SELECT \"GoodTypeId\", \"GoodTypeName\" FROM \"GoodType\"");
 			while (goodTypes.next()) {
-				goodTypeValues.put(
-						goodTypes.getString("GoodTypeName"),
+				goodTypeValues.put(goodTypes.getString("GoodTypeName"),
 						goodTypes.getString("GoodTypeId"));
 			}
-			
+
 			ResultSet shipTypes = s
-					.executeQuery("SELECT \"ShipTypeId\", \"ShipName\" FROM \"ShipType\"");
+					.executeQuery("SELECT \"ShipTypeId\", \"ShipTypeName\" FROM \"ShipType\"");
 			while (shipTypes.next()) {
-				shipTypeValues.put(
-						shipTypes.getString("ShipName"),
+				shipTypeValues.put(shipTypes.getString("ShipTypeName"),
 						shipTypes.getString("ShipTypeId"));
 			}
-			
-			
+
 		} catch (SQLException s) {
 			s.printStackTrace();
 		}
@@ -180,40 +175,14 @@ public class Database {
 		return false;
 	}
 
-	// Tables:
-	// Planet - PlanetId, TechLevelId, SpecialResourceId, GovernemntId, LocationX, LocationY, ConditionId, PoliceEncounterRateId, PirateEncounterRateId, MarketplaceId
-	// Government - GovernmentId, GovernmentName
-	// TechLevel - TechLevelId, TechLevelName, TechLevelValue
-	// SpecialResource - SpecialResourceId, SpecialResourceName
-	// Condition - ConditionId, ConditionName
-	// EncounterRate - EncounterRateId, EncounterRateName
-	// GoodType - GoodTypeId, GoodTypeName, MinTechLevelToProduce, MinTechLevelToUse, BiggestProducer, BaseGoodTypePrice, PriceIncreasePerTechLevel, PriceVariance, Condition, CheapSpecialResource, ExpensiveSpecialResource, MinTraderPrice, MaxTraderPrice, BaseQuantity, QuantityIncreasePerTechLevel
-	// Marketplace - MarketplaceId, PlanetId
-	// MarketplaceGoods - MarketplaceId, GoodTypeId, GoodTypeQuantity, GoodTypePrice
-	// Player - PlayerId, PlayerName, PilotSkill, FighterSkill, TraderSkill, EngineerSkill, InvestorSkill, TraderReputation, PoliceReputation, PirateReputation, Credits, ShipId, PlanetId
-	// Ship - ShipId, ShipTypeId, CurrentHullPoints, CurrentFuel, Insurance
-	// ShipType - ShipTypeId, ShipName, MaxFuel, TotalHullPoints, CargoSize, WeaponSlots, ShieldSlots, GadgetSlots, CrewSpace, ShipMinTechLevel, FuelCost, ShipPrice, ShipBounty, ShipOccurrence, PoliceModifier, PirateModifier, TraderModifier, RepairCost, Size
-	// Laser - WeaponId, Name, BaseDamage, MinTechLevel, Price
-	// Shield - ShieldId, Name, MaxStrength
-	// Gadget - GadgetId, Name, Price, MinTechLevel, Ability
-	// ShipLasers - ShipId, WeaponId
-	// ShipShields - ShipId, ShieldId
-	// ShipGadgets - ShipId, GadgetId
-	// ShipMercenaries - ShipId, MercenaryId
-	// ShipCargo - ShipId, GoodTypeId, GoodTypeQuantity
-	// Mercenary - MercenaryId, DailyCost, FighterSkill, PilotSkill, EngineerSkill
-	
-	
-	// Bank - BankId, PlayerId, InterestRate, OutstandingPlayerDebt
-	// StockExchange - StockExchangeId, PlayerId
-	// Stock - StockId, StockExchangeId, CompanyId, Value
-	// Bond - BondId, StockExchangeId, InterestRate, Value
 	public void saveGame(Universe universe, Player player) {
 		long startTime = System.nanoTime();
 		if (userExists()) {
 			System.out.println("User exists, implementing update here");
 		} else {
 			try {
+				connection.setAutoCommit(false);
+
 				Ship ship = player.getShip();
 				PreparedStatement shipInsertStatement = connection
 						.prepareStatement("INSERT INTO \"Ship\" VALUES(?, ?, ?, ?)");
@@ -291,7 +260,7 @@ public class Database {
 				userPlayersInsertStatement.setObject(1, userUUIDObject);
 				userPlayersInsertStatement.setObject(2, playerUUIDObject);
 				userPlayersInsertStatement.execute();
-				
+
 				PreparedStatement planetInsertStatement = connection
 						.prepareStatement("INSERT INTO \"Planet\" VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 				PreparedStatement playerPlanetsInsertStatement = connection
@@ -347,8 +316,7 @@ public class Database {
 
 					planetInsertStatement.setString(10, p.getName());
 					planetInsertStatement.execute();
-					
-					
+
 					playerPlanetsInsertStatement.setObject(1, playerUUIDObject);
 					playerPlanetsInsertStatement.setObject(2, planetUUIDObject);
 					playerPlanetsInsertStatement.execute();
@@ -387,16 +355,26 @@ public class Database {
 					// }
 
 				}
-				
+
 				Statement s = connection.createStatement();
 				ResultSet planet = s
 						.executeQuery("SELECT \"PlanetId\" FROM \"Planet\" WHERE \"PlanetName\"='"
 								+ player.getPlanet().getName() + "'");
 				planet.next();
 				String planetUUID = planet.getString("PlanetId");
-				s.execute("UPDATE \"Player\" SET \"PlanetId\"='"+planetUUID+"' WHERE \"PlayerId\"='"+playerUUID+"'");
+				s.execute("UPDATE \"Player\" SET \"PlanetId\"='" + planetUUID
+						+ "' WHERE \"PlayerId\"='" + playerUUID + "'");
+
+				connection.commit();
+				connection.setAutoCommit(true);
 
 			} catch (SQLException s) {
+				try {
+					connection.setAutoCommit(true);
+					connection.rollback();
+				} catch (SQLException sqle) {
+					sqle.printStackTrace();
+				}
 				s.printStackTrace();
 			}
 		}
@@ -411,197 +389,74 @@ public class Database {
 	 * @return An object[] of the universe and planets
 	 */
 	public Object[] loadGame() {
+		Player p = null;
+		Universe u = null;
 		try {
+
 			Statement s = connection.createStatement();
-			ResultSet user = s
-					.executeQuery("SELECT \"UserId\" FROM \"User\" WHERE \"Username\"='"
-							+ username + "'");
-			user.next();
-			String userId = user.getString("UserId");
-			
-			ResultSet player = s
-					.executeQuery("SELECT \"PlayerId\" FROM \"UserPlayers\" WHERE \"UserId\"='"
-							+ userId + "'");
-			user.next();
-			String playerId = user.getString("UserId");
-			
+			String execPlayerStatement = "SELECT p.\"PlayerId\", p.\"PlayerName\", p.\"PilotSkill\", p.\"FighterSkill\", p.\"TraderSkill\", p.\"EngineerSkill\", p.\"InvestorSkill\", p.\"TraderReputation\", p.\"PoliceReputation\", p.\"PirateReputation\", p.\"Credits\", s.\"ShipId\", s.\"CurrentHullPoints\",  s.\"CurrentFuel\", st.\"ShipTypeName\" FROM \"User\" u INNER JOIN \"UserPlayers\" up ON u.\"UserId\"=up.\"UserId\" INNER JOIN \"Player\" p ON p.\"PlayerId\"=up.\"PlayerId\" INNER JOIN \"Ship\" s ON p.\"ShipId\"=s.\"ShipId\" INNER JOIN \"ShipType\" st ON s.\"ShipTypeId\"=st.\"ShipTypeId\" WHERE u.\"Username\"='"
+					+ username + "'";
+
+			ResultSet playerInfo = s.executeQuery(execPlayerStatement);
+			playerInfo.next();
+			String shipId = playerInfo.getString("ShipId");
+			String playerId = playerInfo.getString("PlayerId");
+			double credits = Double.valueOf(playerInfo.getString("Credits"));
+			ShipType type = ShipType.valueOf(playerInfo.getString(
+					"ShipTypeName").toUpperCase());
+			Ship ship = new Ship(type);
+			p = new Player(playerInfo.getString("PlayerName"),
+					playerInfo.getInt("PilotSkill"),
+					playerInfo.getInt("FighterSkill"),
+					playerInfo.getInt("TraderSkill"),
+					playerInfo.getInt("EngineerSkill"),
+					playerInfo.getInt("InvestorSkill"), ship, credits,
+					playerInfo.getInt("TraderReputation"),
+					playerInfo.getInt("PoliceReputation"),
+					playerInfo.getInt("PirateReputation"));
+
+			ResultSet shipCargo = s
+					.executeQuery("SELECT goods.\"GoodTypeName\", cargo.\"GoodTypeQuantity\" FROM \"ShipCargo\" cargo INNER JOIN \"GoodType\" goods ON cargo.\"GoodTypeId\"=goods.\"GoodTypeId\" WHERE cargo.\"ShipId\"='"
+							+ shipId + "'");
+
+			while (shipCargo.next()) {
+				ship.addToCargo(GoodType.valueOf(shipCargo.getString(
+						"GoodTypeName").toUpperCase()), shipCargo
+						.getInt("GoodTypeQuantity"));
+			}
+			String execPlanetStatement = "SELECT p.\"PlanetName\", tl.\"TechLevelName\", sr.\"SpecialResourceName\", g.\"GovernmentName\", p.\"LocationX\", p.\"LocationY\", c.\"ConditionName\", er.\"EncounterRateName\" AS \"PoliceEncounterRateId\", pirEr.\"EncounterRateName\" AS \"PirateEncounterRateId\" FROM \"Planet\" p INNER JOIN \"PlayerPlanets\" pp ON p.\"PlanetId\"=pp.\"PlanetId\" INNER JOIN  \"TechLevel\" tl ON tl.\"TechLevelId\"=p.\"TechLevelId\" INNER JOIN \"SpecialResource\" sr ON sr.\"SpecialResourceId\"=p.\"SpecialResourceId\" INNER JOIN \"Government\" g ON g.\"GovernmentId\"=p.\"GovernmentId\" INNER JOIN \"Condition\" c ON c.\"ConditionId\"=p.\"ConditionId\" INNER JOIN \"EncounterRate\" er ON er.\"EncounterRateId\"=p.\"PoliceEncounterRateId\" INNER JOIN \"EncounterRate\" pirEr ON pirEr.\"EncounterRateId\"=p.\"PirateEncounterRateId\" WHERE pp.\"PlayerId\"='"
+					+ playerId + "'";
+			ResultSet planets = s.executeQuery(execPlanetStatement);
+			List<Planet> planetList = new ArrayList<Planet>();
+			while (planets.next()) {
+				String planetName = planets.getString("PlanetName");
+				TechLevel techLevel = TechLevel.getEnum(planets.getString(
+						"TechLevelName").toUpperCase());
+				SpecialResource resource = SpecialResource.getEnum(planets
+						.getString("SpecialResourceName").toUpperCase());
+				Government government = Government.valueOf(planets.getString(
+						"GovernmentName").toUpperCase());
+				Location location = new Location(planets.getInt("LocationX"),
+						planets.getInt("LocationY"));
+				Condition condition = Condition.getEnum(planets.getString(
+						"ConditionName").toUpperCase());
+				EncounterRate pirates = EncounterRate.valueOf(planets
+						.getString("PirateEncounterRateId").toUpperCase());
+				EncounterRate police = EncounterRate.valueOf(planets.getString(
+						"PoliceEncounterRateId").toUpperCase());
+				EncounterRate trader = EncounterRate.SWARMS;
+				Planet planet = new Planet(planetName, techLevel, resource,
+						government, location, condition, pirates, police,
+						trader, 5, Color.GREEN);
+				planetList.add(planet);
+				u = new Universe(planetList);
+			}
+
 		} catch (SQLException s) {
 			s.printStackTrace();
 		}
-		
-		Universe u = new Universe();
-		u.createPlanets();
-		Player p = new Player("Jack",1,10,7,1,1,new Ship(ShipType.FIREFLY));
-		p.setPlanet(u.getPlanets().get(0));
-		return new Object[] {p,u};
-	}
 
-	// public void createEnum() {
-	// Map<Integer, String> techLevelMap = new HashMap<Integer, String>();
-	// techLevelMap.put(3, "346ab4de-3a9e-4edd-81ca-2dae7c498910");
-	// techLevelMap.put(5, "5f0da0ba-35c1-4274-8f37-a9e74549ff7c");
-	// techLevelMap.put(0, "69c54f7a-53a4-4216-9ae2-4609d38b132b");
-	// techLevelMap.put(4, "735ca420-eb54-4157-8f96-acfc55fe35e9");
-	// techLevelMap.put(1, "8501754a-7adb-4c38-8172-e204cf091bb5");
-	// techLevelMap.put(2, "947effab-d08f-43ef-8735-a9d7866d1fc0");
-	// techLevelMap.put(6, "a78330f1-a681-4140-99ba-63eee79bad02");
-	// techLevelMap.put(7, "ba6271de-4b67-40c2-a99c-7130627ba0fa");
-	//
-	// try {
-	// for (ShieldType c : ShieldType.values()) {
-	// Statement s = connection.createStatement();
-	// UUID uuid = UUID.randomUUID();
-	// s.execute("INSERT INTO \"Shield\" VALUES('" + uuid + "', "
-	// + c.getShieldHP() + ", '"
-	// + techLevelMap.get(c.getMinTechLevel()) + "', "
-	// + c.getPrice() + ", '" + c.toString() + "')");
-	// }
-	// } catch (SQLException e) {
-	// e.printStackTrace();
-	// }
-	// }
-	//
-	// public void createShipType() {
-	// Map<Integer, String> techLevelMap = new HashMap<Integer, String>();
-	// techLevelMap.put(3, "346ab4de-3a9e-4edd-81ca-2dae7c498910");
-	// techLevelMap.put(5, "5f0da0ba-35c1-4274-8f37-a9e74549ff7c");
-	// techLevelMap.put(0, "69c54f7a-53a4-4216-9ae2-4609d38b132b");
-	// techLevelMap.put(4, "735ca420-eb54-4157-8f96-acfc55fe35e9");
-	// techLevelMap.put(1, "8501754a-7adb-4c38-8172-e204cf091bb5");
-	// techLevelMap.put(2, "947effab-d08f-43ef-8735-a9d7866d1fc0");
-	// techLevelMap.put(6, "a78330f1-a681-4140-99ba-63eee79bad02");
-	// techLevelMap.put(7, "ba6271de-4b67-40c2-a99c-7130627ba0fa");
-	//
-	// try {
-	// for (ShipType g : ShipType.values()) {
-	// Statement s = connection.createStatement();
-	// UUID uuid = UUID.randomUUID();
-	// String execStatement = "'" + uuid + "', '";
-	// execStatement += g.toString() + "', ";
-	// execStatement += g.getFuel() + ", ";
-	// execStatement += g.getTotalHP() + ", ";
-	// execStatement += g.getCargoSize() + ", ";
-	// execStatement += g.getWeaponSlots() + ", ";
-	// execStatement += g.getShieldSlots() + ", ";
-	// execStatement += g.getGadgetSlots() + ", ";
-	// execStatement += g.getCrewSpace() + ", '";
-	// execStatement += techLevelMap.get(g.getMinTechLevel()) + "', ";
-	// execStatement += g.getFuelCost() + ", ";
-	// execStatement += g.getPrice() + ", ";
-	// execStatement += g.getBounty() + ", ";
-	// execStatement += g.getOccurrence() + ", ";
-	// execStatement += g.getPoliceModifier() + ", ";
-	// execStatement += g.getPirateModifier() + ", ";
-	// execStatement += g.getTraderModifier() + ", ";
-	// execStatement += g.getRepairCost() + ", ";
-	// execStatement += g.getSize();
-	// System.out.println("INSERT INTO \"ShipType\" VALUES("
-	// + execStatement + ")");
-	//
-	// s.execute("INSERT INTO \"ShipType\" VALUES(" + execStatement
-	// + ")");
-	// }
-	// } catch (SQLException e) {
-	// e.printStackTrace();
-	// }
-	// }
-	//
-	// public void createGoodType() {
-	// Map<Integer, String> techLevelMap = new HashMap<Integer, String>();
-	// techLevelMap.put(3, "346ab4de-3a9e-4edd-81ca-2dae7c498910");
-	// techLevelMap.put(5, "5f0da0ba-35c1-4274-8f37-a9e74549ff7c");
-	// techLevelMap.put(0, "69c54f7a-53a4-4216-9ae2-4609d38b132b");
-	// techLevelMap.put(4, "735ca420-eb54-4157-8f96-acfc55fe35e9");
-	// techLevelMap.put(1, "8501754a-7adb-4c38-8172-e204cf091bb5");
-	// techLevelMap.put(2, "947effab-d08f-43ef-8735-a9d7866d1fc0");
-	// techLevelMap.put(6, "a78330f1-a681-4140-99ba-63eee79bad02");
-	// techLevelMap.put(7, "ba6271de-4b67-40c2-a99c-7130627ba0fa");
-	//
-	// Map<Condition, String> conditionMap = new HashMap<Condition, String>();
-	// conditionMap.put(Condition.DROUGHT,
-	// "0815cec6-99c7-443f-b9fd-7cf59924cad8");
-	// conditionMap
-	// .put(Condition.NONE, "1b45245b-0a91-4048-9331-9cb5ce360bbe");
-	// conditionMap.put(Condition.CROPFAIL,
-	// "3674ea27-a03d-48a1-88b6-5ac4389644d3");
-	// conditionMap.put(Condition.BOREDOM,
-	// "3dfffaa5-6c19-481b-bde2-7c17aa7e0181");
-	// conditionMap
-	// .put(Condition.COLD, "4f8c8ba3-5cb5-470f-a477-8f983adb1d52");
-	// conditionMap.put(Condition.WAR, "9cddf2c4-d68d-4d20-b3df-cd3a7dcf4354");
-	// conditionMap.put(Condition.LACKOFWORKERS,
-	// "a1ff4493-40b4-4db8-ab71-14119c1cb207");
-	// conditionMap.put(Condition.PLAGUE,
-	// "d19a56f7-773b-4e96-93ce-554b393c6dc2");
-	//
-	// Map<SpecialResource, String> resourceMap = new HashMap<SpecialResource,
-	// String>();
-	// resourceMap.put(SpecialResource.DESERT,
-	// "0d3455c8-112a-4e7b-ad62-aa29151ed5e8");
-	// resourceMap.put(SpecialResource.NOSPECIALRESOURCES,
-	// "0d65f5ed-9d90-4d73-a8b2-075f785b1bc9");
-	// resourceMap.put(SpecialResource.WARLIKE,
-	// "15d11d22-8e76-493c-a842-53494ea67bd0");
-	// resourceMap.put(SpecialResource.RICHFAUNA,
-	// "2663547b-3dac-4ddc-9a6b-fda2bc6715a4");
-	// resourceMap.put(SpecialResource.MINERALRICH,
-	// "9666f206-c6e3-433d-a4e4-471805ab0c1e");
-	// resourceMap.put(SpecialResource.POORSOIL,
-	// "aa211fff-983c-4c9b-b70f-8c2b528b7d43");
-	// resourceMap.put(SpecialResource.LOTSOFWATER,
-	// "adc14902-a84d-49a2-a84a-fcf29cd558f8");
-	// resourceMap.put(SpecialResource.LIFELESS,
-	// "c6d6d1ff-6237-4102-9491-d2cf35c2cbe4");
-	// resourceMap.put(SpecialResource.WEIRDMUSHROOMS,
-	// "c7bb252c-2247-4d91-9f13-865645fd2bf3");
-	// resourceMap.put(SpecialResource.ARTISTIC,
-	// "cc5241b7-7e6f-4cf5-98f3-19855b240b85");
-	// resourceMap.put(SpecialResource.MINERALPOOR,
-	// "e301d026-1383-4748-8e96-6141d0ccf3be");
-	// resourceMap.put(SpecialResource.RICHSOIL,
-	// "f545a5ff-10da-4c2f-ae8d-e8968b9acd9c");
-	// resourceMap.put(SpecialResource.LOTSOFHERBS,
-	// "f5918ab6-212d-4fc5-addd-fb9a30bbc731");
-	//
-	// try {
-	// for (GoodType g : GoodType.values()) {
-	// Statement s = connection.createStatement();
-	// UUID uuid = UUID.randomUUID();
-	// String execStatement = "'" + uuid + "', '";
-	// execStatement += g.toString() + "', '";
-	// execStatement += techLevelMap.get(g.getMinTechLevelToProduce())
-	// + "', '";
-	// execStatement += techLevelMap.get(g.getMinTechLevelToUse())
-	// + "', '";
-	// execStatement += techLevelMap.get(g.getBiggestProducer())
-	// + "', ";
-	// execStatement += g.getBasePrice() + ", ";
-	// execStatement += g.getPriceIncPerTechLevel() + ", ";
-	// execStatement += g.getVariance() + ", '";
-	// execStatement += conditionMap.get(g.getCondition()) + "', ";
-	// if (g.getCheapResource() != null)
-	// execStatement += "'"
-	// + resourceMap.get(g.getCheapResource()) + "', ";
-	// else
-	// execStatement += "'',";
-	// if (g.getExpensiveResource() != null)
-	// execStatement += "'"
-	// + resourceMap.get(g.getExpensiveResource()) + "', ";
-	// else
-	// execStatement += "'',";
-	// execStatement += g.getMinTraderPrice() + ", ";
-	// execStatement += g.getMaxTraderPrice() + ", ";
-	// execStatement += g.getBaseQuantity() + ", ";
-	// execStatement += g.getQuantityIncPerTechLevel();
-	// System.out.println("INSERT INTO \"GoodType\" VALUES("
-	// + execStatement + ")");
-	// if (g.getCheapResource() != null
-	// && g.getExpensiveResource() != null)
-	// s.execute("INSERT INTO \"GoodType\" VALUES("
-	// + execStatement + ")");
-	// }
-	// } catch (SQLException e) {
-	// e.printStackTrace();
-	// }
-	// }
+		p.setPlanet(u.getPlanets().get(0));
+		return new Object[] { p, u };
+	}
 }
