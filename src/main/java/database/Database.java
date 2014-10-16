@@ -182,6 +182,26 @@ public class Database {
 	}
 
 	/**
+	 * Determines whether or not a given player exists
+	 * 
+	 * @param playerName
+	 *            The name of the player
+	 * @return Whether or not the player is present in the database
+	 */
+	public boolean playerExists(String playerName) {
+		try {
+			Statement s = connection.createStatement();
+			String playerQuery = "SELECT up.\"PlayerId\" FROM \"UserPlayers\" up INNER JOIN \"User\" u ON u.\"UserId\"=up.\"UserId\" WHERE u.\"Username\"='"
+					+ username + "'";
+			ResultSet r = s.executeQuery(playerQuery);
+			return r.next();
+		} catch (SQLException s) {
+			s.printStackTrace();
+		}
+		return false;
+	}
+
+	/**
 	 * Saves the game data to the database
 	 * 
 	 * @param universe
@@ -191,7 +211,7 @@ public class Database {
 	 */
 	public void saveGame(Universe universe, Player player) {
 		long startTime = System.nanoTime();
-		if (userExists()) {
+		if (userExists() && playerExists(player.getName())) {
 			try {
 				Statement playerShipStatment = connection.createStatement();
 				String playerShipQuery = "SELECT up.\"PlayerId\", p.\"ShipId\" FROM \"User\" u INNER JOIN \"UserPlayers\" up ON up.\"UserId\"=u.\"UserId\" INNER JOIN \"Player\" p ON p.\"PlayerId\"=up.\"PlayerId\" WHERE u.\"Username\"='"
@@ -336,16 +356,25 @@ public class Database {
 				playerInsertStatement.setString(13, player.getName());
 				playerInsertStatement.execute();
 
-				PreparedStatement userInsertStatement = connection
-						.prepareStatement("INSERT INTO \"User\" VALUES(?, ?, ?)");
-				UUID userUUID = UUID.randomUUID();
 				PGobject userUUIDObject = new PGobject();
 				userUUIDObject.setType("uuid");
-				userUUIDObject.setValue(userUUID.toString());
-				userInsertStatement.setObject(1, userUUIDObject);
-				userInsertStatement.setString(2, username);
-				userInsertStatement.setString(3, "password");
-				userInsertStatement.execute();
+				if (!userExists()) {
+					PreparedStatement userInsertStatement = connection
+							.prepareStatement("INSERT INTO \"User\" VALUES(?, ?, ?)");
+					UUID userUUID = UUID.randomUUID();
+					userUUIDObject.setValue(userUUID.toString());
+					userInsertStatement.setObject(1, userUUIDObject);
+					userInsertStatement.setString(2, username);
+					userInsertStatement.setString(3, "password");
+					userInsertStatement.execute();
+				} else {
+					PreparedStatement getUserIdStatement = connection
+							.prepareStatement("SELECT \"UserId\" from \"User\" WHERE \"Username\"='"
+									+ username + "'");
+					ResultSet userIdSet = getUserIdStatement.executeQuery();
+					userIdSet.next();
+					userUUIDObject.setValue(userIdSet.getString("UserId"));
+				}
 
 				PreparedStatement userPlayersInsertStatement = connection
 						.prepareStatement("INSERT INTO \"UserPlayers\" VALUES(?, ?, ?)");
@@ -489,19 +518,41 @@ public class Database {
 	}
 
 	/**
+	 * Gets the list of player names associated with a given user
+	 * 
+	 * @return The list of players that a user has
+	 */
+	public List<String> getUserPlayers() {
+		List<String> players = new ArrayList<String>();
+		try {
+			Statement s = connection.createStatement();
+			String playerQuery = "SELECT up.\"PlayerName\" FROM \"User\" u INNER JOIN \"UserPlayers\" up ON u.\"UserId\"=up.\"UserId\" WHERE u.\"Username\"='"
+					+ username + "'";
+			ResultSet playerSet = s.executeQuery(playerQuery);
+			while (playerSet.next()) {
+				players.add(playerSet.getString("PlayerName"));
+			}
+		} catch (SQLException s) {
+			s.printStackTrace();
+		}
+
+		return players;
+	}
+
+	/**
 	 * Loads the users game from the database
 	 * 
 	 * @return An object[] of the universe and planets
 	 */
-	public Object[] loadGame() {
+	public Object[] loadGame(String playerName) {
 		long startTime = System.nanoTime();
 		Player p = null;
 		Universe u = null;
 		try {
 
 			Statement s = connection.createStatement();
-			String execPlayerStatement = "SELECT p.\"PlayerId\", p.\"PlayerName\", p.\"PilotSkill\", p.\"FighterSkill\", p.\"TraderSkill\", p.\"EngineerSkill\", p.\"InvestorSkill\", p.\"TraderReputation\", p.\"PoliceReputation\", p.\"PirateReputation\", p.\"Credits\", s.\"ShipId\", s.\"CurrentHullPoints\",  s.\"CurrentFuel\", st.\"ShipTypeName\", plan.\"PlanetName\" FROM \"User\" u INNER JOIN \"UserPlayers\" up ON u.\"UserId\"=up.\"UserId\" INNER JOIN \"Player\" p ON p.\"PlayerId\"=up.\"PlayerId\" INNER JOIN \"Ship\" s ON p.\"ShipId\"=s.\"ShipId\" INNER JOIN \"ShipType\" st ON s.\"ShipTypeId\"=st.\"ShipTypeId\" INNER JOIN \"Planet\" plan ON p.\"PlanetId\"=plan.\"PlanetId\" WHERE u.\"Username\"='"
-					+ username + "'";
+			String execPlayerStatement = "SELECT p.\"PlayerId\", p.\"PilotSkill\", p.\"FighterSkill\", p.\"TraderSkill\", p.\"EngineerSkill\", p.\"InvestorSkill\", p.\"TraderReputation\", p.\"PoliceReputation\", p.\"PirateReputation\", p.\"Credits\", s.\"ShipId\", s.\"CurrentHullPoints\",  s.\"CurrentFuel\", st.\"ShipTypeName\", plan.\"PlanetName\" FROM \"User\" u INNER JOIN \"UserPlayers\" up ON u.\"UserId\"=up.\"UserId\" INNER JOIN \"Player\" p ON p.\"PlayerId\"=up.\"PlayerId\" INNER JOIN \"Ship\" s ON p.\"ShipId\"=s.\"ShipId\" INNER JOIN \"ShipType\" st ON s.\"ShipTypeId\"=st.\"ShipTypeId\" INNER JOIN \"Planet\" plan ON p.\"PlanetId\"=plan.\"PlanetId\" WHERE u.\"Username\"='"
+					+ username + "' AND up.\"PlayerName\"='" + playerName + "'";
 
 			ResultSet playerInfo = s.executeQuery(execPlayerStatement);
 			playerInfo.next();
@@ -514,8 +565,7 @@ public class Database {
 			ShipType type = ShipType.valueOf(playerInfo.getString(
 					"ShipTypeName").toUpperCase());
 			Ship ship = new Ship(type, currentHullPoints, shipFuel);
-			p = new Player(playerInfo.getString("PlayerName"),
-					playerInfo.getInt("PilotSkill"),
+			p = new Player(playerName, playerInfo.getInt("PilotSkill"),
 					playerInfo.getInt("FighterSkill"),
 					playerInfo.getInt("TraderSkill"),
 					playerInfo.getInt("EngineerSkill"),

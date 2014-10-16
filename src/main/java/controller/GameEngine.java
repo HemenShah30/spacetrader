@@ -70,19 +70,28 @@ public class GameEngine {
 	/**
 	 * Loads an existing game from the database by populating the proper classes
 	 */
-	public void loadGame() {
-		Object[] gameData = database.loadGame();
+	public void loadGame(String playerName) {
+		Object[] gameData = database.loadGame(playerName);
 		player = (Player) gameData[0];
 		universe = (Universe) gameData[1];
 		tradeEngine = new TradeEngine(player);
 		flightEngine = new FlightEngine(player, universe);
 	}
-	
+
 	/**
 	 * Saves all the current game data to the database
 	 */
 	public void saveGame() {
 		database.saveGame(universe, player);
+	}
+
+	/**
+	 * Gets the players associated with a given user
+	 * 
+	 * @return The players associated with a given user
+	 */
+	public List<String> getUserPlayers() {
+		return database.getUserPlayers();
 	}
 
 	/**

@@ -1,6 +1,7 @@
 package view;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.controlsfx.dialog.Dialogs;
 
@@ -73,6 +74,14 @@ public class CharacterCreatorController {
 	@FXML
 	private void startNewGame(Event e) {
 		if (MultiPageController.isValidAction(e)) {
+			GameEngine game = GameEngine.getGameEngine();
+			List<String> playerNames = game.getUserPlayers();
+			for (int i = 0; i < playerNames.size(); i++) {
+				String name = playerNames.get(i);
+				name = name.toLowerCase();
+				playerNames.remove(i);
+				playerNames.add(name);
+			}
 			String playerName = name.getText().trim();
 			double totalPoints = pilotSlider.getValue()
 					+ fightingSlider.getValue() + investorSlider.getValue()
@@ -83,7 +92,15 @@ public class CharacterCreatorController {
 						.title("Error")
 						.message("You must enter a name for your character")
 						.showError();
+			} else if (playerNames.contains(playerName.toLowerCase())) {
+				Dialogs.create()
+						.owner(newGame.getScene().getWindow())
+						.title("Error")
+						.message(
+								"You cannot create two characters with the same name")
+						.showError();
 			} else if (totalPoints != totalSkills) {
+
 				Dialogs.create()
 						.owner(newGame.getScene().getWindow())
 						.title("Error")
@@ -91,7 +108,6 @@ public class CharacterCreatorController {
 								"You must allocate all your skill points for your character")
 						.showError();
 			} else {
-				GameEngine game = GameEngine.getGameEngine();
 				game.setPlayer(playerName, (int) pilotSlider.getValue(),
 						(int) fightingSlider.getValue(),
 						(int) traderSlider.getValue(),

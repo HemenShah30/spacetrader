@@ -27,23 +27,14 @@ public class StartScreenController {
 	@FXML
 	private void begin(Event e) {
 		if (MultiPageController.isValidAction(e)) {
-			boolean done = false;
-			while (!done) {
-				Optional<String> response = Dialogs.create()
-						.owner(beginButton.getScene().getWindow())
-						.title("User").message("Please input your username")
-						.showTextInput();
-				if (response.isPresent() && !response.get().equals("")) {
-					String user = response.get();
-					done = true;
-					GameEngine game = GameEngine.getGameEngine();
-					game.createDatabase(user);
-					MultiPageController.loadView(beginButton, "MainScene");
-				} else {
-					Dialogs.create().owner(beginButton.getScene().getWindow())
-							.title("Error")
-							.message("You must enter a username").showError();
-				}
+			Optional<String> response = Dialogs.create()
+					.owner(beginButton.getScene().getWindow()).title("User")
+					.message("Please input your username").showTextInput();
+			if (response.isPresent() && !response.get().equals("")) {
+				String user = response.get();
+				GameEngine game = GameEngine.getGameEngine();
+				game.createDatabase(user);
+				MultiPageController.loadView(beginButton, "MainScene");
 			}
 		}
 	}

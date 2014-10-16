@@ -1,6 +1,7 @@
 package view;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import org.controlsfx.dialog.Dialogs;
 
@@ -47,19 +48,29 @@ public class MainSceneController {
 	 */
 	private void loadGame(Event e) {
 		if (MultiPageController.isValidAction(e)) {
-			if (GameEngine.getGameEngine().userExists()) {
+			GameEngine game = GameEngine.getGameEngine();
+			if (game.userExists()) {
 				try {
-					GameEngine.getGameEngine().loadGame();
-					Stage stage = (Stage) loadGame.getScene().getWindow();
-					stage.hide();
-					FXMLLoader loader = new FXMLLoader(
-							ClassLoader
-									.getSystemResource("view/PlanetScreen.fxml"));
-					Parent newScene = loader.load();
-					stage.setScene(new Scene(newScene, 600, 400));
-					PlanetScreenController controller = loader.getController();
-					controller.initializePage();
-					stage.show();
+					Optional<String> player = Dialogs.create()
+							.owner(loadGame.getScene().getWindow())
+							.title("Player Select")
+							.message("Please select your character")
+							.showChoices(game.getUserPlayers());
+
+					if (player.isPresent()) {
+						game.loadGame(player.get());
+						Stage stage = (Stage) loadGame.getScene().getWindow();
+						stage.hide();
+						FXMLLoader loader = new FXMLLoader(
+								ClassLoader
+										.getSystemResource("view/PlanetScreen.fxml"));
+						Parent newScene = loader.load();
+						stage.setScene(new Scene(newScene, 600, 400));
+						PlanetScreenController controller = loader
+								.getController();
+						controller.initializePage();
+						stage.show();
+					}
 				} catch (IOException ioe) {
 					ioe.printStackTrace();
 				}
