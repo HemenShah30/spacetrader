@@ -91,11 +91,11 @@ public class FlightEngine {
 	 */
 	public void goToPlanet(Planet p) {
 		Planet origin = player.getPlanet();
+		calculateEncounters(p);
 		player.setPlanet(p);
 		// encounters go here
 		Map<Planet, Integer> withinRange = getPlanetsWithinRange(universe,
 				origin);
-		calculateEncounters(p);
 		ship.setFuel(ship.getFuel() - withinRange.get(p));
 
 	}
@@ -141,7 +141,7 @@ public class FlightEngine {
 		String ret = "";
 		if (roll < 0.20) {
 			// give credits
-			double amount = (Math.random() / 3) * player.getCredits();
+			double amount = (int)(Math.random() * 2000) + 50;
 			player.increaseCredits(amount);
 			ret = "You find some credits floating in space!";
 		} else if (roll >= 0.20 && roll < 0.35) {
