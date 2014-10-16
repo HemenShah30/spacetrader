@@ -30,6 +30,12 @@ import model.SpecialResource;
 import model.TechLevel;
 import model.Universe;
 
+/**
+ * Class that handles all input and output to the database
+ * 
+ * @author Jack Croft
+ *
+ */
 public class Database {
 	private Connection connection;
 	private String username;
@@ -175,6 +181,14 @@ public class Database {
 		return false;
 	}
 
+	/**
+	 * Saves the game data to the database
+	 * 
+	 * @param universe
+	 *            The universe to be saved
+	 * @param player
+	 *            The player to be saved
+	 */
 	public void saveGame(Universe universe, Player player) {
 		long startTime = System.nanoTime();
 		if (userExists()) {
@@ -262,7 +276,7 @@ public class Database {
 				userPlayersInsertStatement.execute();
 
 				PreparedStatement planetInsertStatement = connection
-						.prepareStatement("INSERT INTO \"Planet\" VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+						.prepareStatement("INSERT INTO \"Planet\" VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 				PreparedStatement playerPlanetsInsertStatement = connection
 						.prepareStatement("INSERT INTO \"PlayerPlanets\" VALUES(?, ?)");
 				List<Planet> planets = universe.getPlanets();
@@ -315,6 +329,18 @@ public class Database {
 							pirateEncounterUUIDObject);
 
 					planetInsertStatement.setString(10, p.getName());
+
+					PGobject traderEncounterUUIDObject = new PGobject();
+					traderEncounterUUIDObject.setType("uuid");
+					traderEncounterUUIDObject.setValue(encounterRateValues
+							.get(p.getTraderEncounterRate().toString()));
+					planetInsertStatement.setObject(11,
+							traderEncounterUUIDObject);
+
+					planetInsertStatement.setInt(12, p.getRadius());
+					planetInsertStatement
+							.setString(13, p.getColor().toString());
+
 					planetInsertStatement.execute();
 
 					playerPlanetsInsertStatement.setObject(1, playerUUIDObject);
@@ -424,7 +450,7 @@ public class Database {
 						"GoodTypeName").toUpperCase()), shipCargo
 						.getInt("GoodTypeQuantity"));
 			}
-			String execPlanetStatement = "SELECT p.\"PlanetName\", tl.\"TechLevelName\", sr.\"SpecialResourceName\", g.\"GovernmentName\", p.\"LocationX\", p.\"LocationY\", c.\"ConditionName\", er.\"EncounterRateName\" AS \"PoliceEncounterRateId\", pirEr.\"EncounterRateName\" AS \"PirateEncounterRateId\" FROM \"Planet\" p INNER JOIN \"PlayerPlanets\" pp ON p.\"PlanetId\"=pp.\"PlanetId\" INNER JOIN  \"TechLevel\" tl ON tl.\"TechLevelId\"=p.\"TechLevelId\" INNER JOIN \"SpecialResource\" sr ON sr.\"SpecialResourceId\"=p.\"SpecialResourceId\" INNER JOIN \"Government\" g ON g.\"GovernmentId\"=p.\"GovernmentId\" INNER JOIN \"Condition\" c ON c.\"ConditionId\"=p.\"ConditionId\" INNER JOIN \"EncounterRate\" er ON er.\"EncounterRateId\"=p.\"PoliceEncounterRateId\" INNER JOIN \"EncounterRate\" pirEr ON pirEr.\"EncounterRateId\"=p.\"PirateEncounterRateId\" WHERE pp.\"PlayerId\"='"
+			String execPlanetStatement = "SELECT p.\"PlanetName\", p.\"Radius\", p.\"Color\", tl.\"TechLevelName\", sr.\"SpecialResourceName\", g.\"GovernmentName\", p.\"LocationX\", p.\"LocationY\", c.\"ConditionName\", er.\"EncounterRateName\" AS \"PoliceEncounterRateId\", pirEr.\"EncounterRateName\" AS \"PirateEncounterRateId\", traEr.\"EncounterRateName\" AS \"TraderEncounterRateId\" FROM \"Planet\" p INNER JOIN \"PlayerPlanets\" pp ON p.\"PlanetId\"=pp.\"PlanetId\" INNER JOIN  \"TechLevel\" tl ON tl.\"TechLevelId\"=p.\"TechLevelId\" INNER JOIN \"SpecialResource\" sr ON sr.\"SpecialResourceId\"=p.\"SpecialResourceId\" INNER JOIN \"Government\" g ON g.\"GovernmentId\"=p.\"GovernmentId\" INNER JOIN \"Condition\" c ON c.\"ConditionId\"=p.\"ConditionId\" INNER JOIN \"EncounterRate\" er ON er.\"EncounterRateId\"=p.\"PoliceEncounterRateId\" INNER JOIN \"EncounterRate\" pirEr ON pirEr.\"EncounterRateId\"=p.\"PirateEncounterRateId\" INNER JOIN \"EncounterRate\" traEr ON traEr.\"EncounterRateId\"=p.\"TraderEncounterRateId\" WHERE pp.\"PlayerId\"='"
 					+ playerId + "'";
 			ResultSet planets = s.executeQuery(execPlanetStatement);
 			List<Planet> planetList = new ArrayList<Planet>();
@@ -444,10 +470,13 @@ public class Database {
 						.getString("PirateEncounterRateId").toUpperCase());
 				EncounterRate police = EncounterRate.valueOf(planets.getString(
 						"PoliceEncounterRateId").toUpperCase());
-				EncounterRate trader = EncounterRate.SWARMS;
+				EncounterRate trader = EncounterRate.valueOf(planets.getString(
+						"TraderEncounterRateId").toUpperCase());
+				int radius = planets.getInt("Radius");
+				Color color = Color.valueOf(planets.getString("Color"));
 				Planet planet = new Planet(planetName, techLevel, resource,
 						government, location, condition, pirates, police,
-						trader, 5, Color.GREEN);
+						trader, radius, color);
 				planetList.add(planet);
 				u = new Universe(planetList);
 			}
