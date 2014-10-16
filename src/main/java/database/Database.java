@@ -239,8 +239,17 @@ public class Database {
 				s.execute("UPDATE \"Player\" SET \"PlanetId\"='" + planetId
 						+ "' WHERE \"PlayerId\"='" + playerId + "'");
 
-				// need to update ship fuel and hull points
 				Ship ship = player.getShip();
+				String updateShipCmd = "UPDATE \"Ship\" SET \"CurrentHullPoints\"="
+						+ ship.getCurrHP()
+						+ ", \"CurrentFuel\"="
+						+ ship.getFuel()
+						+ ", \"ShipTypeId\"=(SELECT \"ShipTypeId\" FROM \"ShipType\" WHERE \"ShipTypeName\"='"
+						+ ship.getShipType().toString()
+						+ "')"
+						+ " WHERE \"ShipId\"='" + shipId + "'";
+				s.execute(updateShipCmd);
+
 				for (GoodType g : GoodType.values()) {
 					String updateShipCargoCmd = "UPDATE \"ShipCargo\" SET \"GoodTypeQuantity\"="
 							+ ship.amountInCargo(g)
@@ -262,8 +271,6 @@ public class Database {
 				}
 				s.printStackTrace();
 			}
-
-			System.out.println("BAM SAVE UPDATED");
 		} else {
 			try {
 				connection.setAutoCommit(false);
@@ -487,22 +494,26 @@ public class Database {
 	 * @return An object[] of the universe and planets
 	 */
 	public Object[] loadGame() {
+		long startTime = System.nanoTime();
 		Player p = null;
 		Universe u = null;
 		try {
 
 			Statement s = connection.createStatement();
-			String execPlayerStatement = "SELECT p.\"PlayerId\", p.\"PlayerName\", p.\"PilotSkill\", p.\"FighterSkill\", p.\"TraderSkill\", p.\"EngineerSkill\", p.\"InvestorSkill\", p.\"TraderReputation\", p.\"PoliceReputation\", p.\"PirateReputation\", p.\"Credits\", s.\"ShipId\", s.\"CurrentHullPoints\",  s.\"CurrentFuel\", st.\"ShipTypeName\" FROM \"User\" u INNER JOIN \"UserPlayers\" up ON u.\"UserId\"=up.\"UserId\" INNER JOIN \"Player\" p ON p.\"PlayerId\"=up.\"PlayerId\" INNER JOIN \"Ship\" s ON p.\"ShipId\"=s.\"ShipId\" INNER JOIN \"ShipType\" st ON s.\"ShipTypeId\"=st.\"ShipTypeId\" WHERE u.\"Username\"='"
+			String execPlayerStatement = "SELECT p.\"PlayerId\", p.\"PlayerName\", p.\"PilotSkill\", p.\"FighterSkill\", p.\"TraderSkill\", p.\"EngineerSkill\", p.\"InvestorSkill\", p.\"TraderReputation\", p.\"PoliceReputation\", p.\"PirateReputation\", p.\"Credits\", s.\"ShipId\", s.\"CurrentHullPoints\",  s.\"CurrentFuel\", st.\"ShipTypeName\", plan.\"PlanetName\" FROM \"User\" u INNER JOIN \"UserPlayers\" up ON u.\"UserId\"=up.\"UserId\" INNER JOIN \"Player\" p ON p.\"PlayerId\"=up.\"PlayerId\" INNER JOIN \"Ship\" s ON p.\"ShipId\"=s.\"ShipId\" INNER JOIN \"ShipType\" st ON s.\"ShipTypeId\"=st.\"ShipTypeId\" INNER JOIN \"Planet\" plan ON p.\"PlanetId\"=plan.\"PlanetId\" WHERE u.\"Username\"='"
 					+ username + "'";
 
 			ResultSet playerInfo = s.executeQuery(execPlayerStatement);
 			playerInfo.next();
 			String shipId = playerInfo.getString("ShipId");
+			int shipFuel = playerInfo.getInt("CurrentFuel");
+			int currentHullPoints = playerInfo.getInt("CurrentHullPoints");
 			String playerId = playerInfo.getString("PlayerId");
+			String playerPlanetName = playerInfo.getString("PlanetName");
 			double credits = Double.valueOf(playerInfo.getString("Credits"));
 			ShipType type = ShipType.valueOf(playerInfo.getString(
 					"ShipTypeName").toUpperCase());
-			Ship ship = new Ship(type);
+			Ship ship = new Ship(type, currentHullPoints, shipFuel);
 			p = new Player(playerInfo.getString("PlayerName"),
 					playerInfo.getInt("PilotSkill"),
 					playerInfo.getInt("FighterSkill"),
@@ -550,14 +561,16 @@ public class Database {
 						government, location, condition, pirates, police,
 						trader, radius, color);
 				planetList.add(planet);
-				u = new Universe(planetList);
+				if (planet.getName().equalsIgnoreCase(playerPlanetName))
+					p.setPlanet(planet);
 			}
+			u = new Universe(planetList);
 
 		} catch (SQLException s) {
 			s.printStackTrace();
 		}
-		//need to set this planet properly
-		p.setPlanet(u.getPlanets().get(0));
+		System.out.println("Load Time: " + (System.nanoTime() - startTime)
+				/ 1000000000.);
 		return new Object[] { p, u };
 	}
 }

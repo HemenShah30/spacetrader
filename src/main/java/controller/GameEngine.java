@@ -76,7 +76,6 @@ public class GameEngine {
 		universe = (Universe) gameData[1];
 		tradeEngine = new TradeEngine(player);
 		flightEngine = new FlightEngine(player, universe);
-		System.out.println("BAM GAME LOADED");
 	}
 	
 	/**
