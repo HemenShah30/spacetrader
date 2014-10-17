@@ -192,7 +192,7 @@ public class Database {
 		try {
 			Statement s = connection.createStatement();
 			String playerQuery = "SELECT up.\"PlayerId\" FROM \"UserPlayers\" up INNER JOIN \"User\" u ON u.\"UserId\"=up.\"UserId\" WHERE u.\"Username\"='"
-					+ username + "'";
+					+ username + "' AND up.\"PlayerName\"='" + playerName + "'";
 			ResultSet r = s.executeQuery(playerQuery);
 			return r.next();
 		} catch (SQLException s) {
@@ -224,6 +224,16 @@ public class Database {
 				String playerId = playerShipSet.getString("PlayerId");
 				String shipId = playerShipSet.getString("ShipId");
 
+				ResultSet planetSet = playerShipStatment
+						.executeQuery("SELECT \"PlanetId\" FROM \"Planet\" WHERE \"PlanetName\"='"
+								+ player.getPlanet().getName() + "'");
+				planetSet.next();
+				String planetId = planetSet.getString("PlanetId");
+				playerShipStatment
+						.execute("UPDATE \"Player\" SET \"PlanetId\"='"
+								+ planetId + "' WHERE \"PlayerId\"='"
+								+ playerId + "'");
+
 				connection.setAutoCommit(false);
 				for (Planet planet : universe.getPlanets()) {
 					// update marketplace info here
@@ -250,15 +260,6 @@ public class Database {
 						+ " WHERE \"PlayerId\"='"
 						+ playerId + "'";
 				s.execute(updatePlayerCmd);
-
-				ResultSet planetSet = s
-						.executeQuery("SELECT \"PlanetId\" FROM \"Planet\" WHERE \"PlanetName\"='"
-								+ player.getPlanet().getName() + "'");
-				planetSet.next();
-				String planetId = planetSet.getString("PlanetId");
-				s.execute("UPDATE \"Player\" SET \"PlanetId\"='" + planetId
-						+ "' WHERE \"PlayerId\"='" + playerId + "'");
-
 				Ship ship = player.getShip();
 				String updateShipCmd = "UPDATE \"Ship\" SET \"CurrentHullPoints\"="
 						+ ship.getCurrHP()
@@ -279,9 +280,9 @@ public class Database {
 							+ g.toString() + "')";
 					s.execute(updateShipCargoCmd);
 				}
-
 				connection.commit();
 				connection.setAutoCommit(true);
+
 			} catch (SQLException s) {
 				try {
 					connection.rollback();
@@ -498,7 +499,7 @@ public class Database {
 				String planetUUID = planet.getString("PlanetId");
 				s.execute("UPDATE \"Player\" SET \"PlanetId\"='" + planetUUID
 						+ "' WHERE \"PlayerId\"='" + playerUUID + "'");
-
+				
 				connection.commit();
 				connection.setAutoCommit(true);
 
