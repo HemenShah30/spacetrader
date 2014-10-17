@@ -101,35 +101,50 @@ public class FlightEngine {
 	}
 
 	/**
-	 * Determines what happens at each possibility of an encounter. 70% chance
-	 * of NPC, scaled to respective reps, 22% of npc-less encounter, 8% of
-	 * nothing
+	 * Determines what happens at each possibility of an encounter. 40% are NPC,
+	 * 10% are non NPC, and 50% nothing happens
 	 * 
 	 * @param p
 	 *            the planet being traveled to
+	 * @return The list of Strings to be shown to the player describing what
+	 *         they encounter
 	 */
 	private List<String> calculateEncounters(Planet p) {
-		double totalSkill = (double) (player.getTraderRep()
-				+ player.getPirateRep() + player.getPoliceRep());
-		double trader = (player.getTraderRep() / totalSkill) * 0.70;
-		double pirate = (player.getPirateRep() / totalSkill) * 0.70 + trader;
-		double police = 0.70;
-		double random = 0.92;
 		List<String> ret = new ArrayList<String>();
 		for (int i = 0; i < p.getChances(); i++) {
 			double roll = Math.random();
-			if (roll < trader) {
-				ret.add("You encounter a traveling trader in space!");
-				// trader encounter method
-			} else if (roll >= trader && roll < pirate) {
-				ret.add("You encounter a pirate in space!");
-				// pirate encounter method
-			} else if (roll >= pirate && roll < police) {
-				ret.add("You are pulled over, figuratively, by some police!");
-				// police encounter method
-			} else if (roll >= police && roll < random) {
+			if (roll < 0.40) {
+				ret.add(isNPCEncounter());
+			} else if (roll < 0.50) {
 				ret.add(notNPCEncounter());
 			}
+		}
+		return ret;
+	}
+
+	/**
+	 * Based on player reps with respective factions (trader/police/pirate),
+	 * calculates what the player meets up with
+	 * 
+	 * @return The String representing who the player encounters, to be
+	 *         displayed to the player
+	 */
+	private String isNPCEncounter() {
+		String ret = "";
+		int pirate = player.getPirateRep();
+		int trader = player.getTraderRep();
+		int police = player.getPoliceRep();
+		double totalRep = (double) (pirate + trader + police);
+		double piChance = (double) pirate / totalRep;
+		double trChance = (double) trader / totalRep + piChance;
+		double poChance = (double) police / totalRep + trChance;
+		double roll = Math.random();
+		if (roll < piChance) {
+			ret = "You glance at the viewing monitor and see a ship approaching with pirate markings!";
+		} else if (roll < trChance) {
+			ret = "You fly towards the unidentified blip on your radar and discover a traveling trader!";
+		} else {
+			ret = "A police ship hails you and flashes it's blue lights in an attempt to pull you over!";
 		}
 		return ret;
 	}
@@ -146,10 +161,10 @@ public class FlightEngine {
 		String ret = "";
 		if (roll < 0.20) {
 			// give credits
-			double amount = (int)(Math.random() * 2000) + 50;
+			double amount = (int) (Math.random() * 2000) + 50;
 			player.increaseCredits(amount);
 			ret = "You find some credits floating in space!";
-		} else if (roll >= 0.20 && roll < 0.35) {
+		} else if (roll < 0.35) {
 			// give cargo
 			GoodType[] goodTypes = GoodType.values();
 			int index = (int) (Math.random() * goodTypes.length);
@@ -162,22 +177,22 @@ public class FlightEngine {
 			}
 			ship.addToCargo(good, quantity);
 			ret = "You find some " + good.toString() + " floating in space!";
-		} else if (roll >= 0.35 && roll < 0.40) {
+		} else if (roll < 0.40) {
 			// give weapon
 			// ret = "You find a " + weapon.toString() + " floating in space!";
-		} else if (roll >= 0.40 && roll < 0.55) {
+		} else if (roll < 0.55) {
 			// give fuel
 			int currFuel = ship.getFuel();
 			int amount = (int) (Math.random() / 2 * currFuel);
 			ship.setFuel(currFuel + amount);
 			ret = "You find some fuel floating in space!";
-		} else if (roll >= 0.55 && roll < 0.60) {
+		} else if (roll < 0.60) {
 			// lose credits
 			double playerCred = player.getCredits();
 			double amount = Math.random() * 0.40 * playerCred;
 			player.decreaseCredits(amount);
 			ret = "You find a computer floating in a piece of debris. You boot it up and quickly realize it's a virus! It manages to siphon off some of your credits before you jettison it out the trash chute. ";
-		} else if (roll >= 0.60 && roll < 0.75) {
+		} else if (roll < 0.75) {
 			// lose cargo
 			Map<GoodType, Integer> cargo = ship.getCargo();
 			GoodType[] playerGoods = (GoodType[]) cargo.values().toArray();
@@ -185,7 +200,7 @@ public class FlightEngine {
 			int quantity = cargo.get(good) * (int) (Math.random() * 0.50);
 			ship.removeFromCargo(good, quantity);
 			ret = "An asteroid crashes into your cargo hold, and some cargo slips out into space!";
-		} else if (roll >= 0.75 && roll < 0.90) {
+		} else if (roll < 0.90) {
 			// lose fuel
 			int currFuel = ship.getFuel();
 			int amount = (int) (Math.random() * 0.33 * currFuel);
