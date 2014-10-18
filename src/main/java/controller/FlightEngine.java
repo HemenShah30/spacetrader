@@ -9,7 +9,6 @@ import model.GoodType;
 import model.Planet;
 import model.Player;
 import model.Ship;
-import model.ShipType;
 import model.Universe;
 
 /**
@@ -146,7 +145,7 @@ public class FlightEngine {
 		String ret = "";
 		if (roll < 0.20) {
 			// give credits
-			double amount = (int)(Math.random() * 2000) + 50;
+			double amount = (int) (Math.random() * 2000) + 50;
 			player.increaseCredits(amount);
 			ret = "You find some credits floating in space!";
 		} else if (roll >= 0.20 && roll < 0.35) {

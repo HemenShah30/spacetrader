@@ -235,9 +235,9 @@ public class Database {
 								+ playerId + "'");
 
 				connection.setAutoCommit(false);
-				for (Planet planet : universe.getPlanets()) {
-					// update marketplace info here
-				}
+				// for (Planet planet : universe.getPlanets()) {
+				// update marketplace info here
+				// }
 				Statement s = connection.createStatement();
 				String updatePlayerCmd = "UPDATE \"Player\" SET \"PilotSkill\"="
 						+ player.getPilotSkill()
@@ -499,7 +499,7 @@ public class Database {
 				String planetUUID = planet.getString("PlanetId");
 				s.execute("UPDATE \"Player\" SET \"PlanetId\"='" + planetUUID
 						+ "' WHERE \"PlayerId\"='" + playerUUID + "'");
-				
+
 				connection.commit();
 				connection.setAutoCommit(true);
 
