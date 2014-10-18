@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import database.Database;
+import model.EncounterResult;
 import model.GoodType;
 import model.Location;
+import model.NPC;
 import model.Planet;
 import model.Player;
 import model.Ship;
@@ -23,6 +25,7 @@ public class GameEngine {
 	private Database database;
 	private TradeEngine tradeEngine;
 	private FlightEngine flightEngine;
+	private FightEngine fightEngine;
 	private Universe universe;
 	private Player player;
 
@@ -33,8 +36,8 @@ public class GameEngine {
 	private GameEngine() {
 		universe = new Universe();
 		universe.createPlanets();
-//		for (Planet p : universe.getPlanets())
-//			System.out.println(p);
+		// for (Planet p : universe.getPlanets())
+		// System.out.println(p);
 	}
 
 	/**
@@ -76,6 +79,7 @@ public class GameEngine {
 		universe = (Universe) gameData[1];
 		tradeEngine = new TradeEngine(player);
 		flightEngine = new FlightEngine(player, universe);
+		fightEngine = new FightEngine(player);
 	}
 
 	/**
@@ -119,6 +123,7 @@ public class GameEngine {
 		player.setPlanet(universe.getPlanets().get(0));
 		tradeEngine = new TradeEngine(player);
 		flightEngine = new FlightEngine(player, universe);
+		fightEngine = new FightEngine(player);
 	}
 
 	/**
@@ -217,5 +222,16 @@ public class GameEngine {
 	public List<Planet> getPlanetsWithinRange() {
 		return new ArrayList<Planet>(flightEngine.getPlanetsWithinRange(
 				universe, player.getPlanet()).keySet());
+	}
+
+	/**
+	 * Attacks the NPC using all player weapons
+	 * 
+	 * @param n
+	 *            the NPC being attacked
+	 * @return the string representing damage you've done
+	 */
+	public EncounterResult playerAttack(NPC n) {
+		return fightEngine.playerAttack(n);
 	}
 }

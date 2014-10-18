@@ -24,21 +24,45 @@ public class Ship {
 	public Ship(ShipType sT) {
 		this(sT, sT.getTotalHP(), sT.getFuel());
 	}
-	
+
 	/**
 	 * Ship constructor taking in values for more instance variables
-	 * @param sT The ShipType for the ship
-	 * @param hp The Hull Points for the ship
-	 * @param f The fuel for the ship
+	 * 
+	 * @param sT
+	 *            The ShipType for the ship
+	 * @param hp
+	 *            The Hull Points for the ship
+	 * @param f
+	 *            The fuel for the ship
 	 */
 	public Ship(ShipType sT, int hp, int f) {
 		setShipType(sT);
 		cargo = new HashMap<GoodType, Integer>();
 		for (GoodType type : GoodType.values())
 			cargo.put(type, 0);
-		fuel=f;
-		currHP=hp;
-		cargoSize=sT.getCargoSize();
+		fuel = f;
+		currHP = hp;
+		cargoSize = sT.getCargoSize();
+	}
+
+	/**
+	 * A simpler way of calculating damage to be taken
+	 * 
+	 * @param damage
+	 *            the amount of damage to be done
+	 */
+	public void takeDamage(int damage) {
+		int remaining = damage;
+		while (remaining > 0) {
+			// int shield = getShield().getCurrHP();
+			int hull = getCurrHP();
+			// if (shield > 0) {
+			// getShield().setCurrHP(shield - 1);
+			// } else {
+			// setCurrHP(hull - 1)
+			// }
+			remaining--;
+		}
 	}
 
 	/**
@@ -197,5 +221,15 @@ public class Ship {
 		if (sT == null)
 			throw new IllegalArgumentException();
 		shipType = sT;
+	}
+
+	/**
+	 * Returns all lasers currently equipped by ship
+	 * 
+	 * @return array of lasers
+	 */
+	public LaserType[] getLasers() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
