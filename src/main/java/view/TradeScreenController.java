@@ -3,10 +3,10 @@ package view;
 import java.io.IOException;
 
 import controller.GameEngine;
-import model.GoodType;
 import model.Marketplace;
 import model.Planet;
 import model.Player;
+import model.Enum.GoodType;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

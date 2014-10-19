@@ -2,6 +2,8 @@ package model;
 
 import java.util.Random;
 
+import model.Enum.GoodType;
+
 /**
  * Class representing Traders.
  * 

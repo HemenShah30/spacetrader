@@ -1,4 +1,4 @@
-package model;
+package model.Enum;
 
 /**
  * Class representing the condition of a planet

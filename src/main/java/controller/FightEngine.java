@@ -1,13 +1,13 @@
 package controller;
 
-import model.EncounterResult;
-import model.LaserType;
 import model.Player;
 import model.Ship;
 import model.NPC;
+import model.Enum.EncounterResult;
 //import model.Laser;
 //import model.Shield;
 //import model.Gadget;
+import model.Enum.LaserType;
 
 /**
  * Class providing methods for NPC fights

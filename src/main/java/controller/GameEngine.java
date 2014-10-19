@@ -4,15 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import database.Database;
-import model.EncounterResult;
-import model.GoodType;
+import model.Encounter;
 import model.Location;
 import model.NPC;
 import model.Planet;
 import model.Player;
 import model.Ship;
-import model.ShipType;
 import model.Universe;
+import model.Enum.EncounterResult;
+import model.Enum.GoodType;
+import model.Enum.ShipType;
 
 /**
  * The main game coordinator that will connect the views and the controllers
@@ -199,7 +200,7 @@ public class GameEngine {
 	 * @param planet
 	 *            The planet the player is going to
 	 */
-	public List<String> goToPlanet(Planet planet) {
+	public List<Encounter> goToPlanet(Planet planet) {
 		return flightEngine.goToPlanet(planet);
 	}
 

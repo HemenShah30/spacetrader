@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
-import model.GoodType;
+import model.Encounter;
 import model.Planet;
 import model.Player;
 import model.Ship;
 import model.Universe;
+import model.Enum.EncounterType;
+import model.Enum.GoodType;
 
 /**
  * Controller for traveling in game
@@ -21,6 +24,8 @@ public class FlightEngine {
 	private Ship ship;
 	private Player player;
 	private Universe universe;
+	private final double NPCEncounterRate = .4;
+	private final double otherEncounterRate = .1;
 
 	/**
 	 * Constructor for the FlightEngine
@@ -88,132 +93,194 @@ public class FlightEngine {
 	 * @param p
 	 *            The planet being clicked on to travel to
 	 */
-	public List<String> goToPlanet(Planet p) {
+	public List<Encounter> goToPlanet(Planet p) {
 		Planet origin = player.getPlanet();
-		List<String> ret = calculateEncounters(p);
 		player.setPlanet(p);
-		// encounters go here
 		Map<Planet, Integer> withinRange = getPlanetsWithinRange(universe,
 				origin);
 		ship.setFuel(ship.getFuel() - withinRange.get(p));
-		return ret;
+		return calculateEncounters(p);
 	}
 
 	/**
 	 * Determines what happens at each possibility of an encounter. 40% are NPC,
-	 * 10% are non NPC, and 50% nothing happens
+	 * 10% are non NPC, and 50% are that nothing happens
 	 * 
 	 * @param p
 	 *            the planet being traveled to
 	 * @return The list of Strings to be shown to the player describing what
 	 *         they encounter
 	 */
-	private List<String> calculateEncounters(Planet p) {
-		List<String> ret = new ArrayList<String>();
+	private List<Encounter> calculateEncounters(Planet p) {
+		List<Encounter> encounters = new ArrayList<Encounter>();
 		for (int i = 0; i < p.getChances(); i++) {
 			double roll = Math.random();
-			if (roll < 0.40) {
-				ret.add(isNPCEncounter());
-			} else if (roll < 0.50) {
-				ret.add(notNPCEncounter());
+			if (roll < NPCEncounterRate) {
+				Encounter encounter = getNPCEncounter(p);
+				if (encounter != null)
+					encounters.add(encounter);
+			} else if (roll < NPCEncounterRate + otherEncounterRate) {
+				Encounter encounter = getNonNPCEncounter();
+				if (encounter != null)
+					encounters.add(encounter);
 			}
 		}
-		return ret;
+		return encounters;
 	}
 
 	/**
-	 * Based on player reps with respective factions (trader/police/pirate),
-	 * calculates what the player meets up with
+	 * Calculates who the player encounters, based on the EncounterRate of the
+	 * planet for each faction
 	 * 
-	 * @return The String representing who the player encounters, to be
-	 *         displayed to the player
+	 * @param planet
+	 *            The destination planet after the encounters are overs
+	 * @return An encounter with an NPC based on the planet's EncounterRates
 	 */
-	private String isNPCEncounter() {
-		String ret = "";
-		int pirate = player.getPirateRep();
-		int trader = player.getTraderRep();
-		int police = player.getPoliceRep();
-		double totalRep = (double) (pirate + trader + police);
-		double piChance = (double) pirate / totalRep;
-		double trChance = (double) trader / totalRep + piChance;
-		double poChance = (double) police / totalRep + trChance;
+	private Encounter getNPCEncounter(Planet planet) {
+		double pirateRate = planet.getPirateEncounterRate().getValue();
+		double traderRate = planet.getTraderEncounterRate().getValue();
+		double policeRate = planet.getPoliceEncounterRate().getValue();
+		if (pirateRate + traderRate + policeRate == 0)
+			return null;
+
+		double rateSum = pirateRate + traderRate + policeRate;
+		double pirateChance = pirateRate / rateSum;
+		double traderChance = traderRate / rateSum + pirateChance;
 		double roll = Math.random();
-		if (roll < piChance) {
-			ret = "You glance at the viewing monitor and see a ship approaching with pirate markings!";
-		} else if (roll < trChance) {
-			ret = "You fly towards the unidentified blip on your radar and discover a traveling trader!";
+		if (roll < pirateChance) {
+			return new Encounter(
+					EncounterType.PIRATE,
+					"You glance at the viewing monitor and see a ship approaching with pirate markings!");
+		} else if (roll < traderChance) {
+			return new Encounter(
+					EncounterType.TRADER,
+					"You fly towards the unidentified blip on your radar and discover a traveling trader!");
 		} else {
-			ret = "A police ship hails you and flashes it's blue lights in an attempt to pull you over!";
+			return new Encounter(
+					EncounterType.POLICE,
+					"A police ship hails you and flashes it's blue lights in an attempt to pull you over!");
 		}
-		return ret;
+	}
+
+	public boolean five(int o) {
+		if (o == 1)
+			return true;
+		else if (o == 2)
+			return false;
+		else
+			return false;
 	}
 
 	/**
-	 * Randomly selects to give credits(20)/cargo(15)/weapon(5)/fuel(15), lose
-	 * credits(5)/cargo(15)/fuel(15), take shield-ship damage(10),
+	 * Randomly selects an encounter for the player. The options are to give
+	 * credits(20%)/cargo(15%)/a weapon(5%)/fuel(15%), or to lose
+	 * credits(5%)/lose cargo(15%)/lose fuel(15%), take shield-ship damage(10%),
 	 * 
-	 * @return The String representing what happened, to be displayed to the
-	 *         player
+	 * @return The Encounter representing what happened
 	 */
-	private String notNPCEncounter() {
+	private Encounter getNonNPCEncounter() {
 		double roll = Math.random();
-		String ret = "";
-		if (roll < 0.20) {
+		// rate is just the cutoff for the random number falling into the given
+		// bracket
+		double gainCreditRate = .2;
+		double gainCargoRate = .35;
+		double weaponRate = .4;
+		double gainFuelRate = .55;
+		double loseCreditRate = .6;
+		double losecargoRate = .75;
+		double loseFuelRate = .9;
+
+		if (roll < gainCreditRate) {
 			// give credits
-			double amount = (int) (Math.random() * 2000) + 50;
+			int creditStandardDeviation = 300;
+			int creditAverage = 1000;
+			int amount = (int) (new Random().nextGaussian()
+					* creditStandardDeviation + creditAverage);
+			if (amount < 1)
+				amount = 1;
 			player.increaseCredits(amount);
-			ret = "You find some credits floating in space!";
-		} else if (roll < 0.35) {
+			return new Encounter(EncounterType.OTHER, "You find " + amount
+					+ " credits floating in space!");
+		} else if (roll < gainCargoRate) {
 			// give cargo
 			GoodType[] goodTypes = GoodType.values();
 			int index = (int) (Math.random() * goodTypes.length);
 			GoodType good = goodTypes[index];
-			int cargoCap = ship.getCargoSize();
+			double percentOfCargoFilled = .2;
+			int cargoCapacity = ship.getCargoSize();
 			int currCargo = ship.getCurrCargo();
-			int quantity = (int) (Math.random() * 0.20 * cargoCap);
-			if (currCargo + quantity > cargoCap) {
-				quantity = cargoCap - currCargo;
+			int quantity = (int) (Math.random() * percentOfCargoFilled * cargoCapacity);
+			if (currCargo + quantity > cargoCapacity) {
+				quantity = cargoCapacity - currCargo;
 			}
+
 			ship.addToCargo(good, quantity);
-			ret = "You find some " + good.toString() + " floating in space!";
-		} else if (roll < 0.40) {
+			return new Encounter(EncounterType.OTHER, "You find " + quantity
+					+ " " + good.toString() + " floating in space!");
+		} else if (roll < weaponRate) {
 			// give weapon
-			// ret = "You find a " + weapon.toString() + " floating in space!";
-		} else if (roll < 0.55) {
+			// check for free weapon slot, else return nothing
+			// create an encounter to find a new weapon in space
+			return new Encounter(EncounterType.OTHER, "IMPLEMENTATION NEEDED");
+		} else if (roll < gainFuelRate) {
 			// give fuel
+			double percentOfFuelLost = .5;
 			int currFuel = ship.getFuel();
-			int amount = (int) (Math.random() / 2 * currFuel);
+			int maxFuel = ship.getShipType().getFuel();
+			int amount = (int) (Math.random() * percentOfFuelLost * currFuel);
+			if (amount + currFuel > maxFuel)
+				amount = maxFuel - currFuel;
 			ship.setFuel(currFuel + amount);
-			ret = "You find some fuel floating in space!";
-		} else if (roll < 0.60) {
+			return new Encounter(EncounterType.OTHER, "You find " + amount
+					+ " fuel floating in space!");
+		} else if (roll < loseCreditRate) {
 			// lose credits
 			double playerCred = player.getCredits();
-			double amount = Math.random() * 0.40 * playerCred;
+			double percentOfMoneyLost = .4;
+			int amount = (int) (Math.random() * percentOfMoneyLost * playerCred);
 			player.decreaseCredits(amount);
-			ret = "You find a computer floating in a piece of debris. You boot it up and quickly realize it's a virus! It manages to siphon off some of your credits before you jettison it out the trash chute. ";
-		} else if (roll < 0.75) {
+			return new Encounter(
+					EncounterType.OTHER,
+					"You find a computer floating in a piece of debris. You boot it up and quickly realize it's a virus! It manages to siphon off "
+							+ amount
+							+ " of your credits before you jettison it out the trash chute.");
+		} else if (roll < losecargoRate) {
 			// lose cargo
-			Map<GoodType, Integer> cargo = ship.getCargo();
-			GoodType[] playerGoods = (GoodType[]) cargo.values().toArray();
-			GoodType good = playerGoods[((int) (Math.random() * playerGoods.length))];
-			int quantity = cargo.get(good) * (int) (Math.random() * 0.50);
+			double percentOfCargoLost = .5;
+			List<GoodType> cargo = new ArrayList<GoodType>();
+			for (GoodType g : GoodType.values()) {
+				if (ship.amountInCargo(g) > 0)
+					cargo.add(g);
+			}
+			if (cargo.size() == 0)
+				return null;
+
+			GoodType good = cargo.get((int) Math.random() * cargo.size());
+			int quantity = (int) Math.ceil(ship.amountInCargo(good)
+					* Math.random() * percentOfCargoLost);
 			ship.removeFromCargo(good, quantity);
-			ret = "An asteroid crashes into your cargo hold, and some cargo slips out into space!";
-		} else if (roll < 0.90) {
+			return new Encounter(EncounterType.OTHER,
+					"An asteroid crashes into your cargo hold, and " + quantity
+							+ " " + good.toString() + " slips out into space!");
+		} else if (roll < loseFuelRate) {
 			// lose fuel
+			double percentOfFuelLost = 1 / 3.0;
 			int currFuel = ship.getFuel();
-			int amount = (int) (Math.random() * 0.33 * currFuel);
+			int amount = (int) Math.ceil(Math.random() * percentOfFuelLost
+					* currFuel);
 			ship.setFuel(currFuel - amount);
-			ret = "An asteroid crashes into your fuel tank, and some fuel leaks out into space!";
+			return new Encounter(EncounterType.OTHER,
+					"An asteroid crashes into your fuel tank, and " + amount
+							+ " fuel leaks out into space!");
 		} else {
 			// take damage
-			int newHP = ship.getCurrHP() - (int) (Math.ceil(Math.random() * 5));
-			if (newHP <= 0) {
-				// end game
-			}
-			ship.setCurrHP(newHP);
-			ret = "An asteroid glances off your ship's hull, doing some minor damage!";
+			int maxHealthLost = 5;
+			int healthLost = Math.min(ship.getCurrHP() - 1,
+					(int) (Math.ceil(Math.random() * maxHealthLost)));
+			ship.setCurrHP(ship.getCurrHP() - healthLost);
+			return new Encounter(EncounterType.OTHER,
+					"An asteroid glances off your ship's hull, doing "
+							+ healthLost + " damage!");
 		}
-		return ret;
 	}
 }

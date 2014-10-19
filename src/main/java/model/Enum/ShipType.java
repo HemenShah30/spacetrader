@@ -1,4 +1,4 @@
-package model;
+package model.Enum;
 
 /**
  * Enum representing the various ship types

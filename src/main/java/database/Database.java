@@ -17,18 +17,18 @@ import javafx.scene.paint.Color;
 
 import org.postgresql.util.PGobject;
 
-import model.Condition;
-import model.EncounterRate;
-import model.GoodType;
-import model.Government;
 import model.Location;
 import model.Planet;
 import model.Player;
 import model.Ship;
-import model.ShipType;
-import model.SpecialResource;
-import model.TechLevel;
 import model.Universe;
+import model.Enum.Condition;
+import model.Enum.EncounterRate;
+import model.Enum.GoodType;
+import model.Enum.Government;
+import model.Enum.ShipType;
+import model.Enum.SpecialResource;
+import model.Enum.TechLevel;
 
 /**
  * Class that handles all input and output to the database

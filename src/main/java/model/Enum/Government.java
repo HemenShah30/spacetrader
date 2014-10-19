@@ -1,4 +1,4 @@
-package model;
+package model.Enum;
 
 /**
  * Class representing the government of a planet

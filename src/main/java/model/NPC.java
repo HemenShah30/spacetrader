@@ -1,5 +1,7 @@
 package model;
 
+import model.Enum.ShipType;
+
 /**
  * Abstract class representing NPC's.
  * 

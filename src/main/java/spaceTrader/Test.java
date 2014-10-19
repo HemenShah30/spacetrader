@@ -2,8 +2,8 @@ package spaceTrader;
 
 import model.Player;
 import model.Ship;
-import model.ShipType;
 import model.Universe;
+import model.Enum.ShipType;
 
 public class Test {
 

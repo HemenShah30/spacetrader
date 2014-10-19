@@ -3,6 +3,10 @@ package model;
 import java.util.HashMap;
 import java.util.Map;
 
+import model.Enum.GoodType;
+import model.Enum.LaserType;
+import model.Enum.ShipType;
+
 /**
  * Class representing a player's ship
  * 

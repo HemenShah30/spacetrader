@@ -6,6 +6,7 @@ import java.util.List;
 import org.controlsfx.dialog.Dialogs;
 
 import controller.GameEngine;
+import model.Encounter;
 import model.Location;
 import model.Planet;
 import model.Player;
@@ -159,7 +160,8 @@ public class TravelScreenController {
 		Player p = game.getPlayer();
 		if (selectedPlanet != p.getPlanet()) {
 			if (p.getShip().getFuel() >= distance) {
-				game.goToPlanet(selectedPlanet);
+				List<Encounter> encounters = game.goToPlanet(selectedPlanet);
+				System.out.println(encounters);
 				setPlanetInfo();
 			} else {
 				displayError("You do not have enough fuel");

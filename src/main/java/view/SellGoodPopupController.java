@@ -5,7 +5,7 @@ import java.util.List;
 import org.controlsfx.dialog.Dialogs;
 
 import controller.GameEngine;
-import model.GoodType;
+import model.Enum.GoodType;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
