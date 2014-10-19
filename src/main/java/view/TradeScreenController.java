@@ -288,7 +288,6 @@ public class TradeScreenController {
 				SellGoodPopupController controller = loader.getController();
 				controller.initializePage(type, this);
 				sellPopup.show();
-
 			} catch (IOException ie) {
 				ie.printStackTrace();
 			}

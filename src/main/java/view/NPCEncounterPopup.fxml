@@ -6,14 +6,14 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.NPCEncounterController">
    <children>
       <HBox layoutX="66.0" layoutY="295.0" prefHeight="55.0" prefWidth="400.0" spacing="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
          <children>
-            <Button mnemonicParsing="false" text="Attack" />
-            <Button mnemonicParsing="false" text="Flee" />
-            <Button mnemonicParsing="false" text="Surrender" />
-            <Button mnemonicParsing="false" text="Consent to Search" />
+            <Button fx:id="attackBtn" mnemonicParsing="false" text="Attack" />
+            <Button fx:id="fleeLeaveBtn" mnemonicParsing="false" text="Flee" />
+            <Button fx:id="surrenderConsentTradeBtn" mnemonicParsing="false" text="Surrender" />
+            <Button fx:id="bribeBtn" mnemonicParsing="false" text="Bribe" />
          </children>
          <padding>
             <Insets left="20.0" />
@@ -30,12 +30,12 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Your Ship" />
-            <Label text="HP :  " GridPane.rowIndex="1" />
-            <Label text="Shields : " GridPane.rowIndex="2" />
-            <Label text="NPC Ship" GridPane.columnIndex="1" />
-            <Label text="HP :  " GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label text="Shields : " GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="playerShipLbl" text="Your Ship" />
+            <Label fx:id="playerHPLbl" text="HP :  " GridPane.rowIndex="1" />
+            <Label fx:id="playerSheildsLbl" text="Shields : " GridPane.rowIndex="2" />
+            <Label fx:id="NPCShipLbl" text="NPC Ship" GridPane.columnIndex="1" />
+            <Label fx:id="NPCHPLbl" text="HP :  " GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="NPCShieldsLbl" text="Shields : " GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
          <padding>
             <Insets left="50.0" />

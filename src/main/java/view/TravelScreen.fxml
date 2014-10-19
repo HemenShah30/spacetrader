@@ -60,6 +60,11 @@
                               <Insets left="3.0" />
                            </VBox.margin>
                         </Label>
+                        <Label fx:id="traderLevelLbl" text="Trader Level">
+                           <padding>
+                              <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                           </padding>
+                        </Label>
                         <Label fx:id="fuelLbl" text="Fuel: ">
                            <VBox.margin>
                               <Insets left="3.0" />
@@ -70,8 +75,8 @@
                         </Label>
                      </children>
                   </VBox>
-                  <Button fx:id="backBtn" mnemonicParsing="false" onKeyPressed="#toPlanetScreen" onMouseClicked="#toPlanetScreen" text="Back to Current Planet" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="3.0" />
-                  <Button fx:id="nextBtn" mnemonicParsing="false" onKeyPressed="#showNextPlanet" onMouseClicked="#showNextPlanet" text="Next" AnchorPane.bottomAnchor="3.0" AnchorPane.rightAnchor="3.0" />
+                  <Button fx:id="backBtn" mnemonicParsing="false" onKeyPressed="#toPlanetScreen" onMouseClicked="#toPlanetScreen" text="Back to Planet" AnchorPane.bottomAnchor="3.0" AnchorPane.rightAnchor="3.0" />
+                  <Button fx:id="nextBtn" mnemonicParsing="false" onKeyPressed="#showNextPlanet" onMouseClicked="#showNextPlanet" text="Next" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="33.0" />
                   <Button fx:id="goBtn" mnemonicParsing="false" onMouseClicked="#goToSelectedPlanet" text="Go" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="3.0" />
                </children>
             </AnchorPane>

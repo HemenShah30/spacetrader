@@ -11,6 +11,7 @@ import model.Location;
 import model.Planet;
 import model.Player;
 import model.Universe;
+import model.Enum.EncounterType;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +23,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -33,6 +35,7 @@ import javafx.stage.Stage;
 public class TravelScreenController {
 	private GameEngine game;
 	private Planet selectedPlanet;
+	private List<Encounter> encounters;
 
 	@FXML
 	private Canvas miniMapCanvas;
@@ -67,6 +70,9 @@ public class TravelScreenController {
 	@FXML
 	private Label pirateLevelLbl;
 
+	@FXML
+	private Label traderLevelLbl;
+	
 	@FXML
 	private Label fuelLbl;
 
@@ -160,8 +166,12 @@ public class TravelScreenController {
 		Player p = game.getPlayer();
 		if (selectedPlanet != p.getPlanet()) {
 			if (p.getShip().getFuel() >= distance) {
-				List<Encounter> encounters = game.goToPlanet(selectedPlanet);
-				System.out.println(encounters);
+				encounters = game.goToPlanet(selectedPlanet);
+				for (int i = 0; i < encounters.size(); i++) {
+					if (encounters.get(i).getEncounterType() == EncounterType.OTHER)
+						doNextEncounter(i);
+				}
+				doNextEncounter();
 				setPlanetInfo();
 			} else {
 				displayError("You do not have enough fuel");
@@ -169,6 +179,52 @@ public class TravelScreenController {
 		} else {
 			displayError("You are already on this planet");
 		}
+	}
+
+	/**
+	 * Method for displaying the next encounter to the player
+	 * 
+	 * @param index
+	 *            The index in the encounter list to be displayed
+	 */
+	private void doNextEncounter(int index) {
+		System.out.println(encounters);
+		if (encounters.size() != 0 && index < encounters.size()) {
+			Encounter encounter = encounters.remove(index);
+			if (encounter.getEncounterType() == EncounterType.OTHER) {
+				Dialogs.create().owner(goBtn.getScene().getWindow())
+						.title("Encounter").message(encounter.getMessage())
+						.showInformation();
+			} else {
+				try {
+					Stage encounterPopup = new Stage();
+					encounterPopup.initModality(Modality.APPLICATION_MODAL);
+					encounterPopup.initOwner((Stage) goBtn.getScene()
+							.getWindow());
+
+					FXMLLoader loader = new FXMLLoader(
+							ClassLoader
+									.getSystemResource("view/NPCEncounterPopup.fxml"));
+					Parent newScene = loader.load();
+					encounterPopup.setScene(new Scene(newScene, 400, 300));
+
+					NPCEncounterController controller = loader.getController();
+					controller.initializePage(this,
+							encounter.getEncounterType());
+					encounterPopup.show();
+				} catch (IOException ie) {
+					ie.printStackTrace();
+				}
+				System.out.println(encounter.getMessage());
+			}
+		}
+	}
+
+	/**
+	 * Overloaded encounter method with index 0
+	 */
+	public void doNextEncounter() {
+		doNextEncounter(0);
 	}
 
 	/**
@@ -211,6 +267,8 @@ public class TravelScreenController {
 				+ selectedPlanet.getPoliceEncounterRate());
 		pirateLevelLbl.setText("Pirate Level: "
 				+ selectedPlanet.getPirateEncounterRate());
+		traderLevelLbl.setText("Trader Level: "
+				+ selectedPlanet.getTraderEncounterRate());
 		fuelLbl.setText("Fuel: " + game.getPlayer().getShip().getFuel());
 	}
 
