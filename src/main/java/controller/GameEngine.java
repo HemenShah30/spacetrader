@@ -290,16 +290,6 @@ public class GameEngine {
 	}
 	
 	/**
-	 * Represents a player wanting to trade with the trader
-	 * 
-	 * @param npc
-	 *            The encounter in which the player is trading
-	 */
-	public void tradeWithTrader(NPCEncounter npc) {
-		//tradeEngine.tradeWithTrader
-	}
-	
-	/**
 	 * Calculates and returns repair cost for player's ship
 	 * @return repair cost
 	 */

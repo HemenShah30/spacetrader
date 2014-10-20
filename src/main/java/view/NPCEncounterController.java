@@ -11,10 +11,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import model.NPCEncounter;
+import model.Trader;
 import model.Player;
 import model.Ship;
 import model.Enum.EncounterResult;
 import model.Enum.EncounterType;
+import model.Enum.GoodType;
 
 /**
  * Controller for the encounter screen with NPCs
@@ -268,7 +270,18 @@ public class NPCEncounterController {
 				popupStage.close();
 				parent.doEncounters();
 			} else {
-				System.out.println("TRADE WITH TRADER");
+				String msg = "";
+				Trader trader = (Trader) encounter.getNPC();
+				boolean isSelling = trader.getIsSelling();
+				GoodType type = trader.getGood();
+				int price = trader.getPrice();
+				int quantity = trader.getQuantity();
+				if (isSelling) {
+					msg = "The trader wants to sell " + quantity + " " + type.toString() + " for " + price + " each.";
+				} else {
+					msg = "The trader wants to buy " + quantity + " " + type.toString() + " for " + price + " each.";
+				}
+				System.out.println(msg);
 			}
 		}
 	}
