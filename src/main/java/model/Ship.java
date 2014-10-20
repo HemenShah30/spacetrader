@@ -167,14 +167,14 @@ public class Ship {
 	 * Calculates and returns amount needed to refuel
 	 * @return cost to refuel ship
 	 */
-	public double getCostRefuel() {
+	public double getRefuelCost() {
 		return (shipType.getFuel() - fuel) * shipType.getFuelCost();
 	}
 	/**
 	 * Calculates and returns amount needed to repair
 	 * @return
 	 */
-	public double getCostRepair() {
+	public double getRepairCost() {
 		return (shipType.getTotalHP() - currHP) *shipType.getRepairCost();
 	}
 	
