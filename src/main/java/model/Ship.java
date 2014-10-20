@@ -1,10 +1,13 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import model.Enum.GoodType;
 import model.Enum.LaserType;
+import model.Enum.ShieldType;
 import model.Enum.ShipType;
 
 /**
@@ -16,6 +19,9 @@ import model.Enum.ShipType;
 public class Ship {
 	private ShipType shipType;
 	private int currHP, fuel, cargoSize;
+	private Map<ShieldType, Integer> shields;
+	private List<LaserType> lasers;
+	private List<Gadget> gadgets;
 	// private List<Mercenary> mercenaries;
 	private Map<GoodType, Integer> cargo;
 
@@ -47,25 +53,41 @@ public class Ship {
 		fuel = f;
 		currHP = hp;
 		cargoSize = sT.getCargoSize();
+		shields = new HashMap<ShieldType, Integer>();
+		lasers = new ArrayList<LaserType>();
+		gadgets = new ArrayList<Gadget>();
 	}
 
 	/**
-	 * A simpler way of calculating damage to be taken
+	 * The given amount of damage is dealt to the ship
 	 * 
 	 * @param damage
 	 *            the amount of damage to be done
 	 */
 	public void takeDamage(int damage) {
-		int remaining = damage;
-		while (remaining > 0) {
-			// int shield = getShield().getCurrHP();
-			int hull = getCurrHP();
-			// if (shield > 0) {
-			// getShield().setCurrHP(shield - 1);
-			// } else {
-			// setCurrHP(hull - 1)
-			// }
-			remaining--;
+		for (ShieldType shield : shields.keySet()) {
+			int shieldHP = shields.get(shield);
+			int absorbed = Math.min(damage, shieldHP);
+			shields.put(shield, shieldHP - absorbed);
+			damage -= absorbed;
+		}
+		currHP -= damage;
+		if (currHP <= 0)
+			throw new RuntimeException("YOU HAVE LOST, DIE NOW");
+	}
+
+	/**
+	 * A given amount of shields is added to the ship
+	 * 
+	 * @param amount
+	 *            The amount the shields need to be increased by
+	 */
+	public void addShieldHP(int amount) {
+		for (ShieldType shield : shields.keySet()) {
+			int newShieldHP = Math.min(amount + shields.get(shield),
+					shield.getShieldHP());
+			amount -= newShieldHP - shields.get(shield);
+			shields.put(shield, newShieldHP);
 		}
 	}
 
@@ -76,6 +98,19 @@ public class Ship {
 	 */
 	public int getTotalHP() {
 		return shipType.getTotalHP();
+	}
+
+	/**
+	 * Returns the current shield hp of the ship
+	 * 
+	 * @return The current shield hp of the ship
+	 */
+	public int getCurrShieldHP() {
+		int sum = 0;
+		for (int shieldHP : shields.values()) {
+			sum += shieldHP;
+		}
+		return sum;
 	}
 
 	/**
@@ -228,12 +263,71 @@ public class Ship {
 	}
 
 	/**
+	 * Adds a shield to the ship
+	 * 
+	 * @param shield
+	 *            The shield to be added to the ship
+	 */
+	public void addShield(ShieldType shield) {
+		if (shipType.getShieldSlots() > shields.size()) {
+			shields.put(shield, shield.getShieldHP());
+			return;
+		}
+		throw new IllegalArgumentException("Already has max shields");
+	}
+
+	/**
+	 * Adds a laser to the ship
+	 * 
+	 * @param laser
+	 *            The laser to be added to the ship
+	 */
+	public void addLaser(LaserType laser) {
+		if (shipType.getWeaponSlots() > lasers.size()) {
+			lasers.add(laser);
+			return;
+		}
+		throw new IllegalArgumentException("Already has max lasers");
+	}
+
+	/**
+	 * Adds a gadget to the ship
+	 * 
+	 * @param g
+	 *            The gadget to be added to the ship
+	 */
+	public void addGadget(Gadget g) {
+		if (shipType.getGadgetSlots() > gadgets.size()) {
+			gadgets.add(g);
+			return;
+		}
+		throw new IllegalArgumentException("Already has max gadgets");
+	}
+
+	/**
 	 * Returns all lasers currently equipped by ship
 	 * 
-	 * @return array of lasers
+	 * @return The lasers equipped by the ship
 	 */
-	public LaserType[] getLasers() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<LaserType> getLasers() {
+		return lasers;
+	}
+
+	/**
+	 * Returns the shields equipped by the ship
+	 * 
+	 * @return The shields equipped by the ship
+	 */
+	public List<ShieldType> getShields() {
+		return new ArrayList<ShieldType>(shields.keySet());
+	}
+
+	/**
+	 * Returns the gadgets equipped by the ship
+	 * 
+	 * @return The gadgets equipped by the ship
+	 */
+	public List<Gadget> getGadgets() {
+		return gadgets;
 	}
 }

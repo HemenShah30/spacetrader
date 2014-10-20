@@ -6,13 +6,15 @@ import java.util.List;
 import database.Database;
 import model.Encounter;
 import model.Location;
-import model.NPC;
+import model.NPCEncounter;
 import model.Planet;
 import model.Player;
+import model.Police;
 import model.Ship;
 import model.Universe;
 import model.Enum.EncounterResult;
 import model.Enum.GoodType;
+import model.Enum.LaserType;
 import model.Enum.ShipType;
 
 /**
@@ -119,6 +121,7 @@ public class GameEngine {
 	public void setPlayer(String name, int pilotSkill, int fightingSkill,
 			int traderSkill, int engineerSkill, int investorSkill) {
 		Ship s = new Ship(ShipType.GNAT);
+		s.addLaser(LaserType.PULSELASER);
 		player = new Player(name, pilotSkill, fightingSkill, traderSkill,
 				engineerSkill, investorSkill, s);
 		player.setPlanet(universe.getPlanets().get(0));
@@ -226,13 +229,30 @@ public class GameEngine {
 	}
 
 	/**
-	 * Attacks the NPC using all player weapons
+	 * Method that represents a player attack during the given NPC encounter
 	 * 
-	 * @param n
-	 *            the NPC being attacked
-	 * @return the string representing damage you've done
+	 * @param encounter
+	 *            The encounter that the player is involved in
+	 * @return The result of the given attack
 	 */
-	public EncounterResult playerAttack(NPC n) {
-		return fightEngine.playerAttack(n);
+	public EncounterResult playerAttack(NPCEncounter encounter) {
+		return fightEngine.playerAttack(encounter.getNPC());
+	}
+
+	/**
+	 * Represents a player attempting to bribe a police officer
+	 * 
+	 * @param encounter
+	 *            The NPCEncounter that the player is involved with
+	 * @param credits
+	 *            The credits the player is offering the police officer
+	 * @return Whether the bribe was successful
+	 */
+	public boolean bribe(NPCEncounter encounter, int credits) {
+		if (((Police) encounter.getNPC()).willAcceptBribe(credits)) {
+			player.decreaseCredits(credits);
+			return true;
+		}
+		return false;
 	}
 }

@@ -7,7 +7,7 @@ package model;
  * 
  */
 public class Pirate extends NPC {
-	private double credits, chanceOfAttack;
+	private double chanceOfAttack;
 	private boolean isFighting;
 
 	public Pirate(int rep) {
@@ -24,7 +24,7 @@ public class Pirate extends NPC {
 	 * Generates whether the Pirate attacks or not based off player rep
 	 * 
 	 * @param rep
-	 *            notoriety amongst pirates of player
+	 *            Player notoriety amongst pirates
 	 */
 	private void generateChance(int rep) {
 		chanceOfAttack = (double) (Math.random() / 2 + (rep / 20));

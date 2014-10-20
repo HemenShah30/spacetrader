@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.List;
+
 import model.Player;
 import model.Ship;
 import model.NPC;
@@ -36,14 +38,15 @@ public class FightEngine {
 
 	public EncounterResult playerAttack(NPC n) {
 		npcShip = n.getShip();
-		LaserType[] lasers = playerShip.getLasers();
+		List<LaserType> lasers = playerShip.getLasers();
 		int damage = 0;
 		for (LaserType laser : lasers) {
 			damage += laser.getBaseDamage()
 					+ ((player.getFighterSkill() - 1) / 10 * 10);
 		}
 		npcShip.takeDamage(damage);
-		double healthRatio = (double) npcShip.getCurrHP() / (double) npcShip.getTotalHP();
+		double healthRatio = (double) npcShip.getCurrHP()
+				/ (double) npcShip.getTotalHP();
 		if (healthRatio <= 0.00) {
 			return EncounterResult.NPCDEATH;
 		} else if (healthRatio <= 0.20) {
@@ -55,19 +58,18 @@ public class FightEngine {
 			if (nPilot + (int) (Math.random() * 4) > pPilot) {
 				return EncounterResult.NPCFLEESUCCESS;
 			}
-			return EncounterResult.NPCFLEEFAIL;	
+			return EncounterResult.NPCFLEEFAIL;
 		}
 		// now, NPC attacks
-		LaserType[] nLasers = npcShip.getLasers();
+		List<LaserType> nLasers = npcShip.getLasers();
 		int nDamage = 0;
 		for (LaserType laser : nLasers) {
-			nDamage += laser.getBaseDamage()
-					 + ((n.getFighter() - 1) / 10 * 10);
+			nDamage += laser.getBaseDamage() + ((n.getFighter() - 1) / 10 * 10);
 		}
 		playerShip.takeDamage(nDamage);
 		// handle death?
 		return EncounterResult.NPCATTACK;
-		
+
 	}
 
 	// called in between each attack

@@ -10,7 +10,7 @@ package model.Enum;
  */
 public enum GoodType {
 	WATER(0, 0, 2, 30, 3, 4, Condition.DROUGHT, SpecialResource.LOTSOFWATER, SpecialResource.DESERT, 30, 50, 5, 3),
-	FURS(0, 0, 0, 250, 10, 10, Condition.COLD, SpecialResource.RICHFAUNA, SpecialResource.LIFELESS, 230, 180, 5, 4),
+	FURS(0, 0, 0, 250, 10, 10, Condition.COLD, SpecialResource.RICHFAUNA, SpecialResource.LIFELESS, 180, 230, 5, 4),
 	FOOD(1, 0, 1, 100, 5, 5, Condition.CROPFAIL, SpecialResource.RICHSOIL, SpecialResource.POORSOIL, 90, 160, 10, 5),
 	ORE(2, 2, 3, 350, 20, 10, Condition.WAR, SpecialResource.MINERALRICH, SpecialResource.MINERALPOOR, 350, 420, 10, 5),
 	GAMES(3, 1, 6, 250, -10, 5, Condition.BOREDOM, SpecialResource.ARTISTIC, null, 160, 720, 10, 4),

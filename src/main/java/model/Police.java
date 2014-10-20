@@ -7,10 +7,7 @@ package model;
  * 
  */
 public class Police extends NPC {
-	private boolean willCheckCargo;
-	private double minCredBribe; // minimum bribe required to avoid a search;
-									// hidden from player
-	private double credits;
+	private double minimumBribe;
 
 	public Police(int rep, double playerCred) {
 		setPilot((int) (rep * .6));
@@ -19,14 +16,7 @@ public class Police extends NPC {
 		setEngineer(3);
 		setInvestor(1);
 		generateShip(rep);
-		generateMinCredBribe(rep, playerCred);
-	}
-
-	/**
-	 * Creates the ratio needed to bribe the officer
-	 */
-	private void generateMinCredBribe(int rep, double credits) {
-		minCredBribe = (double) (rep * credits / 10);
+		minimumBribe = (double) (rep * playerCred / 10);
 	}
 
 	/**
@@ -36,9 +26,8 @@ public class Police extends NPC {
 	 *            double of credits offered by player
 	 * @return boolean whether the police accepts or not
 	 */
-	public boolean acceptBribe(double bribe) {
-		if (bribe > minCredBribe) {
-			willCheckCargo = false;
+	public boolean willAcceptBribe(double bribe) {
+		if (bribe >= minimumBribe) {
 			return true;
 		}
 		return false;

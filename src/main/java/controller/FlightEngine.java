@@ -4,15 +4,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import model.Encounter;
+import model.NPCEncounter;
+import model.Pirate;
 import model.Planet;
 import model.Player;
+import model.Police;
 import model.Ship;
+import model.Trader;
 import model.Universe;
 import model.Enum.EncounterType;
-import model.Enum.GoodType;
 
 /**
  * Controller for traveling in game
@@ -148,27 +150,15 @@ public class FlightEngine {
 		double traderChance = traderRate / rateSum + pirateChance;
 		double roll = Math.random();
 		if (roll < pirateChance) {
-			return new Encounter(
-					EncounterType.PIRATE,
-					"You glance at the viewing monitor and see a ship approaching with pirate markings!");
+			return new NPCEncounter(EncounterType.PIRATE, new Pirate(
+					player.getPirateRep()));
 		} else if (roll < traderChance) {
-			return new Encounter(
-					EncounterType.TRADER,
-					"You fly towards the unidentified blip on your radar and discover a traveling trader!");
+			return new NPCEncounter(EncounterType.TRADER, new Trader(
+					player.getTraderRep()));
 		} else {
-			return new Encounter(
-					EncounterType.POLICE,
-					"A police ship hails you and flashes it's blue lights in an attempt to pull you over!");
+			return new NPCEncounter(EncounterType.POLICE, new Police(
+					player.getPoliceRep(), player.getCredits()));
 		}
-	}
-
-	public boolean five(int o) {
-		if (o == 1)
-			return true;
-		else if (o == 2)
-			return false;
-		else
-			return false;
 	}
 
 	/**
@@ -191,96 +181,21 @@ public class FlightEngine {
 		double loseFuelRate = .9;
 
 		if (roll < gainCreditRate) {
-			// give credits
-			int creditStandardDeviation = 300;
-			int creditAverage = 1000;
-			int amount = (int) (new Random().nextGaussian()
-					* creditStandardDeviation + creditAverage);
-			if (amount < 1)
-				amount = 1;
-			player.increaseCredits(amount);
-			return new Encounter(EncounterType.OTHER, "You find " + amount
-					+ " credits floating in space!");
+			return new Encounter(EncounterType.GAINCREDITS);
 		} else if (roll < gainCargoRate) {
-			// give cargo
-			GoodType[] goodTypes = GoodType.values();
-			int index = (int) (Math.random() * goodTypes.length);
-			GoodType good = goodTypes[index];
-			double percentOfCargoFilled = .2;
-			int cargoCapacity = ship.getCargoSize();
-			int currCargo = ship.getCurrCargo();
-			int quantity = (int) (Math.random() * percentOfCargoFilled * cargoCapacity);
-			if (currCargo + quantity > cargoCapacity) {
-				quantity = cargoCapacity - currCargo;
-			}
-
-			ship.addToCargo(good, quantity);
-			return new Encounter(EncounterType.OTHER, "You find " + quantity
-					+ " " + good.toString() + " floating in space!");
+			return new Encounter(EncounterType.GAINCARGO);
 		} else if (roll < weaponRate) {
-			// give weapon
-			// check for free weapon slot, else return nothing
-			// create an encounter to find a new weapon in space
-			return new Encounter(EncounterType.OTHER, "IMPLEMENTATION NEEDED");
+			return new Encounter(EncounterType.GAINWEAPON);
 		} else if (roll < gainFuelRate) {
-			// give fuel
-			double percentOfFuelLost = .5;
-			int currFuel = ship.getFuel();
-			int maxFuel = ship.getShipType().getFuel();
-			int amount = (int) (Math.random() * percentOfFuelLost * currFuel);
-			if (amount + currFuel > maxFuel)
-				amount = maxFuel - currFuel;
-			ship.setFuel(currFuel + amount);
-			return new Encounter(EncounterType.OTHER, "You find " + amount
-					+ " fuel floating in space!");
+			return new Encounter(EncounterType.GAINFUEL);
 		} else if (roll < loseCreditRate) {
-			// lose credits
-			double playerCred = player.getCredits();
-			double percentOfMoneyLost = .4;
-			int amount = (int) (Math.random() * percentOfMoneyLost * playerCred);
-			player.decreaseCredits(amount);
-			return new Encounter(
-					EncounterType.OTHER,
-					"You find a computer floating in a piece of debris. You boot it up and quickly realize it's a virus! It manages to siphon off "
-							+ amount
-							+ " of your credits before you jettison it out the trash chute.");
+			return new Encounter(EncounterType.LOSECREDITS);
 		} else if (roll < losecargoRate) {
-			// lose cargo
-			double percentOfCargoLost = .5;
-			List<GoodType> cargo = new ArrayList<GoodType>();
-			for (GoodType g : GoodType.values()) {
-				if (ship.amountInCargo(g) > 0)
-					cargo.add(g);
-			}
-			if (cargo.size() == 0)
-				return null;
-
-			GoodType good = cargo.get((int) Math.random() * cargo.size());
-			int quantity = (int) Math.ceil(ship.amountInCargo(good)
-					* Math.random() * percentOfCargoLost);
-			ship.removeFromCargo(good, quantity);
-			return new Encounter(EncounterType.OTHER,
-					"An asteroid crashes into your cargo hold, and " + quantity
-							+ " " + good.toString() + " slips out into space!");
+			return new Encounter(EncounterType.LOSECARGO);
 		} else if (roll < loseFuelRate) {
-			// lose fuel
-			double percentOfFuelLost = 1 / 3.0;
-			int currFuel = ship.getFuel();
-			int amount = (int) Math.ceil(Math.random() * percentOfFuelLost
-					* currFuel);
-			ship.setFuel(currFuel - amount);
-			return new Encounter(EncounterType.OTHER,
-					"An asteroid crashes into your fuel tank, and " + amount
-							+ " fuel leaks out into space!");
+			return new Encounter(EncounterType.LOSEFUEL);
 		} else {
-			// take damage
-			int maxHealthLost = 5;
-			int healthLost = Math.min(ship.getCurrHP() - 1,
-					(int) (Math.ceil(Math.random() * maxHealthLost)));
-			ship.setCurrHP(ship.getCurrHP() - healthLost);
-			return new Encounter(EncounterType.OTHER,
-					"An asteroid glances off your ship's hull, doing "
-							+ healthLost + " damage!");
+			return new Encounter(EncounterType.LOSEHEALTH);
 		}
 	}
 }
