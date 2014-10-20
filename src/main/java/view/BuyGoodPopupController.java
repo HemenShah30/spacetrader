@@ -49,7 +49,7 @@ public class BuyGoodPopupController {
 	@FXML
 	private void buyAllGood(Event e) {
 		if (MultiPageController.isValidAction(e)) {
-			List<String> errors = game.tradeWithMarketplace(tradeGood,
+			List<String> errors = game.marketplaceTrade(tradeGood,
 					buyAllAmount, true);
 			if (errors.isEmpty()) {
 				tradeScreen.updatePage();
@@ -77,7 +77,7 @@ public class BuyGoodPopupController {
 			try {
 				goodAmount = Integer.parseInt(cargoAmountTxt.getText());
 				if (goodAmount > 0 && goodAmount <= buyAllAmount) {
-					List<String> errors = game.tradeWithMarketplace(tradeGood,
+					List<String> errors = game.marketplaceTrade(tradeGood,
 							goodAmount, true);
 					if (errors.isEmpty()) {
 						tradeScreen.updatePage();

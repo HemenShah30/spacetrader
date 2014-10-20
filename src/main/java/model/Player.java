@@ -245,6 +245,24 @@ public class Player {
 	}
 
 	/**
+	 * credits needed to refuel ship
+	 * 
+	 * @return refuel cost
+	 */
+	public double getCostRefuel() {
+		return ship.getCostRefuel();
+	}
+
+	/**
+	 * credits needed to repair ship
+	 * 
+	 * @return repair cost
+	 */
+	public double getCostRepair() {
+		return ship.getCostRepair();
+	}
+
+	/**
 	 * Removes credits and refuels ship if player has enough credits
 	 * 
 	 * @param amountBy
