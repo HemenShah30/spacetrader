@@ -279,6 +279,9 @@ public class GameEngine {
 	/**
 	 * Represents a player consenting to a police search
 	 * 
+	 * @param npc
+	 *            The encounter in which the player is consenting
+	 * 
 	 * @return The success of the search in finding illegal goods, true if goods
 	 *         found, false otherwise
 	 */
@@ -287,8 +290,18 @@ public class GameEngine {
 	}
 	
 	/**
+	 * Represents a player wanting to trade with the trader
+	 * 
+	 * @param npc
+	 *            The encounter in which the player is trading
+	 */
+	public void tradeWithTrader(NPCEncounter npc) {
+		//tradeEngine.tradeWithTrader
+	}
+	
+	/**
 	 * Calculates and returns repair cost for player's ship
-	 * @return repiar cost
+	 * @return repair cost
 	 */
 	public double getRepairCost() {
 		return player.getCostRepair();
