@@ -145,9 +145,8 @@ public class GameEngine {
 	 *            Whether or not a good is being bought
 	 * @return The errors from the transaction, if any
 	 */
-	public List<String> marketplaceTrade(GoodType good, int quantity,
+	public List<String> tradeWithMarketplace(GoodType good, int quantity,
 			boolean buyingGood) {
-		player.getShip();
 		if (buyingGood)
 			return tradeEngine.buy(good, quantity, player.getPlanet()
 					.getMarketplace());
@@ -288,7 +287,7 @@ public class GameEngine {
 	public boolean consentToSearch(NPCEncounter npc) {
 		return fightEngine.consentToSearch((Police) (npc.getNPC()));
 	}
-	
+
 	/**
 	 * Represents a player wanting to trade with the trader
 	 * 
@@ -296,25 +295,27 @@ public class GameEngine {
 	 *            The encounter in which the player is trading
 	 */
 	public void tradeWithTrader(NPCEncounter npc) {
-		//tradeEngine.tradeWithTrader
+		// tradeEngine.tradeWithTrader
 	}
-	
+
 	/**
 	 * Calculates and returns repair cost for player's ship
+	 * 
 	 * @return repair cost
 	 */
 	public double getRepairCost() {
-		return player.getCostRepair();
+		return player.getShip().getCostRepair();
 	}
-	
+
 	/**
 	 * Calculates and returns refuel cost for player's ship
+	 * 
 	 * @return refuel cost
 	 */
 	public double getRefuelCost() {
-		return player.getCostRefuel();
+		return player.getShip().getCostRefuel();
 	}
-	
+
 	/**
 	 * Removes credits and refuels ship if player has enough credits
 	 * 
@@ -325,7 +326,7 @@ public class GameEngine {
 	public boolean refuelShip(double credits) {
 		return player.refuelShip(credits);
 	}
-	
+
 	/**
 	 * Removes credits and repairs ship if player has enough credits
 	 * 
