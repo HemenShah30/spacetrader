@@ -10,11 +10,11 @@ public class Police extends NPC {
 	private double minimumBribe;
 
 	public Police(int rep, double playerCred) {
-		setPilot((int) (rep * .6));
-		setFighter((int) (rep * .6));
-		setTrader(1);
-		setEngineer(3);
-		setInvestor(1);
+		setPilotSkill((int) (rep * .6));
+		setFighterSkill((int) (rep * .6));
+		setTraderSkill(1);
+		setEngineerSkill(3);
+		setInvestorSkill(1);
 		generateShip(rep);
 		minimumBribe = (double) (rep * playerCred / 10);
 	}

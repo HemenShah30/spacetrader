@@ -21,11 +21,11 @@ public class Trader extends NPC {
 	private double credits;
 
 	public Trader(int rep) {
-		setPilot(1);
-		setFighter((int) (rep * .5));
-		setTrader(1);
-		setEngineer((int) (rep * .5));
-		setInvestor(1);
+		setPilotSkill(1);
+		setFighterSkill((int) (rep * .5));
+		setTraderSkill(1);
+		setEngineerSkill((int) (rep * .5));
+		setInvestorSkill(1);
 		generateShip(rep);
 		generateCredits(rep);
 		generateIsSelling();

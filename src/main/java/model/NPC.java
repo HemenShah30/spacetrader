@@ -14,19 +14,17 @@ public abstract class NPC {
 								// ex. if player has bad reputation, the
 								// threatlevel of police ships will be higher,
 								// resulting in a tougher enemy
-	// *** we should have a pirateRep, policeRep, and a traderRep for the player
 	private int pilotSkill, fighterSkill, traderSkill, engineerSkill,
 			investorSkill;
 	private double credits;
 	private Ship ship;
-	private boolean isFleeing, isFighting, isSurrenduring;
 
 	/**
 	 * Returns the NPC's piloting skill
 	 * 
 	 * @return The NPC's piloting skill
 	 */
-	public int getPilot() {
+	public int getPilotSkill() {
 		return pilotSkill;
 	}
 
@@ -35,7 +33,7 @@ public abstract class NPC {
 	 * 
 	 * @return The NPC's fighter skill
 	 */
-	public int getFighter() {
+	public int getFighterSkill() {
 		return fighterSkill;
 	}
 
@@ -44,7 +42,7 @@ public abstract class NPC {
 	 * 
 	 * @return The NPC's trader skill
 	 */
-	public int getTrader() {
+	public int getTraderSkill() {
 		return traderSkill;
 	}
 
@@ -53,7 +51,7 @@ public abstract class NPC {
 	 * 
 	 * @return The NPC's engineer skill
 	 */
-	public int getEngineer() {
+	public int getEngineerSkill() {
 		return engineerSkill;
 	}
 
@@ -62,7 +60,7 @@ public abstract class NPC {
 	 * 
 	 * @return The NPC's investor skill
 	 */
-	public int getInvestor() {
+	public int getInvestorSkill() {
 		return investorSkill;
 	}
 
@@ -76,39 +74,12 @@ public abstract class NPC {
 	}
 
 	/**
-	 * Returns true if the NPC is trying to flee
-	 * 
-	 * @return boolean indicating if the NPC is trying to flee
-	 */
-	public boolean getIsFleeing() {
-		return isFleeing;
-	}
-
-	/**
-	 * Returns true if the NPC is wants to fight
-	 * 
-	 * @return boolean indicating if the NPC wants to fight
-	 */
-	public boolean getIsFighting() {
-		return isFighting;
-	}
-
-	/**
-	 * Returns true if the NPC surrenders
-	 * 
-	 * @return boolean indicating if the NPC wants to surrender
-	 */
-	public boolean getIsSurrendering() {
-		return isSurrenduring;
-	}
-
-	/**
 	 * Sets the NPC's pilot skill points
 	 * 
 	 * @param points
 	 *            The NPC's new pilot skill points
 	 */
-	public void setPilot(int points) {
+	public void setPilotSkill(int points) {
 		pilotSkill = points;
 	}
 
@@ -118,7 +89,7 @@ public abstract class NPC {
 	 * @param points
 	 *            The NPC's new fighter skill points
 	 */
-	public void setFighter(int points) {
+	public void setFighterSkill(int points) {
 		fighterSkill = points;
 	}
 
@@ -128,7 +99,7 @@ public abstract class NPC {
 	 * @param points
 	 *            The NPC's new trader skill points
 	 */
-	public void setTrader(int points) {
+	public void setTraderSkill(int points) {
 		traderSkill = points;
 	}
 
@@ -138,7 +109,7 @@ public abstract class NPC {
 	 * @param points
 	 *            The NPC's new engineer skill points
 	 */
-	public void setEngineer(int points) {
+	public void setEngineerSkill(int points) {
 		engineerSkill = points;
 	}
 
@@ -148,7 +119,7 @@ public abstract class NPC {
 	 * @param points
 	 *            The NPC's new investor skill points
 	 */
-	public void setInvestor(int points) {
+	public void setInvestorSkill(int points) {
 		investorSkill = points;
 	}
 
@@ -166,7 +137,7 @@ public abstract class NPC {
 		try {
 			s.addLaser(LaserType.PULSELASER);
 		} catch (MaxCapacityException m) {
-			
+
 		}
 		setShip(s);
 	}
@@ -178,36 +149,6 @@ public abstract class NPC {
 	 */
 	public Ship getShip() {
 		return ship;
-	}
-
-	/**
-	 * Sets if the NPC wants to flee
-	 * 
-	 * @param flee
-	 *            True if NPC wants to flee
-	 */
-	public void setIsFleeing(boolean flee) {
-		isFleeing = flee;
-	}
-
-	/**
-	 * Sets if the NPC wants to fight
-	 * 
-	 * @param fight
-	 *            True if NPC wants to fight
-	 */
-	public void setIsFighting(boolean fight) {
-		isFighting = fight;
-	}
-
-	/**
-	 * Sets if the NPC wants to surrender
-	 * 
-	 * @param fight
-	 *            True if NPC wants to surrender
-	 */
-	public void setIsSurrenduring(boolean surrender) {
-		isSurrenduring = surrender;
 	}
 
 	/**

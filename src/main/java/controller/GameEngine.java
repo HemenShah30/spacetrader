@@ -251,11 +251,27 @@ public class GameEngine {
 	 *            The credits the player is offering the police officer
 	 * @return Whether the bribe was successful
 	 */
-	public boolean bribe(NPCEncounter encounter, int credits) {
-		if (((Police) encounter.getNPC()).willAcceptBribe(credits)) {
-			player.decreaseCredits(credits);
-			return true;
-		}
-		return false;
+	public boolean bribePolice(NPCEncounter npc, int credits) {
+		return fightEngine.bribePolice((Police) npc.getNPC(), credits);
+	}
+
+	/**
+	 * Represents a player surrendering in the given encounter
+	 * 
+	 * @param npc
+	 *            The encounter in which the player is surrendering
+	 */
+	public void surrenderToNPC(NPCEncounter npc) {
+		fightEngine.playerSurrender(npc.getNPC());
+	}
+
+	/**
+	 * Represents a player consenting to a police search
+	 * 
+	 * @return The success of the search in finding illegal goods, true if goods
+	 *         found, false otherwise
+	 */
+	public boolean consentToSearch(NPCEncounter npc) {
+		return fightEngine.consentToSearch((Police) (npc.getNPC()));
 	}
 }

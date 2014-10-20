@@ -86,16 +86,16 @@ public class NPCEncounterController {
 			bribeBtn.setVisible(false);
 		}
 	}
-	
+
 	/**
 	 * Updates the labels actively involved in a battle
 	 */
-	public void updateShipLabels() {		
+	public void updateShipLabels() {
 		Player player = GameEngine.getGameEngine().getPlayer();
 		Ship ship = player.getShip();
 		playerHPLbl.setText(Integer.toString(ship.getCurrHP()));
 		playerShieldsLbl.setText(Integer.toString(ship.getCurrShieldHP()));
-		
+
 	}
 
 	/**
@@ -182,7 +182,19 @@ public class NPCEncounterController {
 	@FXML
 	private void surrenderConsentTrade(Event e) {
 		if (MultiPageController.isValidAction(e)) {
-			System.out.println("SURRENDER");
+			GameEngine game = GameEngine.getGameEngine();
+			if (encounter.getEncounterType() == EncounterType.PIRATE) {
+				game.surrenderToNPC(encounter);
+				Dialogs.create().owner(bribeBtn.getScene().getWindow())
+						.title("Surrender")
+						.message("You surrender and lose all your cargo")
+						.showInformation();
+				Stage popupStage = (Stage) attackBtn.getScene().getWindow();
+				popupStage.close();
+				parent.doEncounters();
+			} else if(encounter.getEncounterType() == EncounterType.POLICE) {
+				game.consentToSearch(encounter);
+			}
 		}
 	}
 
@@ -209,7 +221,7 @@ public class NPCEncounterController {
 						bribeAmt = Integer.valueOf(bribe.get());
 						if (bribeAmt > 0
 								&& bribeAmt <= game.getPlayer().getCredits()) {
-							if (game.bribe(encounter, bribeAmt)) {
+							if (game.bribePolice(encounter, bribeAmt)) {
 								Dialogs.create()
 										.owner(bribeBtn.getScene().getWindow())
 										.title("Success")
