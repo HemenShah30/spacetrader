@@ -1,5 +1,6 @@
 package model;
 
+import model.Enum.LaserType;
 import model.Enum.ShipType;
 
 /**
@@ -152,13 +153,22 @@ public abstract class NPC {
 	}
 
 	/**
-	 * Randomly generates the ship the NPC is using
+	 * Randomly generates the ship the NPC is using given the player reputation
+	 * 
+	 * @param rep
+	 *            The reputation of the player
 	 */
 	protected void generateShip(int rep) {
-		ShipType[] shiptypes = ShipType.values();
+		ShipType[] shipTypes = ShipType.values();
 		int index = (rep - 1) / 2;
-		ShipType shiptype = shiptypes[index];
-		setShip(new Ship(shiptype));
+		ShipType shipType = shipTypes[index];
+		Ship s = new Ship(shipType);
+		try {
+			s.addLaser(LaserType.PULSELASER);
+		} catch (MaxCapacityException m) {
+			
+		}
+		setShip(s);
 	}
 
 	/**

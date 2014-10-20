@@ -63,8 +63,11 @@ public class Ship {
 	 * 
 	 * @param damage
 	 *            the amount of damage to be done
+	 * @throws DeathException
+	 *             Thrown when the ship would have 0 or less health after taking
+	 *             damage
 	 */
-	public void takeDamage(int damage) {
+	public void takeDamage(int damage) throws DeathException {
 		for (ShieldType shield : shields.keySet()) {
 			int shieldHP = shields.get(shield);
 			int absorbed = Math.min(damage, shieldHP);
@@ -73,7 +76,7 @@ public class Ship {
 		}
 		currHP -= damage;
 		if (currHP <= 0)
-			throw new RuntimeException("YOU HAVE LOST, DIE NOW");
+			throw new DeathException();
 	}
 
 	/**
@@ -267,13 +270,15 @@ public class Ship {
 	 * 
 	 * @param shield
 	 *            The shield to be added to the ship
+	 * @throws MaxCapacityException
+	 *             Thrown when too many shields are added
 	 */
-	public void addShield(ShieldType shield) {
+	public void addShield(ShieldType shield) throws MaxCapacityException {
 		if (shipType.getShieldSlots() > shields.size()) {
 			shields.put(shield, shield.getShieldHP());
 			return;
 		}
-		throw new IllegalArgumentException("Already has max shields");
+		throw new MaxCapacityException("Already has max shields");
 	}
 
 	/**
@@ -281,13 +286,15 @@ public class Ship {
 	 * 
 	 * @param laser
 	 *            The laser to be added to the ship
+	 * @throws MaxCapacityException
+	 *             Thrown when too many lasers are added
 	 */
-	public void addLaser(LaserType laser) {
+	public void addLaser(LaserType laser) throws MaxCapacityException {
 		if (shipType.getWeaponSlots() > lasers.size()) {
 			lasers.add(laser);
 			return;
 		}
-		throw new IllegalArgumentException("Already has max lasers");
+		throw new MaxCapacityException("Already has max lasers");
 	}
 
 	/**
@@ -295,13 +302,15 @@ public class Ship {
 	 * 
 	 * @param g
 	 *            The gadget to be added to the ship
+	 * @throws MaxCapacityException
+	 *             thrown when too many gadgets are added
 	 */
-	public void addGadget(Gadget g) {
+	public void addGadget(Gadget g) throws MaxCapacityException {
 		if (shipType.getGadgetSlots() > gadgets.size()) {
 			gadgets.add(g);
 			return;
 		}
-		throw new IllegalArgumentException("Already has max gadgets");
+		throw new MaxCapacityException("Already has max gadgets");
 	}
 
 	/**

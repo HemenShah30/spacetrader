@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import model.NPCEncounter;
 import model.Player;
 import model.Ship;
+import model.Enum.EncounterResult;
 import model.Enum.EncounterType;
 
 /**
@@ -32,7 +33,7 @@ public class NPCEncounterController {
 	private Label playerHPLbl;
 
 	@FXML
-	private Label playerSheildsLbl;
+	private Label playerShieldsLbl;
 
 	@FXML
 	private Label NPCShipLbl;
@@ -66,13 +67,12 @@ public class NPCEncounterController {
 	public void initializePage(TravelScreenController tsc, NPCEncounter e) {
 		encounter = e;
 		parent = tsc;
-		// go through and set all player and npc ship stats
 		Player player = GameEngine.getGameEngine().getPlayer();
 		Ship ship = player.getShip();
 		Ship NPCShip = e.getNPC().getShip();
 		playerShipLbl.setText("Ship Type: " + ship.getShipType().toString());
 		playerHPLbl.setText("HP: " + ship.getCurrHP());
-		playerSheildsLbl.setText("Shields: " + ship.getCurrShieldHP());
+		playerShieldsLbl.setText("Shields: " + ship.getCurrShieldHP());
 		NPCShipLbl.setText("Ship Type: " + NPCShip.getShipType().toString());
 		NPCHPLbl.setText("HP: " + NPCShip.getCurrHP());
 		NPCShieldsLbl.setText("Shields: " + NPCShip.getCurrShieldHP());
@@ -86,70 +86,163 @@ public class NPCEncounterController {
 			bribeBtn.setVisible(false);
 		}
 	}
-
-	@FXML
-	private void attack(Event e) {
-
-	}
-
-	@FXML
-	private void flee(Event e) {
-
-	}
-
-	@FXML
-	private void surrenderConsentTrader(Event e) {
+	
+	/**
+	 * Updates the labels actively involved in a battle
+	 */
+	public void updateShipLabels() {		
+		Player player = GameEngine.getGameEngine().getPlayer();
+		Ship ship = player.getShip();
+		playerHPLbl.setText(Integer.toString(ship.getCurrHP()));
+		playerShieldsLbl.setText(Integer.toString(ship.getCurrShieldHP()));
 		
 	}
 
+	/**
+	 * Method for executing a player attack
+	 * 
+	 * @param e
+	 *            The event that fired the method
+	 */
+	@FXML
+	private void attack(Event e) {
+		if (MultiPageController.isValidAction(e)) {
+			EncounterResult result = GameEngine.getGameEngine().playerAttack(
+					encounter);
+			String playerMsg = "";
+			boolean encounterComplete = false;
+			switch (result) {
+			case NPCFLEESUCCESS: {
+				playerMsg = "The " + encounter.getNPC().toString()
+						+ " successfully fled the battle";
+				encounterComplete = true;
+				break;
+			}
+			case NPCFLEEFAIL: {
+				playerMsg = "The " + encounter.getNPC().toString()
+						+ " tried to flee the battle, but failed";
+				break;
+			}
+			case NPCATTACK: {
+				playerMsg = "The " + encounter.getNPC().toString()
+						+ " attacked you";
+				break;
+			}
+			case NPCSURRENDER: {
+				playerMsg = "The " + encounter.getNPC().toString()
+						+ " has surrendered to you. You aquire his cargo";
+				encounterComplete = true;
+				break;
+			}
+			case NPCDEATH: {
+				playerMsg = "The " + encounter.getNPC().toString()
+						+ " has died";
+				encounterComplete = true;
+				break;
+			}
+			case PLAYERDEATH: {
+				playerMsg = "You have died";
+				throw new RuntimeException("You have died");
+			}
+			default: {
+
+			}
+			}
+
+			Dialogs.create().owner(bribeBtn.getScene().getWindow())
+					.title("Result").message(playerMsg).showInformation();
+
+			if (encounterComplete) {
+				Stage popupStage = (Stage) attackBtn.getScene().getWindow();
+				popupStage.close();
+				parent.doEncounters();
+			}
+		}
+	}
+
+	/**
+	 * Method for executing a player attempt to flee or leave
+	 * 
+	 * @param e
+	 *            The event that fired the method
+	 */
+	@FXML
+	private void fleeLeave(Event e) {
+		if (MultiPageController.isValidAction(e)) {
+			System.out.println("FLEE");
+		}
+	}
+
+	/**
+	 * Method for executing a player surrender, consent to search, or trade
+	 * 
+	 * @param e
+	 *            The event that fired the method
+	 */
+	@FXML
+	private void surrenderConsentTrade(Event e) {
+		if (MultiPageController.isValidAction(e)) {
+			System.out.println("SURRENDER");
+		}
+	}
+
+	/**
+	 * Method for executing a player bribe
+	 * 
+	 * @param e
+	 *            The event that fired the method
+	 */
 	@FXML
 	private void bribe(Event e) {
-		boolean done = false;
-		GameEngine game = GameEngine.getGameEngine();
-		while (!done) {
-			Optional<String> bribe = Dialogs.create()
-					.owner(bribeBtn.getScene().getWindow()).title("Bribe")
-					.message("Please input your bribe amount").showTextInput();
+		if (MultiPageController.isValidAction(e)) {
+			boolean done = false;
+			GameEngine game = GameEngine.getGameEngine();
+			while (!done) {
+				Optional<String> bribe = Dialogs.create()
+						.owner(bribeBtn.getScene().getWindow()).title("Bribe")
+						.message("Please input your bribe amount")
+						.showTextInput();
 
-			if (bribe.isPresent()) {
-				int bribeAmt;
-				try {
-					bribeAmt = Integer.valueOf(bribe.get());
-					if (bribeAmt > 0
-							&& bribeAmt <= game.getPlayer().getCredits()) {
-						if (game.bribe(encounter, bribeAmt)) {
-							Dialogs.create()
-									.owner(bribeBtn.getScene().getWindow())
-									.title("Success")
-									.message(
-											"The police accept your bribe and leave")
-									.showInformation();
+				if (bribe.isPresent()) {
+					int bribeAmt;
+					try {
+						bribeAmt = Integer.valueOf(bribe.get());
+						if (bribeAmt > 0
+								&& bribeAmt <= game.getPlayer().getCredits()) {
+							if (game.bribe(encounter, bribeAmt)) {
+								Dialogs.create()
+										.owner(bribeBtn.getScene().getWindow())
+										.title("Success")
+										.message(
+												"The police accept your bribe and leave")
+										.showInformation();
 
-							Stage popupStage = (Stage) bribeBtn.getScene()
-									.getWindow();
-							popupStage.close();
-							parent.doEncounters();
+								Stage popupStage = (Stage) bribeBtn.getScene()
+										.getWindow();
+								popupStage.close();
+								parent.doEncounters();
+							} else {
+								Dialogs.create()
+										.owner(bribeBtn.getScene().getWindow())
+										.title("Failure")
+										.message("The police refuse your bribe")
+										.showInformation();
+								bribeBtn.setDisable(true);
+							}
 						} else {
 							Dialogs.create()
 									.owner(bribeBtn.getScene().getWindow())
-									.title("Failure")
-									.message("The police refuse your bribe")
-									.showInformation();
-							bribeBtn.setDisable(true);
+									.title("Error")
+									.message(
+											"You must enter a positive number less than your total credits")
+									.showError();
 						}
-					} else {
-						Dialogs.create()
-								.owner(bribeBtn.getScene().getWindow())
+					} catch (NumberFormatException n) {
+						Dialogs.create().owner(bribeBtn.getScene().getWindow())
 								.title("Error")
-								.message(
-										"You must enter a positive number less than your total credits")
+								.message("You must enter a valid number")
 								.showError();
 					}
-				} catch (NumberFormatException n) {
-					Dialogs.create().owner(bribeBtn.getScene().getWindow())
-							.title("Error")
-							.message("You must enter a valid number")
-							.showError();
 				}
 			}
 		}

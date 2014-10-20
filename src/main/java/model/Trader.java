@@ -125,13 +125,13 @@ public class Trader extends NPC {
 		credits = (double) (rep * 800);
 	}
 
-	/**
-	 * Returns Trader's credits
-	 * 
-	 * @return trader's credits
-	 */
+	@Override
 	public double getCredits() {
 		return credits;
 	}
 
+	@Override
+	public String toString() {
+		return "Trader";
+	}
 }

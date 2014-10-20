@@ -2,6 +2,7 @@ package controller;
 
 import java.util.List;
 
+import model.DeathException;
 import model.Player;
 import model.Ship;
 import model.NPC;
@@ -44,12 +45,14 @@ public class FightEngine {
 			damage += laser.getBaseDamage()
 					+ ((player.getFighterSkill() - 1) / 10 * 10);
 		}
-		npcShip.takeDamage(damage);
+		try {
+			npcShip.takeDamage(damage);
+		} catch (DeathException death) {
+			return EncounterResult.NPCDEATH;
+		}
 		double healthRatio = (double) npcShip.getCurrHP()
 				/ (double) npcShip.getTotalHP();
-		if (healthRatio <= 0.00) {
-			return EncounterResult.NPCDEATH;
-		} else if (healthRatio <= 0.20) {
+		if (healthRatio <= .2) {
 			int nPilot = n.getPilot();
 			int pPilot = player.getPilotSkill();
 			if (nPilot + 2 < pPilot) {
@@ -66,10 +69,12 @@ public class FightEngine {
 		for (LaserType laser : nLasers) {
 			nDamage += laser.getBaseDamage() + ((n.getFighter() - 1) / 10 * 10);
 		}
-		playerShip.takeDamage(nDamage);
-		// handle death?
+		try {
+			playerShip.takeDamage(nDamage);
+		} catch (DeathException death) {
+			return EncounterResult.PLAYERDEATH;
+		}
 		return EncounterResult.NPCATTACK;
-
 	}
 
 	// called in between each attack

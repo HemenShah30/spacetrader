@@ -18,6 +18,7 @@ import javafx.scene.paint.Color;
 import org.postgresql.util.PGobject;
 
 import model.Location;
+import model.MaxCapacityException;
 import model.Planet;
 import model.Player;
 import model.Ship;
@@ -26,6 +27,7 @@ import model.Enum.Condition;
 import model.Enum.EncounterRate;
 import model.Enum.GoodType;
 import model.Enum.Government;
+import model.Enum.LaserType;
 import model.Enum.ShipType;
 import model.Enum.SpecialResource;
 import model.Enum.TechLevel;
@@ -566,6 +568,14 @@ public class Database {
 			ShipType type = ShipType.valueOf(playerInfo.getString(
 					"ShipTypeName").toUpperCase());
 			Ship ship = new Ship(type, currentHullPoints, shipFuel);
+
+			// TODO: Add in laser, shield, and gadget saving to fix this
+			try {
+				ship.addLaser(LaserType.PULSELASER);
+			} catch (MaxCapacityException m) {
+
+			}
+
 			p = new Player(playerName, playerInfo.getInt("PilotSkill"),
 					playerInfo.getInt("FighterSkill"),
 					playerInfo.getInt("TraderSkill"),

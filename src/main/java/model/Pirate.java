@@ -34,4 +34,9 @@ public class Pirate extends NPC {
 			setIsFighting(true);
 		}
 	}
+	
+	@Override
+	public String toString() {
+		return "Pirate";
+	}
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import database.Database;
 import model.Encounter;
 import model.Location;
+import model.MaxCapacityException;
 import model.NPCEncounter;
 import model.Planet;
 import model.Player;
@@ -39,8 +40,6 @@ public class GameEngine {
 	private GameEngine() {
 		universe = new Universe();
 		universe.createPlanets();
-		// for (Planet p : universe.getPlanets())
-		// System.out.println(p);
 	}
 
 	/**
@@ -121,7 +120,11 @@ public class GameEngine {
 	public void setPlayer(String name, int pilotSkill, int fightingSkill,
 			int traderSkill, int engineerSkill, int investorSkill) {
 		Ship s = new Ship(ShipType.GNAT);
-		s.addLaser(LaserType.PULSELASER);
+		try {
+			s.addLaser(LaserType.PULSELASER);
+		} catch (MaxCapacityException m) {
+			m.printStackTrace();
+		}
 		player = new Player(name, pilotSkill, fightingSkill, traderSkill,
 				engineerSkill, investorSkill, s);
 		player.setPlanet(universe.getPlanets().get(0));

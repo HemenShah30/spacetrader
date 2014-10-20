@@ -32,4 +32,9 @@ public class Police extends NPC {
 		}
 		return false;
 	}
+
+	@Override
+	public String toString() {
+		return "Police";
+	}
 }

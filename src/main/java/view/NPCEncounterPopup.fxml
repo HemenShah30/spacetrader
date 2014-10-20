@@ -10,10 +10,10 @@
    <children>
       <HBox layoutX="66.0" layoutY="295.0" prefHeight="55.0" prefWidth="400.0" spacing="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
          <children>
-            <Button fx:id="attackBtn" mnemonicParsing="false" text="Attack" />
-            <Button fx:id="fleeLeaveBtn" mnemonicParsing="false" text="Flee" />
-            <Button fx:id="surrenderConsentTradeBtn" mnemonicParsing="false" text="Surrender" />
-            <Button fx:id="bribeBtn" mnemonicParsing="false" text="Bribe" />
+            <Button fx:id="attackBtn" mnemonicParsing="false" onKeyPressed="#attack" onMouseClicked="#attack" text="Attack" />
+            <Button fx:id="fleeLeaveBtn" mnemonicParsing="false" onKeyPressed="#fleeLeave" onMouseClicked="#fleeLeave" text="Flee" />
+            <Button fx:id="surrenderConsentTradeBtn" mnemonicParsing="false" onKeyPressed="#surrenderConsentTrade" onMouseClicked="#surrenderConsentTrade" text="Surrender" />
+            <Button fx:id="bribeBtn" mnemonicParsing="false" onKeyPressed="#bribe" onMouseClicked="#bribe" text="Bribe" />
          </children>
          <padding>
             <Insets left="20.0" />
@@ -32,7 +32,7 @@
          <children>
             <Label fx:id="playerShipLbl" text="Your Ship" />
             <Label fx:id="playerHPLbl" text="HP :  " GridPane.rowIndex="1" />
-            <Label fx:id="playerSheildsLbl" text="Shields : " GridPane.rowIndex="2" />
+            <Label fx:id="playerShieldsLbl" text="Shields : " GridPane.rowIndex="2" />
             <Label fx:id="NPCShipLbl" text="NPC Ship" GridPane.columnIndex="1" />
             <Label fx:id="NPCHPLbl" text="HP :  " GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label fx:id="NPCShieldsLbl" text="Shields : " GridPane.columnIndex="1" GridPane.rowIndex="2" />
