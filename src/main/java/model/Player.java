@@ -263,9 +263,11 @@ public class Player {
 	}
 
 	/**
-	 * Refuels ship and removes credits if player has enough
+	 * Removes credits and refuels ship if player has enough credits
 	 * 
 	 * @param amountBy
+	 *            credits used for payment
+	 * @return true if transaction works, false if fails
 	 */
 	public boolean refuelShip(double amountBy) {
 		if (credits >= amountBy) {
@@ -278,10 +280,11 @@ public class Player {
 	}
 
 	/**
-	 * Repairs ship and removes credits if player has enough
+	 * Removes credits and repairs ship if player has enough credits
 	 * 
 	 * @param amountBy
-	 *            amount used to repair ship
+	 *            credits used for payment
+	 * @return true if transaction works, false if fails
 	 */
 	public boolean repairShip(double amountBy) {
 		if (credits >= amountBy) {

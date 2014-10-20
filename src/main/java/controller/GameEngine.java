@@ -286,18 +286,40 @@ public class GameEngine {
 		return fightEngine.consentToSearch((Police) (npc.getNPC()));
 	}
 	
+	/**
+	 * Calculates and returns repair cost for player's ship
+	 * @return repiar cost
+	 */
 	public double getRepairCost() {
 		return player.getCostRepair();
 	}
 	
+	/**
+	 * Calculates and returns refuel cost for player's ship
+	 * @return refuel cost
+	 */
 	public double getRefuelCost() {
 		return player.getCostRefuel();
 	}
 	
+	/**
+	 * Removes credits and refuels ship if player has enough credits
+	 * 
+	 * @param amountBy
+	 *            credits used for payment
+	 * @return true if transaction works, false if fails
+	 */
 	public boolean refuelShip(double credits) {
 		return player.refuelShip(credits);
 	}
 	
+	/**
+	 * Removes credits and repairs ship if player has enough credits
+	 * 
+	 * @param amountBy
+	 *            credits used for payment
+	 * @return true if transaction works, false if fails
+	 */
 	public boolean repairShip(double credits) {
 		return player.repairShip(credits);
 	}
