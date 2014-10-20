@@ -238,8 +238,19 @@ public class GameEngine {
 	 *            The encounter that the player is involved in
 	 * @return The result of the given attack
 	 */
-	public EncounterResult playerAttack(NPCEncounter encounter) {
-		return fightEngine.playerAttack(encounter.getNPC());
+	public EncounterResult playerAttack(NPCEncounter npc) {
+		return fightEngine.playerAttack(npc.getNPC());
+	}
+
+	/**
+	 * Represents an attempt of the player to flee during an encounter
+	 * 
+	 * @param npc
+	 *            The encounter the player is attempting to flee from
+	 * @return The result of the flee attempt
+	 */
+	public EncounterResult playerFlee(NPCEncounter npc) {
+		return fightEngine.playerFlee(npc.getNPC());
 	}
 
 	/**

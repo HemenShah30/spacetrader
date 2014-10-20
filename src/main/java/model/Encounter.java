@@ -77,10 +77,10 @@ public class Encounter {
 			return "IMPLEMENTATION NEEDED";
 		}
 		case GAINFUEL: {
-			double percentOfFuelLost = .5;
+			double percentOfFuelFound = .5;
 			int currFuel = ship.getFuel();
 			int maxFuel = ship.getShipType().getFuel();
-			int amount = (int) (Math.random() * percentOfFuelLost * currFuel);
+			int amount = (int) (Math.random() * percentOfFuelFound * currFuel);
 			if (amount + currFuel > maxFuel)
 				amount = maxFuel - currFuel;
 			ship.setFuel(currFuel + amount);

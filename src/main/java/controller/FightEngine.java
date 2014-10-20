@@ -98,6 +98,8 @@ public class FightEngine {
 	/**
 	 * Calculates the NPC decision in the fight
 	 * 
+	 * @param npc
+	 *            The NPC whose turn is being calculated
 	 * @return The result of the NPC turn
 	 */
 	private EncounterResult npcTurn(NPC npc) {
@@ -156,19 +158,4 @@ public class FightEngine {
 		}
 		return false;
 	}
-
-	// called in between each attack
-	// called while in flight??
-	// can you repair shields?
-	// public void repair() {
-	// if (playerShip.getCurrHP() != playerShip.getTotalHP()) {
-	// int repairs = playerShip.getCurrHP()
-	// + ((player.getEngineerSkill()-1)/10 *20);
-	// if (repairs >= playerShip.getTotalHP()) {
-	// playerShip.setCurrHP(playerShip.getTotalHP());
-	// } else {
-	// playerShip.setCurrHP(repairs);
-	// }
-	// }
-	// }
 }

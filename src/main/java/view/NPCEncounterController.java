@@ -142,14 +142,16 @@ public class NPCEncounterController {
 			}
 			case PLAYERDEATH: {
 				playerMsg = "You have died";
-				throw new RuntimeException("You have died");
+				Dialogs.create().owner(attackBtn.getScene().getWindow())
+						.title("Death").message(playerMsg).showInformation();
+				System.exit(0);
 			}
 			default: {
 
 			}
 			}
 
-			Dialogs.create().owner(bribeBtn.getScene().getWindow())
+			Dialogs.create().owner(attackBtn.getScene().getWindow())
 					.title("Result").message(playerMsg).showInformation();
 
 			if (encounterComplete) {
@@ -169,7 +171,65 @@ public class NPCEncounterController {
 	@FXML
 	private void fleeLeave(Event e) {
 		if (MultiPageController.isValidAction(e)) {
-			System.out.println("FLEE");
+			boolean encounterComplete = false;
+			String playerMsg = "";
+			if (encounter.getEncounterType() != EncounterType.TRADER) {
+				EncounterResult result = GameEngine.getGameEngine().playerFlee(
+						encounter);
+				switch (result) {
+				case PLAYERFLEESUCCESS: {
+					playerMsg = "You have successfully fled the fight";
+					encounterComplete = true;
+					break;
+				}
+				case NPCFLEESUCCESS: {
+					playerMsg = "The " + encounter.getNPC().toString()
+							+ " successfully fled the battle";
+					encounterComplete = true;
+					break;
+				}
+				case NPCFLEEFAIL: {
+					playerMsg = "The " + encounter.getNPC().toString()
+							+ " tried to flee the battle, but failed";
+					break;
+				}
+				case NPCATTACK: {
+					playerMsg = "The " + encounter.getNPC().toString()
+							+ " attacked you";
+					break;
+				}
+				case NPCSURRENDER: {
+					playerMsg = "The " + encounter.getNPC().toString()
+							+ " has surrendered to you. You aquire his cargo";
+					encounterComplete = true;
+					break;
+				}
+				case NPCDEATH: {
+					playerMsg = "The " + encounter.getNPC().toString()
+							+ " has died";
+					encounterComplete = true;
+					break;
+				}
+				case PLAYERDEATH: {
+					playerMsg = "You have died";
+					Dialogs.create().owner(attackBtn.getScene().getWindow())
+							.title("Death").message(playerMsg)
+							.showInformation();
+					System.exit(0);
+				}
+				}
+			} else {
+				encounterComplete = true;
+				playerMsg = "You leave the Trader and continue on";
+			}
+			Dialogs.create().owner(fleeLeaveBtn.getScene().getWindow())
+					.title("Result").message(playerMsg).showInformation();
+
+			if (encounterComplete) {
+				Stage popupStage = (Stage) fleeLeaveBtn.getScene().getWindow();
+				popupStage.close();
+				parent.doEncounters();
+			}
 		}
 	}
 
@@ -189,11 +249,26 @@ public class NPCEncounterController {
 						.title("Surrender")
 						.message("You surrender and lose all your cargo")
 						.showInformation();
-				Stage popupStage = (Stage) attackBtn.getScene().getWindow();
+				Stage popupStage = (Stage) surrenderConsentTradeBtn.getScene()
+						.getWindow();
 				popupStage.close();
 				parent.doEncounters();
-			} else if(encounter.getEncounterType() == EncounterType.POLICE) {
-				game.consentToSearch(encounter);
+			} else if (encounter.getEncounterType() == EncounterType.POLICE) {
+				boolean policeSuccess = game.consentToSearch(encounter);
+				String msg = "";
+				if (policeSuccess) {
+					msg = "The police found and confiscated all your illegal cargo";
+				} else {
+					msg = "The police did not find any illegal cargo and leave your ship";
+				}
+				Dialogs.create().owner(bribeBtn.getScene().getWindow())
+						.title("Police Search").message(msg).showInformation();
+				Stage popupStage = (Stage) surrenderConsentTradeBtn.getScene()
+						.getWindow();
+				popupStage.close();
+				parent.doEncounters();
+			} else {
+				System.out.println("TRADE WITH TRADER");
 			}
 		}
 	}
@@ -207,14 +282,13 @@ public class NPCEncounterController {
 	@FXML
 	private void bribe(Event e) {
 		if (MultiPageController.isValidAction(e)) {
-			boolean done = false;
 			GameEngine game = GameEngine.getGameEngine();
+			boolean done = false;
 			while (!done) {
 				Optional<String> bribe = Dialogs.create()
 						.owner(bribeBtn.getScene().getWindow()).title("Bribe")
 						.message("Please input your bribe amount")
 						.showTextInput();
-
 				if (bribe.isPresent()) {
 					int bribeAmt;
 					try {
@@ -255,6 +329,8 @@ public class NPCEncounterController {
 								.message("You must enter a valid number")
 								.showError();
 					}
+				} else {
+					done = true;
 				}
 			}
 		}
