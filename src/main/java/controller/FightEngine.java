@@ -9,9 +9,6 @@ import model.Ship;
 import model.NPC;
 import model.Enum.EncounterResult;
 import model.Enum.GoodType;
-//import model.Laser;
-//import model.Shield;
-//import model.Gadget;
 import model.Enum.LaserType;
 
 /**
@@ -52,7 +49,7 @@ public class FightEngine {
 		int damage = 0;
 		for (LaserType laser : lasers) {
 			damage += laser.getBaseDamage()
-					+ ((player.getFighterSkill() - 1) / 10 * 10);
+					+ ((player.getFighterSkill() - 1) * 2);
 		}
 		try {
 			npcShip.takeDamage(damage);
@@ -70,7 +67,7 @@ public class FightEngine {
 	 * @return The result of the flee attempt or fight itself
 	 */
 	public EncounterResult playerFlee(NPC npc) {
-		if (player.getPilotSkill() + (int) (Math.random() * 4) > npc
+		if (player.getPilotSkill() + (int) (Math.random() * 3) > npc
 				.getPilotSkill()) {
 			return EncounterResult.NPCFLEESUCCESS;
 		}
@@ -87,8 +84,8 @@ public class FightEngine {
 		int cargoRemoved = 0;
 		double percentCreditsLost = .5;
 		for (GoodType g : GoodType.values()) {
-			int cargoAmt = player.getShip().amountInCargo(g);
-			player.getShip().removeFromCargo(g, cargoAmt);
+			int cargoAmt = playerShip.amountInCargo(g);
+			playerShip.removeFromCargo(g, cargoAmt);
 			cargoRemoved += cargoAmt;
 		}
 		if (cargoRemoved == 0)
@@ -108,10 +105,10 @@ public class FightEngine {
 		if (healthRatio <= .2) {
 			int nPilot = npc.getPilotSkill();
 			int pPilot = player.getPilotSkill();
-			if (nPilot + 2 < pPilot) {
+			if (nPilot + 1 < pPilot) {
 				return EncounterResult.NPCSURRENDER;
 			}
-			if (nPilot + (int) (Math.random() * 4) > pPilot) {
+			if (nPilot + (int) (Math.random() * 3) > pPilot) {
 				return EncounterResult.NPCFLEESUCCESS;
 			}
 			return EncounterResult.NPCFLEEFAIL;
@@ -120,7 +117,7 @@ public class FightEngine {
 		int nDamage = 0;
 		for (LaserType laser : nLasers) {
 			nDamage += laser.getBaseDamage()
-					+ ((npc.getFighterSkill() - 1) / 10 * 10);
+					+ ((npc.getFighterSkill() - 1) * 2);
 		}
 		try {
 			playerShip.takeDamage(nDamage);
@@ -139,6 +136,21 @@ public class FightEngine {
 	 *         goods found
 	 */
 	public boolean consentToSearch(Police police) {
+		int amtFirearms = playerShip.amountInCargo(GoodType.FIREARMS);
+		int amtNarcotics = playerShip.amountInCargo(GoodType.NARCOTICS);
+		
+		if (amtFirearms != 0 || amtNarcotics != 0) {
+			playerShip.removeFromCargo(GoodType.FIREARMS, amtFirearms);
+			playerShip.removeFromCargo(GoodType.NARCOTICS, amtNarcotics);
+			// pay fine
+			if (player.getPoliceRep() < 10) {
+				player.setPoliceRep(player.getPoliceRep() + 1);
+			}
+			return true;
+		}
+		if (player.getPoliceRep() > 1) {
+			player.setPoliceRep(player.getPoliceRep() - 1);
+		}
 		return false;
 	}
 
