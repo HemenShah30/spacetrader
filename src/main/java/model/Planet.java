@@ -24,7 +24,7 @@ public class Planet implements Boundary {
 	private EncounterRate policeEncounterRate;
 	private EncounterRate pirateEncounterRate;
 	private EncounterRate traderEncounterRate;
-	private int radius, chances;
+	private int diameter, chances;
 	private Color color;
 	public final static Color[] approvedColors = { Color.BLUE, Color.RED,
 			Color.FORESTGREEN, Color.PERU };
@@ -59,7 +59,7 @@ public class Planet implements Boundary {
 		pirateEncounterRate = pirateRate;
 		traderEncounterRate = traderRate;
 		marketplace = new Marketplace(this);
-		setRadius(size);
+		setDiameter(size);
 		setColor(color);
 		setChances();
 	}
@@ -141,11 +141,11 @@ public class Planet implements Boundary {
 	 * 
 	 * @param i
 	 */
-	private void setRadius(int i) {
+	private void setDiameter(int i) {
 		if (2 < i && i < 8) {
-			radius = i;
+			diameter = i;
 		} else {
-			radius = 3;
+			diameter = 3;
 		}
 	}
 
@@ -281,8 +281,8 @@ public class Planet implements Boundary {
 	 * 
 	 * @return planet size
 	 */
-	public int getRadius() {
-		return radius;
+	public int getDiameter() {
+		return diameter;
 	}
 
 	/**

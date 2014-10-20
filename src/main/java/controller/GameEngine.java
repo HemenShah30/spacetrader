@@ -285,4 +285,20 @@ public class GameEngine {
 	public boolean consentToSearch(NPCEncounter npc) {
 		return fightEngine.consentToSearch((Police) (npc.getNPC()));
 	}
+	
+	public double getRepairCost() {
+		return player.getCostRepair();
+	}
+	
+	public double getRefuelCost() {
+		return player.getCostRefuel();
+	}
+	
+	public boolean refuelShip(double credits) {
+		return player.refuelShip(credits);
+	}
+	
+	public boolean repairShip(double credits) {
+		return player.repairShip(credits);
+	}
 }

@@ -245,6 +245,55 @@ public class Player {
 	}
 
 	/**
+	 * credits needed to refuel ship
+	 * 
+	 * @return refuel cost
+	 */
+	public double getCostRefuel() {
+		return ship.getCostRefuel();
+	}
+
+	/**
+	 * credits needed to repair ship
+	 * 
+	 * @return repair cost
+	 */
+	public double getCostRepair() {
+		return ship.getCostRepair();
+	}
+
+	/**
+	 * Refuels ship and removes credits if player has enough
+	 * 
+	 * @param amountBy
+	 */
+	public boolean refuelShip(double amountBy) {
+		if (credits >= amountBy) {
+			this.decreaseCredits(amountBy);
+			ship.refuel(amountBy);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * Repairs ship and removes credits if player has enough
+	 * 
+	 * @param amountBy
+	 *            amount used to repair ship
+	 */
+	public boolean repairShip(double amountBy) {
+		if (credits >= amountBy) {
+			this.decreaseCredits(amountBy);
+			ship.repair(amountBy);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
 	 * Setter for the player's ship
 	 * 
 	 * @param ship

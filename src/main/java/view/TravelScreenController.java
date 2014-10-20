@@ -238,7 +238,7 @@ public class TravelScreenController {
 		for (Planet p : u.getPlanets()) {
 			x = p.getLocation().getX() * (mapSize / universeSize);
 			y = p.getLocation().getY() * (mapSize / universeSize);
-			radius = p.getRadius();
+			radius = p.getDiameter();
 			localGC.setFill(p.getColor());
 			localGC.fillOval(x, y, radius, radius);
 		}

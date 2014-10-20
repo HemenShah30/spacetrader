@@ -162,7 +162,36 @@ public class Ship {
 	public void setFuel(int f) {
 		this.fuel = f;
 	}
-
+	
+	/**
+	 * Calculates and returns amount needed to refuel
+	 * @return cost to refuel ship
+	 */
+	public double getCostRefuel() {
+		return (shipType.getFuel() - fuel) * shipType.getFuelCost();
+	}
+	/**
+	 * Calculates and returns amount needed to repair
+	 * @return
+	 */
+	public double getCostRepair() {
+		return (shipType.getTotalHP() - currHP) *shipType.getRepairCost();
+	}
+	
+	/**
+	 * Refuels ship
+	 * @param credits used in refueling
+	 */
+	public void refuel(double credits) {
+		fuel += (credits / shipType.getFuelCost());
+	}
+	/**
+	 * Repairs ships
+	 * @param credits amount used in the repair
+	 */
+	public void repair(double credits) {
+		currHP += (credits / shipType.getRepairCost());
+	}
 	/**
 	 * Returns the size of the cargo hold of the ship
 	 * 

@@ -448,7 +448,7 @@ public class Database {
 					planetInsertStatement.setObject(11,
 							traderEncounterUUIDObject);
 
-					planetInsertStatement.setInt(12, p.getRadius());
+					planetInsertStatement.setInt(12, p.getDiameter());
 					planetInsertStatement
 							.setString(13, p.getColor().toString());
 

@@ -32,6 +32,12 @@ public class PlanetScreenController {
 
 	@FXML
 	Button toSpaceBtn;
+	
+	@FXML
+	Button refuelBtn;
+	
+	@FXML
+	Button repairBtn;
 
 	@FXML
 	Label planetNameLbl;
@@ -123,6 +129,26 @@ public class PlanetScreenController {
 			}
 		}
 	}
+	
+	/**
+	 * Refuels ship
+	 * @param e event that triggers the function
+	 */
+	@FXML
+	private void refuelShip(Event e) {
+		//not sure on what needs to be done here
+		System.out.println("Refuel still needs to be implemented");
+	}
+	
+	/**
+	 * Repairs ship
+	 * @param e event that triggers the function
+	 */
+	@FXML
+	private void repairShip(Event e) {
+		//not sure what needs to be done here
+		System.out.println("Repair still needs to be implemented");
+	}
 
 	/**
 	 * Initializes the main page with the relevant label data
@@ -138,5 +164,11 @@ public class PlanetScreenController {
 				+ planet.getResource().toString());
 		playerNameLbl.setText(player.getName());
 		playerCreditsLbl.setText("Credits: " + (int) player.getCredits());
+		int refuelAmount = (int) game.getRefuelCost();
+		int repairAmount = (int) game.getRepairCost();
+		refuelBtn.setText("Repair ship for " + refuelAmount + " credits");
+		repairBtn.setText("Repair ship for " + repairAmount + " credits");
 	}
+	
+	
 }
