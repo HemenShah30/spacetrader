@@ -4,10 +4,12 @@ import java.util.List;
 
 import model.DeathException;
 import model.NPCEncounter;
+import model.Pirate;
 import model.Player;
 import model.Police;
 import model.Ship;
 import model.NPC;
+import model.Trader;
 import model.Enum.EncounterResult;
 import model.Enum.GoodType;
 import model.Enum.LaserType;
@@ -25,6 +27,7 @@ public class FightEngine {
 	private Player player;
 	private Ship playerShip;
 	private Ship npcShip;
+	final int REP_CHANGE = 1;
 
 	/**
 	 * Constructor for the FightEngine, taking in the main game player
@@ -45,14 +48,24 @@ public class FightEngine {
 	 * @return The result of the attack
 	 */
 	public EncounterResult playerAttack(NPCEncounter encounter) {
+		NPC npc = encounter.getNPC();
 		if (encounter.getTurnCount() == 0) {
 			regenExtraShields();
+			if (npc instanceof Pirate) {
+				if (player.getPirateRep() < 20)
+					player.setPirateRep(player.getPirateRep() + REP_CHANGE);
+			} else if (npc instanceof Police) {
+				if (player.getPoliceRep() < 20)
+					player.setPoliceRep(player.getPoliceRep() + REP_CHANGE);
+			} else if (npc instanceof Trader) {
+				if (player.getPoliceRep() > 1)
+					player.setPoliceRep(player.getPoliceRep() - REP_CHANGE);
+			}
 		} else {
 			regenShields();
 		}
 
 		encounter.takeTurn();
-		NPC npc = encounter.getNPC();
 		npcShip = npc.getShip();
 		List<LaserType> lasers = playerShip.getLasers();
 		int damage = 0;
@@ -77,14 +90,21 @@ public class FightEngine {
 	 * @return The result of the flee attempt or fight itself
 	 */
 	public EncounterResult playerFlee(NPCEncounter encounter) {
+		NPC npc = encounter.getNPC();
 		if (encounter.getTurnCount() == 0) {
 			regenExtraShields();
+			if (npc instanceof Pirate) {
+				if (player.getPirateRep() > 1)
+					player.setPirateRep(player.getPirateRep() - REP_CHANGE);
+			} else if (npc instanceof Police) {
+				if (player.getPoliceRep() < 20)
+					player.setPoliceRep(player.getPoliceRep() + REP_CHANGE);
+			}
 		} else {
 			regenShields();
 		}
 
 		encounter.takeTurn();
-		NPC npc = encounter.getNPC();
 		if (player.getPilotSkill() + (int) (Math.random() * 3) > npc
 				.getPilotSkill()) {
 			return EncounterResult.NPCFLEESUCCESS;
@@ -110,6 +130,14 @@ public class FightEngine {
 		}
 		if (cargoRemoved == 0)
 			player.decreaseCredits(player.getCredits() * percentCreditsLost);
+		NPC npc = encounter.getNPC();
+		if (npc instanceof Pirate) {
+			if (player.getPirateRep() > 1)
+				player.setPirateRep(player.getPirateRep() - REP_CHANGE);
+		} else if (npc instanceof Trader) {
+			if (player.getTraderRep() < 20)
+				player.setTraderRep(player.getTraderRep() + REP_CHANGE);
+		}
 	}
 
 	/**
@@ -162,22 +190,26 @@ public class FightEngine {
 			regenExtraShields();
 		}
 		encounter.takeTurn();
+		int pPolice = player.getPoliceRep();
 		int amtFirearms = playerShip.amountInCargo(GoodType.FIREARMS);
 		int amtNarcotics = playerShip.amountInCargo(GoodType.NARCOTICS);
-
-		if (amtFirearms != 0 || amtNarcotics != 0) {
+        if (amtFirearms != 0 || amtNarcotics != 0) {
+        	if ( (int) (Math.random() * 4) + pPolice > 15) {
+        		return false;
+        	}
 			playerShip.removeFromCargo(GoodType.FIREARMS, amtFirearms);
 			playerShip.removeFromCargo(GoodType.NARCOTICS, amtNarcotics);
-			// pay fine
-			if (player.getPoliceRep() < 10) {
-				player.setPoliceRep(player.getPoliceRep() + 1);
+			int fine = (int) (Math.random() * (1/4) * player.getCredits());
+			player.decreaseCredits(fine);
+			if (player.getPoliceRep() < 20) {
+				player.setPoliceRep(pPolice + REP_CHANGE);
 			}
 			return true;
+		} else {
+			if (player.getPoliceRep() > 1)
+			player.setPoliceRep(pPolice - REP_CHANGE);
+			return false;
 		}
-		if (player.getPoliceRep() > 1) {
-			player.setPoliceRep(player.getPoliceRep() - 1);
-		}
-		return false;
 	}
 
 	/**
@@ -197,6 +229,9 @@ public class FightEngine {
 			player.decreaseCredits(credits);
 			return true;
 		}
+		if (player.getPoliceRep() < 20) { 
+			player.setPoliceRep(player.getPoliceRep() + REP_CHANGE);
+		}
 		return false;
 	}
 
@@ -204,8 +239,7 @@ public class FightEngine {
 	 * Regenerates a portion of the player's shields based on engineer skill
 	 */
 	private void regenShields() {
-		Ship ship = player.getShip();
-		ship.addShieldHP((int) (ship.getMaxShieldHP()
+		playerShip.addShieldHP((int) (playerShip.getMaxShieldHP()
 				* player.getEngineerSkill() / 100.));
 	}
 
