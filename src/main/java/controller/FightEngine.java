@@ -27,7 +27,7 @@ public class FightEngine {
 	private Player player;
 	private Ship playerShip;
 	private Ship npcShip;
-	final int REP_CHANGE = 1;
+	final int REP_CHANGE = 5;
 	final int MAX_REP = 100;
 
 	/**
@@ -156,8 +156,9 @@ public class FightEngine {
 		} else if (npc instanceof Trader) {
 			if (player.getTraderRep() + REP_CHANGE > MAX_REP) {
 				player.setTraderRep(MAX_REP);
-			}
+			} else {
 				player.setTraderRep(player.getTraderRep() + REP_CHANGE);
+			}
 		}
 	}
 
@@ -214,13 +215,14 @@ public class FightEngine {
 		int pPolice = player.getPoliceRep();
 		int amtFirearms = playerShip.amountInCargo(GoodType.FIREARMS);
 		int amtNarcotics = playerShip.amountInCargo(GoodType.NARCOTICS);
-        if (amtFirearms != 0 || amtNarcotics != 0) {
-        	if ( (int) (Math.random() * 4) + pPolice > 15) {
-        		return false;
-        	}
+		if (amtFirearms != 0 || amtNarcotics != 0) {
+			if ((int) (Math.random() * (1 / 7) * MAX_REP + pPolice) > MAX_REP) {
+				return false;
+			}
 			playerShip.removeFromCargo(GoodType.FIREARMS, amtFirearms);
 			playerShip.removeFromCargo(GoodType.NARCOTICS, amtNarcotics);
-			int fine = (int) (Math.random() * (1/4) * player.getCredits());
+			int fine = (int) (Math.random() * (2 / 3)
+					* ((MAX_REP - pPolice + 1) / MAX_REP + 1) * player.getCredits());
 			player.decreaseCredits(fine);
 			if (player.getPoliceRep() + REP_CHANGE > MAX_REP) {
 				player.setPoliceRep(MAX_REP);
