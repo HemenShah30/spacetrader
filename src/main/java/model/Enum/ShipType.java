@@ -85,10 +85,14 @@ public enum ShipType {
 	 *            The minimum police rep needed for the police to have this ship
 	 * @param minPirateRep
 	 *            The minimum pirate rep needed for the pirate to have this ship
+	 * @param minTraderRep
+	 *            The minimum trader rep needed for the trader to have this ship
 	 * @param maxPoliceRep
 	 *            The maximum police rep needed for the police to have this ship
 	 * @param maxPirateRep
 	 *            The maximum pirate rep needed for the pirate to have this ship
+	 * @param maxTraderRep
+	 *            The maximum trader rep needed for the trader to have this ship
 	 */
 	private ShipType(int f, int thp, int cs, int ws, int ss, int gs, int crewS,
 			int mtl, int fc, int p, int b, int o, int pm, int pirateM, int tm,
@@ -272,6 +276,13 @@ public enum ShipType {
 		return size;
 	}
 
+	/**
+	 * Returns the minimum reputation for the corresponding Encountertype
+	 * 
+	 * @param type
+	 * 			The type of npc encounter
+	 * @return The corresponding minimum reputation for this Encountertype 
+	 */
 	public int getMinRep(EncounterType type) {
 		if (type == EncounterType.POLICE)		return minPoliceRep;
 		else if (type == EncounterType.PIRATE)	return minPirateRep;
@@ -279,6 +290,13 @@ public enum ShipType {
 		return 0;
 	}
 	
+	/**
+	 * Returns the maximum reputation for the corresponding Encountertype
+	 * 
+	 * @param type
+	 * 			The type of npc encounter
+	 * @return The corresponding maximum reputation for this Encountertype 
+	 */
 	public int getMaxRep(EncounterType type) {
 		if (type == EncounterType.POLICE)		return maxPoliceRep;
 		else if (type == EncounterType.PIRATE)	return maxPirateRep;

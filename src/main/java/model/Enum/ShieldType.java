@@ -30,6 +30,18 @@ public enum ShieldType {
 	 *            The price of the shield
 	 * @param mtl
 	 *            The minimum tech level required for a shield
+	 * @param minPoliceRep
+	 *            The minimum police rep needed for the police to have this shield
+	 * @param minPirateRep
+	 *            The minimum pirate rep needed for the pirate to have this shield
+	 * @param minTraderRep
+	 *            The minimum trader rep needed for the trader to have this shield
+	 * @param maxPoliceRep
+	 *            The maximum police rep needed for the police to have this shield
+	 * @param maxPirateRep
+	 *            The maximum pirate rep needed for the pirate to have this shield
+	 * @param maxTraderRep
+	 *            The maximum trader rep needed for the trader to have this shield
 	 */
 	private ShieldType(int hp, int p, int mtl, int minPoliceRep, int minPirateRep, int minTraderRep,
 			int maxPoliceRep, int maxPirateRep, int maxTraderRep) {
@@ -71,6 +83,13 @@ public enum ShieldType {
 		return price;
 	}
 
+	/**
+	 * Returns the minimum reputation for the corresponding Encountertype
+	 * 
+	 * @param type
+	 * 			The type of npc encounter
+	 * @return The corresponding minimum reputation for this Encountertype 
+	 */
 	public int getMinRep(EncounterType type) {
 		if (type == EncounterType.POLICE)		return minPoliceRep;
 		else if (type == EncounterType.PIRATE)	return minPirateRep;
@@ -78,6 +97,13 @@ public enum ShieldType {
 		return 0;
 	}
 	
+	/**
+	 * Returns the maximum reputation for the corresponding Encountertype
+	 * 
+	 * @param type
+	 * 			The type of npc encounter
+	 * @return The corresponding maximum reputation for this Encountertype 
+	 */
 	public int getMaxRep(EncounterType type) {
 		if (type == EncounterType.POLICE)		return maxPoliceRep;
 		else if (type == EncounterType.PIRATE)	return maxPirateRep;

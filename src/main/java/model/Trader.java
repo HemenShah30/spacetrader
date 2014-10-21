@@ -29,9 +29,9 @@ public class Trader extends NPC {
 	 */
 	public Trader(int rep) {
 		setPilotSkill(1);
-		setFighterSkill((int) (rep * .5));
+		setFighterSkill((int) (rep * .08));
 		setTraderSkill(1);
-		setEngineerSkill((int) (rep * .5));
+		setEngineerSkill((int) (rep * .08));
 		setInvestorSkill(1);
 		generateShip(rep, EncounterType.TRADER);
 		generateCredits(rep);

@@ -177,6 +177,7 @@ public abstract class NPC {
 		//generate cargo
 		
 		//generate gadgets
+		
 	}
 
 	/**

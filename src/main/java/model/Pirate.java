@@ -11,8 +11,8 @@ import model.Enum.EncounterType;
 public class Pirate extends NPC {
 
 	public Pirate(int rep) {
-		setPilotSkill((int) (rep * .6));
-		setFighterSkill((int) (rep * .6));
+		setPilotSkill((int) (rep * .09));
+		setFighterSkill((int) (rep * .09));
 		setTraderSkill(1);
 		setEngineerSkill(3);
 		setInvestorSkill(1);
