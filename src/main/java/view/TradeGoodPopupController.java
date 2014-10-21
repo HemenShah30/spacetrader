@@ -135,7 +135,9 @@ public class TradeGoodPopupController {
 		if (isMarketplace) {
 			return game.tradeWithMarketplace(tradeGood, amount, isBuying);
 		} else {
-			return new ArrayList<String>();
+			return game.tradeWithTrader(
+					((NPCEncounterController) parentController).getEncounter(),
+					amount);
 		}
 	}
 
@@ -151,14 +153,14 @@ public class TradeGoodPopupController {
 	 * @param isMarketplace
 	 *            Whether or not the player is at a marketplace trading
 	 */
-	public void initializePage(GoodType good, Controller c, boolean buying,
-			boolean marketplace) {
+	public void initializePage(GoodType good, Controller c,
+			int maximumTradeAmount, boolean buying, boolean marketplace) {
 		game = GameEngine.getGameEngine();
 		parentController = c;
 		isBuying = buying;
 		tradeGood = good;
 		isMarketplace = marketplace;
-		maxTradeAmount = game.getMaximumGood(tradeGood, isBuying);
+		maxTradeAmount = maximumTradeAmount;
 		tradeBtn.setText(isBuying ? "Buy" : "Sell");
 		tradeAllBtn.setText(isBuying ? "Buy All" : "Sell All");
 		cargoLbl.setText("Enter amount or " + (isBuying ? "Buy" : "Sell")

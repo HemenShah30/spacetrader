@@ -219,7 +219,9 @@ public class TradeScreenController implements Controller {
 				tradePopup.setScene(new Scene(newScene, 300, 125));
 
 				TradeGoodPopupController controller = loader.getController();
-				controller.initializePage(type, this, true, true);
+				int maxGood = GameEngine.getGameEngine().getMaximumMarketplaceTradeAmount(type,
+						true);
+				controller.initializePage(type, this, maxGood, true, true);
 				tradePopup.show();
 
 			} catch (IOException ie) {
@@ -276,19 +278,21 @@ public class TradeScreenController implements Controller {
 			}
 
 			try {
-				Stage buyPopup = new Stage();
-				buyPopup.initModality(Modality.APPLICATION_MODAL);
-				buyPopup.initOwner((Stage) btn.getScene().getWindow());
+				Stage tradePopup = new Stage();
+				tradePopup.initModality(Modality.APPLICATION_MODAL);
+				tradePopup.initOwner((Stage) btn.getScene().getWindow());
 
 				FXMLLoader loader = new FXMLLoader(
 						ClassLoader
 								.getSystemResource("view/TradeGoodPopup.fxml"));
 				Parent newScene = loader.load();
-				buyPopup.setScene(new Scene(newScene, 300, 125));
+				tradePopup.setScene(new Scene(newScene, 300, 125));
 
 				TradeGoodPopupController controller = loader.getController();
-				controller.initializePage(type, this, false, true);
-				buyPopup.show();
+				int maxGood = GameEngine.getGameEngine().getMaximumMarketplaceTradeAmount(type,
+						false);
+				controller.initializePage(type, this, maxGood, false, true);
+				tradePopup.show();
 			} catch (IOException ie) {
 				ie.printStackTrace();
 			}

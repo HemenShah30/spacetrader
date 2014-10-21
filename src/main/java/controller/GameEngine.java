@@ -10,8 +10,8 @@ import model.MaxCapacityException;
 import model.NPCEncounter;
 import model.Planet;
 import model.Player;
-import model.Police;
 import model.Ship;
+import model.Trader;
 import model.Universe;
 import model.Enum.EncounterResult;
 import model.Enum.GoodType;
@@ -166,7 +166,7 @@ public class GameEngine {
 
 	/**
 	 * Returns the maximum good amount that can be bought or sold by the player
-	 * for a given good
+	 * from a marketplace for a given good
 	 * 
 	 * @param type
 	 *            The type of good being bought or sold
@@ -174,10 +174,37 @@ public class GameEngine {
 	 *            Whether or not the player is buying
 	 * @return The maximum amount that can be bought or sold by the player
 	 */
-	public int getMaximumGood(GoodType type, boolean buying) {
+	public int getMaximumMarketplaceTradeAmount(GoodType type, boolean buying) {
 		if (buying)
 			return tradeEngine.getMaximumBuyGoodAmount(type);
 		return tradeEngine.getMaximumSellGoodAmount(type);
+	}
+
+	/**
+	 * Executes a trade with a trader if possible, otherwise returns a list of
+	 * error strings
+	 * 
+	 * @param npc
+	 *            The NPCEncounter that the player is involved in
+	 * @param quantity
+	 *            The quantity of the good the player is trying to trade
+	 * @return The list of error strings, if any, with the trade
+	 */
+	public List<String> tradeWithTrader(NPCEncounter npc, int quantity) {
+		return tradeEngine.tradeWithTrader((Trader) (npc.getNPC()), quantity);
+	}
+
+	/**
+	 * Returns the maximum good amount that can be traded with a trader in the
+	 * given NPCEncounter
+	 * 
+	 * @param encounter
+	 *            The NPCEncounter that the player is having
+	 * @return The maximum amount of the good the player can buy or sell
+	 */
+	public int getMaximumTraderTradeAmount(NPCEncounter encounter) {
+		return tradeEngine.getMaximumTraderTradeAmount((Trader) encounter
+				.getNPC());
 	}
 
 	/**
@@ -287,55 +314,5 @@ public class GameEngine {
 	 */
 	public boolean consentToSearch(NPCEncounter npc) {
 		return fightEngine.consentToSearch(npc);
-	}
-
-	/**
-	 * Represents a player wanting to trade with the trader
-	 * 
-	 * @param npc
-	 *            The encounter in which the player is trading
-	 */
-	public void tradeWithTrader(NPCEncounter npc) {
-		// tradeEngine.tradeWithTrader
-	}
-
-	/**
-	 * Calculates and returns repair cost for player's ship
-	 * 
-	 * @return repair cost
-	 */
-	public double getRepairCost() {
-		return player.getShip().getRepairCost();
-	}
-
-	/**
-	 * Calculates and returns refuel cost for player's ship
-	 * 
-	 * @return refuel cost
-	 */
-	public double getRefuelCost() {
-		return player.getShip().getRefuelCost();
-	}
-
-	/**
-	 * Removes credits and refuels ship if player has enough credits
-	 * 
-	 * @param amountBy
-	 *            credits used for payment
-	 * @return true if transaction works, false if fails
-	 */
-	public boolean refuelShip(double credits) {
-		return player.refuelShip(credits);
-	}
-
-	/**
-	 * Removes credits and repairs ship if player has enough credits
-	 * 
-	 * @param amountBy
-	 *            credits used for payment
-	 * @return true if transaction works, false if fails
-	 */
-	public boolean repairShip(double credits) {
-		return player.repairShip(credits);
 	}
 }

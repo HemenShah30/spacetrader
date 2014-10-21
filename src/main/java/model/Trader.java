@@ -20,6 +20,12 @@ public class Trader extends NPC {
 										// to trade
 	private double credits;
 
+	/**
+	 * Constructor for a Trader that takes in the player reputation with traders
+	 * 
+	 * @param rep
+	 *            The TraderReputation for the player
+	 */
 	public Trader(int rep) {
 		setPilotSkill(1);
 		setFighterSkill((int) (rep * .5));
@@ -93,7 +99,7 @@ public class Trader extends NPC {
 	 * 
 	 * @return GoodType of the good
 	 */
-	public GoodType getGood() {
+	public GoodType getGoodOfInterest() {
 		return goodOfInterest;
 	}
 

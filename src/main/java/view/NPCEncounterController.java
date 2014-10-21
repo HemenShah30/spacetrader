@@ -1,5 +1,6 @@
 package view;
 
+import java.io.IOException;
 import java.util.Optional;
 
 import org.controlsfx.dialog.Dialogs;
@@ -7,12 +8,17 @@ import org.controlsfx.dialog.Dialogs;
 import controller.GameEngine;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.NPCEncounter;
 import model.Player;
 import model.Ship;
+import model.Trader;
 import model.Enum.EncounterResult;
 import model.Enum.EncounterType;
 
@@ -22,7 +28,7 @@ import model.Enum.EncounterType;
  * @author Jack Croft
  *
  */
-public class NPCEncounterController {
+public class NPCEncounterController implements Controller {
 	private TravelScreenController parent;
 	private NPCEncounter encounter;
 
@@ -268,7 +274,28 @@ public class NPCEncounterController {
 				popupStage.close();
 				parent.updatePage();
 			} else {
-				System.out.println("TRADE WITH TRADER");
+				Trader trader = (Trader) (encounter.getNPC());
+				try {
+					Stage tradePopup = new Stage();
+					tradePopup.initModality(Modality.APPLICATION_MODAL);
+					tradePopup.initOwner((Stage) surrenderConsentTradeBtn
+							.getScene().getWindow());
+
+					FXMLLoader loader = new FXMLLoader(
+							ClassLoader
+									.getSystemResource("view/TradeGoodPopup.fxml"));
+					Parent newScene = loader.load();
+					tradePopup.setScene(new Scene(newScene, 300, 125));
+
+					TradeGoodPopupController controller = loader
+							.getController();
+					int maxGood = game.getMaximumTraderTradeAmount(encounter);
+					controller.initializePage(trader.getGoodOfInterest(), this,
+							maxGood, false, false);
+					tradePopup.show();
+				} catch (IOException ie) {
+					ie.printStackTrace();
+				}
 			}
 		}
 	}
@@ -334,5 +361,28 @@ public class NPCEncounterController {
 				}
 			}
 		}
+	}
+
+	@Override
+	public void updatePage() {
+		if (encounter.getEncounterType() == EncounterType.TRADER) {
+			Dialogs.create().owner(bribeBtn.getScene().getWindow())
+					.title("Success")
+					.message("The trader thanks you for your trade and leaves")
+					.showInformation();
+
+			Stage popupStage = (Stage) bribeBtn.getScene().getWindow();
+			popupStage.close();
+			parent.updatePage();
+		}
+	}
+
+	/**
+	 * Gets the NPCEncounter associated with this controller
+	 * 
+	 * @return The NPCEncounter associated with this controller
+	 */
+	public NPCEncounter getEncounter() {
+		return encounter;
 	}
 }

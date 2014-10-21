@@ -6,6 +6,7 @@ import java.util.List;
 import model.Marketplace;
 import model.Player;
 import model.Ship;
+import model.Trader;
 import model.Enum.GoodType;
 
 /**
@@ -22,7 +23,8 @@ public class TradeEngine {
 	/**
 	 * Constructor for the TradeEngine, taking in the main game player
 	 * 
-	 * @param p The player that will be trading with the marketplace
+	 * @param p
+	 *            The player that will be trading with the marketplace
 	 */
 	public TradeEngine(Player p) {
 		player = p;
@@ -156,5 +158,31 @@ public class TradeEngine {
 		if (market.getSellPrice(good) == -1)
 			return 0;
 		return ship.amountInCargo(good);
+	}
+
+	/**
+	 * Returns the maximum amount of good the given trader can buy or sell with
+	 * the player
+	 * 
+	 * @param trader
+	 *            The trader trading with the player
+	 * @return The maximum transaction amount with the player
+	 */
+	public int getMaximumTraderTradeAmount(Trader trader) {
+		return 10;
+	}
+
+	/**
+	 * Executes a trade with a trader if possible, or returns a list of error
+	 * strings
+	 * 
+	 * @param trader
+	 *            The trader who the player is trading with
+	 * @param quantity
+	 *            The quantity of the good the player is trying to trade
+	 * @return The list of errors, if any, with the trade
+	 */
+	public List<String> tradeWithTrader(Trader trader, int quantity) {
+		return new ArrayList<String>();
 	}
 }
