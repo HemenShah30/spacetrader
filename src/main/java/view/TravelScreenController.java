@@ -11,8 +11,8 @@ import model.Location;
 import model.NPCEncounter;
 import model.Planet;
 import model.Player;
+import model.Ship;
 import model.Universe;
-
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -35,7 +35,7 @@ import javafx.stage.WindowEvent;
  * @author Hemen Shah
  *
  */
-public class TravelScreenController {
+public class TravelScreenController implements Controller {
 	private GameEngine game;
 	private Planet selectedPlanet;
 	private List<Encounter> encounters;
@@ -170,7 +170,6 @@ public class TravelScreenController {
 		if (selectedPlanet != p.getPlanet()) {
 			if (p.getShip().getFuel() >= distance) {
 				encounters = game.goToPlanet(selectedPlanet);
-				System.out.println(encounters);
 				doEncounters();
 				setPlanetInfo();
 			} else {
@@ -181,10 +180,20 @@ public class TravelScreenController {
 		}
 	}
 
+	@Override
+	public void updatePage() {
+		if (encounters.size() > 0)
+			doEncounters();
+		else {
+			Ship ship = game.getPlayer().getShip();
+			ship.addShieldHP(ship.getMaxShieldHP());
+		}
+	}
+
 	/**
-	 * Method for displaying the next encounter to the player
+	 * Method for continuously displaying the next encounter to the player
 	 */
-	public void doEncounters() {
+	private void doEncounters() {
 		boolean NPCEncounter = false;
 		while (encounters.size() != 0 && !NPCEncounter) {
 			Encounter encounter = encounters.remove(0);

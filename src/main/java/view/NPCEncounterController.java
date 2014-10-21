@@ -157,7 +157,7 @@ public class NPCEncounterController {
 			if (encounterComplete) {
 				Stage popupStage = (Stage) attackBtn.getScene().getWindow();
 				popupStage.close();
-				parent.doEncounters();
+				parent.updatePage();
 			}
 		}
 	}
@@ -228,7 +228,7 @@ public class NPCEncounterController {
 			if (encounterComplete) {
 				Stage popupStage = (Stage) fleeLeaveBtn.getScene().getWindow();
 				popupStage.close();
-				parent.doEncounters();
+				parent.updatePage();
 			}
 		}
 	}
@@ -252,7 +252,7 @@ public class NPCEncounterController {
 				Stage popupStage = (Stage) surrenderConsentTradeBtn.getScene()
 						.getWindow();
 				popupStage.close();
-				parent.doEncounters();
+				parent.updatePage();
 			} else if (encounter.getEncounterType() == EncounterType.POLICE) {
 				boolean policeSuccess = game.consentToSearch(encounter);
 				String msg = "";
@@ -266,7 +266,7 @@ public class NPCEncounterController {
 				Stage popupStage = (Stage) surrenderConsentTradeBtn.getScene()
 						.getWindow();
 				popupStage.close();
-				parent.doEncounters();
+				parent.updatePage();
 			} else {
 				System.out.println("TRADE WITH TRADER");
 			}
@@ -306,7 +306,7 @@ public class NPCEncounterController {
 								Stage popupStage = (Stage) bribeBtn.getScene()
 										.getWindow();
 								popupStage.close();
-								parent.doEncounters();
+								parent.updatePage();
 							} else {
 								Dialogs.create()
 										.owner(bribeBtn.getScene().getWindow())

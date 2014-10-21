@@ -52,21 +52,21 @@ public class Marketplace {
 				+ (2 * Math.random() * type.getVariance() - type.getVariance());
 		// price is decreased if a planet is the biggest producer of that good
 		if (techlevel.getValue() == type.getBiggestProducer()) {
-			price = (int) (price * (0.2 * Math.random() + 0.6));
+			price = price * (0.2 * Math.random() + 0.6);
 		}
 		// price is increased if condition affecting that good occurs
 		if (planet.getCondition() == type.getCondition()) {
-			price = (int) (price * (0.2 * Math.random() + 1.2));
+			price = price * (0.2 * Math.random() + 1.2);
 		}
 		// price is decreased if special resource affecting that good occurs
 		if (planet.getResource() == type.getCheapResource()) {
-			price = (int) (price * (0.2 * Math.random() + 0.6));
+			price = price * (0.2 * Math.random() + 0.6);
 		}
 		// price is increased if special resource affecting that good occurs
 		if (planet.getResource() == type.getCheapResource()) {
-			price = (int) (price * (0.2 * Math.random() + 1.2));
+			price = price * (0.2 * Math.random() + 1.2);
 		}
-		return price;
+		return (int) price;
 	}
 
 	/**

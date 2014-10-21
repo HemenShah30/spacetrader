@@ -23,7 +23,7 @@ import javafx.stage.Stage;
  * @author Jack Croft
  *
  */
-public class TradeScreenController {
+public class TradeScreenController implements Controller {
 
 	@FXML
 	private Label buyPriceGamesLbl;
@@ -208,18 +208,19 @@ public class TradeScreenController {
 			}
 
 			try {
-				Stage buyPopup = new Stage();
-				buyPopup.initModality(Modality.APPLICATION_MODAL);
-				buyPopup.initOwner((Stage) btn.getScene().getWindow());
+				Stage tradePopup = new Stage();
+				tradePopup.initModality(Modality.APPLICATION_MODAL);
+				tradePopup.initOwner((Stage) btn.getScene().getWindow());
 
 				FXMLLoader loader = new FXMLLoader(
-						ClassLoader.getSystemResource("view/BuyGoodPopup.fxml"));
+						ClassLoader
+								.getSystemResource("view/TradeGoodPopup.fxml"));
 				Parent newScene = loader.load();
-				buyPopup.setScene(new Scene(newScene, 300, 125));
+				tradePopup.setScene(new Scene(newScene, 300, 125));
 
-				BuyGoodPopupController controller = loader.getController();
-				controller.initializePage(type, this);
-				buyPopup.show();
+				TradeGoodPopupController controller = loader.getController();
+				controller.initializePage(type, this, true, true);
+				tradePopup.show();
 
 			} catch (IOException ie) {
 				ie.printStackTrace();
@@ -275,28 +276,26 @@ public class TradeScreenController {
 			}
 
 			try {
-				Stage sellPopup = new Stage();
-				sellPopup.initModality(Modality.APPLICATION_MODAL);
-				sellPopup.initOwner((Stage) btn.getScene().getWindow());
+				Stage buyPopup = new Stage();
+				buyPopup.initModality(Modality.APPLICATION_MODAL);
+				buyPopup.initOwner((Stage) btn.getScene().getWindow());
 
 				FXMLLoader loader = new FXMLLoader(
 						ClassLoader
-								.getSystemResource("view/SellGoodPopup.fxml"));
+								.getSystemResource("view/TradeGoodPopup.fxml"));
 				Parent newScene = loader.load();
-				sellPopup.setScene(new Scene(newScene, 300, 125));
+				buyPopup.setScene(new Scene(newScene, 300, 125));
 
-				SellGoodPopupController controller = loader.getController();
-				controller.initializePage(type, this);
-				sellPopup.show();
+				TradeGoodPopupController controller = loader.getController();
+				controller.initializePage(type, this, false, true);
+				buyPopup.show();
 			} catch (IOException ie) {
 				ie.printStackTrace();
 			}
 		}
 	}
 
-	/**
-	 * Updates the page with all new data at initial load and after buy or sell
-	 */
+	@Override
 	public void updatePage() {
 		GameEngine game = GameEngine.getGameEngine();
 		Player player = game.getPlayer();
