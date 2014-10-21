@@ -28,6 +28,7 @@ public class FightEngine {
 	private Ship playerShip;
 	private Ship npcShip;
 	final int REP_CHANGE = 1;
+	final int MAX_REP = 100;
 
 	/**
 	 * Constructor for the FightEngine, taking in the main game player
@@ -52,14 +53,23 @@ public class FightEngine {
 		if (encounter.getTurnCount() == 0) {
 			regenExtraShields();
 			if (npc instanceof Pirate) {
-				if (player.getPirateRep() < 20)
+				if (player.getPirateRep() + REP_CHANGE > MAX_REP) {
+					player.setPirateRep(MAX_REP);
+				} else {
 					player.setPirateRep(player.getPirateRep() + REP_CHANGE);
+				}
 			} else if (npc instanceof Police) {
-				if (player.getPoliceRep() < 20)
+				if (player.getPoliceRep() + REP_CHANGE > MAX_REP) {
+					player.setPoliceRep(MAX_REP);
+				} else {
 					player.setPoliceRep(player.getPoliceRep() + REP_CHANGE);
+				}
 			} else if (npc instanceof Trader) {
-				if (player.getPoliceRep() > 1)
-					player.setPoliceRep(player.getPoliceRep() - REP_CHANGE);
+				if (player.getTraderRep() - REP_CHANGE < 1) {
+					player.setTraderRep(1);
+				} else {
+					player.setTraderRep(player.getPoliceRep() - REP_CHANGE);
+				}
 			}
 		} else {
 			regenShields();
@@ -94,11 +104,17 @@ public class FightEngine {
 		if (encounter.getTurnCount() == 0) {
 			regenExtraShields();
 			if (npc instanceof Pirate) {
-				if (player.getPirateRep() > 1)
+				if (player.getPirateRep() - REP_CHANGE < 1) {
+					player.setPirateRep(1);
+				} else {
 					player.setPirateRep(player.getPirateRep() - REP_CHANGE);
+				}
 			} else if (npc instanceof Police) {
-				if (player.getPoliceRep() < 20)
+				if (player.getPoliceRep() + REP_CHANGE > MAX_REP) {
+					player.setPoliceRep(MAX_REP);
+				} else {
 					player.setPoliceRep(player.getPoliceRep() + REP_CHANGE);
+				}
 			}
 		} else {
 			regenShields();
@@ -132,10 +148,15 @@ public class FightEngine {
 			player.decreaseCredits(player.getCredits() * percentCreditsLost);
 		NPC npc = encounter.getNPC();
 		if (npc instanceof Pirate) {
-			if (player.getPirateRep() > 1)
+			if (player.getPirateRep() - REP_CHANGE < 1) {
+				player.setPirateRep(1);
+			} else {
 				player.setPirateRep(player.getPirateRep() - REP_CHANGE);
+			}
 		} else if (npc instanceof Trader) {
-			if (player.getTraderRep() < 20)
+			if (player.getTraderRep() + REP_CHANGE > MAX_REP) {
+				player.setTraderRep(MAX_REP);
+			}
 				player.setTraderRep(player.getTraderRep() + REP_CHANGE);
 		}
 	}
@@ -201,13 +222,18 @@ public class FightEngine {
 			playerShip.removeFromCargo(GoodType.NARCOTICS, amtNarcotics);
 			int fine = (int) (Math.random() * (1/4) * player.getCredits());
 			player.decreaseCredits(fine);
-			if (player.getPoliceRep() < 20) {
+			if (player.getPoliceRep() + REP_CHANGE > MAX_REP) {
+				player.setPoliceRep(MAX_REP);
+			} else {
 				player.setPoliceRep(pPolice + REP_CHANGE);
 			}
 			return true;
 		} else {
-			if (player.getPoliceRep() > 1)
-			player.setPoliceRep(pPolice - REP_CHANGE);
+			if (player.getPoliceRep() - REP_CHANGE < 1) {
+				player.setPoliceRep(1);
+			} else {
+				player.setPoliceRep(pPolice - REP_CHANGE);
+			}
 			return false;
 		}
 	}
@@ -229,7 +255,9 @@ public class FightEngine {
 			player.decreaseCredits(credits);
 			return true;
 		}
-		if (player.getPoliceRep() < 20) { 
+		if (player.getPoliceRep() + REP_CHANGE > MAX_REP) {
+			player.setPoliceRep(MAX_REP);
+		} else {
 			player.setPoliceRep(player.getPoliceRep() + REP_CHANGE);
 		}
 		return false;
