@@ -2,6 +2,7 @@ package model;
 
 import model.Enum.EncounterType;
 import model.Enum.LaserType;
+import model.Enum.ShieldType;
 import model.Enum.ShipType;
 
 /**
@@ -160,7 +161,22 @@ public abstract class NPC {
 		}
 		
 		//generate shields
+		ShieldType[] shieldTypes = ShieldType.values();
+		int shieldCapacity = getShip().getShipType().getShieldSlots();
+		for (int i = 0; i < shieldCapacity; i++) {
+			index = (int) Math.random() * shieldTypes.length;
+			if (shieldTypes[index].getMinRep(type) <= rep && shieldTypes[index].getMaxRep(type) >= rep) {
+				try {
+					getShip().addShield(shieldTypes[index]);
+				} catch (MaxCapacityException m) {
+					
+				}
+			}
+		}
 		
+		//generate cargo
+		
+		//generate gadgets
 	}
 
 	/**

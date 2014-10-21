@@ -8,13 +8,19 @@ package model.Enum;
  */
 public enum ShieldType {
 
-	ENERGYSHIELD(50, 10000, 4), 
-	REFLECTIVESHIELD(100, 35000, 5);
+	ENERGYSHIELD(50, 10000, 4, 20, 30, 30, 80, 101, 101), 
+	REFLECTIVESHIELD(100, 35000, 5, 40, 50, 50, 101, 101, 101);
 
 	private int shieldHP;
 	private int minTechLevel;
 	private int price;
-
+	private int minPoliceRep;
+	private int minPirateRep;
+	private int minTraderRep;
+	private int maxPoliceRep;
+	private int maxPirateRep;
+	private int maxTraderRep;
+	
 	/**
 	 * Constructor for the shield enums
 	 * 
@@ -25,10 +31,17 @@ public enum ShieldType {
 	 * @param mtl
 	 *            The minimum tech level required for a shield
 	 */
-	private ShieldType(int hp, int p, int mtl) {
+	private ShieldType(int hp, int p, int mtl, int minPoliceRep, int minPirateRep, int minTraderRep,
+			int maxPoliceRep, int maxPirateRep, int maxTraderRep) {
 		shieldHP = hp;
 		price = p;
 		minTechLevel = mtl;
+		this.minPoliceRep = minPoliceRep;
+		this.minPirateRep = minPirateRep;
+		this.minTraderRep = minTraderRep;
+		this.maxPoliceRep = maxPoliceRep;
+		this.maxPirateRep = maxPirateRep;
+		this.maxTraderRep = maxTraderRep;
 	}
 
 	/**
@@ -58,6 +71,20 @@ public enum ShieldType {
 		return price;
 	}
 
+	public int getMinRep(EncounterType type) {
+		if (type == EncounterType.POLICE)		return minPoliceRep;
+		else if (type == EncounterType.PIRATE)	return minPirateRep;
+		else if (type == EncounterType.TRADER)	return minTraderRep;
+		return 0;
+	}
+	
+	public int getMaxRep(EncounterType type) {
+		if (type == EncounterType.POLICE)		return maxPoliceRep;
+		else if (type == EncounterType.PIRATE)	return maxPirateRep;
+		else if (type == EncounterType.TRADER)	return maxTraderRep;
+		return 0;
+	}
+	
 	@Override
 	public String toString() {
 		switch (this) {
