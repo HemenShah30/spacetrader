@@ -95,11 +95,11 @@ public class Ship {
 	}
 
 	/**
-	 * Returns totalHP of ship
+	 * Returns maximum hull points of ship
 	 * 
-	 * @return the totalHP of the ship
+	 * @return the max hp of the ship
 	 */
-	public int getTotalHP() {
+	public int getMaxHP() {
 		return shipType.getTotalHP();
 	}
 
@@ -114,6 +114,19 @@ public class Ship {
 			sum += shieldHP;
 		}
 		return sum;
+	}
+
+	/**
+	 * Returns the maximum shield health points for the ship
+	 * 
+	 * @return The maximum shield hp for the ship
+	 */
+	public int getMaxShieldHP() {
+		int shieldHP = 0;
+		for (ShieldType shield : shields.keySet()) {
+			shieldHP += shield.getShieldHP();
+		}
+		return shieldHP;
 	}
 
 	/**
@@ -162,36 +175,45 @@ public class Ship {
 	public void setFuel(int f) {
 		this.fuel = f;
 	}
-	
+
 	/**
 	 * Calculates and returns amount needed to refuel
+	 * 
 	 * @return cost to refuel ship
 	 */
 	public double getRefuelCost() {
 		return (shipType.getFuel() - fuel) * shipType.getFuelCost();
 	}
+
 	/**
 	 * Calculates and returns amount needed to repair
+	 * 
 	 * @return
 	 */
 	public double getRepairCost() {
-		return (shipType.getTotalHP() - currHP) *shipType.getRepairCost();
+		return (shipType.getTotalHP() - currHP) * shipType.getRepairCost();
 	}
-	
+
 	/**
 	 * Refuels ship
-	 * @param credits used in refueling
+	 * 
+	 * @param credits
+	 *            used in refueling
 	 */
 	public void refuel(double credits) {
 		fuel += (credits / shipType.getFuelCost());
 	}
+
 	/**
 	 * Repairs ships
-	 * @param credits amount used in the repair
+	 * 
+	 * @param credits
+	 *            amount used in the repair
 	 */
 	public void repair(double credits) {
 		currHP += (credits / shipType.getRepairCost());
 	}
+
 	/**
 	 * Returns the size of the cargo hold of the ship
 	 * 

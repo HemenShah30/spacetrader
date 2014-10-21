@@ -11,6 +11,7 @@ import model.Enum.EncounterType;
 public class NPCEncounter extends Encounter {
 
 	private NPC npc;
+	private int turnCount;
 
 	/**
 	 * Constructor for the NPC Encounter taking in an EncounterType and a NPC
@@ -23,6 +24,7 @@ public class NPCEncounter extends Encounter {
 	public NPCEncounter(EncounterType type, NPC n) {
 		super(type);
 		npc = n;
+		turnCount = 0;
 	}
 
 	/**
@@ -32,6 +34,23 @@ public class NPCEncounter extends Encounter {
 	 */
 	public NPC getNPC() {
 		return npc;
+	}
+
+	/**
+	 * Returns the turn count of the NPCEncounter
+	 * 
+	 * @return The current turn count of the NPCEncounter
+	 */
+	public int getTurnCount() {
+		return turnCount;
+	}
+
+	/**
+	 * Causes the turn count to increment as a result of a turn being taken in
+	 * the encounter
+	 */
+	public void takeTurn() {
+		turnCount++;
 	}
 
 	@Override

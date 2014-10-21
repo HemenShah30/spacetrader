@@ -3,6 +3,7 @@ package controller;
 import java.util.List;
 
 import model.DeathException;
+import model.NPCEncounter;
 import model.Player;
 import model.Police;
 import model.Ship;
@@ -43,7 +44,15 @@ public class FightEngine {
 	 *            The NPC who is fighting the player
 	 * @return The result of the attack
 	 */
-	public EncounterResult playerAttack(NPC npc) {
+	public EncounterResult playerAttack(NPCEncounter encounter) {
+		if (encounter.getTurnCount() == 0) {
+			regenExtraShields();
+		} else {
+			regenShields();
+		}
+
+		encounter.takeTurn();
+		NPC npc = encounter.getNPC();
 		npcShip = npc.getShip();
 		List<LaserType> lasers = playerShip.getLasers();
 		int damage = 0;
@@ -54,6 +63,7 @@ public class FightEngine {
 		try {
 			npcShip.takeDamage(damage);
 		} catch (DeathException death) {
+			regenShields();
 			return EncounterResult.NPCDEATH;
 		}
 		return npcTurn(npc);
@@ -66,7 +76,15 @@ public class FightEngine {
 	 *            The NPC who the player is fighting
 	 * @return The result of the flee attempt or fight itself
 	 */
-	public EncounterResult playerFlee(NPC npc) {
+	public EncounterResult playerFlee(NPCEncounter encounter) {
+		if (encounter.getTurnCount() == 0) {
+			regenExtraShields();
+		} else {
+			regenShields();
+		}
+
+		encounter.takeTurn();
+		NPC npc = encounter.getNPC();
 		if (player.getPilotSkill() + (int) (Math.random() * 3) > npc
 				.getPilotSkill()) {
 			return EncounterResult.NPCFLEESUCCESS;
@@ -80,7 +98,9 @@ public class FightEngine {
 	 * @param npc
 	 *            The NPC who the player is surrendering to
 	 */
-	public void playerSurrender(NPC npc) {
+	public void playerSurrender(NPCEncounter encounter) {
+		regenExtraShields();
+		encounter.takeTurn();
 		int cargoRemoved = 0;
 		double percentCreditsLost = .5;
 		for (GoodType g : GoodType.values()) {
@@ -101,14 +121,16 @@ public class FightEngine {
 	 */
 	private EncounterResult npcTurn(NPC npc) {
 		double healthRatio = (double) npcShip.getCurrHP()
-				/ (double) npcShip.getTotalHP();
+				/ (double) npcShip.getMaxHP();
 		if (healthRatio <= .2) {
 			int nPilot = npc.getPilotSkill();
 			int pPilot = player.getPilotSkill();
 			if (nPilot + 1 < pPilot) {
+				regenShields();
 				return EncounterResult.NPCSURRENDER;
 			}
 			if (nPilot + (int) (Math.random() * 3) > pPilot) {
+				regenShields();
 				return EncounterResult.NPCFLEESUCCESS;
 			}
 			return EncounterResult.NPCFLEEFAIL;
@@ -135,10 +157,14 @@ public class FightEngine {
 	 * @return The result of the search, false if nothing found, true if illegal
 	 *         goods found
 	 */
-	public boolean consentToSearch(Police police) {
+	public boolean consentToSearch(NPCEncounter encounter) {
+		if (encounter.getTurnCount() == 0) {
+			regenExtraShields();
+		}
+		encounter.takeTurn();
 		int amtFirearms = playerShip.amountInCargo(GoodType.FIREARMS);
 		int amtNarcotics = playerShip.amountInCargo(GoodType.NARCOTICS);
-		
+
 		if (amtFirearms != 0 || amtNarcotics != 0) {
 			playerShip.removeFromCargo(GoodType.FIREARMS, amtFirearms);
 			playerShip.removeFromCargo(GoodType.NARCOTICS, amtNarcotics);
@@ -163,11 +189,32 @@ public class FightEngine {
 	 *            The amount of credits the player is offering
 	 * @return The success of the bribe attempt
 	 */
-	public boolean bribePolice(Police police, int credits) {
+	public boolean bribePolice(NPCEncounter encounter, int credits) {
+		Police police = (Police) encounter.getNPC();
+		regenExtraShields();
+		encounter.takeTurn();
 		if (police.willAcceptBribe(credits)) {
 			player.decreaseCredits(credits);
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * Regenerates a portion of the player's shields based on engineer skill
+	 */
+	private void regenShields() {
+		Ship ship = player.getShip();
+		ship.addShieldHP((int) (ship.getMaxShieldHP()
+				* player.getEngineerSkill() / 100.));
+	}
+
+	/**
+	 * Regenerates more of the player's shields at the beginning and end of an
+	 * encounter
+	 */
+	private void regenExtraShields() {
+		regenShields();
+		regenShields();
 	}
 }

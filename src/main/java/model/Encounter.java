@@ -7,6 +7,7 @@ import java.util.Random;
 import controller.GameEngine;
 import model.Enum.EncounterType;
 import model.Enum.GoodType;
+import model.Enum.LaserType;
 
 /**
  * Class representing an Encounter with an NPC or other
@@ -72,9 +73,21 @@ public class Encounter {
 					+ " floating in space!";
 		}
 		case GAINWEAPON: {
-			// check for free weapon slot, else return nothing
-			// if free slot, then create a new weapon and add to the ship
-			return "IMPLEMENTATION NEEDED";
+			if (ship.getLasers().size() < ship.getShipType().getWeaponSlots()) {
+				LaserType[] lasers = LaserType.values();
+				int laserIndex = Math.min(
+						lasers.length,
+						(int) Math.abs(new Random().nextGaussian()
+								/ (2 / lasers.length)));
+				try {
+					ship.addLaser(lasers[laserIndex]);
+					return "You find a " + lasers[laserIndex]
+							+ " floating in space, and add it to your ship";
+				} catch (MaxCapacityException m) {
+					return "You find a weapon floating in space, but have no free weapon slots";
+				}
+			}
+			return null;
 		}
 		case GAINFUEL: {
 			double percentOfFuelFound = .5;

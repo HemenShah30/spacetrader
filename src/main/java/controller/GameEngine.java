@@ -239,7 +239,7 @@ public class GameEngine {
 	 * @return The result of the given attack
 	 */
 	public EncounterResult playerAttack(NPCEncounter npc) {
-		return fightEngine.playerAttack(npc.getNPC());
+		return fightEngine.playerAttack(npc);
 	}
 
 	/**
@@ -250,7 +250,7 @@ public class GameEngine {
 	 * @return The result of the flee attempt
 	 */
 	public EncounterResult playerFlee(NPCEncounter npc) {
-		return fightEngine.playerFlee(npc.getNPC());
+		return fightEngine.playerFlee(npc);
 	}
 
 	/**
@@ -263,7 +263,7 @@ public class GameEngine {
 	 * @return Whether the bribe was successful
 	 */
 	public boolean bribePolice(NPCEncounter npc, int credits) {
-		return fightEngine.bribePolice((Police) npc.getNPC(), credits);
+		return fightEngine.bribePolice(npc, credits);
 	}
 
 	/**
@@ -273,7 +273,7 @@ public class GameEngine {
 	 *            The encounter in which the player is surrendering
 	 */
 	public void surrenderToNPC(NPCEncounter npc) {
-		fightEngine.playerSurrender(npc.getNPC());
+		fightEngine.playerSurrender(npc);
 	}
 
 	/**
@@ -286,7 +286,7 @@ public class GameEngine {
 	 *         found, false otherwise
 	 */
 	public boolean consentToSearch(NPCEncounter npc) {
-		return fightEngine.consentToSearch((Police) (npc.getNPC()));
+		return fightEngine.consentToSearch(npc);
 	}
 
 	/**
