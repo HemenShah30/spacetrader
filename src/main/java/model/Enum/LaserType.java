@@ -8,13 +8,19 @@ package model.Enum;
  */
 public enum LaserType {
 
-	PULSELASER(20, 5000, 4), 
-	BEAMLASER(35, 15000, 5), 
-	MILITARYLASER(60, 35000, 6);
+	PULSELASER(20, 5000, 4, 0, 0, 10, 40, 60, 101), 
+	BEAMLASER(35, 15000, 5, 20, 30, 30, 101, 101, 101), 
+	MILITARYLASER(60, 35000, 6, 40, 40, 50, 101, 101, 101);
 
 	private int baseDamage;
 	private int minTechLevel;
 	private int price;
+	private int minPoliceRep;
+	private int minPirateRep;
+	private int minTraderRep;
+	private int maxPoliceRep;
+	private int maxPirateRep;
+	private int maxTraderRep;
 
 	/**
 	 * Constructor for the Laser enums
@@ -26,10 +32,17 @@ public enum LaserType {
 	 * @param mtl
 	 *            The minimum tech level required for a laser
 	 */
-	private LaserType(int bd, int p, int mtl) {
+	private LaserType(int bd, int p, int mtl, int minPoliceRep, int minPirateRep,
+			int minTraderRep, int maxPoliceRep, int maxPirateRep, int maxTraderRep) {
 		baseDamage = bd;
 		price = p;
 		minTechLevel = mtl;
+		this.minPoliceRep = minPoliceRep;
+		this.minPirateRep = minPirateRep;
+		this.minTraderRep = minTraderRep;
+		this.maxPoliceRep = maxPoliceRep;
+		this.maxPirateRep = maxPirateRep;
+		this.maxTraderRep = maxTraderRep;
 	}
 
 	/**
@@ -59,6 +72,20 @@ public enum LaserType {
 		return price;
 	}
 
+	public int getMinRep(EncounterType type) {
+		if (type == EncounterType.POLICE)		return minPoliceRep;
+		else if (type == EncounterType.PIRATE)	return minPirateRep;
+		else if (type == EncounterType.TRADER)	return minTraderRep;
+		return 0;
+	}
+	
+	public int getMaxRep(EncounterType type) {
+		if (type == EncounterType.POLICE)		return maxPoliceRep;
+		else if (type == EncounterType.PIRATE)	return maxPirateRep;
+		else if (type == EncounterType.TRADER)	return maxTraderRep;
+		return 0;
+	}
+	
 	@Override
 	public String toString() {
 		switch (this) {

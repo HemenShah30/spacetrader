@@ -7,12 +7,18 @@ package model.Enum;
  *
  */
 public enum ShipType {
-	FLEA(20, 25, 10, 0, 0, 0, 1, 4, 1, 2000, 5, 2, -1, -1, 0, 1, 0),
-	GNAT(14, 100, 15, 1, 0, 1, 1, 5, 2, 10000, 50, 28, 0, 0, 0, 1, 1),
-	FIREFLY(17, 100, 20, 1, 1, 1, 1, 5, 3, 25000, 75, 20, 0, 0, 0, 1, 1),
-	MOSQUITO(13, 100, 15, 2, 1, 1, 1, 5, 5, 30000, 100, 20, 0, 1, 0, 1, 1),
-	BUMBLEBEE(15, 100, 25, 1, 2, 2, 2, 5, 7, 60000, 125, 15, 0, 1, 0, 1, 2);
-
+	FLEA		(20, 25, 10, 0, 0, 0, 1, 4, 1, 2000, 5, 2, -1, -1, 0, 1, 0, 0, 0, 0, 20, 20, 70),
+	GNAT		(14, 100, 15, 1, 0, 1, 1, 5, 2, 10000, 50, 28, 0, 0, 0, 1, 1, 0, 0, 0, 30, 30, 70),
+	FIREFLY		(17, 100, 20, 1, 1, 1, 1, 5, 3, 25000, 75, 20, 0, 0, 0, 1, 1, 0, 0, 0, 30, 40, 80),
+	MOSQUITO	(13, 100, 15, 2, 1, 1, 1, 5, 5, 30000, 100, 20, 0, 1, 0, 1, 1, 0, 0, 0, 40, 50, 90),
+	BUMBLEBEE	(15, 100, 25, 1, 2, 2, 2, 5, 7, 60000, 125, 15, 0, 1, 0, 1, 2, 0, 0, 0, 50, 60, 101),
+	BEETLE		(14, 50, 50, 0, 1, 1, 3, 5, 7, 60000, 150, 12, 0, 0, 1, 2, 2, 10, 0, 0, 80, 101, 101),
+	HORNET		(16, 150, 20, 3, 2, 1, 2, 6, 7, 90000, 200, 5, 0, 0, 0, 3, 2, 30, 20, 0, 101, 101, 101),
+	GRASSHOPPER	(15, 150, 30, 2, 2, 3, 3, 6, 5, 100000, 500, 5, 0, 0, 0, 4, 3, 40, 30, 10, 101, 101, 101),
+	TERMITE		(13, 200, 60, 1, 3, 2, 3, 6, 7, 120000, 200, 5, 0, 0, 0, 4, 3, 50, 40, 30, 101, 101, 101),
+	WASP		(14, 200, 35, 3, 2, 2, 3, 7, 7, 160000, 1000, 5, 0, 0, 0, 5, 3, 50, 40, 60, 101, 101, 101),
+	MANTIS		(16, 225, 10, 3, 3, 3, 3, 7, 7, 220000, 1000, 5, 0, 0, 0, 5, 3, 60, 50, 70, 101, 101, 101);
+	
 	private int fuel;
 	private int totalHP;
 	private int cargoSize;
@@ -30,7 +36,13 @@ public enum ShipType {
 	private int traderModifier;
 	private int repairCost;
 	private int size;
-
+	private int minPoliceRep;
+	private int minPirateRep;
+	private int minTraderRep;
+	private int maxPoliceRep;
+	private int maxPirateRep;
+	private int maxTraderRep;
+	
 	/**
 	 * Constructor for the ShipType enum, taking in all the parameters related
 	 * to the ship
@@ -69,10 +81,19 @@ public enum ShipType {
 	 *            The repair cost for the ship
 	 * @param s
 	 *            The size of the ship
+	 * @param minPoliceRep
+	 *            The minimum police rep needed for the police to have this ship
+	 * @param minPirateRep
+	 *            The minimum pirate rep needed for the pirate to have this ship
+	 * @param maxPoliceRep
+	 *            The maximum police rep needed for the police to have this ship
+	 * @param maxPirateRep
+	 *            The maximum pirate rep needed for the pirate to have this ship
 	 */
 	private ShipType(int f, int thp, int cs, int ws, int ss, int gs, int crewS,
 			int mtl, int fc, int p, int b, int o, int pm, int pirateM, int tm,
-			int rc, int s) {
+			int rc, int s, int minPoliceRep, int minPirateRep, int minTraderRep,
+			int maxPoliceRep, int maxPirateRep, int maxTraderRep) {
 		fuel = f;
 		totalHP = thp;
 		cargoSize = cs;
@@ -90,6 +111,12 @@ public enum ShipType {
 		traderModifier = tm;
 		repairCost = rc;
 		size = s;
+		this.minPoliceRep = minPoliceRep;
+		this.minPirateRep = minPirateRep;
+		this.minTraderRep = minTraderRep;
+		this.maxPoliceRep = maxPoliceRep;
+		this.maxPirateRep = maxPirateRep;
+		this.maxTraderRep = maxTraderRep;
 	}
 
 	/**
@@ -245,6 +272,20 @@ public enum ShipType {
 		return size;
 	}
 
+	public int getMinRep(EncounterType type) {
+		if (type == EncounterType.POLICE)		return minPoliceRep;
+		else if (type == EncounterType.PIRATE)	return minPirateRep;
+		else if (type == EncounterType.TRADER)	return minTraderRep;
+		return 0;
+	}
+	
+	public int getMaxRep(EncounterType type) {
+		if (type == EncounterType.POLICE)		return maxPoliceRep;
+		else if (type == EncounterType.PIRATE)	return maxPirateRep;
+		else if (type == EncounterType.TRADER)	return maxTraderRep;
+		return 0;
+	}
+	
 	@Override
 	public String toString() {
 		switch (this) {
@@ -258,6 +299,18 @@ public enum ShipType {
 			return "Mosquito";
 		case BUMBLEBEE:
 			return "Bumblebee";
+		case BEETLE:
+			return "Beetle";
+		case HORNET:
+			return "Hornet";
+		case GRASSHOPPER:
+			return "Grasshopper";
+		case TERMITE:
+			return "Termite";
+		case WASP:
+			return "Wasp";
+		case MANTIS:
+			return "Mantis";
 		default:
 			return null;
 		}

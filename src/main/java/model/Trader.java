@@ -2,6 +2,7 @@ package model;
 
 import java.util.Random;
 
+import model.Enum.EncounterType;
 import model.Enum.GoodType;
 
 /**
@@ -32,7 +33,7 @@ public class Trader extends NPC {
 		setTraderSkill(1);
 		setEngineerSkill((int) (rep * .5));
 		setInvestorSkill(1);
-		generateShip(rep);
+		generateShip(rep, EncounterType.TRADER);
 		generateCredits(rep);
 		generateIsSelling();
 		generateGood();

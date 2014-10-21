@@ -1,5 +1,6 @@
 package model;
 
+import model.Enum.EncounterType;
 import model.Enum.LaserType;
 import model.Enum.ShipType;
 
@@ -129,17 +130,37 @@ public abstract class NPC {
 	 * @param rep
 	 *            The reputation of the player
 	 */
-	protected void generateShip(int rep) {
+	protected void generateShip(int rep, EncounterType type) {
+		Ship s;
+		int index;
+		//generate a ship type
 		ShipType[] shipTypes = ShipType.values();
-		int index = (rep - 1) / 2;
-		ShipType shipType = shipTypes[index];
-		Ship s = new Ship(shipType);
-		try {
-			s.addLaser(LaserType.PULSELASER);
-		} catch (MaxCapacityException m) {
-
+		boolean shipTypeGenerated = false;
+		while (!shipTypeGenerated) {
+			index = (int) Math.random() * shipTypes.length;
+			if (shipTypes[index].getMinRep(type) <= rep && shipTypes[index].getMaxRep(type) >= rep) {
+				s = new Ship(shipTypes[index]);
+				shipTypeGenerated = true;
+				setShip(s);
+			}
 		}
-		setShip(s);
+		
+		//generate a weapon
+		LaserType[] laserTypes = LaserType.values();
+		int weaponCapacity = getShip().getShipType().getWeaponSlots();
+		for (int i = 0; i < weaponCapacity; i++) {
+			index = (int) Math.random() * shipTypes.length;
+			if (laserTypes[index].getMinRep(type) <= rep && laserTypes[index].getMaxRep(type) >= rep) {
+				try {
+					getShip().addLaser(laserTypes[index]);
+				} catch (MaxCapacityException m) {
+					
+				}
+			}
+		}
+		
+		//generate shields
+		
 	}
 
 	/**

@@ -1,5 +1,7 @@
 package model;
 
+import model.Enum.EncounterType;
+
 /**
  * Class representing Pirates.
  * 
@@ -14,7 +16,7 @@ public class Pirate extends NPC {
 		setTraderSkill(1);
 		setEngineerSkill(3);
 		setInvestorSkill(1);
-		generateShip(rep);
+		generateShip(rep, EncounterType.PIRATE);
 	}
 
 	@Override

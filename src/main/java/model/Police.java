@@ -1,5 +1,7 @@
 package model;
 
+import model.Enum.EncounterType;
+
 /**
  * Class representing Police.
  * 
@@ -15,7 +17,7 @@ public class Police extends NPC {
 		setTraderSkill(1);
 		setEngineerSkill(3);
 		setInvestorSkill(1);
-		generateShip(rep);
+		generateShip(rep, EncounterType.POLICE);
 		minimumBribe = (double) (rep * playerCred / 10);
 	}
 
