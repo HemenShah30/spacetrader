@@ -323,7 +323,7 @@ public class Player {
 	 * Setter for player traderRep
 	 * 
 	 * @param rep
-	 *            int 1-10 to set rep to
+	 *            int 1-20 to set rep to
 	 */
 	public void setTraderRep(int rep) {
 		traderRep = rep;
@@ -333,7 +333,7 @@ public class Player {
 	 * Setter for player policeRep
 	 * 
 	 * @param rep
-	 *            int 1-10 to set rep to
+	 *            int 1-20 to set rep to
 	 */
 	public void setPoliceRep(int rep) {
 		policeRep = rep;
@@ -343,7 +343,7 @@ public class Player {
 	 * Setter for player pirateRep
 	 * 
 	 * @param rep
-	 *            int 1-10 to set rep to
+	 *            int 1-20 to set rep to
 	 */
 	public void setPirateRep(int rep) {
 		pirateRep = rep;
