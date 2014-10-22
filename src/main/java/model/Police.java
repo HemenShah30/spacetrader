@@ -3,7 +3,7 @@ package model;
 import model.Enum.EncounterType;
 
 /**
- * Class representing Police.
+ * Class representing Police
  * 
  * @author Eric Wan and Larry He
  * 
@@ -11,6 +11,15 @@ import model.Enum.EncounterType;
 public class Police extends NPC {
 	private double minimumBribe;
 
+	/**
+	 * Constructor for Police, taking in the player PoliceReputation and their
+	 * credit amount
+	 * 
+	 * @param rep
+	 *            The PoliceReputation of the player
+	 * @param playerCred
+	 *            The amount of credits the player has
+	 */
 	public Police(int rep, double playerCred) {
 		setPilotSkill((int) (rep * .09));
 		setFighterSkill((int) (rep * .09));

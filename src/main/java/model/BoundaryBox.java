@@ -89,7 +89,7 @@ public class BoundaryBox implements Boundary {
 	/**
 	 * Sets the top right sub-region for the BoundaryBox
 	 * 
-	 * @param tl
+	 * @param tr
 	 *            The new top right sub-region for the BoundaryBox
 	 */
 	public void setTopRight(Boundary tr) {
@@ -99,7 +99,7 @@ public class BoundaryBox implements Boundary {
 	/**
 	 * Sets the bottom left sub-region for the BoundaryBox
 	 * 
-	 * @param tl
+	 * @param bl
 	 *            The new bottom left sub-region for the BoundaryBox
 	 */
 	public void setBottomLeft(Boundary bl) {
@@ -109,7 +109,7 @@ public class BoundaryBox implements Boundary {
 	/**
 	 * Sets the bottom right sub-region for the BoundaryBox
 	 * 
-	 * @param tl
+	 * @param br
 	 *            The new bottom right sub-region for the BoundaryBox
 	 */
 	public void setBottomRight(Boundary br) {

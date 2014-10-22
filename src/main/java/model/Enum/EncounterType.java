@@ -1,7 +1,7 @@
 package model.Enum;
 
 /**
- * Enum for representing the type of encounter
+ * Enum for representing the type of encounter a player is having
  * 
  * @author Jack Croft
  *

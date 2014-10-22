@@ -16,7 +16,7 @@ import model.Enum.TechLevel;
 import javafx.scene.paint.Color;
 
 /**
- * Class representing the entire universe
+ * Class representing the entire game universe
  * 
  * @author Jack Croft
  *
@@ -66,7 +66,7 @@ public class Universe {
 		int uniSize2 = uniSize * uniSize;
 		int scale;
 		Location l = new Location(0, 0);
-		//int uniSize = 10;
+		// int uniSize = 10;
 		for (int i = 0; i < planetNames.size(); i++) {
 			TechLevel[] levels = TechLevel.values();
 			SpecialResource[] resources = SpecialResource.values();
@@ -105,8 +105,8 @@ public class Universe {
 				y = i % uniSize;
 				x = (int) (x * universeSize / uniSize);
 				y = (int) (y * universeSize / uniSize);
-				x = x + rand.nextInt(uniSize) + (uniSize/4);
-				y = y + rand.nextInt(uniSize) + (uniSize/4);
+				x = x + rand.nextInt(uniSize) + (uniSize / 4);
+				y = y + rand.nextInt(uniSize) + (uniSize / 4);
 				l = new Location(x, y);
 			} else {
 				while (uniqueLocations.contains(l)) {
@@ -145,6 +145,7 @@ public class Universe {
 	public Planet getPlanetAtLocation(Location loc) {
 		return planetLocations.getPlanetAtLocation(loc);
 	}
+
 	public int getUniverseSize() {
 		return (int) universeSize;
 	}

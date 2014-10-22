@@ -17,7 +17,7 @@ import model.Universe;
 import model.Enum.EncounterType;
 
 /**
- * Controller for traveling in game
+ * Controller for traveling in game and calculating encounters during traveling
  * 
  * @author Jack Croft
  *
@@ -32,10 +32,8 @@ public class FlightEngine {
 	/**
 	 * Constructor for the FlightEngine
 	 * 
-	 * @param s
-	 *            The ship that's traveling in space
 	 * @param p
-	 *            The player piloting the ship
+	 *            The player piloting the ship that is traveling
 	 * @param u
 	 *            The universe the ship is moving in
 	 */
@@ -94,6 +92,8 @@ public class FlightEngine {
 	 * 
 	 * @param p
 	 *            The planet being clicked on to travel to
+	 * @return The list of encounters the player has during the flight to the
+	 *         planet
 	 */
 	public List<Encounter> goToPlanet(Planet p) {
 		Planet origin = player.getPlanet();

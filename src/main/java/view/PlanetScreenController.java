@@ -94,7 +94,7 @@ public class PlanetScreenController {
 	}
 
 	/**
-	 * Sends the player to the shipyard view
+	 * Sends the player to the Shipyard view
 	 * 
 	 * @param e
 	 *            The event that fired the method

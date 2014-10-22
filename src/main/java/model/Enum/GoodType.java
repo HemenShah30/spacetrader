@@ -1,9 +1,7 @@
 package model.Enum;
 
-
-
 /**
- * Enum representing the type of good a good is. Info holder.
+ * Enum representing the various types of trading goods
  * 
  * @author Larry He
  * 
@@ -144,8 +142,8 @@ public enum GoodType {
 	}
 
 	/**
-	 * Getter for increase condition (i.e. conditions that cause certain goods to be
-	 * very expensive)
+	 * Getter for increase condition (i.e. conditions that cause certain goods
+	 * to be very expensive)
 	 * 
 	 * @return Increase condition of a planet
 	 */
@@ -198,7 +196,7 @@ public enum GoodType {
 	public int getBaseQuantity() {
 		return baseQuantity;
 	}
-	
+
 	/**
 	 * Getter for base quantity of a good
 	 * 
@@ -207,7 +205,7 @@ public enum GoodType {
 	public int getQuantityIncPerTechLevel() {
 		return quantityIncPerTechLevel;
 	}
-	
+
 	@Override
 	public String toString() {
 		switch (this) {

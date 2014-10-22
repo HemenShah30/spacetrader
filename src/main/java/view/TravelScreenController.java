@@ -257,9 +257,6 @@ public class TravelScreenController implements Controller {
 
 	/**
 	 * Sets all the planet labels with the relevant planet information
-	 * 
-	 * @param p
-	 *            The planet that has been selected
 	 */
 	public void setPlanetInfo() {
 		planetNameLbl.setText(selectedPlanet.getName());

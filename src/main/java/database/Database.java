@@ -51,6 +51,9 @@ public class Database {
 
 	/**
 	 * Creates a new Database class and attempts to connect to the database
+	 * 
+	 * @param u
+	 *            The username of the person logging into the game
 	 */
 	public Database(String u) {
 		username = u;
@@ -545,6 +548,8 @@ public class Database {
 	/**
 	 * Loads the users game from the database
 	 * 
+	 * @param playerName
+	 *            The name of the player being loaded into the game
 	 * @return An object[] of the universe and planets
 	 */
 	public Object[] loadGame(String playerName) {

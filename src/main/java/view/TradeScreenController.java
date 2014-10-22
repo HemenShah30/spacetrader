@@ -219,8 +219,8 @@ public class TradeScreenController implements Controller {
 				tradePopup.setScene(new Scene(newScene, 300, 125));
 
 				TradeGoodPopupController controller = loader.getController();
-				int maxGood = GameEngine.getGameEngine().getMaximumMarketplaceTradeAmount(type,
-						true);
+				int maxGood = GameEngine.getGameEngine()
+						.getMaximumMarketplaceTradeAmount(type, true);
 				controller.initializePage(type, this, maxGood, true, true);
 				tradePopup.show();
 
@@ -289,8 +289,8 @@ public class TradeScreenController implements Controller {
 				tradePopup.setScene(new Scene(newScene, 300, 125));
 
 				TradeGoodPopupController controller = loader.getController();
-				int maxGood = GameEngine.getGameEngine().getMaximumMarketplaceTradeAmount(type,
-						false);
+				int maxGood = GameEngine.getGameEngine()
+						.getMaximumMarketplaceTradeAmount(type, false);
 				controller.initializePage(type, this, maxGood, false, true);
 				tradePopup.show();
 			} catch (IOException ie) {

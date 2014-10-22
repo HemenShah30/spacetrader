@@ -67,8 +67,8 @@ public class NPCEncounterController implements Controller {
 	 * 
 	 * @param tsc
 	 *            The controller that created the popup
-	 * @param type
-	 *            The type of encounter that is happening
+	 * @param e
+	 *            The NPCEncounter that is happening
 	 */
 	public void initializePage(TravelScreenController tsc, NPCEncounter e) {
 		encounter = e;

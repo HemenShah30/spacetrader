@@ -18,7 +18,7 @@ public class NPCEncounter extends Encounter {
 	 * 
 	 * @param type
 	 *            The type of encounter
-	 * @param npc
+	 * @param n
 	 *            The NPC that is involved in the encounter
 	 */
 	public NPCEncounter(EncounterType type, NPC n) {

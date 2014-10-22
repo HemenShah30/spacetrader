@@ -22,8 +22,6 @@ import model.Enum.LaserType;
  */
 public class FightEngine {
 
-	// TODO: escape pod, increase shields each player turn
-
 	private Player player;
 	private Ship playerShip;
 	private Ship npcShip;
@@ -42,11 +40,12 @@ public class FightEngine {
 	}
 
 	/**
-	 * Represents an attack phase between the player and the given NPC
+	 * Represents an attack phase between the player and the given NPC in the
+	 * NPCEncounter
 	 * 
-	 * @param npc
-	 *            The NPC who is fighting the player
-	 * @return The result of the attack
+	 * @param encounter
+	 *            The encounter the player is involved in
+	 * @return The result of the encounter turn
 	 */
 	public EncounterResult playerAttack(NPCEncounter encounter) {
 		NPC npc = encounter.getNPC();
@@ -93,11 +92,11 @@ public class FightEngine {
 	}
 
 	/**
-	 * Represents a player attempting to flee the given NPC
+	 * Represents a player attempting to flee the given NPC in the NPCEncounter
 	 * 
-	 * @param npc
-	 *            The NPC who the player is fighting
-	 * @return The result of the flee attempt or fight itself
+	 * @param encounter
+	 *            The NPCEncounter that the player is involved in
+	 * @return The result of the player flee attempt
 	 */
 	public EncounterResult playerFlee(NPCEncounter encounter) {
 		NPC npc = encounter.getNPC();
@@ -129,10 +128,10 @@ public class FightEngine {
 	}
 
 	/**
-	 * Represents the player surrendering to the given NPC
+	 * Represents the player surrendering to the given NPC in the NPCEncounter
 	 * 
-	 * @param npc
-	 *            The NPC who the player is surrendering to
+	 * @param encounter
+	 *            The NPCEncounter the player is involved in
 	 */
 	public void playerSurrender(NPCEncounter encounter) {
 		regenExtraShields();
@@ -202,8 +201,9 @@ public class FightEngine {
 	/**
 	 * Conducts a police search of the player ship looking for illegal goods
 	 * 
-	 * @param police
-	 *            The police that are searching the player
+	 * @param encounter
+	 *            The NPCEncounter where the police are looking for illegal
+	 *            goods
 	 * @return The result of the search, false if nothing found, true if illegal
 	 *         goods found
 	 */
@@ -222,7 +222,8 @@ public class FightEngine {
 			playerShip.removeFromCargo(GoodType.FIREARMS, amtFirearms);
 			playerShip.removeFromCargo(GoodType.NARCOTICS, amtNarcotics);
 			int fine = (int) (Math.random() * (2 / 3)
-					* ((MAX_REP - pPolice + 1) / MAX_REP + 1) * player.getCredits());
+					* ((MAX_REP - pPolice + 1) / MAX_REP + 1) * player
+					.getCredits());
 			player.decreaseCredits(fine);
 			if (player.getPoliceRep() + REP_CHANGE > MAX_REP) {
 				player.setPoliceRep(MAX_REP);
@@ -243,8 +244,9 @@ public class FightEngine {
 	/**
 	 * Determines whether or not the police will accept a given bribe
 	 * 
-	 * @param police
-	 *            The police being bribed
+	 * @param encounter
+	 *            The NPCEncounter where the police are being bribed by the
+	 *            player
 	 * @param credits
 	 *            The amount of credits the player is offering
 	 * @return The success of the bribe attempt

@@ -1,6 +1,5 @@
 package view;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.controlsfx.dialog.Dialogs;
@@ -148,9 +147,11 @@ public class TradeGoodPopupController {
 	 *            The GoodType being bought or sold
 	 * @param c
 	 *            The parent Controller of this page
+	 * @param maximumTradeAmount
+	 *            The maximum amount of a good that can be bought or sold
 	 * @param buying
 	 *            Whether or not the player is buying the given good
-	 * @param isMarketplace
+	 * @param marketplace
 	 *            Whether or not the player is at a marketplace trading
 	 */
 	public void initializePage(GoodType good, Controller c,

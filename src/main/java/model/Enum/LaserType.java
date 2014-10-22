@@ -1,16 +1,16 @@
 package model.Enum;
 
 /**
- * Enum representing the various lasers
+ * Enum representing the various lasers that a ship can have
  * 
  * @author Caroline Zhang
  *
  */
 public enum LaserType {
 
-	PULSELASER(20, 5000, 4, 0, 0, 10, 40, 60, 101), 
-	BEAMLASER(35, 15000, 5, 20, 30, 30, 101, 101, 101), 
-	MILITARYLASER(60, 35000, 6, 40, 40, 50, 101, 101, 101);
+	PULSELASER(20, 5000, 4, 0, 0, 10, 40, 60, 101), BEAMLASER(35, 15000, 5, 20,
+			30, 30, 101, 101, 101), MILITARYLASER(60, 35000, 6, 40, 40, 50,
+			101, 101, 101);
 
 	private int baseDamage;
 	private int minTechLevel;
@@ -23,7 +23,7 @@ public enum LaserType {
 	private int maxTraderRep;
 
 	/**
-	 * Constructor for the Laser enums
+	 * Constructor for the Laser Enum
 	 * 
 	 * @param d
 	 *            The damage dealt by the laser
@@ -32,20 +32,27 @@ public enum LaserType {
 	 * @param mtl
 	 *            The minimum tech level required for a laser
 	 * @param minPoliceRep
-	 *            The minimum police rep needed for the police to have this laser
+	 *            The minimum Police rep needed for the police to have this
+	 *            laser
 	 * @param minPirateRep
-	 *            The minimum pirate rep needed for the pirate to have this laser
+	 *            The minimum Pirate rep needed for the pirate to have this
+	 *            laser
 	 * @param minTraderRep
-	 *            The minimum trader rep needed for the trader to have this laser
+	 *            The minimum Trader rep needed for the trader to have this
+	 *            laser
 	 * @param maxPoliceRep
-	 *            The maximum police rep needed for the police to have this laser
+	 *            The maximum Police rep needed for the police to have this
+	 *            laser
 	 * @param maxPirateRep
-	 *            The maximum pirate rep needed for the pirate to have this laser
+	 *            The maximum Pirate rep needed for the pirate to have this
+	 *            laser
 	 * @param maxTraderRep
-	 *            The maximum trader rep needed for the trader to have this laser
+	 *            The maximum Trader rep needed for the trader to have this
+	 *            laser
 	 */
-	private LaserType(int bd, int p, int mtl, int minPoliceRep, int minPirateRep,
-			int minTraderRep, int maxPoliceRep, int maxPirateRep, int maxTraderRep) {
+	private LaserType(int bd, int p, int mtl, int minPoliceRep,
+			int minPirateRep, int minTraderRep, int maxPoliceRep,
+			int maxPirateRep, int maxTraderRep) {
 		baseDamage = bd;
 		price = p;
 		minTechLevel = mtl;
@@ -83,35 +90,41 @@ public enum LaserType {
 	public int getPrice() {
 		return price;
 	}
-	
+
 	/**
-	 * Returns the minimum reputation for the corresponding Encountertype
+	 * Returns the minimum reputation for the corresponding EncounterType
 	 * 
 	 * @param type
-	 * 			The type of npc encounter
-	 * @return The corresponding minimum reputation for this Encountertype 
+	 *            The type of NPCEncounter
+	 * @return The corresponding minimum reputation for this EncounterType
 	 */
 	public int getMinRep(EncounterType type) {
-		if (type == EncounterType.POLICE)		return minPoliceRep;
-		else if (type == EncounterType.PIRATE)	return minPirateRep;
-		else if (type == EncounterType.TRADER)	return minTraderRep;
+		if (type == EncounterType.POLICE)
+			return minPoliceRep;
+		else if (type == EncounterType.PIRATE)
+			return minPirateRep;
+		else if (type == EncounterType.TRADER)
+			return minTraderRep;
 		return 0;
 	}
-	
+
 	/**
-	 * Returns the maximum reputation for the corresponding Encountertype
+	 * Returns the maximum reputation for the corresponding EncounterType
 	 * 
 	 * @param type
-	 * 			The type of npc encounter
-	 * @return The corresponding maximum reputation for this Encountertype 
+	 *            The type of NPCEncounter
+	 * @return The corresponding maximum reputation for this EncounterType
 	 */
 	public int getMaxRep(EncounterType type) {
-		if (type == EncounterType.POLICE)		return maxPoliceRep;
-		else if (type == EncounterType.PIRATE)	return maxPirateRep;
-		else if (type == EncounterType.TRADER)	return maxTraderRep;
+		if (type == EncounterType.POLICE)
+			return maxPoliceRep;
+		else if (type == EncounterType.PIRATE)
+			return maxPirateRep;
+		else if (type == EncounterType.TRADER)
+			return maxTraderRep;
 		return 0;
 	}
-	
+
 	@Override
 	public String toString() {
 		switch (this) {

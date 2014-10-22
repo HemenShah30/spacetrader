@@ -8,7 +8,7 @@ import model.Enum.TechLevel;
 import javafx.scene.paint.Color;
 
 /**
- * Class representing a planet
+ * Class representing a planet in the Universe
  * 
  * @author Larry He
  * 
@@ -30,20 +30,30 @@ public class Planet implements Boundary {
 			Color.FORESTGREEN, Color.PERU };
 
 	/**
-	 * Basic Planet constructor taking a tech level and a resource
+	 * Planet constructor taking in all the instance variable values
 	 * 
-	 * @param tech
-	 *            The tech level for the planet
-	 * @param r
-	 *            The resource for the planet
 	 * @param n
 	 *            The name of the planet
+	 * @param tech
+	 *            The TechLevel for the planet
+	 * @param r
+	 *            The SpecialResource for the planet
 	 * @param g
-	 *            The government type of the planet
+	 *            The Government of the planet
 	 * @param l
-	 *            The location of the planet in space
+	 *            The Location of the planet in space
 	 * @param c
-	 *            The condition of the planet
+	 *            The Condition afflicting the planet
+	 * @param policeRate
+	 *            The rate at which Police are encountered around the planet
+	 * @param pirateRate
+	 *            The rate at which Pirates are encountered around the planet
+	 * @param traderRate
+	 *            The rate at which Traders are encountered around the planet
+	 * @param size
+	 *            The size of the planet in space
+	 * @param color
+	 *            The color of the planet
 	 */
 	public Planet(String n, TechLevel tech, SpecialResource r, Government g,
 			Location l, Condition c, EncounterRate policeRate,
@@ -150,10 +160,11 @@ public class Planet implements Boundary {
 	}
 
 	/**
-	 * private setter for color validation if color is not an approved color, it
+	 * Private setter for color validation if color is not an approved color, it
 	 * is set to green
 	 * 
 	 * @param c
+	 *            The color of the planet
 	 */
 	private void setColor(Color c) {
 		boolean isSet = false;

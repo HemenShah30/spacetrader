@@ -29,7 +29,8 @@ public class BoundaryTree {
 		root = b;
 		int diam;
 		for (Planet p : planets) {
-			// TODO: p.getLocation.getX() should be a valid top x, but doesnt work
+			// TODO: p.getLocation.getX() should be a valid top x, but doesnt
+			// work
 			// soon
 			diam = p.getDiameter();
 			int topX = p.getLocation().getX() - diam;

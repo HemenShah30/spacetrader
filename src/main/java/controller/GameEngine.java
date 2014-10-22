@@ -74,6 +74,9 @@ public class GameEngine {
 
 	/**
 	 * Loads an existing game from the database by populating the proper classes
+	 * 
+	 * @param playerName
+	 *            The name of the player being loaded into the game
 	 */
 	public void loadGame(String playerName) {
 		Object[] gameData = database.loadGame(playerName);
@@ -232,6 +235,8 @@ public class GameEngine {
 	 * 
 	 * @param planet
 	 *            The planet the player is going to
+	 * @return The list of Encounters the player has along the trip to the
+	 *         planet
 	 */
 	public List<Encounter> goToPlanet(Planet planet) {
 		return flightEngine.goToPlanet(planet);
@@ -261,7 +266,7 @@ public class GameEngine {
 	/**
 	 * Method that represents a player attack during the given NPC encounter
 	 * 
-	 * @param encounter
+	 * @param npc
 	 *            The encounter that the player is involved in
 	 * @return The result of the given attack
 	 */
@@ -283,7 +288,7 @@ public class GameEngine {
 	/**
 	 * Represents a player attempting to bribe a police officer
 	 * 
-	 * @param encounter
+	 * @param npc
 	 *            The NPCEncounter that the player is involved with
 	 * @param credits
 	 *            The credits the player is offering the police officer

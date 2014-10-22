@@ -42,7 +42,7 @@ public enum ShipType {
 	private int maxPoliceRep;
 	private int maxPirateRep;
 	private int maxTraderRep;
-	
+
 	/**
 	 * Constructor for the ShipType enum, taking in all the parameters related
 	 * to the ship
@@ -82,22 +82,23 @@ public enum ShipType {
 	 * @param s
 	 *            The size of the ship
 	 * @param minPoliceRep
-	 *            The minimum police rep needed for the police to have this ship
+	 *            The minimum Police rep needed for the police to have this ship
 	 * @param minPirateRep
-	 *            The minimum pirate rep needed for the pirate to have this ship
+	 *            The minimum Pirate rep needed for the pirate to have this ship
 	 * @param minTraderRep
-	 *            The minimum trader rep needed for the trader to have this ship
+	 *            The minimum Trader rep needed for the trader to have this ship
 	 * @param maxPoliceRep
-	 *            The maximum police rep needed for the police to have this ship
+	 *            The maximum Police rep needed for the police to have this ship
 	 * @param maxPirateRep
-	 *            The maximum pirate rep needed for the pirate to have this ship
+	 *            The maximum Pirate rep needed for the pirate to have this ship
 	 * @param maxTraderRep
-	 *            The maximum trader rep needed for the trader to have this ship
+	 *            The maximum Trader rep needed for the trader to have this ship
 	 */
 	private ShipType(int f, int thp, int cs, int ws, int ss, int gs, int crewS,
 			int mtl, int fc, int p, int b, int o, int pm, int pirateM, int tm,
-			int rc, int s, int minPoliceRep, int minPirateRep, int minTraderRep,
-			int maxPoliceRep, int maxPirateRep, int maxTraderRep) {
+			int rc, int s, int minPoliceRep, int minPirateRep,
+			int minTraderRep, int maxPoliceRep, int maxPirateRep,
+			int maxTraderRep) {
 		fuel = f;
 		totalHP = thp;
 		cargoSize = cs;
@@ -277,33 +278,39 @@ public enum ShipType {
 	}
 
 	/**
-	 * Returns the minimum reputation for the corresponding Encountertype
+	 * Returns the minimum reputation for the corresponding EncounterType
 	 * 
 	 * @param type
-	 * 			The type of npc encounter
-	 * @return The corresponding minimum reputation for this Encountertype 
+	 *            The type of NPCEncounter
+	 * @return The corresponding minimum reputation for this EncounterType
 	 */
 	public int getMinRep(EncounterType type) {
-		if (type == EncounterType.POLICE)		return minPoliceRep;
-		else if (type == EncounterType.PIRATE)	return minPirateRep;
-		else if (type == EncounterType.TRADER)	return minTraderRep;
+		if (type == EncounterType.POLICE)
+			return minPoliceRep;
+		else if (type == EncounterType.PIRATE)
+			return minPirateRep;
+		else if (type == EncounterType.TRADER)
+			return minTraderRep;
 		return 0;
 	}
-	
+
 	/**
-	 * Returns the maximum reputation for the corresponding Encountertype
+	 * Returns the maximum reputation for the corresponding EncounterType
 	 * 
 	 * @param type
-	 * 			The type of npc encounter
-	 * @return The corresponding maximum reputation for this Encountertype 
+	 *            The type of NPCEncounter
+	 * @return The corresponding maximum reputation for this EncounterType
 	 */
 	public int getMaxRep(EncounterType type) {
-		if (type == EncounterType.POLICE)		return maxPoliceRep;
-		else if (type == EncounterType.PIRATE)	return maxPirateRep;
-		else if (type == EncounterType.TRADER)	return maxTraderRep;
+		if (type == EncounterType.POLICE)
+			return maxPoliceRep;
+		else if (type == EncounterType.PIRATE)
+			return maxPirateRep;
+		else if (type == EncounterType.TRADER)
+			return maxTraderRep;
 		return 0;
 	}
-	
+
 	@Override
 	public String toString() {
 		switch (this) {

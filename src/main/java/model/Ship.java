@@ -188,7 +188,7 @@ public class Ship {
 	/**
 	 * Calculates and returns amount needed to repair
 	 * 
-	 * @return
+	 * @return The cost to repair the ship
 	 */
 	public double getRepairCost() {
 		return (shipType.getTotalHP() - currHP) * shipType.getRepairCost();

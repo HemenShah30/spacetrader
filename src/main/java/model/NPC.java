@@ -6,7 +6,7 @@ import model.Enum.ShieldType;
 import model.Enum.ShipType;
 
 /**
- * Abstract class representing NPC's.
+ * Abstract class representing NPCs.
  * 
  * @author Eric Wan and Larry He
  * 
@@ -130,54 +130,59 @@ public abstract class NPC {
 	 * 
 	 * @param rep
 	 *            The reputation of the player
+	 * @param type
+	 *            The type of encounter the sh
 	 */
 	protected void generateShip(int rep, EncounterType type) {
 		Ship s;
 		int index;
-		//generate a ship type
+		// generate a ship type
 		ShipType[] shipTypes = ShipType.values();
 		boolean shipTypeGenerated = false;
 		while (!shipTypeGenerated) {
 			index = (int) Math.random() * shipTypes.length;
-			if (shipTypes[index].getMinRep(type) <= rep && shipTypes[index].getMaxRep(type) >= rep) {
+			if (shipTypes[index].getMinRep(type) <= rep
+					&& shipTypes[index].getMaxRep(type) >= rep) {
 				s = new Ship(shipTypes[index]);
 				shipTypeGenerated = true;
 				setShip(s);
 			}
 		}
-		
-		//generate a weapon
+
+		// generate a weapon
 		LaserType[] laserTypes = LaserType.values();
 		int weaponCapacity = getShip().getShipType().getWeaponSlots();
 		for (int i = 0; i < weaponCapacity; i++) {
 			index = (int) Math.random() * shipTypes.length;
-			if (laserTypes[index].getMinRep(type) <= rep && laserTypes[index].getMaxRep(type) >= rep) {
+			if (laserTypes[index].getMinRep(type) <= rep
+					&& laserTypes[index].getMaxRep(type) >= rep) {
 				try {
 					getShip().addLaser(laserTypes[index]);
 				} catch (MaxCapacityException m) {
-					
+
 				}
 			}
 		}
-		
-		//generate shields
+
+		// generate shields
 		ShieldType[] shieldTypes = ShieldType.values();
 		int shieldCapacity = getShip().getShipType().getShieldSlots();
 		for (int i = 0; i < shieldCapacity; i++) {
 			index = (int) Math.random() * shieldTypes.length;
-			if (shieldTypes[index].getMinRep(type) <= rep && shieldTypes[index].getMaxRep(type) >= rep) {
+			if (shieldTypes[index].getMinRep(type) <= rep
+					&& shieldTypes[index].getMaxRep(type) >= rep) {
 				try {
 					getShip().addShield(shieldTypes[index]);
 				} catch (MaxCapacityException m) {
-					
+
 				}
 			}
 		}
-		
-		//generate cargo
-		
-		//generate gadgets
-		
+
+		// generate cargo
+
+		// generate gadgets
+
 	}
 
 	/**

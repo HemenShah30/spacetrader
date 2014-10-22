@@ -15,13 +15,11 @@ public class Main extends Application {
 	// This will be the main To-Do list for any specific code level items that
 	// need to be taken care of
 	// TODO: Add in logging
-	// TODO: Implement Save and Load functions
 	// TODO: Add exit button to MainScene
-	// TODO: Combine buy/sell popup controllers into one class
 	// TODO: Clean up TradeScreenController to be more generalized
+	// TODO: Add escape pod for ship
+	// TODO: Change MaxCapacityException to be a RuntimeException
 
-	// Turn GameEngine into a message handling system which takes in a message
-	// and throws a GameEngineException or returns void if successful
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		Parent root = new FXMLLoader().load(ClassLoader
