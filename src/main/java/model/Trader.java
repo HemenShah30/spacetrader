@@ -12,9 +12,9 @@ import model.Enum.GoodType;
  * 
  */
 public class Trader extends NPC {
-	private final double percentSelling = 0.5;
+	private final double percentBuying = 0.5;
 	private int quantity, price;
-	private boolean isSelling; // determines if the Trader wants to sell
+	private boolean isBuying; // determines if the Trader wants to sell
 								// something to the player or wants to buy
 								// something from the player
 	private GoodType goodOfInterest; // determines which good the Trader wants
@@ -35,7 +35,7 @@ public class Trader extends NPC {
 		setInvestorSkill(1);
 		generateShip(rep, EncounterType.TRADER);
 		generateCredits(rep);
-		generateIsSelling();
+		generateIsBuying();
 		generateGood();
 		generatePrice();
 		generateQuantity(rep);
@@ -45,11 +45,11 @@ public class Trader extends NPC {
 	 * Determines if the Trader wants to sell or buy or sell from the player
 	 * 
 	 */
-	private void generateIsSelling() {
-		if (Math.random() < percentSelling) {
-			isSelling = true;
+	private void generateIsBuying() {
+		if (Math.random() < percentBuying) {
+			isBuying = true;
 		} else {
-			isSelling = false;
+			isBuying = false;
 		}
 	}
 
@@ -86,13 +86,13 @@ public class Trader extends NPC {
 	}
 
 	/**
-	 * Returns true if trader wants to sell to the player Returns false if the
+	 * Returns false if trader wants to sell to the player Returns true if the
 	 * trader wants to buy from the player
 	 * 
-	 * @return true if the trader wants to sell to the player false otherwise
+	 * @return false if the trader wants to sell to the playerm true otherwise
 	 */
-	public boolean getIsSelling() {
-		return isSelling;
+	public boolean isBuying() {
+		return isBuying;
 	}
 
 	/**
@@ -114,9 +114,9 @@ public class Trader extends NPC {
 	}
 
 	/**
-	 * Returns the quantity of the good
+	 * Returns the quantity of the good that the trader wants to buy or sell
 	 * 
-	 * @return quantity of good
+	 * @return quantity of good that the trader wants to buy or sell
 	 */
 	public int getQuantity() {
 		return quantity;

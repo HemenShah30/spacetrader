@@ -291,7 +291,7 @@ public class NPCEncounterController implements Controller {
 							.getController();
 					int maxGood = game.getMaximumTraderTradeAmount(encounter);
 					controller.initializePage(trader.getGoodOfInterest(), this,
-							maxGood, false, false);
+							maxGood, !trader.isBuying(), false);
 					tradePopup.show();
 				} catch (IOException ie) {
 					ie.printStackTrace();

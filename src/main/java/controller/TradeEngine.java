@@ -169,7 +169,15 @@ public class TradeEngine {
 	 * @return The maximum transaction amount with the player
 	 */
 	public int getMaximumTraderTradeAmount(Trader trader) {
-		return 10;
+		if (trader.isBuying()) {
+			return Math.min(ship.amountInCargo(trader.getGoodOfInterest()),
+					trader.getQuantity());
+		} else {
+			return Math.min(
+					Math.min(ship.getCargoSize() - ship.getCurrCargo(),
+							trader.getQuantity()),
+					(int) (player.getCredits() / trader.getPrice()));
+		}
 	}
 
 	/**
@@ -183,6 +191,35 @@ public class TradeEngine {
 	 * @return The list of errors, if any, with the trade
 	 */
 	public List<String> tradeWithTrader(Trader trader, int quantity) {
-		return new ArrayList<String>();
+		ArrayList<String> errors = new ArrayList<String>();
+		if (quantity > trader.getQuantity())
+			errors.add("Trader will not "
+					+ (trader.isBuying() ? "buy" : "sell") + " this much "
+					+ trader.getGoodOfInterest());
+		if (trader.isBuying()) {
+			if (ship.amountInCargo(trader.getGoodOfInterest()) < quantity) {
+				errors.add("You do not have " + quantity + " "
+						+ trader.getGoodOfInterest() + " to sell");
+			}
+		} else {
+			if (player.getCredits() < quantity * trader.getPrice())
+				errors.add("You do not have enough credits to buy " + quantity
+						+ " " + trader.getGoodOfInterest());
+			if (ship.getCargoSize() - ship.getCurrCargo() < quantity)
+				errors.add("Your ship cannot hold " + quantity + " more "
+						+ trader.getGoodOfInterest());
+		}
+
+		if (errors.size() == 0) {
+			if (trader.isBuying()) {
+				ship.removeFromCargo(trader.getGoodOfInterest(), quantity);
+				player.increaseCredits(quantity * trader.getPrice());
+			} else {
+				ship.addToCargo(trader.getGoodOfInterest(), quantity);
+				player.decreaseCredits(quantity * trader.getPrice());
+			}
+		}
+
+		return errors;
 	}
 }
