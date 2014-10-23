@@ -134,7 +134,7 @@ public abstract class NPC {
 	 * @param rep
 	 *            The reputation of the player
 	 * @param type
-	 *            The type of encounter the sh
+	 *            The type of encounter the NPC is
 	 */
 	protected void generateShip(int rep, EncounterType type) {
 		Ship s;
@@ -156,7 +156,7 @@ public abstract class NPC {
 		LaserType[] laserTypes = LaserType.values();
 		int weaponCapacity = getShip().getShipType().getWeaponSlots();
 		for (int i = 0; i < weaponCapacity; i++) {
-			index = (int) (Math.random() * shipTypes.length);
+			index = (int) (Math.random() * laserTypes.length);
 			if (laserTypes[index].getMinRep(type) <= rep
 					&& laserTypes[index].getMaxRep(type) >= rep) {
 				try {
