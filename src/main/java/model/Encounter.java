@@ -87,7 +87,7 @@ public class Encounter {
 					return "You find a weapon floating in space, but have no free weapon slots";
 				}
 			}
-			return null;
+			return "You find a weapon floating in space, but have no free weapon slots";
 		}
 		case GAINFUEL: {
 			double percentOfFuelFound = .5;
