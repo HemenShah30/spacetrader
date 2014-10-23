@@ -19,4 +19,8 @@ public class AutoRepairSystem extends Gadget {
 	public AutoRepairSystem() {
 		super(PRICE, MIN_TECH_LEVEL);
 	}
+	
+	public String toString() {
+		return "AutoRepairSystem";
+	}
 }

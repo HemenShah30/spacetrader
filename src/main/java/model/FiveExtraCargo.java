@@ -19,4 +19,8 @@ public class FiveExtraCargo extends Gadget {
 	public FiveExtraCargo() {
 		super(PRICE, MIN_TECH_LEVEL);
 	}
+	
+	public String toString() {
+		return "5 Extra Cargo Spaces";
+	}
 }

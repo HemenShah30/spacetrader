@@ -66,4 +66,18 @@ public class NPCEncounter extends Encounter {
 			return null;
 		}
 	}
+	
+	@Override
+	public String toString() {
+		switch (encounterType) {
+		case TRADER:
+			return "Trader";
+		case PIRATE:
+			return "Pirate";
+		case POLICE:
+			return "Police";
+		default:
+			return null;
+		}
+	}
 }

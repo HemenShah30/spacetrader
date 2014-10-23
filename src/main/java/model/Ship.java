@@ -390,4 +390,26 @@ public class Ship {
 	public List<Gadget> getGadgets() {
 		return gadgets;
 	}
+	
+	/**
+	 * Returns a description of the ship, which includes:
+	 * shipType, cargo size, shield capacity, laser capacity, gadget capacity,
+	 * cargo contents, equipped shields, equipped lasers, equipped gadgets
+	 * 
+	 * @return Ship description
+	 */
+	@Override
+	public String toString() {
+		String msg = "";
+		msg += "Shiptype: " + shipType;
+		msg += "\nCargo size: " + cargoSize;
+		msg += "\nCargo contents: " + cargo.toString();
+		msg += "\nWeapon slots: " + shipType.getWeaponSlots();
+		msg += "\nWeapons: " + lasers.toString();
+		msg += "\nShield slots: " + shipType.getShieldSlots();
+		msg += "\nShields: " + shields.toString();
+		msg += "\nGadget slots: " + shipType.getGadgetSlots();
+		msg += "\nGadgets: " + gadgets.toString();
+		return msg;
+	}
 }

@@ -19,5 +19,8 @@ public class NavigatingSystem extends Gadget {
 	public NavigatingSystem() {
 		super(PRICE, MIN_TECH_LEVEL);
 	}
-
+	
+	public String toString() {
+		return "NavigatingSystem";
+	}
 }

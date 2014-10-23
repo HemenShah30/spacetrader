@@ -1,6 +1,9 @@
 package model;
 
+import java.util.ArrayList;
+
 import model.Enum.EncounterType;
+import model.Enum.GoodType;
 import model.Enum.LaserType;
 import model.Enum.ShieldType;
 import model.Enum.ShipType;
@@ -140,7 +143,7 @@ public abstract class NPC {
 		ShipType[] shipTypes = ShipType.values();
 		boolean shipTypeGenerated = false;
 		while (!shipTypeGenerated) {
-			index = (int) Math.random() * shipTypes.length;
+			index = (int) (Math.random() * shipTypes.length);
 			if (shipTypes[index].getMinRep(type) <= rep
 					&& shipTypes[index].getMaxRep(type) >= rep) {
 				s = new Ship(shipTypes[index]);
@@ -153,13 +156,14 @@ public abstract class NPC {
 		LaserType[] laserTypes = LaserType.values();
 		int weaponCapacity = getShip().getShipType().getWeaponSlots();
 		for (int i = 0; i < weaponCapacity; i++) {
-			index = (int) Math.random() * shipTypes.length;
+			index = (int) (Math.random() * shipTypes.length);
 			if (laserTypes[index].getMinRep(type) <= rep
 					&& laserTypes[index].getMaxRep(type) >= rep) {
 				try {
-					getShip().addLaser(laserTypes[index]);
+					ship.addLaser(laserTypes[index]);
 				} catch (MaxCapacityException m) {
-
+					System.out.println("Over the max capacity for lasers!");
+					m.printStackTrace();
 				}
 			}
 		}
@@ -168,21 +172,53 @@ public abstract class NPC {
 		ShieldType[] shieldTypes = ShieldType.values();
 		int shieldCapacity = getShip().getShipType().getShieldSlots();
 		for (int i = 0; i < shieldCapacity; i++) {
-			index = (int) Math.random() * shieldTypes.length;
+			index = (int) (Math.random() * shieldTypes.length);
 			if (shieldTypes[index].getMinRep(type) <= rep
 					&& shieldTypes[index].getMaxRep(type) >= rep) {
 				try {
-					getShip().addShield(shieldTypes[index]);
+					ship.addShield(shieldTypes[index]);
 				} catch (MaxCapacityException m) {
-
+					System.out.println("Over the max capacity for shields!");
+					m.printStackTrace();
 				}
 			}
 		}
 
 		// generate cargo
-
+		GoodType[] goodTypes = GoodType.values();
+		int cargoCapacity = getShip().getShipType().getCargoSize();
+		boolean addedAllowedGood = false;
+		while(!addedAllowedGood) {
+			index = (int) (Math.random() * goodTypes.length);
+			if (goodTypes[index].getNPCAmount(type) != -1) {
+				int goodAmount = goodTypes[index].getNPCAmount(type);
+				if (goodAmount > cargoCapacity) {
+					goodAmount = cargoCapacity;
+				}
+				ship.addToCargo(goodTypes[index], goodAmount);
+				addedAllowedGood = true;
+			}
+		}
+		
 		// generate gadgets
-
+		ArrayList<Gadget> gadgetTypes = new ArrayList<>(5);
+		gadgetTypes.add(new AutoRepairSystem());
+		gadgetTypes.add(new CloakingDevice());
+		gadgetTypes.add(new FiveExtraCargo());
+		gadgetTypes.add(new NavigatingSystem());
+		gadgetTypes.add(new TargetingSystem());
+		int gadgetCapacity = getShip().getShipType().getGadgetSlots();
+		for (int i = 0; i < gadgetCapacity; i++) {
+			index = (int) (Math.random() * shieldTypes.length);
+			try {
+				ship.addGadget(gadgetTypes.get(index));
+			} catch (MaxCapacityException m) {
+				System.out.println("Over the max capacity for gadgets!");
+				m.printStackTrace();
+			}
+		}
+		System.out.println("Encounter type: " + type);
+		System.out.println("Ship description\n" + ship.toString());
 	}
 
 	/**

@@ -19,4 +19,8 @@ public class CloakingDevice extends Gadget {
 	public CloakingDevice() {
 		super(PRICE, MIN_TECH_LEVEL);
 	}
+	
+	public String toString() {
+		return "Cloaking Device";
+	}
 }

@@ -7,16 +7,16 @@ package model.Enum;
  * 
  */
 public enum GoodType {
-	WATER(0, 0, 2, 30, 3, 4, Condition.DROUGHT, SpecialResource.LOTSOFWATER, SpecialResource.DESERT, 30, 50, 5, 3),
-	FURS(0, 0, 0, 250, 10, 10, Condition.COLD, SpecialResource.RICHFAUNA, SpecialResource.LIFELESS, 180, 230, 5, 4),
-	FOOD(1, 0, 1, 100, 5, 5, Condition.CROPFAIL, SpecialResource.RICHSOIL, SpecialResource.POORSOIL, 90, 160, 10, 5),
-	ORE(2, 2, 3, 350, 20, 10, Condition.WAR, SpecialResource.MINERALRICH, SpecialResource.MINERALPOOR, 350, 420, 10, 5),
-	GAMES(3, 1, 6, 250, -10, 5, Condition.BOREDOM, SpecialResource.ARTISTIC, null, 160, 720, 10, 4),
-	FIREARMS(3, 1, 5, 1250, -75, 100, Condition.WAR, SpecialResource.WARLIKE, null, 600, 1100, 15, 4),
-	MEDICINE(4, 1, 6, 650, -20, 10, Condition.PLAGUE, SpecialResource.LOTSOFHERBS, null, 400, 700, 10, 5),
-	MACHINES(4, 3, 5, 900, -30, 5, Condition.LACKOFWORKERS, null, null, 600, 800, 10, 4),
-	NARCOTICS(5, 0, 5, 3500, -125, 150, Condition.BOREDOM, SpecialResource.WEIRDMUSHROOMS, null, 2000, 3000, 10, 4),
-	ROBOTS(6, 4, 7, 5000, -150, 100, Condition.LACKOFWORKERS, null, null, 3500, 5000, 15, 4);
+	WATER(0, 0, 2, 30, 3, 4, Condition.DROUGHT, SpecialResource.LOTSOFWATER, SpecialResource.DESERT, 30, 50, 5, 3, 7, 3, 10),
+	FURS(0, 0, 0, 250, 10, 10, Condition.COLD, SpecialResource.RICHFAUNA, SpecialResource.LIFELESS, 180, 230, -1, 4, 3, 2, 13),
+	FOOD(1, 0, 1, 100, 5, 5, Condition.CROPFAIL, SpecialResource.RICHSOIL, SpecialResource.POORSOIL, 90, 160, 10, 5, 7, 3, 15),
+	ORE(2, 2, 3, 350, 20, 10, Condition.WAR, SpecialResource.MINERALRICH, SpecialResource.MINERALPOOR, 350, 420, 10, 5, -1, 2, 9),
+	GAMES(3, 1, 6, 250, -10, 5, Condition.BOREDOM, SpecialResource.ARTISTIC, null, 160, 720, 10, 4, -1, 4, 15),
+	FIREARMS(3, 1, 5, 1250, -75, 100, Condition.WAR, SpecialResource.WARLIKE, null, 600, 1100, 15, 4, 20, 3, 25),
+	MEDICINE(4, 1, 6, 650, -20, 10, Condition.PLAGUE, SpecialResource.LOTSOFHERBS, null, 400, 700, 10, 5, 5, 4, 11),
+	MACHINES(4, 3, 5, 900, -30, 5, Condition.LACKOFWORKERS, null, null, 600, 800, 10, 4, -1, 2, 10),
+	NARCOTICS(5, 0, 5, 3500, -125, 150, Condition.BOREDOM, SpecialResource.WEIRDMUSHROOMS, null, 2000, 3000, 10, 4, 20, 2, 24),
+	ROBOTS(6, 4, 7, 5000, -150, 100, Condition.LACKOFWORKERS, null, null, 3500, 5000, 15, 4, -1, 1, 10);
 
 	private int minTechLevelToProduce;
 	private int minTechLevelToUse;
@@ -31,6 +31,10 @@ public enum GoodType {
 	private int maxTraderPrice;
 	private int baseQuantity;
 	private int quantityIncPerTechLevel;
+	private int policeAmount;
+	private int pirateAmount;
+	private int traderAmount;
+	private int NPCMaxVariation = 2;
 
 	/**
 	 * Constructor for the GoodType enum
@@ -65,12 +69,19 @@ public enum GoodType {
 	 *            Base quantity of good
 	 * @param quantityIncPerTechLevel
 	 *            Quantity increase per Tech Level
+	 * @param policeAmount
+	 *            Amount of a good a police ship can have in cargo
+	 * @param pirateAmount
+	 *            Amount of a good a pirate ship can have in cargo
+	 * @param traderAmount
+	 *            Amount of a good a trader ship can have in cargo
 	 */
 	private GoodType(int minTechLevelToProduce, int minTechLevelToUse,
 			int biggestProducer, int basePrice, int priceIncPerTechLevel,
 			int variance, Condition condition, SpecialResource cheapResource,
 			SpecialResource expensiveResource, int minTraderPrice,
-			int maxTraderPrice, int baseQuantity, int quantityIncPerTechLevel) {
+			int maxTraderPrice, int baseQuantity, int quantityIncPerTechLevel,
+			int policeAmount, int pirateAmount, int traderAmount) {
 		this.minTechLevelToProduce = minTechLevelToProduce;
 		this.minTechLevelToUse = minTechLevelToUse;
 		this.biggestProducer = biggestProducer;
@@ -84,6 +95,9 @@ public enum GoodType {
 		this.maxTraderPrice = maxTraderPrice;
 		this.baseQuantity = baseQuantity;
 		this.quantityIncPerTechLevel = quantityIncPerTechLevel;
+		this.policeAmount = policeAmount;
+		this.pirateAmount = pirateAmount;
+		this.traderAmount = traderAmount;
 	}
 
 	/**
@@ -206,6 +220,16 @@ public enum GoodType {
 		return quantityIncPerTechLevel;
 	}
 
+	public int getNPCAmount(EncounterType type) {
+		if (type == EncounterType.POLICE)
+			return (int) (policeAmount * Math.random() * NPCMaxVariation);
+		else if (type == EncounterType.PIRATE)
+			return (int) (pirateAmount * Math.random() * NPCMaxVariation);
+		else if (type == EncounterType.TRADER)
+			return (int) (traderAmount * Math.random() * NPCMaxVariation);
+		return 0;
+	}
+	
 	@Override
 	public String toString() {
 		switch (this) {

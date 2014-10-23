@@ -18,4 +18,8 @@ public class TargetingSystem extends Gadget {
 	public TargetingSystem() {
 		super(PRICE, MIN_TECH_LEVEL);
 	}
+	
+	public String toString() {
+		return "TargetingSystem";
+	}
 }
