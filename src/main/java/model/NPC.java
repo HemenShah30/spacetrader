@@ -190,6 +190,7 @@ public abstract class NPC {
 		boolean addedAllowedGood = false;
 		while(!addedAllowedGood) {
 			index = (int) (Math.random() * goodTypes.length);
+			//-1 indicates that this type of NPC cannot have this kind of cargo on their ship
 			if (goodTypes[index].getNPCAmount(type) != -1) {
 				int goodAmount = goodTypes[index].getNPCAmount(type);
 				if (goodAmount > cargoCapacity) {

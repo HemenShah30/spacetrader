@@ -61,7 +61,7 @@ public class NPCEncounter extends Encounter {
 		case PIRATE:
 			return "You glance at the viewing monitor and see a ship approaching with pirate markings!";
 		case POLICE:
-			return "A police ship hails you and flashes it's blue lights in an attempt to pull you over!";
+			return "A police ship hails you and flashes its blue lights in an attempt to pull you over!";
 		default:
 			return null;
 		}
