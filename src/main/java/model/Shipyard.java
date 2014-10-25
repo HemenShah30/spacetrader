@@ -40,7 +40,7 @@ public class Shipyard {
 	}
 	
 	/**
-	 * Returns the purchase price of a given ship in the shipyard to be sold by the
+	 * Returns the purchase price of a given ship in the shipyard to be bought by the
 	 * player
 	 * 
 	 * @param type
