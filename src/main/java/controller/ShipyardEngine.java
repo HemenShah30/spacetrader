@@ -3,11 +3,9 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Marketplace;
 import model.Player;
 import model.Ship;
 import model.Shipyard;
-import model.Enum.GoodType;
 import model.Enum.ShipType;
 
 /**
@@ -46,7 +44,6 @@ public class ShipyardEngine {
 		double cost = shipyard.getBuyPrice(type);
 		List<String> errors = validateBuy(cost);
 		if (errors.isEmpty()) {
-			//transfer contents of old ship to new ship
 			ship = new Ship(type);
 			player.setShip(ship);
 			player.increaseCredits(getPlayerAssetValue(shipyard));
@@ -59,7 +56,7 @@ public class ShipyardEngine {
 	 * Internal method for validating a buy transaction
 	 * 
 	 * @param cost
-	 *            The cost of the good
+	 *            The cost of the ship
 	 * @return Any errors from the buy, if any
 	 */
 	private List<String> validateBuy(double cost) {
