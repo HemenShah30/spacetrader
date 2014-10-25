@@ -3,41 +3,66 @@ package model;
 import java.util.HashMap;
 import java.util.Map;
 
-import model.Enum.GoodType;
 import model.Enum.ShipType;
 
+/**
+ * Class representing the shipyard of a planet
+ * 
+ * @author Larry He
+ * 
+ */
 public class Shipyard {
-	private Map<ShipType, Integer> ships;
+	private static final double sellPricePenalty = 0.9;
+	private Map<ShipType, Double> prices;
 	private Planet planet;
 	
 	public Shipyard(Planet planet) {
+		this.planet = planet;
 		
+		prices = new HashMap<ShipType, Double>();
+		for (ShipType type : ShipType.values()) {
+			double price = generateSellPrice(type);
+			prices.put(type, price);
+		}
 	}
 	
 	/**
-	 * Returns the quantity of a given good in the marketplace
+	 * Generates the price of the ship to be sold by the player
+	 * Note: This method was created in case we make other factors
+	 * impact the price
 	 * 
-	 * @param good
-	 *            The good whose quantity is being asked for
-	 * @return The quantity of the given good
+	 * @param type
+	 *            The ship whose price is being determined
+	 * @return The price of the ship
 	 */
-	public int getQuantity(GoodType good) {
-		return 0;
-		//return quantities.get(good);
+	private double generateSellPrice(ShipType type) {
+		return type.getPrice();
 	}
-
+	
 	/**
-	 * Returns the price of a given good in the marketplace to be sold by the
+	 * Returns the purchase price of a given ship in the shipyard to be sold by the
 	 * player
 	 * 
-	 * @param good
-	 *            The good in the marketplace
-	 * @return The price of the good in the marketplace
+	 * @param type
+	 *            The type of ship in the shipyard
+	 * @return The purchase price of the ship in the shipyard
 	 */
-	public double getSellPrice(GoodType good) {
-		if (good.getMinTechLevelToUse() > planet.getTechLevel().getValue())
+	public double getBuyPrice(ShipType type) {
+		if (type.getMinTechLevel() > planet.getTechLevel().getValue())
 			return -1;
-		return 0;
-		//return prices.get(good);
+		return prices.get(type);
+	}
+	
+	/**
+	 * Returns the sell price of a given ship in the shipyard to be sold by the
+	 * player
+	 * A penalty to the amount of credits you get back is applied
+	 * 
+	 * @param type
+	 *            The type of ship in the shipyard
+	 * @return The sell price of the ship in the shipyard
+	 */
+	public double getSellPrice(ShipType type) {
+		return prices.get(type) * sellPricePenalty;
 	}
 }
