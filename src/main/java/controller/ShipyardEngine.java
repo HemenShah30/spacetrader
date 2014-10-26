@@ -16,10 +16,10 @@ import model.Enum.ShipType;
  */
 
 public class ShipyardEngine {
-	
+
 	private Player player;
 	private Ship ship;
-	
+
 	/**
 	 * Constructor for the ShipyardEngine, taking in the main game player
 	 * 
@@ -30,7 +30,7 @@ public class ShipyardEngine {
 		player = p;
 		ship = p.getShip();
 	}
-	
+
 	/**
 	 * Attempts a buy transaction between a shipyard and the player
 	 * 
@@ -40,18 +40,19 @@ public class ShipyardEngine {
 	 *            The shipyard involved in the transaction
 	 * @return The errors from the transaction, if any
 	 */
-	public List<String> buy(ShipType type, Shipyard shipyard) {
+	public List<String> buy(ShipType type, Shipyard shipyard,
+			double playerAssetValue) {
 		double cost = shipyard.getBuyPrice(type);
 		List<String> errors = validateBuy(cost);
 		if (errors.isEmpty()) {
 			ship = new Ship(type);
 			player.setShip(ship);
-			player.increaseCredits(getPlayerAssetValue(shipyard));
+			player.increaseCredits(playerAssetValue);
 			player.decreaseCredits(cost);
 		}
 		return errors;
 	}
-	
+
 	/**
 	 * Internal method for validating a buy transaction
 	 * 
@@ -69,13 +70,19 @@ public class ShipyardEngine {
 			errors.add("Planet cannot sell this ship");
 		return errors;
 	}
-	
-	private double getPlayerAssetValue(Shipyard shipyard) {
-		//player ship value
-		double value = shipyard.getSellPrice(ship.getShipType());
-		//player cargo value
-		
-		//player gadget/weapons/shield values
-		return value;
+
+
+
+	/**
+	 * Executes sell transaction for shipyard and player
+	 * 
+	 * @param shipyard
+	 *            the shipyard involved
+	 */
+	public void sell(Shipyard shipyard, double playerAssetValue) {
+		double value = playerAssetValue;
+		player.setShip(null);
+		player.increaseCredits(value);
 	}
+
 }

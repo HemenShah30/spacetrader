@@ -2,6 +2,7 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import database.Database;
 import model.Encounter;
@@ -11,6 +12,7 @@ import model.NPCEncounter;
 import model.Planet;
 import model.Player;
 import model.Ship;
+import model.Shipyard;
 import model.Trader;
 import model.Universe;
 import model.Enum.EncounterResult;
@@ -30,6 +32,7 @@ public class GameEngine {
 	private TradeEngine tradeEngine;
 	private FlightEngine flightEngine;
 	private FightEngine fightEngine;
+	private ShipyardEngine shipyardEngine;
 	private Universe universe;
 	private Player player;
 
@@ -85,6 +88,7 @@ public class GameEngine {
 		tradeEngine = new TradeEngine(player);
 		flightEngine = new FlightEngine(player, universe);
 		fightEngine = new FightEngine(player);
+		shipyardEngine = new ShipyardEngine(player);
 	}
 
 	/**
@@ -134,6 +138,7 @@ public class GameEngine {
 		tradeEngine = new TradeEngine(player);
 		flightEngine = new FlightEngine(player, universe);
 		fightEngine = new FightEngine(player);
+		shipyardEngine = new ShipyardEngine(player);
 	}
 
 	/**
@@ -319,5 +324,54 @@ public class GameEngine {
 	 */
 	public boolean consentToSearch(NPCEncounter npc) {
 		return fightEngine.consentToSearch(npc);
+	}
+
+	/**
+	 * Initiates a buy or sell transaction between the player and the shipyard
+	 * using ShipyardEngine
+	 * 
+	 * @param type
+	 *            The type of ship being bought by the player
+	 * @param shipyard
+	 *            The shipyard involved in the transaction
+	 * @param isBuying
+	 *            whether player is buying or not (false: selling)
+	 * 
+	 * @return The errors from the transaction, if any
+	 */
+	public List<String> tradeWithShipyard(ShipType type, boolean isBuying) {
+		List<String> errors = new ArrayList<String>();
+		double value = getPlayerAssetValue();
+		player.getShip();
+		if (isBuying) {
+			errors = shipyardEngine.buy(type, player.getPlanet().getShipyard(),
+					value);
+		} else {
+			shipyardEngine.sell(player.getPlanet().getShipyard(), value);
+		}
+		return errors;
+	}
+
+	/**
+	 * Calculates the value of the ship and all items onboard
+	 * 
+	 * @return double value of ship/items
+	 */
+	private double getPlayerAssetValue() {
+		double value = player.getPlanet().getShipyard()
+				.getSellPrice(player.getShip().getShipType());
+		Map<GoodType, Integer> cargo = player.getShip().getCargo();
+		for (GoodType each : cargo.keySet()) {
+			if (each.getMinTechLevelToUse() <= player.getPlanet()
+					.getTechLevel().getValue()) {
+				int quantity = cargo.get(each);
+				for (int i = 0; i < quantity; i++) {
+					value += player.getPlanet().getMarketplace()
+							.getSellPrice(each);
+				}
+			}
+		}
+		// TODO: gadget/shield/weapon money
+		return value;
 	}
 }
