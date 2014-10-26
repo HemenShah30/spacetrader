@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <children>
+            <Label fx:id="playerNameLbl" text="Player Name">
+               <HBox.margin>
+                  <Insets right="15.0" />
+               </HBox.margin></Label>
+            <Label fx:id="playerCreditsLbl" text="Credits: " />
+         </children>
+      </HBox>
+   </bottom>
+   <top>
+      <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="planetNameLbl" text="Planet Name">
+               <HBox.margin>
+                  <Insets right="15.0" />
+               </HBox.margin></Label>
+            <Label fx:id="planetTechLevelLbl" text="Tech Level:">
+               <HBox.margin>
+                  <Insets right="15.0" />
+               </HBox.margin>
+            </Label>
+            <Label fx:id="planetResourceLbl" text="Resource:" />
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="TOP_CENTER" prefWidth="300.0">
+               <children>
+                  <ComboBox fx:id="shipDropDown" editable="true" onMouseClicked="#selectShip" prefWidth="200.0" promptText="What ship do you want to buy" />
+                  <HBox prefHeight="183.0" prefWidth="300.0">
+                     <children>
+                        <VBox prefHeight="200.0" prefWidth="80.0">
+                           <children>
+                              <Label fx:id="playerShipNameLbl" text="ShipName" />
+                              <Label fx:id="playerShipFuelLbl" text="Fuel" />
+                              <Label fx:id="playerShipHPLbl" text="Hp" />
+                              <Label fx:id="playerShipCargoSizeLbl" text="cargo size" />
+                              <Label fx:id="playerShipWeaponSlotsLbl" text="Label" />
+                              <Label fx:id="PlayerShipSheildSlotsLbl" text="Label" />
+                              <Label fx:id="playerShipGadgetSlotsLbl" text="Label" />
+                              <Label fx:id="playerShipCrewSpaceLbl" text="Label" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="140.0">
+                           <children>
+                              <Label text="&lt;-Yours, Buying-&gt;" />
+                              <Label text="Range/ Fuel Capacity" />
+                              <Label text="Hull Points" />
+                              <Label text="Cargo Size" />
+                              <Label text="Weapon Slots" />
+                              <Label text="Sheild Slots" />
+                              <Label text="Gadget Slots" />
+                              <Label text="Crew Space" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="80.0">
+                           <children>
+                              <Label fx:id="shipyardShipNameLbl" text="Label" />
+                              <Label fx:id="shipyardShipFuelLbl" text="Label" />
+                              <Label fx:id="shipyardShipHPLbl" text="Label" />
+                              <Label fx:id="shipyardShipCargoSizeLbl" text="Label" />
+                              <Label fx:id="shipyardShipWeaponSlotsLbl" text="Label" />
+                              <Label fx:id="shipyardShipSheildSlotsLbl" text="Label" />
+                              <Label fx:id="shipyardShipGadgetSlotsLbl" text="Label" />
+                              <Label fx:id="shipyardShipCrewSpaceLbl" text="Label" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <Button fx:id="buyShipBtn" mnemonicParsing="false" onMouseClicked="#buyShipFromShipyard" text="Buy for 0 credits" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </center>
+</BorderPane>
