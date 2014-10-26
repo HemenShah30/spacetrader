@@ -20,6 +20,7 @@ public class Planet implements Boundary {
 	private Government government;
 	private Location location;
 	private Marketplace marketplace;
+	private Shipyard shipyard;
 	private Condition condition;
 	private EncounterRate policeEncounterRate;
 	private EncounterRate pirateEncounterRate;
@@ -69,6 +70,11 @@ public class Planet implements Boundary {
 		pirateEncounterRate = pirateRate;
 		traderEncounterRate = traderRate;
 		marketplace = new Marketplace(this);
+		if (tech.getValue() < 4) {
+			shipyard = null;
+		} else {
+			shipyard = new Shipyard(this);
+		}
 		setDiameter(size);
 		setColor(color);
 		setChances();
@@ -247,6 +253,15 @@ public class Planet implements Boundary {
 		return marketplace;
 	}
 
+	/**
+	 * Returns the shipyard for the planet
+	 * 
+	 * @return The shipyard for the planet
+	 */
+	public Shipyard getShipyard() {
+		return shipyard;
+	}
+	
 	@Override
 	public String toString() {
 		return name + ", Location: " + location + ", Tech Level: " + techLevel
