@@ -285,8 +285,6 @@ public class Player {
 	 *            The new ship for the player
 	 */
 	public void setShip(Ship ship) {
-		if (ship == null)
-			throw new IllegalArgumentException();
 		this.ship = ship;
 	}
 

@@ -1,18 +1,36 @@
 package view;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.controlsfx.dialog.Dialogs;
+
+import controller.GameEngine;
+import model.Player;
+import model.Enum.ShipType;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.util.StringConverter;
 
+/**
+ * Controller for the Shipyard screen
+ * 
+ * @author Hemen Shah
+ *
+ */
 public class ShipyardScreenController {
 
 	@FXML
 	private Label playerShipNameLbl;
 
 	@FXML
-	private Label shipyardShipSheildSlotsLbl;
+	private Label shipyardShipShieldSlotsLbl;
 
 	@FXML
 	private Label playerNameLbl;
@@ -42,7 +60,7 @@ public class ShipyardScreenController {
 	private Button buyShipBtn;
 
 	@FXML
-	private Label PlayerShipSheildSlotsLbl;
+	private Label playerShipShieldSlotsLbl;
 
 	@FXML
 	private Label playerShipGadgetSlotsLbl;
@@ -72,19 +90,130 @@ public class ShipyardScreenController {
 	private Label playerShipCrewSpaceLbl;
 
 	@FXML
-	private ComboBox<?> shipDropDown;
+	private ComboBox<ShipType> shipDropDown;
 
 	@FXML
 	private Label playerShipHPLbl;
 
+	/**
+	 * Method for selecting a new ship from the drop down menu
+	 * 
+	 * @param event
+	 *            The event that fired the method
+	 */
 	@FXML
-	void selectShip(Event event) {
-
+	private void selectShip(Event event) {
+		updateShipLabels();
 	}
 
+	/**
+	 * Method for buying a ship from the shipyard
+	 * 
+	 * @param event
+	 *            The event that fired the method
+	 */
 	@FXML
-	void buyShipFromShipyard(Event event) {
-
+	private void buyShipFromShipyard(Event event) {
+		if (MultiPageController.isValidAction(event)) {
+			ShipType ship = shipDropDown.getValue();
+			List<String> errors = GameEngine.getGameEngine().tradeWithShipyard(
+					ship);
+			if (errors.size() == 0) {
+				initializePage();
+			} else {
+				String errorMsg = "";
+				for (String error : errors)
+					errorMsg += error + "\n";
+				displayError(errorMsg);
+			}
+		}
 	}
 
+	/**
+	 * Method for initializing the page with starting information
+	 */
+	public void initializePage() {
+		GameEngine game = GameEngine.getGameEngine();
+		Player player = game.getPlayer();
+		List<ShipType> shipTypes = new ArrayList<ShipType>();
+		for (ShipType st : ShipType.values()) {
+			if (!st.equals(player.getShip().getShipType()))
+				shipTypes.add(st);
+		}
+		shipDropDown.getItems().addAll(shipTypes);
+		shipDropDown.setConverter(new StringConverter<ShipType>() {
+
+			@Override
+			public String toString(ShipType ship) {
+				if (ship == null)
+					return null;
+				return ship.toString();
+			}
+
+			@Override
+			public ShipType fromString(String string) {
+				return ShipType.valueOf(string.toUpperCase());
+			}
+		});
+		shipDropDown.setValue(shipTypes.get(0));
+		planetNameLbl.setText(player.getPlanet().getName());
+		planetTechLevelLbl.setText("Tech Level: "
+				+ player.getPlanet().getTechLevel().toString());
+		planetResourceLbl.setText("Resource: "
+				+ player.getPlanet().getResource().toString());
+		playerNameLbl.setText(player.getName());
+		playerCreditsLbl.setText("Credits: " + player.getCredits());
+		updateShipLabels();
+	}
+
+	/**
+	 * Updates the various ship labels
+	 */
+	private void updateShipLabels() {
+		GameEngine game = GameEngine.getGameEngine();
+		ShipType playerShipType = game.getPlayer().getShip().getShipType();
+		ShipType selectedShipType = shipDropDown.getValue();
+		playerShipNameLbl.setText(playerShipType.toString());
+		playerShipFuelLbl.setText(Integer.toString(playerShipType.getFuel()));
+		playerShipHPLbl.setText(Integer.toString(playerShipType.getTotalHP()));
+		playerShipCargoSizeLbl.setText(Integer.toString(playerShipType
+				.getCargoSize()));
+		playerShipWeaponSlotsLbl.setText(Integer.toString(playerShipType
+				.getWeaponSlots()));
+		playerShipShieldSlotsLbl.setText(Integer.toString(playerShipType
+				.getShieldSlots()));
+		playerShipGadgetSlotsLbl.setText(Integer.toString(playerShipType
+				.getGadgetSlots()));
+		playerShipCrewSpaceLbl.setText(Integer.toString(playerShipType
+				.getCrewSpace()));
+		shipyardShipNameLbl.setText(selectedShipType.toString());
+		shipyardShipFuelLbl
+				.setText(Integer.toString(selectedShipType.getFuel()));
+		shipyardShipHPLbl.setText(Integer.toString(selectedShipType
+				.getTotalHP()));
+		shipyardShipCargoSizeLbl.setText(Integer.toString(selectedShipType
+				.getCargoSize()));
+		shipyardShipWeaponSlotsLbl.setText(Integer.toString(selectedShipType
+				.getWeaponSlots()));
+		shipyardShipShieldSlotsLbl.setText(Integer.toString(selectedShipType
+				.getShieldSlots()));
+		shipyardShipGadgetSlotsLbl.setText(Integer.toString(selectedShipType
+				.getGadgetSlots()));
+		shipyardShipCrewSpaceLbl.setText(Integer.toString(selectedShipType
+				.getCrewSpace()));
+		buyShipBtn.setText("Buy For "
+				+ (int) (selectedShipType.getPrice() - game
+						.getPlayerAssetValue()) + " Credits");
+	}
+
+	/**
+	 * Creates a dialog error box with the given message
+	 * 
+	 * @param msg
+	 *            The message for the error dialog to display
+	 */
+	private void displayError(String msg) {
+		Dialogs.create().owner(buyShipBtn.getScene().getWindow())
+				.title("Error").message(msg).showError();
+	}
 }

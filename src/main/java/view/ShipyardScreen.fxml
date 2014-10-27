@@ -42,7 +42,7 @@
          <children>
             <VBox alignment="TOP_CENTER" prefWidth="300.0">
                <children>
-                  <ComboBox fx:id="shipDropDown" editable="true" onMouseClicked="#selectShip" prefWidth="200.0" promptText="What ship do you want to buy" />
+                  <ComboBox fx:id="shipDropDown" editable="true" onAction="#selectShip" onKeyPressed="#selectShip" onMouseClicked="#selectShip" prefWidth="200.0" promptText="What ship do you want to buy" />
                   <HBox prefHeight="183.0" prefWidth="300.0">
                      <children>
                         <VBox prefHeight="200.0" prefWidth="80.0">
@@ -52,7 +52,7 @@
                               <Label fx:id="playerShipHPLbl" text="Hp" />
                               <Label fx:id="playerShipCargoSizeLbl" text="cargo size" />
                               <Label fx:id="playerShipWeaponSlotsLbl" text="Label" />
-                              <Label fx:id="PlayerShipSheildSlotsLbl" text="Label" />
+                              <Label fx:id="playerShipShieldSlotsLbl" text="Label" />
                               <Label fx:id="playerShipGadgetSlotsLbl" text="Label" />
                               <Label fx:id="playerShipCrewSpaceLbl" text="Label" />
                            </children>
@@ -64,7 +64,7 @@
                               <Label text="Hull Points" />
                               <Label text="Cargo Size" />
                               <Label text="Weapon Slots" />
-                              <Label text="Sheild Slots" />
+                              <Label text="Shield Slots" />
                               <Label text="Gadget Slots" />
                               <Label text="Crew Space" />
                            </children>
@@ -76,14 +76,14 @@
                               <Label fx:id="shipyardShipHPLbl" text="Label" />
                               <Label fx:id="shipyardShipCargoSizeLbl" text="Label" />
                               <Label fx:id="shipyardShipWeaponSlotsLbl" text="Label" />
-                              <Label fx:id="shipyardShipSheildSlotsLbl" text="Label" />
+                              <Label fx:id="shipyardShipShieldSlotsLbl" text="Label" />
                               <Label fx:id="shipyardShipGadgetSlotsLbl" text="Label" />
                               <Label fx:id="shipyardShipCrewSpaceLbl" text="Label" />
                            </children>
                         </VBox>
                      </children>
                   </HBox>
-                  <Button fx:id="buyShipBtn" mnemonicParsing="false" onMouseClicked="#buyShipFromShipyard" text="Buy for 0 credits" />
+                  <Button fx:id="buyShipBtn" mnemonicParsing="false" onKeyPressed="#buyShipFromShipyard" onMouseClicked="#buyShipFromShipyard" text="Buy for 0 credits" />
                </children>
             </VBox>
          </children>

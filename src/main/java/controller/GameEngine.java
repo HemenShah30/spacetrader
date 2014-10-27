@@ -12,7 +12,6 @@ import model.NPCEncounter;
 import model.Planet;
 import model.Player;
 import model.Ship;
-import model.Shipyard;
 import model.Trader;
 import model.Universe;
 import model.Enum.EncounterResult;
@@ -339,25 +338,21 @@ public class GameEngine {
 	 * 
 	 * @return The errors from the transaction, if any
 	 */
-	public List<String> tradeWithShipyard(ShipType type, boolean isBuying) {
+	public List<String> tradeWithShipyard(ShipType type) {
 		List<String> errors = new ArrayList<String>();
 		double value = getPlayerAssetValue();
 		player.getShip();
-		if (isBuying) {
-			errors = shipyardEngine.buy(type, player.getPlanet().getShipyard(),
-					value);
-		} else {
-			shipyardEngine.sell(player.getPlanet().getShipyard(), value);
-		}
+		errors = shipyardEngine.buy(type, player.getPlanet().getShipyard(),
+				value);
 		return errors;
 	}
 
 	/**
-	 * Calculates the value of the ship and all items onboard
+	 * Calculates the value of the ship and all items on board
 	 * 
 	 * @return double value of ship/items
 	 */
-	private double getPlayerAssetValue() {
+	public double getPlayerAssetValue() {
 		double value = player.getPlanet().getShipyard()
 				.getSellPrice(player.getShip().getShipType());
 		Map<GoodType, Integer> cargo = player.getShip().getCargo();

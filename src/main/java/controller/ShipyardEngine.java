@@ -42,9 +42,13 @@ public class ShipyardEngine {
 	 */
 	public List<String> buy(ShipType type, Shipyard shipyard,
 			double playerAssetValue) {
-		double cost = shipyard.getBuyPrice(type);
+		double cost = shipyard.getBuyPrice(type) - playerAssetValue;
 		List<String> errors = validateBuy(cost);
 		if (errors.isEmpty()) {
+			double value = playerAssetValue;
+			player.setShip(null);
+			player.increaseCredits(value);
+
 			ship = new Ship(type);
 			player.setShip(ship);
 			player.increaseCredits(playerAssetValue);
@@ -70,19 +74,4 @@ public class ShipyardEngine {
 			errors.add("Planet cannot sell this ship");
 		return errors;
 	}
-
-
-
-	/**
-	 * Executes sell transaction for shipyard and player
-	 * 
-	 * @param shipyard
-	 *            the shipyard involved
-	 */
-	public void sell(Shipyard shipyard, double playerAssetValue) {
-		double value = playerAssetValue;
-		player.setShip(null);
-		player.increaseCredits(value);
-	}
-
 }

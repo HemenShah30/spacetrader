@@ -96,12 +96,15 @@ public class NPCEncounterController implements Controller {
 	/**
 	 * Updates the labels actively involved in a battle
 	 */
-	public void updateShipLabels() {
+	private void updateShipLabels() {
 		Player player = GameEngine.getGameEngine().getPlayer();
 		Ship ship = player.getShip();
-		playerHPLbl.setText(Integer.toString(ship.getCurrHP()));
-		playerShieldsLbl.setText(Integer.toString(ship.getCurrShieldHP()));
-
+		playerHPLbl.setText("HP: " + Integer.toString(ship.getCurrHP()));
+		playerShieldsLbl.setText("Shields: "
+				+ Integer.toString(ship.getCurrShieldHP()));
+		NPCHPLbl.setText("HP: " + encounter.getNPC().getShip().getCurrHP());
+		NPCShieldsLbl.setText("Shields: "
+				+ encounter.getNPC().getShip().getCurrShieldHP());
 	}
 
 	/**
@@ -159,7 +162,7 @@ public class NPCEncounterController implements Controller {
 
 			Dialogs.create().owner(attackBtn.getScene().getWindow())
 					.title("Result").message(playerMsg).showInformation();
-
+			updateShipLabels();
 			if (encounterComplete) {
 				Stage popupStage = (Stage) attackBtn.getScene().getWindow();
 				popupStage.close();
@@ -179,7 +182,9 @@ public class NPCEncounterController implements Controller {
 		if (MultiPageController.isValidAction(e)) {
 			boolean encounterComplete = false;
 			String playerMsg = "";
-			if (encounter.getEncounterType() != EncounterType.TRADER) {
+			if (encounter.getEncounterType() != EncounterType.TRADER
+					|| (encounter.getEncounterType() == EncounterType.TRADER && encounter
+							.getTurnCount() != 0)) {
 				EncounterResult result = GameEngine.getGameEngine().playerFlee(
 						encounter);
 				switch (result) {
@@ -228,6 +233,7 @@ public class NPCEncounterController implements Controller {
 				encounterComplete = true;
 				playerMsg = "You leave the Trader and continue on";
 			}
+			updateShipLabels();
 			Dialogs.create().owner(fleeLeaveBtn.getScene().getWindow())
 					.title("Result").message(playerMsg).showInformation();
 

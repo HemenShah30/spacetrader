@@ -2,6 +2,8 @@ package view;
 
 import java.io.IOException;
 
+import org.controlsfx.dialog.Dialogs;
+
 import model.Planet;
 import model.Player;
 import model.Ship;
@@ -29,7 +31,7 @@ public class PlanetScreenController {
 	Button marketplaceBtn;
 
 	@FXML
-	Button toShipYardBtn;
+	Button toShipyardBtn;
 
 	@FXML
 	Button toSpaceBtn;
@@ -102,7 +104,29 @@ public class PlanetScreenController {
 	@FXML
 	private void goToShipyard(Event e) {
 		if (MultiPageController.isValidAction(e)) {
-			System.out.println("Going to shipyard");
+			if (GameEngine.getGameEngine().getPlayer().getPlanet()
+					.getTechLevel().getValue() > 3) {
+				try {
+					Stage stage = (Stage) toShipyardBtn.getScene().getWindow();
+					stage.hide();
+					FXMLLoader loader = new FXMLLoader(
+							ClassLoader
+									.getSystemResource("view/ShipyardScreen.fxml"));
+					Parent newScene = loader.load();
+					stage.setScene(new Scene(newScene, 600, 400));
+					ShipyardScreenController controller = loader
+							.getController();
+					controller.initializePage();
+					stage.show();
+				} catch (IOException ie) {
+					ie.printStackTrace();
+				}
+			} else {
+				Dialogs.create().owner(toShipyardBtn.getScene().getWindow())
+						.title("Shipyard")
+						.message("This planet does not have a shipyard")
+						.showInformation();
+			}
 		}
 	}
 
