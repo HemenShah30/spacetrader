@@ -18,6 +18,7 @@
                   <Insets right="15.0" />
                </HBox.margin></Label>
             <Label fx:id="playerCreditsLbl" text="Credits: " />
+            <Button fx:id="backToPlanetBtn" mnemonicParsing="false" onKeyPressed="#toPlanetScreen" onMouseClicked="#toPlanetScreen" text="Back to Planet" />
          </children>
       </HBox>
    </bottom>
