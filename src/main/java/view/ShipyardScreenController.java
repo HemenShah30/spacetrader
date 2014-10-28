@@ -170,6 +170,7 @@ public class ShipyardScreenController {
 			if (!st.equals(player.getShip().getShipType()))
 				shipTypes.add(st);
 		}
+		shipDropDown.getItems().removeAll(ShipType.values());
 		shipDropDown.getItems().addAll(shipTypes);
 		shipDropDown.setConverter(new StringConverter<ShipType>() {
 
@@ -200,40 +201,44 @@ public class ShipyardScreenController {
 	 * Updates the various ship labels
 	 */
 	private void updateShipLabels() {
-		GameEngine game = GameEngine.getGameEngine();
-		ShipType playerShipType = game.getPlayer().getShip().getShipType();
-		ShipType selectedShipType = shipDropDown.getValue();
-		playerShipNameLbl.setText(playerShipType.toString());
-		playerShipFuelLbl.setText(Integer.toString(playerShipType.getFuel()));
-		playerShipHPLbl.setText(Integer.toString(playerShipType.getTotalHP()));
-		playerShipCargoSizeLbl.setText(Integer.toString(playerShipType
-				.getCargoSize()));
-		playerShipWeaponSlotsLbl.setText(Integer.toString(playerShipType
-				.getWeaponSlots()));
-		playerShipShieldSlotsLbl.setText(Integer.toString(playerShipType
-				.getShieldSlots()));
-		playerShipGadgetSlotsLbl.setText(Integer.toString(playerShipType
-				.getGadgetSlots()));
-		playerShipCrewSpaceLbl.setText(Integer.toString(playerShipType
-				.getCrewSpace()));
-		shipyardShipNameLbl.setText(selectedShipType.toString());
-		shipyardShipFuelLbl
-				.setText(Integer.toString(selectedShipType.getFuel()));
-		shipyardShipHPLbl.setText(Integer.toString(selectedShipType
-				.getTotalHP()));
-		shipyardShipCargoSizeLbl.setText(Integer.toString(selectedShipType
-				.getCargoSize()));
-		shipyardShipWeaponSlotsLbl.setText(Integer.toString(selectedShipType
-				.getWeaponSlots()));
-		shipyardShipShieldSlotsLbl.setText(Integer.toString(selectedShipType
-				.getShieldSlots()));
-		shipyardShipGadgetSlotsLbl.setText(Integer.toString(selectedShipType
-				.getGadgetSlots()));
-		shipyardShipCrewSpaceLbl.setText(Integer.toString(selectedShipType
-				.getCrewSpace()));
-		buyShipBtn.setText("Buy For "
-				+ (int) (selectedShipType.getPrice() - game
-						.getPlayerAssetValue()) + " Credits");
+		if (shipDropDown.getItems().size() > 0) {
+			GameEngine game = GameEngine.getGameEngine();
+			ShipType playerShipType = game.getPlayer().getShip().getShipType();
+			ShipType selectedShipType = shipDropDown.getValue();
+			playerShipNameLbl.setText(playerShipType.toString());
+			playerShipFuelLbl
+					.setText(Integer.toString(playerShipType.getFuel()));
+			playerShipHPLbl.setText(Integer.toString(playerShipType
+					.getTotalHP()));
+			playerShipCargoSizeLbl.setText(Integer.toString(playerShipType
+					.getCargoSize()));
+			playerShipWeaponSlotsLbl.setText(Integer.toString(playerShipType
+					.getWeaponSlots()));
+			playerShipShieldSlotsLbl.setText(Integer.toString(playerShipType
+					.getShieldSlots()));
+			playerShipGadgetSlotsLbl.setText(Integer.toString(playerShipType
+					.getGadgetSlots()));
+			playerShipCrewSpaceLbl.setText(Integer.toString(playerShipType
+					.getCrewSpace()));
+			shipyardShipNameLbl.setText(selectedShipType.toString());
+			shipyardShipFuelLbl.setText(Integer.toString(selectedShipType
+					.getFuel()));
+			shipyardShipHPLbl.setText(Integer.toString(selectedShipType
+					.getTotalHP()));
+			shipyardShipCargoSizeLbl.setText(Integer.toString(selectedShipType
+					.getCargoSize()));
+			shipyardShipWeaponSlotsLbl.setText(Integer
+					.toString(selectedShipType.getWeaponSlots()));
+			shipyardShipShieldSlotsLbl.setText(Integer
+					.toString(selectedShipType.getShieldSlots()));
+			shipyardShipGadgetSlotsLbl.setText(Integer
+					.toString(selectedShipType.getGadgetSlots()));
+			shipyardShipCrewSpaceLbl.setText(Integer.toString(selectedShipType
+					.getCrewSpace()));
+			buyShipBtn.setText("Buy For "
+					+ (int) (selectedShipType.getPrice() - game
+							.getPlayerAssetValue()) + " Credits");
+		}
 	}
 
 	/**
