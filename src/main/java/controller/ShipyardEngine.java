@@ -45,13 +45,8 @@ public class ShipyardEngine {
 		double cost = shipyard.getBuyPrice(type) - playerAssetValue;
 		List<String> errors = validateBuy(cost);
 		if (errors.isEmpty()) {
-			double value = playerAssetValue;
-			player.setShip(null);
-			player.increaseCredits(value);
-
 			ship = new Ship(type);
 			player.setShip(ship);
-			player.increaseCredits(playerAssetValue);
 			player.decreaseCredits(cost);
 		}
 		return errors;
