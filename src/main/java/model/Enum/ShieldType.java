@@ -1,19 +1,22 @@
 package model.Enum;
 
+import model.Sellable;
+import model.Ship;
+
 /**
  * Enum representing the various shields
  * 
  * @author Caroline Zhang
  *
  */
-public enum ShieldType {
+public enum ShieldType implements Sellable {
 
-	ENERGYSHIELD(50, 10000, 4, 20, 30, 30, 80, 101, 101), 
-	REFLECTIVESHIELD(100, 35000, 5, 40, 50, 50, 101, 101, 101);
+	ENERGYSHIELD(50, 10000, 4, 20, 30, 30, 80, 101, 101), REFLECTIVESHIELD(100,
+			35000, 5, 40, 50, 50, 101, 101, 101);
 
 	private int shieldHP;
 	private int minTechLevel;
-	private int price;
+	private double price;
 	private int minPoliceRep;
 	private int minPirateRep;
 	private int minTraderRep;
@@ -86,7 +89,7 @@ public enum ShieldType {
 	 * 
 	 * @return The price of the shield
 	 */
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
@@ -134,5 +137,45 @@ public enum ShieldType {
 		default:
 			return null;
 		}
+	}
+
+	/**
+	 * Returns whether or not the ship can hold another shield
+	 * 
+	 * @param ship
+	 *            the player's ship
+	 * @return boolean result
+	 */
+	@Override
+	public boolean canBuy(Ship ship) {
+		if (ship.getNumShields() + 1 > ship.getShipType().getShieldSlots()) {
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Returns whether or not the ship can sell a shield
+	 * 
+	 * @param ship
+	 *            the player's ship
+	 * @return boolean result
+	 */
+	@Override
+	public boolean canSell(Ship ship) {
+		if (ship.getNumShields() < 1) {
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Returns a 0 for addSellable purposes
+	 * 
+	 * @return int type 0 == shield
+	 */
+	@Override
+	public int getType() {
+		return 0;
 	}
 }

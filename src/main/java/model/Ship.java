@@ -18,7 +18,7 @@ import model.Enum.ShipType;
  */
 public class Ship {
 	private ShipType shipType;
-	private int currHP, fuel, cargoSize;
+	private int currHP, fuel, cargoSize, numLasers, numShields, numGadgets;
 	private Map<ShieldType, Integer> shields;
 	private List<LaserType> lasers;
 	private List<Gadget> gadgets;
@@ -327,6 +327,7 @@ public class Ship {
 	public void addShield(ShieldType shield) throws MaxCapacityException {
 		if (shipType.getShieldSlots() > shields.size()) {
 			shields.put(shield, shield.getShieldHP());
+			numShields++;
 			return;
 		}
 		throw new MaxCapacityException("Already has max shields");
@@ -343,6 +344,7 @@ public class Ship {
 	public void addLaser(LaserType laser) throws MaxCapacityException {
 		if (shipType.getWeaponSlots() > lasers.size()) {
 			lasers.add(laser);
+			numLasers++;
 			return;
 		}
 		throw new MaxCapacityException("Already has max lasers");
@@ -359,9 +361,49 @@ public class Ship {
 	public void addGadget(Gadget g) throws MaxCapacityException {
 		if (shipType.getGadgetSlots() > gadgets.size()) {
 			gadgets.add(g);
+			numGadgets++;
 			return;
 		}
 		throw new MaxCapacityException("Already has max gadgets");
+	}
+
+	/**
+	 * Removes the laser from the ship
+	 * 
+	 * @param l
+	 *            the laser to be removed
+	 */
+	public void removeLaser(LaserType l) {
+		if (!lasers.contains(l)) {
+			// throw error
+		}
+		lasers.remove(l);
+	}
+
+	/**
+	 * Removes the shield from the ship
+	 * 
+	 * @param l
+	 *            the laser to be removed
+	 */
+	public void removeShield(ShieldType s) {
+		if (!shields.containsKey(s)) {
+			// throw error
+		}
+		lasers.remove(s);
+	}
+
+	/**
+	 * Removes the gadget from the ship
+	 * 
+	 * @param l
+	 *            the gadget to be removed
+	 */
+	public void removeGadget(Gadget g) {
+		if (!gadgets.contains(g)) {
+			// throw error
+		}
+		lasers.remove(g);
 	}
 
 	/**
@@ -390,11 +432,88 @@ public class Ship {
 	public List<Gadget> getGadgets() {
 		return gadgets;
 	}
-	
+
 	/**
-	 * Returns a description of the ship, which includes:
-	 * shipType, cargo size, shield capacity, laser capacity, gadget capacity,
-	 * cargo contents, equipped shields, equipped lasers, equipped gadgets
+	 * Returns the number of lasers equipped
+	 * 
+	 * @return Int number of lasers
+	 */
+	public int getNumLasers() {
+		return numLasers;
+	}
+
+	/**
+	 * Returns the number of shields equipped
+	 * 
+	 * @return Int number of shields
+	 */
+	public int getNumShields() {
+		return numShields;
+	}
+
+	/**
+	 * Returns the number of gadgets equipped
+	 * 
+	 * @return int number of gadgets
+	 */
+	public int getNumGadgets() {
+		return numGadgets;
+	}
+
+	/**
+	 * Adds the sellable to the ship
+	 * 
+	 * @param sell
+	 *            The sellable being added
+	 * @param type
+	 *            an int key representing 0-shield, 1-laser, 2-gadget
+	 * @throws MaxCapacityException
+	 */
+	public void addSellable(Sellable sell, int type)
+			throws MaxCapacityException {
+		switch (type) {
+		case 0:
+			ShieldType shield = (ShieldType) sell;
+			addShield(shield);
+		case 1:
+			LaserType laser = (LaserType) sell;
+			addLaser(laser);
+		case 2:
+			Gadget gadget = (Gadget) sell;
+			addGadget(gadget);
+		default:
+			// shouldn't happen
+		}
+	}
+
+	/**
+	 * Removes the sellable from the ship
+	 * 
+	 * @param sell
+	 *            The sellable being removed
+	 * @param type
+	 *            an int key representing 0-shield, 1-laser, 2-gadget
+	 */
+	public void removeSellable(Sellable sell, int type) {
+		switch (type) {
+		case 0:
+			ShieldType shield = (ShieldType) sell;
+			removeShield(shield);
+		case 1:
+			LaserType laser = (LaserType) sell;
+			removeLaser(laser);
+		case 2:
+			Gadget gadget = (Gadget) sell;
+			removeGadget(gadget);
+		default:
+			// shouldn't happen
+		}
+	}
+
+	/**
+	 * Returns a description of the ship, which includes: shipType, cargo size,
+	 * shield capacity, laser capacity, gadget capacity, cargo contents,
+	 * equipped shields, equipped lasers, equipped gadgets
 	 * 
 	 * @return Ship description
 	 */

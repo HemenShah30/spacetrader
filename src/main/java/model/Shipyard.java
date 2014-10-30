@@ -3,6 +3,8 @@ package model;
 import java.util.HashMap;
 import java.util.Map;
 
+import model.Enum.LaserType;
+import model.Enum.ShieldType;
 import model.Enum.ShipType;
 
 /**
@@ -15,21 +17,20 @@ public class Shipyard {
 	private static final double sellPricePenalty = 0.9;
 	private Map<ShipType, Double> prices;
 	private Planet planet;
-	
+
 	public Shipyard(Planet planet) {
 		this.planet = planet;
-		
+
 		prices = new HashMap<ShipType, Double>();
 		for (ShipType type : ShipType.values()) {
 			double price = generateSellPrice(type);
 			prices.put(type, price);
 		}
 	}
-	
+
 	/**
-	 * Generates the price of the ship to be sold by the player
-	 * Note: This method was created in case we make other factors
-	 * impact the price
+	 * Generates the price of the ship to be sold by the player Note: This
+	 * method was created in case we make other factors impact the price
 	 * 
 	 * @param type
 	 *            The ship whose price is being determined
@@ -38,10 +39,10 @@ public class Shipyard {
 	private double generateSellPrice(ShipType type) {
 		return type.getPrice();
 	}
-	
+
 	/**
-	 * Returns the purchase price of a given ship in the shipyard to be bought by the
-	 * player
+	 * Returns the purchase price of a given ship in the shipyard to be bought
+	 * by the player
 	 * 
 	 * @param type
 	 *            The type of ship in the shipyard
@@ -52,11 +53,10 @@ public class Shipyard {
 			return -1;
 		return prices.get(type);
 	}
-	
+
 	/**
 	 * Returns the sell price of a given ship in the shipyard to be sold by the
-	 * player
-	 * A penalty to the amount of credits you get back is applied
+	 * player A penalty to the amount of credits you get back is applied
 	 * 
 	 * @param type
 	 *            The type of ship in the shipyard
@@ -64,5 +64,31 @@ public class Shipyard {
 	 */
 	public double getSellPrice(ShipType type) {
 		return prices.get(type) * sellPricePenalty;
+	}
+
+	/**
+	 * Returns buy price of a given Sellable in the shipyard
+	 * 
+	 * @param sell
+	 *            the Sellable being purchased
+	 * @return the price in double
+	 */
+	public double getSellableBuy(Sellable sell) {
+		if (sell.getMinTechLevel() > planet.getTechLevel().getValue()) {
+			return -1;
+		}
+		return sell.getPrice();
+	}
+
+	/**
+	 * Returns the sell price of a given Sellable in the shipyard, with the
+	 * penalty applied
+	 * 
+	 * @param sell
+	 *            the Sellable being sold
+	 * @return the sell price in double
+	 */
+	public double getSellableSell(Sellable sell) {
+		return sell.getPrice() * sellPricePenalty;
 	}
 }

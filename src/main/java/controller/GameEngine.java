@@ -11,6 +11,7 @@ import model.MaxCapacityException;
 import model.NPCEncounter;
 import model.Planet;
 import model.Player;
+import model.Sellable;
 import model.Ship;
 import model.Trader;
 import model.Universe;
@@ -154,7 +155,6 @@ public class GameEngine {
 	 */
 	public List<String> tradeWithMarketplace(GoodType good, int quantity,
 			boolean buyingGood) {
-		player.getShip();
 		if (buyingGood)
 			return tradeEngine.buy(good, quantity, player.getPlanet()
 					.getMarketplace());
@@ -341,7 +341,6 @@ public class GameEngine {
 	public List<String> tradeWithShipyard(ShipType type) {
 		List<String> errors = new ArrayList<String>();
 		double value = getPlayerAssetValue();
-		player.getShip();
 		errors = shipyardEngine.buy(type, player.getPlanet().getShipyard(),
 				value);
 		return errors;
@@ -368,5 +367,23 @@ public class GameEngine {
 		}
 		// TODO: gadget/shield/weapon money
 		return value;
+	}
+
+	/**
+	 * Initiates a Sellable transaction between a player and the shipyard
+	 * 
+	 * @param sell
+	 *            The sellable being transacted
+	 * @param isBuying
+	 *            True for a buy, false for a sell
+	 * @return A list of errors, if any
+	 * @throws MaxCapacityException
+	 */
+	public List<String> tradeSellableWithShipyard(Sellable sell,
+			boolean isBuying) throws MaxCapacityException {
+		if (isBuying)
+			return tradeEngine.buySellable(sell, player.getPlanet()
+					.getShipyard());
+		return tradeEngine.sellSellable(sell, player.getPlanet().getShipyard());
 	}
 }

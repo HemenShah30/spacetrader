@@ -1,12 +1,15 @@
 package model.Enum;
 
+import model.Sellable;
+import model.Ship;
+
 /**
  * Enum representing the various lasers that a ship can have
  * 
  * @author Caroline Zhang
  *
  */
-public enum LaserType {
+public enum LaserType implements Sellable {
 
 	PULSELASER(20, 5000, 4, 0, 0, 10, 40, 60, 101), BEAMLASER(35, 15000, 5, 20,
 			30, 30, 101, 101, 101), MILITARYLASER(60, 35000, 6, 40, 40, 50,
@@ -14,7 +17,7 @@ public enum LaserType {
 
 	private int baseDamage;
 	private int minTechLevel;
-	private int price;
+	private double price;
 	private int minPoliceRep;
 	private int minPirateRep;
 	private int minTraderRep;
@@ -87,7 +90,7 @@ public enum LaserType {
 	 * 
 	 * @return The price of the laser
 	 */
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
@@ -137,5 +140,45 @@ public enum LaserType {
 		default:
 			return null;
 		}
+	}
+
+	/**
+	 * Returns whether or not the ship can hold another laser
+	 * 
+	 * @param ship
+	 *            the player's ship
+	 * @return boolean result
+	 */
+	@Override
+	public boolean canBuy(Ship ship) {
+		if (ship.getNumLasers() + 1 > ship.getShipType().getWeaponSlots()) {
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Returns whether or not the ship can sell a laser
+	 * 
+	 * @param ship
+	 *            the player's ship
+	 * @return boolean result
+	 */
+	@Override
+	public boolean canSell(Ship ship) {
+		if (ship.getNumLasers() < 1) {
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Returns a 1 for addSellable purposes
+	 * 
+	 * @return int type 1 == laser
+	 */
+	@Override
+	public int getType() {
+		return 1;
 	}
 }
