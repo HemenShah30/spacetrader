@@ -80,10 +80,12 @@ public class FightEngine {
 		int damage = 0;
 		for (LaserType laser : lasers) {
 			damage += laser.getBaseDamage()
-					+ ((player.getFighterSkill() - 1) * 2);
+					+ ((player.getFighterSkill()
+							+ playerShip.getFightingBonus() - 1) * 2);
 		}
 		try {
-			npcShip.takeDamage(damage);
+			if (Math.random() > .4 * (npcShip.hasCloakingDevice() ? 1 : 0))
+				npcShip.takeDamage(damage);
 		} catch (DeathException death) {
 			regenShields();
 			return EncounterResult.NPCDEATH;
@@ -120,9 +122,11 @@ public class FightEngine {
 		}
 
 		encounter.takeTurn();
-		if (player.getPilotSkill() + (int) (Math.random() * 3) > npc
-				.getPilotSkill()) {
-			return EncounterResult.NPCFLEESUCCESS;
+		if (player.getPilotSkill() + playerShip.getPilotBonus()
+				+ (playerShip.hasCloakingDevice() ? 5 : 0)
+				+ (int) (Math.random() * 3) > npc.getPilotSkill()
+				+ npcShip.getPilotBonus()) {
+			return EncounterResult.PLAYERFLEESUCCESS;
 		}
 		return npcTurn(npc);
 	}
@@ -172,8 +176,8 @@ public class FightEngine {
 		double healthRatio = (double) npcShip.getCurrHP()
 				/ (double) npcShip.getMaxHP();
 		if (healthRatio <= .2) {
-			int nPilot = npc.getPilotSkill();
-			int pPilot = player.getPilotSkill();
+			int nPilot = npc.getPilotSkill() + npcShip.getPilotBonus();
+			int pPilot = player.getPilotSkill() + playerShip.getPilotBonus();
 			if (nPilot + 1 < pPilot) {
 				regenShields();
 				return EncounterResult.NPCSURRENDER;
@@ -188,10 +192,11 @@ public class FightEngine {
 		int nDamage = 0;
 		for (LaserType laser : nLasers) {
 			nDamage += laser.getBaseDamage()
-					+ ((npc.getFighterSkill() - 1) * 2);
+					+ ((npc.getFighterSkill() + npcShip.getFightingBonus() - 1) * 2);
 		}
 		try {
-			playerShip.takeDamage(nDamage);
+			if (Math.random() > .4 * (playerShip.hasCloakingDevice() ? 1 : 0))
+				playerShip.takeDamage(nDamage);
 		} catch (DeathException death) {
 			return EncounterResult.PLAYERDEATH;
 		}
@@ -271,8 +276,10 @@ public class FightEngine {
 	 * Regenerates a portion of the player's shields based on engineer skill
 	 */
 	private void regenShields() {
-		playerShip.addShieldHP((int) (playerShip.getMaxShieldHP()
-				* player.getEngineerSkill() / 100.));
+		playerShip
+				.addShieldHP((int) (playerShip.getMaxShieldHP()
+						* (player.getEngineerSkill() + playerShip
+								.getEngineerBonus()) / 100.));
 	}
 
 	/**

@@ -19,7 +19,18 @@ public class NavigatingSystem extends Gadget {
 	public NavigatingSystem() {
 		super(PRICE, MIN_TECH_LEVEL);
 	}
+
+	@Override
+	public boolean equals(Object other) {
+		return other instanceof NavigatingSystem;
+	}
 	
+	@Override
+	public int hashCode() {
+		return toString().hashCode();
+	}
+
+	@Override
 	public String toString() {
 		return "NavigatingSystem";
 	}

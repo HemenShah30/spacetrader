@@ -19,7 +19,18 @@ public class CloakingDevice extends Gadget {
 	public CloakingDevice() {
 		super(PRICE, MIN_TECH_LEVEL);
 	}
-	
+
+	@Override
+	public boolean equals(Object other) {
+		return other instanceof CloakingDevice;
+	}
+
+	@Override
+	public int hashCode() {
+		return toString().hashCode();
+	}
+
+	@Override
 	public String toString() {
 		return "Cloaking Device";
 	}

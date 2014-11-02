@@ -18,7 +18,6 @@ import javafx.scene.paint.Color;
 import org.postgresql.util.PGobject;
 
 import model.Location;
-import model.MaxCapacityException;
 import model.Planet;
 import model.Player;
 import model.Ship;
@@ -575,11 +574,7 @@ public class Database {
 			Ship ship = new Ship(type, currentHullPoints, shipFuel);
 
 			// TODO: Add in laser, shield, and gadget saving to fix this
-			try {
-				ship.addLaser(LaserType.PULSELASER);
-			} catch (MaxCapacityException m) {
-
-			}
+			ship.addLaser(LaserType.PULSELASER);
 
 			p = new Player(playerName, playerInfo.getInt("PilotSkill"),
 					playerInfo.getInt("FighterSkill"),

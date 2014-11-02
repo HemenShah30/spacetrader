@@ -18,7 +18,17 @@ public class TargetingSystem extends Gadget {
 	public TargetingSystem() {
 		super(PRICE, MIN_TECH_LEVEL);
 	}
-	
+
+	@Override
+	public boolean equals(Object other) {
+		return other instanceof TargetingSystem;
+	}
+
+	@Override
+	public int hashCode() {
+		return toString().hashCode();
+	}
+
 	public String toString() {
 		return "TargetingSystem";
 	}

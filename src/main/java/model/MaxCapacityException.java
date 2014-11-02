@@ -7,7 +7,7 @@ package model;
  * @author Jack Croft
  *
  */
-public class MaxCapacityException extends Exception {
+public class MaxCapacityException extends RuntimeException {
 
 	private static final long serialVersionUID = 3065061179052313223L;
 
