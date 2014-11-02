@@ -377,10 +377,9 @@ public class GameEngine {
 	 * @param isBuying
 	 *            True for a buy, false for a sell
 	 * @return A list of errors, if any
-	 * @throws MaxCapacityException
 	 */
 	public List<String> tradeSellableWithShipyard(Sellable sell,
-			boolean isBuying) throws MaxCapacityException {
+			boolean isBuying) {
 		if (isBuying)
 			return tradeEngine.buySellable(sell, player.getPlanet()
 					.getShipyard());

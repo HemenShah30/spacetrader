@@ -17,6 +17,8 @@ import javafx.scene.paint.Color;
 
 import org.postgresql.util.PGobject;
 
+import model.Gadget;
+import model.GadgetFactory;
 import model.Location;
 import model.Planet;
 import model.Player;
@@ -27,6 +29,7 @@ import model.Enum.EncounterRate;
 import model.Enum.GoodType;
 import model.Enum.Government;
 import model.Enum.LaserType;
+import model.Enum.ShieldType;
 import model.Enum.ShipType;
 import model.Enum.SpecialResource;
 import model.Enum.TechLevel;
@@ -47,6 +50,9 @@ public class Database {
 	private Map<String, String> conditionValues;
 	private Map<String, String> goodTypeValues;
 	private Map<String, String> shipTypeValues;
+	private Map<String, String> laserTypeValues;
+	private Map<String, String> shieldTypeValues;
+	private Map<String, String> gadgetTypeValues;
 
 	/**
 	 * Creates a new Database class and attempts to connect to the database
@@ -63,6 +69,9 @@ public class Database {
 		conditionValues = new HashMap<String, String>();
 		goodTypeValues = new HashMap<String, String>();
 		shipTypeValues = new HashMap<String, String>();
+		laserTypeValues = new HashMap<String, String>();
+		shieldTypeValues = new HashMap<String, String>();
+		gadgetTypeValues = new HashMap<String, String>();
 		connect();
 		createMaps();
 	}
@@ -148,6 +157,27 @@ public class Database {
 			while (shipTypes.next()) {
 				shipTypeValues.put(shipTypes.getString("ShipTypeName"),
 						shipTypes.getString("ShipTypeId"));
+			}
+
+			ResultSet laserTypes = s
+					.executeQuery("SELECT \"LaserId\", \"LaserName\" FROM \"Laser\"");
+			while (laserTypes.next()) {
+				laserTypeValues.put(laserTypes.getString("LaserName"),
+						laserTypes.getString("LaserId"));
+			}
+
+			ResultSet shieldTypes = s
+					.executeQuery("SELECT \"ShieldId\", \"ShieldName\" FROM \"Shield\"");
+			while (shieldTypes.next()) {
+				shieldTypeValues.put(shieldTypes.getString("ShieldName"),
+						shieldTypes.getString("ShieldId"));
+			}
+
+			ResultSet gadgetTypes = s
+					.executeQuery("SELECT \"GadgetId\", \"GadgetName\" FROM \"Gadget\"");
+			while (gadgetTypes.next()) {
+				gadgetTypeValues.put(gadgetTypes.getString("GadgetName"),
+						gadgetTypes.getString("GadgetId"));
 			}
 
 		} catch (SQLException s) {
@@ -275,6 +305,37 @@ public class Database {
 						+ " WHERE \"ShipId\"='" + shipId + "'";
 				s.execute(updateShipCmd);
 
+				String deleteWeaponsCmd = "DELETE FROM \"ShipLasers\" WHERE \"ShipId\"='"
+						+ shipId + "'";
+				s.execute(deleteWeaponsCmd);
+				String deleteShieldsCmd = "DELETE FROM \"ShipShields\" WHERE \"ShipId\"='"
+						+ shipId + "'";
+				s.execute(deleteShieldsCmd);
+				String deleteGadgetsCmd = "DELETE FROM \"ShipGadgets\" WHERE \"ShipId\"='"
+						+ shipId + "'";
+				s.execute(deleteGadgetsCmd);
+				for (LaserType laser : ship.getLasers()) {
+					String insertWeaponsCmd = "INSERT INTO \"ShipLasers\" VALUES ('"
+							+ shipId
+							+ "', '"
+							+ laserTypeValues.get(laser.toString()) + "')";
+					s.execute(insertWeaponsCmd);
+				}
+				for (ShieldType shield : ship.getShields()) {
+					String insertShieldsCmd = "INSERT INTO \"ShipShields\" VALUES ('"
+							+ shipId
+							+ "', '"
+							+ shieldTypeValues.get(shield.toString()) + "')";
+					s.execute(insertShieldsCmd);
+				}
+				for (Gadget gadget : ship.getGadgets()) {
+					String insertGadgetsCmd = "INSERT INTO \"ShipGadgets\" VALUES ('"
+							+ shipId
+							+ "', '"
+							+ gadgetTypeValues.get(gadget.toString()) + "')";
+					s.execute(insertGadgetsCmd);
+				}
+
 				for (GoodType g : GoodType.values()) {
 					String updateShipCargoCmd = "UPDATE \"ShipCargo\" SET \"GoodTypeQuantity\"="
 							+ ship.amountInCargo(g)
@@ -318,6 +379,42 @@ public class Database {
 				shipInsertStatement.setInt(3, ship.getCurrHP());
 				shipInsertStatement.setInt(4, ship.getFuel());
 				shipInsertStatement.execute();
+
+				PreparedStatement shipLaserStatement = connection
+						.prepareStatement("INSERT INTO \"ShipLasers\" VALUES (?, ?)");
+				for (LaserType laser : ship.getLasers()) {
+					shipLaserStatement.setObject(1, shipUUIDObject);
+					PGobject laserUUIDObject = new PGobject();
+					laserUUIDObject.setType("uuid");
+					laserUUIDObject.setValue(laserTypeValues.get(laser
+							.toString()));
+					shipLaserStatement.setObject(2, laserUUIDObject);
+					shipLaserStatement.execute();
+				}
+
+				PreparedStatement shipShieldStatement = connection
+						.prepareStatement("INSERT INTO \"ShipShields\" VALUES (?, ?)");
+				for (ShieldType shield : ship.getShields()) {
+					shipShieldStatement.setObject(1, shipUUIDObject);
+					PGobject shieldUUIDObject = new PGobject();
+					shieldUUIDObject.setType("uuid");
+					shieldUUIDObject.setValue(laserTypeValues.get(shield
+							.toString()));
+					shipShieldStatement.setObject(2, shieldUUIDObject);
+					shipShieldStatement.execute();
+				}
+
+				PreparedStatement shipGadgetStatement = connection
+						.prepareStatement("INSERT INTO \"ShipGadgets\" VALUES (?, ?)");
+				for (Gadget gadget : ship.getGadgets()) {
+					shipGadgetStatement.setObject(1, shipUUIDObject);
+					PGobject gadgetUUIDObject = new PGobject();
+					gadgetUUIDObject.setType("uuid");
+					gadgetUUIDObject.setValue(gadgetTypeValues.get(gadget
+							.toString()));
+					shipGadgetStatement.setObject(2, gadgetUUIDObject);
+					shipGadgetStatement.execute();
+				}
 
 				for (GoodType g : GoodType.values()) {
 					PreparedStatement shipCargoInsertStatement = connection
@@ -573,9 +670,6 @@ public class Database {
 					"ShipTypeName").toUpperCase());
 			Ship ship = new Ship(type, currentHullPoints, shipFuel);
 
-			// TODO: Add in laser, shield, and gadget saving to fix this
-			ship.addLaser(LaserType.PULSELASER);
-
 			p = new Player(playerName, playerInfo.getInt("PilotSkill"),
 					playerInfo.getInt("FighterSkill"),
 					playerInfo.getInt("TraderSkill"),
@@ -584,6 +678,27 @@ public class Database {
 					playerInfo.getInt("TraderReputation"),
 					playerInfo.getInt("PoliceReputation"),
 					playerInfo.getInt("PirateReputation"));
+			
+			String shipLaserCmd = "SELECT \"LaserName\" FROM \"Laser\" l INNER JOIN \"ShipLasers\" sl ON l.\"LaserId\"=sl.\"LaserId\" WHERE sl.\"ShipId\"='"
+					+ shipId + "'";
+			ResultSet lasers = s.executeQuery(shipLaserCmd);
+			while (lasers.next()) {
+				ship.addLaser(LaserType.getEnum(lasers.getString("LaserName")));
+			}
+			String shipShieldCmd = "SELECT \"ShieldName\" FROM \"Shield\" s INNER JOIN \"ShipShields\" ss ON s.\"ShieldId\"=ss.\"ShieldId\" WHERE ss.\"ShipId\"='"
+					+ shipId + "'";
+			ResultSet shields = s.executeQuery(shipShieldCmd);
+			while (shields.next()) {
+				ship.addShield(ShieldType.getEnum(shields
+						.getString("ShieldName")));
+			}
+			String shipGadgetCmd = "SELECT \"GadgetName\" FROM \"Gadget\" g INNER JOIN \"ShipGadgets\" sg ON g.\"GadgetId\"=sg.\"GadgetId\" WHERE sg.\"ShipId\"='"
+					+ shipId + "'";
+			ResultSet gadgets = s.executeQuery(shipGadgetCmd);
+			while (gadgets.next()) {
+				ship.addGadget(GadgetFactory.createGadget((gadgets
+						.getString("GadgetName"))));
+			}
 
 			ResultSet shipCargo = s
 					.executeQuery("SELECT goods.\"GoodTypeName\", cargo.\"GoodTypeQuantity\" FROM \"ShipCargo\" cargo INNER JOIN \"GoodType\" goods ON cargo.\"GoodTypeId\"=goods.\"GoodTypeId\" WHERE cargo.\"ShipId\"='"

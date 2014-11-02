@@ -284,8 +284,7 @@ public class TradeEngine {
 	 *            the marketplace involved in the transaction
 	 * @return The errors from the sell, if any
 	 */
-	public List<String> sellSellable(Sellable sell, Shipyard shipyard)
-			throws MaxCapacityException {
+	public List<String> sellSellable(Sellable sell, Shipyard shipyard) {
 		double cost = shipyard.getSellableSell(sell);
 		List<String> errors = validateSellableSell(cost, sell);
 		if (errors.isEmpty()) {

@@ -140,6 +140,25 @@ public enum ShieldType implements Sellable {
 	}
 
 	/**
+	 * Returns the valid ShieldType from the passed in string value
+	 * 
+	 * @param value
+	 *            The string representation of the needed ShieldType
+	 * @return The ShieldType that matches the given string value
+	 */
+	public static ShieldType getEnum(String value) {
+		value = value.toLowerCase();
+		switch (value) {
+		case "reflective shield":
+			return ShieldType.REFLECTIVESHIELD;
+		case "energy shield":
+			return ShieldType.ENERGYSHIELD;
+		default:
+			return null;
+		}
+	}
+
+	/**
 	 * Returns whether or not the ship can hold another shield
 	 * 
 	 * @param ship

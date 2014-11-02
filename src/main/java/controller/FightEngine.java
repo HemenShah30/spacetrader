@@ -84,7 +84,7 @@ public class FightEngine {
 							+ playerShip.getFightingBonus() - 1) * 2);
 		}
 		try {
-			if (Math.random() > .4 * (npcShip.hasCloakingDevice() ? 1 : 0))
+			if (Math.random() > .2 * (npcShip.hasCloakingDevice() ? 1 : 0))
 				npcShip.takeDamage(damage);
 		} catch (DeathException death) {
 			regenShields();
@@ -195,7 +195,7 @@ public class FightEngine {
 					+ ((npc.getFighterSkill() + npcShip.getFightingBonus() - 1) * 2);
 		}
 		try {
-			if (Math.random() > .4 * (playerShip.hasCloakingDevice() ? 1 : 0))
+			if (Math.random() > .2 * (playerShip.hasCloakingDevice() ? 1 : 0))
 				playerShip.takeDamage(nDamage);
 		} catch (DeathException death) {
 			return EncounterResult.PLAYERDEATH;

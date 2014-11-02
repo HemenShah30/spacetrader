@@ -32,6 +32,6 @@ public class FiveExtraCargo extends Gadget {
 
 	@Override
 	public String toString() {
-		return "5 Extra Cargo Spaces";
+		return "Five Extra Cargo Spaces";
 	}
 }

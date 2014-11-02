@@ -362,36 +362,6 @@ public class Ship {
 	}
 
 	/**
-	 * Removes the laser from the ship
-	 * 
-	 * @param l
-	 *            the laser to be removed
-	 */
-	public void removeLaser(LaserType l) {
-		lasers.remove(l);
-	}
-
-	/**
-	 * Removes the shield from the ship
-	 * 
-	 * @param s
-	 *            the shield to be removed
-	 */
-	public void removeShield(ShieldType s) {
-		shields.remove(s);
-	}
-
-	/**
-	 * Removes the gadget from the ship
-	 * 
-	 * @param g
-	 *            the gadget to be removed
-	 */
-	public void removeGadget(Gadget g) {
-		gadgets.remove(g);
-	}
-
-	/**
 	 * Returns all lasers currently equipped by ship
 	 * 
 	 * @return The lasers equipped by the ship
@@ -474,6 +444,7 @@ public class Ship {
 
 	/**
 	 * Returns whether or not the ship has a cloaking device
+	 * 
 	 * @return Whether or not the ship has a cloaking device
 	 */
 	public boolean hasCloakingDevice() {
@@ -491,14 +462,15 @@ public class Ship {
 		case 0:
 			ShieldType shield = (ShieldType) sell;
 			addShield(shield);
+			break;
 		case 1:
 			LaserType laser = (LaserType) sell;
 			addLaser(laser);
+			break;
 		case 2:
 			Gadget gadget = (Gadget) sell;
 			addGadget(gadget);
-		default:
-			// shouldn't happen
+			break;
 		}
 	}
 
@@ -512,15 +484,16 @@ public class Ship {
 		switch (sell.getType()) {
 		case 0:
 			ShieldType shield = (ShieldType) sell;
-			removeShield(shield);
+			shields.remove(shield);
+			break;
 		case 1:
 			LaserType laser = (LaserType) sell;
-			removeLaser(laser);
+			lasers.remove(laser);
+			break;
 		case 2:
 			Gadget gadget = (Gadget) sell;
-			removeGadget(gadget);
-		default:
-			// shouldn't happen
+			gadgets.remove(gadget);
+			break;
 		}
 	}
 

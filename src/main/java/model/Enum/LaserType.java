@@ -128,6 +128,27 @@ public enum LaserType implements Sellable {
 		return 0;
 	}
 
+	/**
+	 * Returns the valid LaserType from the passed in string value
+	 * 
+	 * @param value
+	 *            The string representation of the needed LaserType
+	 * @return The LaserType that matches the given string value
+	 */
+	public static LaserType getEnum(String value) {
+		value = value.toLowerCase();
+		switch (value) {
+		case "beam laser":
+			return LaserType.BEAMLASER;
+		case "military laser":
+			return LaserType.MILITARYLASER;
+		case "pulse laser":
+			return LaserType.PULSELASER;
+		default:
+			return null;
+		}
+	}
+
 	@Override
 	public String toString() {
 		switch (this) {
