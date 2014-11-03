@@ -42,9 +42,10 @@ public class ShipyardEngine {
 	 */
 	public List<String> buy(ShipType type, Shipyard shipyard,
 			double playerAssetValue) {
-		double cost = shipyard.getBuyPrice(type) - playerAssetValue;
-		List<String> errors = validateBuy(cost);
+		double cost = shipyard.getBuyPrice(type);
+		List<String> errors = validateBuy(cost, playerAssetValue);
 		if (errors.isEmpty()) {
+			cost -= playerAssetValue;
 			ship = new Ship(type);
 			player.setShip(ship);
 			player.decreaseCredits(cost);
@@ -57,12 +58,14 @@ public class ShipyardEngine {
 	 * 
 	 * @param cost
 	 *            The cost of the ship
+	 * @param playerAssetValue
+	 *            the value of the player's current assets
 	 * @return Any errors from the buy, if any
 	 */
-	private List<String> validateBuy(double cost) {
+	private List<String> validateBuy(double cost, double playerAssetValue) {
 		List<String> errors = new ArrayList<String>();
 
-		if (player.getCredits() < cost) {
+		if (player.getCredits() < cost - playerAssetValue) {
 			errors.add("Not enough credits");
 		}
 		if (cost == -1)

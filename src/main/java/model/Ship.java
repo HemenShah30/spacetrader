@@ -220,7 +220,7 @@ public class Ship {
 	 * @return the size of the cargo hold of the ship
 	 */
 	public int getCargoSize() {
-		return cargoSize;
+		return cargoSize + (gadgets.contains(new FiveExtraCargo()) ? 5 : 0);
 	}
 
 	/**
@@ -321,10 +321,8 @@ public class Ship {
 	 * 
 	 * @param shield
 	 *            The shield to be added to the ship
-	 * @throws MaxCapacityException
-	 *             Thrown when too many shields are added
 	 */
-	public void addShield(ShieldType shield) throws MaxCapacityException {
+	public void addShield(ShieldType shield) {
 		if (shipType.getShieldSlots() > shields.size()) {
 			shields.put(shield, shield.getShieldHP());
 			numShields++;
@@ -338,10 +336,8 @@ public class Ship {
 	 * 
 	 * @param laser
 	 *            The laser to be added to the ship
-	 * @throws MaxCapacityException
-	 *             Thrown when too many lasers are added
 	 */
-	public void addLaser(LaserType laser) throws MaxCapacityException {
+	public void addLaser(LaserType laser) {
 		if (shipType.getWeaponSlots() > lasers.size()) {
 			lasers.add(laser);
 			numLasers++;
@@ -355,55 +351,14 @@ public class Ship {
 	 * 
 	 * @param g
 	 *            The gadget to be added to the ship
-	 * @throws MaxCapacityException
-	 *             thrown when too many gadgets are added
 	 */
-	public void addGadget(Gadget g) throws MaxCapacityException {
+	public void addGadget(Gadget g) {
 		if (shipType.getGadgetSlots() > gadgets.size()) {
 			gadgets.add(g);
 			numGadgets++;
 			return;
 		}
 		throw new MaxCapacityException("Already has max gadgets");
-	}
-
-	/**
-	 * Removes the laser from the ship
-	 * 
-	 * @param l
-	 *            the laser to be removed
-	 */
-	public void removeLaser(LaserType l) {
-		if (!lasers.contains(l)) {
-			// throw error
-		}
-		lasers.remove(l);
-	}
-
-	/**
-	 * Removes the shield from the ship
-	 * 
-	 * @param l
-	 *            the laser to be removed
-	 */
-	public void removeShield(ShieldType s) {
-		if (!shields.containsKey(s)) {
-			// throw error
-		}
-		lasers.remove(s);
-	}
-
-	/**
-	 * Removes the gadget from the ship
-	 * 
-	 * @param l
-	 *            the gadget to be removed
-	 */
-	public void removeGadget(Gadget g) {
-		if (!gadgets.contains(g)) {
-			// throw error
-		}
-		lasers.remove(g);
 	}
 
 	/**
@@ -436,7 +391,7 @@ public class Ship {
 	/**
 	 * Returns the number of lasers equipped
 	 * 
-	 * @return Int number of lasers
+	 * @return the number of lasers
 	 */
 	public int getNumLasers() {
 		return numLasers;
@@ -445,7 +400,7 @@ public class Ship {
 	/**
 	 * Returns the number of shields equipped
 	 * 
-	 * @return Int number of shields
+	 * @return the number of shields
 	 */
 	public int getNumShields() {
 		return numShields;
@@ -454,10 +409,46 @@ public class Ship {
 	/**
 	 * Returns the number of gadgets equipped
 	 * 
-	 * @return int number of gadgets
+	 * @return the number of gadgets
 	 */
 	public int getNumGadgets() {
 		return numGadgets;
+	}
+
+	/**
+	 * Gets the navigation bonus for the ship
+	 * 
+	 * @return The navigation bonus for the ship
+	 */
+	public int getPilotBonus() {
+		return gadgets.contains(new NavigatingSystem()) ? 5 : 0;
+	}
+
+	/**
+	 * Gets the fighting bonus for the ship
+	 * 
+	 * @return The fighting bonus for the ship
+	 */
+	public int getFightingBonus() {
+		return gadgets.contains(new TargetingSystem()) ? 5 : 0;
+	}
+
+	/**
+	 * Gets the engineer bonus for the ship
+	 * 
+	 * @return The engineer bonus for the ship
+	 */
+	public int getEngineerBonus() {
+		return gadgets.contains(new AutoRepairSystem()) ? 5 : 0;
+	}
+
+	/**
+	 * Returns whether or not the ship has a cloaking device
+	 * 
+	 * @return Whether or not the ship has a cloaking device
+	 */
+	public boolean hasCloakingDevice() {
+		return gadgets.contains(new CloakingDevice());
 	}
 
 	/**
@@ -465,24 +456,21 @@ public class Ship {
 	 * 
 	 * @param sell
 	 *            The sellable being added
-	 * @param type
-	 *            an int key representing 0-shield, 1-laser, 2-gadget
-	 * @throws MaxCapacityException
 	 */
-	public void addSellable(Sellable sell, int type)
-			throws MaxCapacityException {
-		switch (type) {
+	public void addSellable(Sellable sell) {
+		switch (sell.getType()) {
 		case 0:
 			ShieldType shield = (ShieldType) sell;
 			addShield(shield);
+			break;
 		case 1:
 			LaserType laser = (LaserType) sell;
 			addLaser(laser);
+			break;
 		case 2:
 			Gadget gadget = (Gadget) sell;
 			addGadget(gadget);
-		default:
-			// shouldn't happen
+			break;
 		}
 	}
 
@@ -491,22 +479,21 @@ public class Ship {
 	 * 
 	 * @param sell
 	 *            The sellable being removed
-	 * @param type
-	 *            an int key representing 0-shield, 1-laser, 2-gadget
 	 */
-	public void removeSellable(Sellable sell, int type) {
-		switch (type) {
+	public void removeSellable(Sellable sell) {
+		switch (sell.getType()) {
 		case 0:
 			ShieldType shield = (ShieldType) sell;
-			removeShield(shield);
+			shields.remove(shield);
+			break;
 		case 1:
 			LaserType laser = (LaserType) sell;
-			removeLaser(laser);
+			lasers.remove(laser);
+			break;
 		case 2:
 			Gadget gadget = (Gadget) sell;
-			removeGadget(gadget);
-		default:
-			// shouldn't happen
+			gadgets.remove(gadget);
+			break;
 		}
 	}
 

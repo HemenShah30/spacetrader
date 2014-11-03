@@ -19,8 +19,19 @@ public class FiveExtraCargo extends Gadget {
 	public FiveExtraCargo() {
 		super(PRICE, MIN_TECH_LEVEL);
 	}
-	
+
+	@Override
+	public boolean equals(Object other) {
+		return other instanceof FiveExtraCargo;
+	}
+
+	@Override
+	public int hashCode() {
+		return toString().hashCode();
+	}
+
+	@Override
 	public String toString() {
-		return "5 Extra Cargo Spaces";
+		return "Five Extra Cargo Spaces";
 	}
 }
