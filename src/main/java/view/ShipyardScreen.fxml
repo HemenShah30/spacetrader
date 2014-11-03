@@ -87,6 +87,98 @@
                   <Button fx:id="buyShipBtn" mnemonicParsing="false" onKeyPressed="#buyShipFromShipyard" onMouseClicked="#buyShipFromShipyard" text="Buy for 0 credits" />
                </children>
             </VBox>
+            <VBox prefHeight="200.0" prefWidth="300.0">
+               <children>
+                  <TabPane prefHeight="320.0" prefWidth="300.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab text="Weapons">
+                           <content>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox alignment="TOP_CENTER">
+                                       <children>
+                                          <ListView fx:id="buyWeaponList" prefHeight="200.0" prefWidth="150.0" />
+                                          <Button fx:id="buyWeaponBtn" mnemonicParsing="false" onMouseClicked="#buySelectedWeapon" text="Buy">
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="TOP_CENTER">
+                                       <children>
+                                          <ListView fx:id="sellWeaponList" prefHeight="200.0" prefWidth="150.0" />
+                                          <Button fx:id="sellWeaponBtn" mnemonicParsing="false" onMouseClicked="#sellSelectedWeapon" text="Sell">
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </content>
+                      </Tab>
+                        <Tab text="Shields">
+                           <content>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox alignment="TOP_CENTER">
+                                       <children>
+                                          <ListView fx:id="buyShieldList" prefHeight="200.0" prefWidth="150.0" />
+                                          <Button fx:id="buyShieldBtn" mnemonicParsing="false" onMouseClicked="#buySelectedShield" text="Buy">
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="TOP_CENTER">
+                                       <children>
+                                          <ListView fx:id="sellShieldList" prefHeight="200.0" prefWidth="150.0" />
+                                          <Button fx:id="sellShieldBtn" mnemonicParsing="false" onMouseClicked="#sellSelectedShield" text="Sell">
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </content>
+                        </Tab>
+                        <Tab text="Gadgets">
+                           <content>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox alignment="TOP_CENTER">
+                                       <children>
+                                          <ListView fx:id="buyGadgetList" prefHeight="200.0" prefWidth="150.0" />
+                                          <Button fx:id="buyGadgetBtn" mnemonicParsing="false" onMouseClicked="#buySelectedGadget" text="Buy">
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="TOP_CENTER">
+                                       <children>
+                                          <ListView fx:id="sellGadgetList" prefHeight="200.0" prefWidth="150.0" />
+                                          <Button fx:id="sellGadgetBtn" mnemonicParsing="false" onMouseClicked="#sellSelectedGadget" text="Sell">
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </content>
+                        </Tab>
+                    </tabs>
+                  </TabPane>
+               </children>
+            </VBox>
          </children>
       </HBox>
    </center>

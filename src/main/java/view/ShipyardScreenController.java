@@ -17,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
@@ -99,6 +100,42 @@ public class ShipyardScreenController {
 
 	@FXML
 	private Button backToPlanetBtn;
+	
+	@FXML
+	private Button sellWeaponBtn;
+
+	@FXML
+	private Button buyShieldBtn;
+
+	@FXML
+	private ListView<?> buyGadgetList;
+
+	@FXML
+	private Button buyGadgetBtn;
+
+	@FXML
+	private ListView<?> buyWeaponList;
+
+	@FXML
+	private ListView<?> sellWeaponList;
+
+	@FXML
+	private Button sellGadgetBtn;
+
+	@FXML
+	private ListView<?> buyShieldList;
+
+	@FXML
+	private ListView<?> sellShieldList;
+
+	@FXML
+	private ListView<?> sellGadgetList;
+
+	@FXML
+	private Button buyWeaponBtn;
+
+	@FXML
+	private Button sellShieldBtn;
 
 	/**
 	 * Method for selecting a new ship from the drop down menu
@@ -251,4 +288,37 @@ public class ShipyardScreenController {
 		Dialogs.create().owner(buyShipBtn.getScene().getWindow())
 				.title("Error").message(msg).showError();
 	}
+
+
+
+    @FXML
+    void buySelectedWeapon(Event event) {
+
+    }
+
+    @FXML
+    void sellSelectedWeapon(Event event) {
+
+    }
+
+    @FXML
+    void buySelectedShield(Event event) {
+
+    }
+
+    @FXML
+    void sellSelectedShield(Event event) {
+
+    }
+
+    @FXML
+    void buySelectedGadget(Event event) {
+
+    }
+
+    @FXML
+    void sellSelectedGadget(Event event) {
+
+    }
+
 }
