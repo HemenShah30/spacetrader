@@ -29,7 +29,8 @@ public class TargetingSystem extends Gadget {
 		return toString().hashCode();
 	}
 
+	@Override
 	public String toString() {
-		return "TargetingSystem";
+		return "Targeting System";
 	}
 }

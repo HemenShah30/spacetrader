@@ -207,6 +207,7 @@ public class ShipyardScreenController {
 		GameEngine game = GameEngine.getGameEngine();
 		Player player = game.getPlayer();
 		List<ShipType> shipTypes = game.getAvailableShips();
+		shipTypes.remove(player.getShip().getShipType());
 		shipDropDown.getItems().removeAll(ShipType.values());
 		shipDropDown.getItems().addAll(shipTypes);
 		shipDropDown.setConverter(new StringConverter<ShipType>() {
@@ -337,12 +338,24 @@ public class ShipyardScreenController {
 			case "buyWeaponBtn": {
 				sellable = buyWeaponList.getSelectionModel().getSelectedItem();
 				break;
-			} case "buyShieldBtn": {
+			}
+			case "buyShieldBtn": {
 				sellable = buyShieldList.getSelectionModel().getSelectedItem();
+				break;
+			}
+			case "buyGadgetBtn": {
+				sellable = buyGadgetList.getSelectionModel().getSelectedItem();
+				break;
 			}
 			}
-			GameEngine.getGameEngine()
+			List<String> errors = GameEngine.getGameEngine()
 					.tradeSellableWithShipyard(sellable, true);
+			String errorMsg = "";
+			for (String error : errors)
+				errorMsg += error + "\n";
+			if (errors.size() > 0)
+				displayError(errorMsg);
+			initializePage();
 		}
 	}
 
@@ -359,32 +372,27 @@ public class ShipyardScreenController {
 			Button btn = (Button) event.getSource();
 			String id = btn.getId();
 			switch (id) {
-
+			case "sellWeaponBtn": {
+				sellable = sellWeaponList.getSelectionModel().getSelectedItem();
+				break;
 			}
-			GameEngine.getGameEngine().tradeSellableWithShipyard(sellable,
-					false);
+			case "sellShieldBtn": {
+				sellable = sellShieldList.getSelectionModel().getSelectedItem();
+				break;
+			}
+			case "sellGadgetBtn": {
+				sellable = sellGadgetList.getSelectionModel().getSelectedItem();
+				break;
+			}
+			}
+			List<String> errors = GameEngine.getGameEngine()
+					.tradeSellableWithShipyard(sellable, false);
+			String errorMsg = "";
+			for (String error : errors)
+				errorMsg += error + "\n";
+			if (errors.size() > 0)
+				displayError(errorMsg);
+			initializePage();
 		}
 	}
-
-	// @FXML
-	// private void buySelectedShield(Event event) {
-	// if(MultiPageController.isValidAction(event)) {
-	//
-	// }
-	// }
-	//
-	// @FXML
-	// private void sellSelectedShield(Event event) {
-	//
-	// }
-	//
-	// @FXML
-	// private void buySelectedGadget(Event event) {
-	//
-	// }
-	//
-	// @FXML
-	// private void sellSelectedGadget(Event event) {
-	//
-	// }
 }

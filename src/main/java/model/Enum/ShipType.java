@@ -18,7 +18,7 @@ public enum ShipType {
 	TERMITE		(13, 200, 60, 1, 3, 2, 3, 6, 7, 120000, 200, 5, 0, 0, 0, 4, 3, 50, 40, 30, 101, 101, 101),
 	WASP		(14, 200, 35, 3, 2, 2, 3, 7, 7, 160000, 1000, 5, 0, 0, 0, 5, 3, 50, 40, 60, 101, 101, 101),
 	MANTIS		(16, 225, 10, 3, 3, 3, 3, 7, 7, 220000, 1000, 5, 0, 0, 0, 5, 3, 60, 50, 70, 101, 101, 101);
-	
+
 	private int fuel;
 	private int totalHP;
 	private int cargoSize;
@@ -105,7 +105,7 @@ public enum ShipType {
 		weaponSlots = ws;
 		shieldSlots = ss;
 		gadgetSlots = gs;
-		crewSpace = cs;
+		crewSpace = crewS;
 		minTechLevel = mtl;
 		fuelCost = fc;
 		price = p;
