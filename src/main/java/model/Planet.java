@@ -21,6 +21,7 @@ public class Planet implements Boundary {
 	private Location location;
 	private Marketplace marketplace;
 	private Shipyard shipyard;
+	private Bar bar;
 	private Condition condition;
 	private EncounterRate policeEncounterRate;
 	private EncounterRate pirateEncounterRate;
@@ -75,6 +76,7 @@ public class Planet implements Boundary {
 		} else {
 			shipyard = new Shipyard(this);
 		}
+		bar = new Bar();
 		setDiameter(size);
 		setColor(color);
 		setChances();

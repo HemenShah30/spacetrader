@@ -196,7 +196,7 @@ public class PlanetScreenController {
 		Ship ship = player.getShip();
 		int refuelAmount = (int) ship.getRefuelCost();
 		int repairAmount = (int) ship.getRepairCost();
-		refuelBtn.setText("Repair ship for " + refuelAmount + " credits");
+		refuelBtn.setText("Refuel ship for " + refuelAmount + " credits");
 		repairBtn.setText("Repair ship for " + repairAmount + " credits");
 	}
 

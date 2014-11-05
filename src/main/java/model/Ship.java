@@ -22,7 +22,7 @@ public class Ship {
 	private Map<ShieldType, Integer> shields;
 	private List<LaserType> lasers;
 	private List<Gadget> gadgets;
-	// private List<Mercenary> mercenaries;
+	private List<Mercenary> mercenaries;
 	private Map<GoodType, Integer> cargo;
 
 	/**
@@ -233,14 +233,14 @@ public class Ship {
 		this.cargoSize = cargoSize;
 	}
 
-	// /**
-	// * Returns the list of mercenaries
-	// *
-	// * @return the list of mercenaries
-	// */
-	// public List<Mercenary> getMercenaries() {
-	// return mercenaries;
-	// }
+	/**
+	* Returns the list of mercenaries
+	*
+	* @return the list of mercenaries
+	*/
+	public List<Mercenary> getMercenaries() {
+		return mercenaries;
+	}
 
 	/**
 	 * Returns the current cargo capacity of the ship
