@@ -32,6 +32,6 @@ public class AutoRepairSystem extends Gadget {
 
 	@Override
 	public String toString() {
-		return "AutoRepairSystem";
+		return "Auto Repair System";
 	}
 }

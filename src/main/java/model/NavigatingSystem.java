@@ -32,6 +32,6 @@ public class NavigatingSystem extends Gadget {
 
 	@Override
 	public String toString() {
-		return "NavigatingSystem";
+		return "Navigating System";
 	}
 }

@@ -3,8 +3,6 @@ package model;
 import java.util.HashMap;
 import java.util.Map;
 
-import model.Enum.LaserType;
-import model.Enum.ShieldType;
 import model.Enum.ShipType;
 
 /**

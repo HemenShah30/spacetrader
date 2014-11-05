@@ -18,7 +18,7 @@ import model.Enum.ShipType;
  */
 public class Ship {
 	private ShipType shipType;
-	private int currHP, fuel, cargoSize, numLasers, numShields, numGadgets;
+	private int currHP, fuel, cargoSize;
 	private Map<ShieldType, Integer> shields;
 	private List<LaserType> lasers;
 	private List<Gadget> gadgets;
@@ -234,10 +234,10 @@ public class Ship {
 	}
 
 	/**
-	* Returns the list of mercenaries
-	*
-	* @return the list of mercenaries
-	*/
+	 * Returns the list of mercenaries
+	 *
+	 * @return the list of mercenaries
+	 */
 	public List<Mercenary> getMercenaries() {
 		return mercenaries;
 	}
@@ -325,7 +325,6 @@ public class Ship {
 	public void addShield(ShieldType shield) {
 		if (shipType.getShieldSlots() > shields.size()) {
 			shields.put(shield, shield.getShieldHP());
-			numShields++;
 			return;
 		}
 		throw new MaxCapacityException("Already has max shields");
@@ -340,7 +339,6 @@ public class Ship {
 	public void addLaser(LaserType laser) {
 		if (shipType.getWeaponSlots() > lasers.size()) {
 			lasers.add(laser);
-			numLasers++;
 			return;
 		}
 		throw new MaxCapacityException("Already has max lasers");
@@ -355,7 +353,6 @@ public class Ship {
 	public void addGadget(Gadget g) {
 		if (shipType.getGadgetSlots() > gadgets.size()) {
 			gadgets.add(g);
-			numGadgets++;
 			return;
 		}
 		throw new MaxCapacityException("Already has max gadgets");
@@ -394,7 +391,7 @@ public class Ship {
 	 * @return the number of lasers
 	 */
 	public int getNumLasers() {
-		return numLasers;
+		return lasers.size();
 	}
 
 	/**
@@ -403,7 +400,7 @@ public class Ship {
 	 * @return the number of shields
 	 */
 	public int getNumShields() {
-		return numShields;
+		return shields.size();
 	}
 
 	/**
@@ -412,7 +409,7 @@ public class Ship {
 	 * @return the number of gadgets
 	 */
 	public int getNumGadgets() {
-		return numGadgets;
+		return gadgets.size();
 	}
 
 	/**

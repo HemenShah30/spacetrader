@@ -4,15 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Marketplace;
-import model.MaxCapacityException;
 import model.Player;
 import model.Sellable;
 import model.Ship;
 import model.Shipyard;
 import model.Trader;
 import model.Enum.GoodType;
-import model.Enum.LaserType;
-import model.Enum.ShieldType;
 
 /**
  * Class providing methods for trade interactions

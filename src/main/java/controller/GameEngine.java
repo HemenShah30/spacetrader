@@ -14,7 +14,6 @@ import model.Planet;
 import model.Player;
 import model.Sellable;
 import model.Ship;
-import model.Shipyard;
 import model.Trader;
 import model.Universe;
 import model.Enum.EncounterResult;
