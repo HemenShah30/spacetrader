@@ -168,10 +168,7 @@ public enum ShieldType implements Sellable {
 
 	@Override
 	public boolean canSell(Ship ship) {
-		if (ship.getNumShields() < 1) {
-			return false;
-		}
-		return true;
+		return ship.hasShield(this);
 	}
 
 	@Override

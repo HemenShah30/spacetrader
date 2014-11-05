@@ -41,10 +41,7 @@ public class Gadget implements Sellable {
 
 	@Override
 	public boolean canSell(Ship ship) {
-		if (ship.getNumGadgets() < 1) {
-			return false;
-		}
-		return true;
+		return ship.hasGadget(this);
 	}
 
 	@Override

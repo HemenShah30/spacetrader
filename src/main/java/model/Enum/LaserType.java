@@ -173,10 +173,7 @@ public enum LaserType implements Sellable {
 
 	@Override
 	public boolean canSell(Ship ship) {
-		if (ship.getNumLasers() < 1) {
-			return false;
-		}
-		return true;
+		return ship.hasLaser(this);
 	}
 
 	@Override
