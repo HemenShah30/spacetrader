@@ -158,13 +158,6 @@ public enum ShieldType implements Sellable {
 		}
 	}
 
-	/**
-	 * Returns whether or not the ship can hold another shield
-	 * 
-	 * @param ship
-	 *            the player's ship
-	 * @return boolean result
-	 */
 	@Override
 	public boolean canBuy(Ship ship) {
 		if (ship.getNumShields() + 1 > ship.getShipType().getShieldSlots()) {
@@ -173,13 +166,6 @@ public enum ShieldType implements Sellable {
 		return true;
 	}
 
-	/**
-	 * Returns whether or not the ship can sell a shield
-	 * 
-	 * @param ship
-	 *            the player's ship
-	 * @return boolean result
-	 */
 	@Override
 	public boolean canSell(Ship ship) {
 		if (ship.getNumShields() < 1) {
@@ -188,11 +174,6 @@ public enum ShieldType implements Sellable {
 		return true;
 	}
 
-	/**
-	 * Returns a 0 for addSellable purposes
-	 * 
-	 * @return int type 0 == shield
-	 */
 	@Override
 	public int getType() {
 		return 0;

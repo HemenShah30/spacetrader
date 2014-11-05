@@ -1,13 +1,36 @@
 package model;
 
 public interface Sellable {
-	double getPrice();
-
-	boolean canBuy(Ship ship);
-
-	boolean canSell(Ship ship);
-
-	int getMinTechLevel();
 	
-	int getType();
+	/**
+	 * 
+	 * @return
+	 */
+	public double getPrice();
+
+	/**
+	 * 
+	 * @param ship
+	 * @return
+	 */
+	public boolean canBuy(Ship ship);
+
+	/**
+	 * 
+	 * @param ship
+	 * @return
+	 */
+	public boolean canSell(Ship ship);
+
+	/**
+	 * 
+	 * @return
+	 */
+	public int getMinTechLevel();
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public int getType();
 }

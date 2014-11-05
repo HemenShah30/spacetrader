@@ -1,5 +1,8 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Class encompassing the various gadgets
  * 
@@ -23,22 +26,11 @@ public class Gadget implements Sellable {
 		minTechLevel = mtl;
 	}
 
-	/**
-	 * Returns the price of the gadget in double
-	 * 
-	 */
 	@Override
 	public double getPrice() {
 		return price;
 	}
 
-	/**
-	 * Returns whether or not the ship can hold another gadget
-	 * 
-	 * @param ship
-	 *            the player's ship
-	 * @return boolean result
-	 */
 	@Override
 	public boolean canBuy(Ship ship) {
 		if (ship.getNumGadgets() + 1 > ship.getShipType().getGadgetSlots()) {
@@ -47,13 +39,6 @@ public class Gadget implements Sellable {
 		return true;
 	}
 
-	/**
-	 * Returns whether or not the ship can sell a gadget
-	 * 
-	 * @param ship
-	 *            the player's ship
-	 * @return boolean result
-	 */
 	@Override
 	public boolean canSell(Ship ship) {
 		if (ship.getNumGadgets() < 1) {
@@ -67,14 +52,23 @@ public class Gadget implements Sellable {
 		return minTechLevel;
 	}
 
-	/**
-	 * Returns a 2 for addSellable purposes
-	 * 
-	 * @return int type 2 == gadget
-	 */
 	@Override
 	public int getType() {
 		return 2;
 	}
 
+	/**
+	 * Returns a list of all the gadgets in the game
+	 * 
+	 * @return The list of all gadgets in the game
+	 */
+	public static List<Gadget> getAllGadgets() {
+		List<Gadget> gadgets = new ArrayList<Gadget>();
+		gadgets.add(new AutoRepairSystem());
+		gadgets.add(new FiveExtraCargo());
+		gadgets.add(new NavigatingSystem());
+		gadgets.add(new TargetingSystem());
+		gadgets.add(new CloakingDevice());
+		return gadgets;
+	}
 }

@@ -98,7 +98,7 @@
                                     <VBox alignment="TOP_CENTER">
                                        <children>
                                           <ListView fx:id="buyWeaponList" prefHeight="200.0" prefWidth="150.0" />
-                                          <Button fx:id="buyWeaponBtn" mnemonicParsing="false" onMouseClicked="#buySelectedWeapon" text="Buy">
+                                          <Button fx:id="buyWeaponBtn" mnemonicParsing="false" onKeyPressed="#buySellable" onMouseClicked="#buySellable" text="Buy">
                                              <VBox.margin>
                                                 <Insets top="10.0" />
                                              </VBox.margin>
@@ -108,7 +108,7 @@
                                     <VBox alignment="TOP_CENTER">
                                        <children>
                                           <ListView fx:id="sellWeaponList" prefHeight="200.0" prefWidth="150.0" />
-                                          <Button fx:id="sellWeaponBtn" mnemonicParsing="false" onMouseClicked="#sellSelectedWeapon" text="Sell">
+                                          <Button fx:id="sellWeaponBtn" mnemonicParsing="false" onKeyPressed="#sellSellable" onMouseClicked="#sellSellable" text="Sell">
                                              <VBox.margin>
                                                 <Insets top="10.0" />
                                              </VBox.margin>
@@ -126,7 +126,7 @@
                                     <VBox alignment="TOP_CENTER">
                                        <children>
                                           <ListView fx:id="buyShieldList" prefHeight="200.0" prefWidth="150.0" />
-                                          <Button fx:id="buyShieldBtn" mnemonicParsing="false" onMouseClicked="#buySelectedShield" text="Buy">
+                                          <Button fx:id="buyShieldBtn" mnemonicParsing="false" text="Buy">
                                              <VBox.margin>
                                                 <Insets top="10.0" />
                                              </VBox.margin>
@@ -136,7 +136,7 @@
                                     <VBox alignment="TOP_CENTER">
                                        <children>
                                           <ListView fx:id="sellShieldList" prefHeight="200.0" prefWidth="150.0" />
-                                          <Button fx:id="sellShieldBtn" mnemonicParsing="false" onMouseClicked="#sellSelectedShield" text="Sell">
+                                          <Button fx:id="sellShieldBtn" mnemonicParsing="false" text="Sell">
                                              <VBox.margin>
                                                 <Insets top="10.0" />
                                              </VBox.margin>
@@ -154,7 +154,7 @@
                                     <VBox alignment="TOP_CENTER">
                                        <children>
                                           <ListView fx:id="buyGadgetList" prefHeight="200.0" prefWidth="150.0" />
-                                          <Button fx:id="buyGadgetBtn" mnemonicParsing="false" onMouseClicked="#buySelectedGadget" text="Buy">
+                                          <Button fx:id="buyGadgetBtn" mnemonicParsing="false" text="Buy">
                                              <VBox.margin>
                                                 <Insets top="10.0" />
                                              </VBox.margin>
@@ -164,7 +164,7 @@
                                     <VBox alignment="TOP_CENTER">
                                        <children>
                                           <ListView fx:id="sellGadgetList" prefHeight="200.0" prefWidth="150.0" />
-                                          <Button fx:id="sellGadgetBtn" mnemonicParsing="false" onMouseClicked="#sellSelectedGadget" text="Sell">
+                                          <Button fx:id="sellGadgetBtn" mnemonicParsing="false" text="Sell">
                                              <VBox.margin>
                                                 <Insets top="10.0" />
                                              </VBox.margin>

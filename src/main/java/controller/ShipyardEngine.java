@@ -3,9 +3,12 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Gadget;
 import model.Player;
 import model.Ship;
 import model.Shipyard;
+import model.Enum.LaserType;
+import model.Enum.ShieldType;
 import model.Enum.ShipType;
 
 /**
@@ -71,5 +74,73 @@ public class ShipyardEngine {
 		if (cost == -1)
 			errors.add("Planet cannot sell this ship");
 		return errors;
+	}
+
+	/**
+	 * Returns the list of available ships to buy on the player's current planet
+	 * 
+	 * @return The list of available ships to buy on the player's current planet
+	 */
+	public List<ShipType> getAvailableShips() {
+		List<ShipType> ships = new ArrayList<ShipType>();
+		int techLevel = player.getPlanet().getTechLevel().getValue();
+		for (ShipType ship : ShipType.values()) {
+			if (ship.getMinTechLevel() <= techLevel)
+				ships.add(ship);
+		}
+		return ships;
+	}
+
+	/**
+	 * Returns the list of available lasers to buy on the player's current
+	 * planet
+	 * 
+	 * @return The list of available lasers to buy on the player's current
+	 *         planet
+	 */
+	public List<LaserType> getAvailableLasers() {
+		List<LaserType> lasers = new ArrayList<LaserType>();
+		int techLevel = player.getPlanet().getTechLevel().getValue();
+		for (LaserType laser : LaserType.values()) {
+			if (laser.getMinTechLevel() <= techLevel)
+				lasers.add(laser);
+		}
+		return lasers;
+	}
+
+	/**
+	 * Returns the list of available shields to buy on the player's current
+	 * planet
+	 * 
+	 * @return The list of available shields to buy on the player's current
+	 *         planet
+	 */
+	public List<ShieldType> getAvailableShields() {
+		List<ShieldType> shields = new ArrayList<ShieldType>();
+		int techLevel = player.getPlanet().getTechLevel().getValue();
+		for (ShieldType shield : ShieldType.values()) {
+			if (shield.getMinTechLevel() <= techLevel)
+				shields.add(shield);
+		}
+		return shields;
+	}
+
+	/**
+	 * Returns the list of available gadgets to buy on the player's current
+	 * planet
+	 * 
+	 * @return The list of available gadgets to buy on the player's current
+	 *         planet
+	 */
+	public List<Gadget> getAvailableGadgets() {
+		List<Gadget> gadgets = Gadget.getAllGadgets();
+		int techLevel = player.getPlanet().getTechLevel().getValue();
+		for (int i = 0; i < gadgets.size(); i++) {
+			if (techLevel < gadgets.get(i).getMinTechLevel()) {
+				gadgets.remove(i);
+				i--;
+			}
+		}
+		return gadgets;
 	}
 }

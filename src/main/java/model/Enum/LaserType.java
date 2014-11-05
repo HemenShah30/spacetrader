@@ -163,13 +163,6 @@ public enum LaserType implements Sellable {
 		}
 	}
 
-	/**
-	 * Returns whether or not the ship can hold another laser
-	 * 
-	 * @param ship
-	 *            the player's ship
-	 * @return boolean result
-	 */
 	@Override
 	public boolean canBuy(Ship ship) {
 		if (ship.getNumLasers() + 1 > ship.getShipType().getWeaponSlots()) {
@@ -178,13 +171,6 @@ public enum LaserType implements Sellable {
 		return true;
 	}
 
-	/**
-	 * Returns whether or not the ship can sell a laser
-	 * 
-	 * @param ship
-	 *            the player's ship
-	 * @return boolean result
-	 */
 	@Override
 	public boolean canSell(Ship ship) {
 		if (ship.getNumLasers() < 1) {
@@ -193,11 +179,6 @@ public enum LaserType implements Sellable {
 		return true;
 	}
 
-	/**
-	 * Returns a 1 for addSellable purposes
-	 * 
-	 * @return int type 1 == laser
-	 */
 	@Override
 	public int getType() {
 		return 1;

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import database.Database;
 import model.Encounter;
+import model.Gadget;
 import model.Location;
 import model.MaxCapacityException;
 import model.NPCEncounter;
@@ -13,11 +14,13 @@ import model.Planet;
 import model.Player;
 import model.Sellable;
 import model.Ship;
+import model.Shipyard;
 import model.Trader;
 import model.Universe;
 import model.Enum.EncounterResult;
 import model.Enum.GoodType;
 import model.Enum.LaserType;
+import model.Enum.ShieldType;
 import model.Enum.ShipType;
 
 /**
@@ -384,5 +387,55 @@ public class GameEngine {
 			return tradeEngine.buySellable(sell, player.getPlanet()
 					.getShipyard());
 		return tradeEngine.sellSellable(sell, player.getPlanet().getShipyard());
+	}
+
+	/**
+	 * Returns the list of available ships to buy on the player's current planet
+	 * 
+	 * @return The list of available ships to buy on the player's current planet
+	 */
+	public List<ShipType> getAvailableShips() {
+		if (player.getPlanet().getShipyard() != null)
+			return shipyardEngine.getAvailableShips();
+		return null;
+	}
+
+	/**
+	 * Returns the list of available lasers to buy on the player's current
+	 * planet
+	 * 
+	 * @return The list of available lasers to buy on the player's current
+	 *         planet
+	 */
+	public List<LaserType> getAvailableLasers() {
+		if (player.getPlanet().getShipyard() != null)
+			return shipyardEngine.getAvailableLasers();
+		return null;
+	}
+
+	/**
+	 * Returns the list of available shields to buy on the player's current
+	 * planet
+	 * 
+	 * @return The list of available shields to buy on the player's current
+	 *         planet
+	 */
+	public List<ShieldType> getAvailableShields() {
+		if (player.getPlanet().getShipyard() != null)
+			return shipyardEngine.getAvailableShields();
+		return null;
+	}
+
+	/**
+	 * Returns the list of available gadgets to buy on the player's current
+	 * planet
+	 * 
+	 * @return The list of available gadgets to buy on the player's current
+	 *         planet
+	 */
+	public List<Gadget> getAvailableGadgets() {
+		if (player.getPlanet().getShipyard() != null)
+			return shipyardEngine.getAvailableGadgets();
+		return null;
 	}
 }

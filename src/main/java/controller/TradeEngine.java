@@ -236,10 +236,8 @@ public class TradeEngine {
 	 * @param shipyard
 	 *            The shipyard involved in the transaction
 	 * @return The errors from the transaction, if any
-	 * @throws MaxCapacityException
 	 */
-	public List<String> buySellable(Sellable sell, Shipyard shipyard)
-			throws MaxCapacityException {
+	public List<String> buySellable(Sellable sell, Shipyard shipyard) {
 		double cost = shipyard.getSellableBuy(sell);
 		List<String> errors = validateSellableBuy(cost, sell);
 		if (errors.isEmpty()) {

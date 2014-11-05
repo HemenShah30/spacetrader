@@ -1,13 +1,17 @@
 package view;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.controlsfx.dialog.Dialogs;
 
 import controller.GameEngine;
+import model.Gadget;
 import model.Player;
+import model.Sellable;
+import model.Ship;
+import model.Enum.LaserType;
+import model.Enum.ShieldType;
 import model.Enum.ShipType;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -100,7 +104,7 @@ public class ShipyardScreenController {
 
 	@FXML
 	private Button backToPlanetBtn;
-	
+
 	@FXML
 	private Button sellWeaponBtn;
 
@@ -108,28 +112,28 @@ public class ShipyardScreenController {
 	private Button buyShieldBtn;
 
 	@FXML
-	private ListView<?> buyGadgetList;
+	private ListView<Gadget> buyGadgetList;
 
 	@FXML
 	private Button buyGadgetBtn;
 
 	@FXML
-	private ListView<?> buyWeaponList;
+	private ListView<LaserType> buyWeaponList;
 
 	@FXML
-	private ListView<?> sellWeaponList;
+	private ListView<LaserType> sellWeaponList;
 
 	@FXML
 	private Button sellGadgetBtn;
 
 	@FXML
-	private ListView<?> buyShieldList;
+	private ListView<ShieldType> buyShieldList;
 
 	@FXML
-	private ListView<?> sellShieldList;
+	private ListView<ShieldType> sellShieldList;
 
 	@FXML
-	private ListView<?> sellGadgetList;
+	private ListView<Gadget> sellGadgetList;
 
 	@FXML
 	private Button buyWeaponBtn;
@@ -202,11 +206,7 @@ public class ShipyardScreenController {
 	public void initializePage() {
 		GameEngine game = GameEngine.getGameEngine();
 		Player player = game.getPlayer();
-		List<ShipType> shipTypes = new ArrayList<ShipType>();
-		for (ShipType st : ShipType.values()) {
-			if (!st.equals(player.getShip().getShipType()))
-				shipTypes.add(st);
-		}
+		List<ShipType> shipTypes = game.getAvailableShips();
 		shipDropDown.getItems().removeAll(ShipType.values());
 		shipDropDown.getItems().addAll(shipTypes);
 		shipDropDown.setConverter(new StringConverter<ShipType>() {
@@ -232,6 +232,7 @@ public class ShipyardScreenController {
 		playerNameLbl.setText(player.getName());
 		playerCreditsLbl.setText("Credits: " + player.getCredits());
 		updateShipLabels();
+		updateSellableListViews();
 	}
 
 	/**
@@ -279,6 +280,37 @@ public class ShipyardScreenController {
 	}
 
 	/**
+	 * Updates the lists of sellable and buyable items
+	 */
+	private void updateSellableListViews() {
+		GameEngine game = GameEngine.getGameEngine();
+		Ship ship = game.getPlayer().getShip();
+		List<LaserType> lasers = game.getAvailableLasers();
+		List<LaserType> playerLasers = ship.getLasers();
+		lasers.removeAll(playerLasers);
+		buyWeaponList.getItems().removeAll(LaserType.values());
+		buyWeaponList.getItems().addAll(lasers);
+		sellWeaponList.getItems().removeAll(LaserType.values());
+		sellWeaponList.getItems().addAll(playerLasers);
+
+		List<ShieldType> shields = game.getAvailableShields();
+		List<ShieldType> playerShields = ship.getShields();
+		shields.removeAll(playerShields);
+		buyShieldList.getItems().removeAll(ShieldType.values());
+		buyShieldList.getItems().addAll(shields);
+		sellShieldList.getItems().removeAll(ShieldType.values());
+		sellShieldList.getItems().addAll(playerShields);
+
+		List<Gadget> gadgets = game.getAvailableGadgets();
+		List<Gadget> playerGadgets = ship.getGadgets();
+		gadgets.removeAll(playerGadgets);
+		buyGadgetList.getItems().removeAll(Gadget.getAllGadgets());
+		buyGadgetList.getItems().addAll(gadgets);
+		sellGadgetList.getItems().removeAll(Gadget.getAllGadgets());
+		sellGadgetList.getItems().addAll(playerGadgets);
+	}
+
+	/**
 	 * Creates a dialog error box with the given message
 	 * 
 	 * @param msg
@@ -289,36 +321,70 @@ public class ShipyardScreenController {
 				.title("Error").message(msg).showError();
 	}
 
+	/**
+	 * Method that causes a buy transaction for a given upgrade
+	 * 
+	 * @param event
+	 *            The event that fired the method
+	 */
+	@FXML
+	private void buySellable(Event event) {
+		if (MultiPageController.isValidAction(event)) {
+			Sellable sellable = null;
+			Button btn = (Button) event.getSource();
+			String id = btn.getId();
+			switch (id) {
+			case "buyWeaponBtn": {
+				sellable = buyWeaponList.getSelectionModel().getSelectedItem();
+				break;
+			} case "buyShieldBtn": {
+				sellable = buyShieldList.getSelectionModel().getSelectedItem();
+			}
+			}
+			GameEngine.getGameEngine()
+					.tradeSellableWithShipyard(sellable, true);
+		}
+	}
 
+	/**
+	 * Method that causes a sell transaction for a given upgrade
+	 * 
+	 * @param event
+	 *            The event that fired the method
+	 */
+	@FXML
+	private void sellSellable(Event event) {
+		if (MultiPageController.isValidAction(event)) {
+			Sellable sellable = null;
+			Button btn = (Button) event.getSource();
+			String id = btn.getId();
+			switch (id) {
 
-    @FXML
-    void buySelectedWeapon(Event event) {
+			}
+			GameEngine.getGameEngine().tradeSellableWithShipyard(sellable,
+					false);
+		}
+	}
 
-    }
-
-    @FXML
-    void sellSelectedWeapon(Event event) {
-
-    }
-
-    @FXML
-    void buySelectedShield(Event event) {
-
-    }
-
-    @FXML
-    void sellSelectedShield(Event event) {
-
-    }
-
-    @FXML
-    void buySelectedGadget(Event event) {
-
-    }
-
-    @FXML
-    void sellSelectedGadget(Event event) {
-
-    }
-
+	// @FXML
+	// private void buySelectedShield(Event event) {
+	// if(MultiPageController.isValidAction(event)) {
+	//
+	// }
+	// }
+	//
+	// @FXML
+	// private void sellSelectedShield(Event event) {
+	//
+	// }
+	//
+	// @FXML
+	// private void buySelectedGadget(Event event) {
+	//
+	// }
+	//
+	// @FXML
+	// private void sellSelectedGadget(Event event) {
+	//
+	// }
 }
