@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import java.net.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<StackPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.CharacterCreatorController">
+<StackPane stylesheets="/view/styleAttempt.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.CharacterCreatorController">
    <children>
-      <VBox prefHeight="400.0" prefWidth="600.0">
+      <VBox prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@/view/styleAttempt.css">
          <children>
             <TextField fx:id="name" promptText="What should the universe know you as?" />
-            <Label text="Where do your strengths lie?" />
+            <Label text="Where do your strengths lie?">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin></Label>
             <Label text="Piloting" />
             <Slider fx:id="pilotSlider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" onKeyReleased="#validateAndUpdateSkillPoints" onMouseClicked="#validateAndUpdateSkillPoints" onMouseReleased="#validateAndUpdateSkillPoints" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
             <Label text="Trading" />
@@ -23,13 +28,16 @@
             <Label text="Investing" />
             <Slider fx:id="investorSlider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" onKeyReleased="#validateAndUpdateSkillPoints" onMouseClicked="#validateAndUpdateSkillPoints" onMouseReleased="#validateAndUpdateSkillPoints" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
             <Label fx:id="pointsLeft" text="Skill points left: 15" />
-            <AnchorPane prefHeight="66.0" prefWidth="600.0">
+            <AnchorPane prefHeight="22.0" prefWidth="600.0">
                <children>
                   <Button fx:id="back" layoutX="14.0" layoutY="21.0" mnemonicParsing="false" onKeyPressed="#backToMainMenu" onMouseClicked="#backToMainMenu" text="Back" />
                   <Button fx:id="newGame" layoutX="449.0" layoutY="21.0" mnemonicParsing="false" onKeyPressed="#startNewGame" onMouseClicked="#startNewGame" text="Join your new universe" />
                </children>
             </AnchorPane>
          </children>
+         <StackPane.margin>
+            <Insets />
+         </StackPane.margin>
       </VBox>
    </children>
 </StackPane>
