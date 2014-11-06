@@ -95,6 +95,9 @@ public class TradeEngine {
 		double cost = market.getSellPrice(tradeGood) * quantity;
 		List<String> errors = validateSell(tradeGood, quantity, market);
 		if (errors.isEmpty()) {
+			//if clause makes sure that goods dont get added to marketPlace
+			//if it cant sell, 
+			// it still gets removed from player
 			if (market.getBuyPrice(tradeGood, player) != -1) {
 				market.setQuantity(tradeGood, market.getQuantity(tradeGood)
 						+ quantity);
