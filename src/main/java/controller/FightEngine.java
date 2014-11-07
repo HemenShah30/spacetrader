@@ -102,6 +102,7 @@ public class FightEngine {
 	 */
 	public EncounterResult playerFlee(NPCEncounter encounter) {
 		NPC npc = encounter.getNPC();
+		npcShip = npc.getShip();
 		if (encounter.getTurnCount() == 0) {
 			regenExtraShields();
 			if (npc instanceof Pirate) {
