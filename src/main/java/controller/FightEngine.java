@@ -222,14 +222,12 @@ public class FightEngine {
 		int amtFirearms = playerShip.amountInCargo(GoodType.FIREARMS);
 		int amtNarcotics = playerShip.amountInCargo(GoodType.NARCOTICS);
 		if (amtFirearms != 0 || amtNarcotics != 0) {
-			if ((int) (Math.random() * (1 / 7) * MAX_REP + pPolice) > MAX_REP) {
+			if ((int) (Math.random() * (MAX_REP / 10) + pPolice) < (int)(MAX_REP / 5)) {
 				return false;
 			}
 			playerShip.removeFromCargo(GoodType.FIREARMS, amtFirearms);
 			playerShip.removeFromCargo(GoodType.NARCOTICS, amtNarcotics);
-			int fine = (int) (Math.random() * (2 / 3)
-					* ((MAX_REP - pPolice + 1) / MAX_REP + 1) * player
-					.getCredits());
+			int fine = (int) (Math.random() * (pPolice / MAX_REP) * player.getCredits());
 			player.decreaseCredits(fine);
 			if (player.getPoliceRep() + REP_CHANGE > MAX_REP) {
 				player.setPoliceRep(MAX_REP);

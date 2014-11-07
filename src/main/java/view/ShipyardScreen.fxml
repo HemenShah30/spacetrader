@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
@@ -46,7 +47,7 @@
                   <ComboBox fx:id="shipDropDown" editable="true" onAction="#selectShip" onKeyPressed="#selectShip" onMouseClicked="#selectShip" prefWidth="200.0" promptText="What ship do you want to buy" />
                   <HBox prefHeight="183.0" prefWidth="300.0">
                      <children>
-                        <VBox prefHeight="200.0" prefWidth="80.0">
+                        <VBox prefHeight="200.0" prefWidth="90.0">
                            <children>
                               <Label fx:id="playerShipNameLbl" text="ShipName" />
                               <Label fx:id="playerShipFuelLbl" text="Fuel" />
@@ -58,7 +59,7 @@
                               <Label fx:id="playerShipCrewSpaceLbl" text="Label" />
                            </children>
                         </VBox>
-                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="140.0">
+                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="120.0">
                            <children>
                               <Label text="&lt;-Yours, Buying-&gt;" />
                               <Label text="Range/ Fuel Capacity" />
@@ -68,9 +69,10 @@
                               <Label text="Shield Slots" />
                               <Label text="Gadget Slots" />
                               <Label text="Crew Space" />
+                              <Button fx:id="buyShipBtn" mnemonicParsing="false" onKeyPressed="#buyShipFromShipyard" onMouseClicked="#buyShipFromShipyard" text="Buy for 0 credits" />
                            </children>
                         </VBox>
-                        <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="80.0">
+                        <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="90.0">
                            <children>
                               <Label fx:id="shipyardShipNameLbl" text="Label" />
                               <Label fx:id="shipyardShipFuelLbl" text="Label" />
@@ -84,7 +86,13 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <Button fx:id="buyShipBtn" mnemonicParsing="false" onKeyPressed="#buyShipFromShipyard" onMouseClicked="#buyShipFromShipyard" text="Buy for 0 credits" />
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="playerShipImage" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="shipyardShipImage" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </HBox>
                </children>
             </VBox>
             <VBox prefHeight="200.0" prefWidth="300.0">

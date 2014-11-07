@@ -24,6 +24,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 
 /**
  * Controller for the Shipyard screen
@@ -33,6 +35,12 @@ import javafx.util.StringConverter;
  */
 public class ShipyardScreenController {
 
+	@FXML
+	private ImageView playerShipImage;
+	
+	@FXML
+	private ImageView shipyardShipImage;
+	
 	@FXML
 	private Label playerShipNameLbl;
 
@@ -234,6 +242,8 @@ public class ShipyardScreenController {
 		playerCreditsLbl.setText("Credits: " + player.getCredits());
 		updateShipLabels();
 		updateSellableListViews();
+		Image test = new Image("view/shiptest.png");
+		playerShipImage.setImage(test);
 	}
 
 	/**

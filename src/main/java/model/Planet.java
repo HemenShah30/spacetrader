@@ -28,8 +28,8 @@ public class Planet implements Boundary {
 	private EncounterRate traderEncounterRate;
 	private int diameter, chances;
 	private Color color;
-	public final static Color[] approvedColors = { Color.BLUE, Color.RED,
-			Color.FORESTGREEN, Color.PERU };
+	public final static Color[] approvedColors = { Color.PALETURQUOISE, Color.MEDIUMVIOLETRED,
+			Color.DARKCYAN, Color.SPRINGGREEN };
 
 	/**
 	 * Planet constructor taking in all the instance variable values
