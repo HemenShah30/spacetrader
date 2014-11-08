@@ -526,7 +526,33 @@ public class Ship {
 	public boolean hasGadget(Gadget g) {
 		return gadgets.contains(g);
 	}
-
+	
+	/**
+     * Returns the largest number of crew this ship can house
+     * 
+     * @return The largest number of crew this ship can house
+     */
+	public int getCrewSpace() {
+	    return shipType.getCrewSpace();
+	}
+	
+	/**
+     * Returns the current number of crew this ship has
+     * 
+     * @return The current number of crew this ship has
+     */
+	public int getCrewCurrentSize() {
+	    return mercenaries.size();
+	}
+	
+	public void addToCrew(Mercenary m) {
+	    mercenaries.add(m);
+	}
+	
+	public void removeFromCrew(Mercenary m) {
+	    mercenaries.remove(m);
+	}
+	
 	@Override
 	public String toString() {
 		String msg = "";

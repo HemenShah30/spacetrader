@@ -27,6 +27,8 @@ public class Universe {
 	private final double universeSize = 100;
 	private final double percentNoneCondition = 0.5;
 	private final double percentNoSpecialResource = 0.5;
+	private final double percentWithMercenaries = 0.15;
+	private final int maximumNumberOfMercenaries = 4;
 	private BoundaryTree planetLocations;
 	private Color[] approvedColors;
 
@@ -57,16 +59,17 @@ public class Universe {
 	public void createPlanets() {
 		FileReader reader = new FileReader();
 		List<String> planetNames = reader
-				.readPlanetNames("model/PlanetNames.txt");
+				.readFile("model/PlanetNames.txt");
 		Collections.shuffle(planetNames);
+		List<String> mercenaryNames = reader.readFile("model/MercenaryNames.txt");
+        Collections.shuffle(mercenaryNames);
+		int currentMercenaryIndex = 0;
 		Set<Location> uniqueLocations = new HashSet<Location>();
 		Random rand = new Random();
 		int x, y;
 		int uniSize = (int) Math.sqrt(planetNames.size());
 		int uniSize2 = uniSize * uniSize;
-		int scale;
 		Location l = new Location(0, 0);
-		// int uniSize = 10;
 		for (int i = 0; i < planetNames.size(); i++) {
 			TechLevel[] levels = TechLevel.values();
 			SpecialResource[] resources = SpecialResource.values();
@@ -83,7 +86,9 @@ public class Universe {
 			int trader = (int) (Math.random() * encounterRates.length);
 			// int x = (int) (Math.random() * universeLength);
 			// int y = (int) (Math.random() * universeWidth);
-
+			
+			//create a new Bar using the list of mercenary names
+			
 			if (Math.random() < percentNoneCondition) {
 				c = 0;
 			}
@@ -92,6 +97,15 @@ public class Universe {
 				r = 0;
 			}
 
+			if (Math.random() < percentWithMercenaries) {
+			    List<Mercenary> mercenaries = new ArrayList<>();
+			    do {
+			        String name = mercenaryNames.get(currentMercenaryIndex);
+			        Mercenary m = new Mercenary(name);
+			        mercenaries.add(m);
+			    } while((Math.random()) < 0.5);
+			}
+			
 			/*
 			 * boolean uniqueLocation = false; Location l = null; while
 			 * (!uniqueLocation) { l = new Location(x, y); if

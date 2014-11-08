@@ -22,10 +22,10 @@ public class FileReader {
 	 *            The name of the file with the planet names
 	 * @return The list of planet names from the file
 	 */
-	public List<String> readPlanetNames(String fileName) {
+	public List<String> readFile(String fileName) {
 		List<String> planetNames = new ArrayList<String>();
 		InputStream is = ClassLoader
-				.getSystemResourceAsStream("model/PlanetNames.txt");
+				.getSystemResourceAsStream(fileName);
 
 		Scanner reader = new Scanner(is);
 		reader.useDelimiter("\r\n");

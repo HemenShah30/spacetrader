@@ -264,6 +264,15 @@ public class Planet implements Boundary {
 		return shipyard;
 	}
 	
+	/**
+     * Returns the bar for the planet
+     * 
+     * @return The bar for the planet
+     */
+	public Bar getBar() {
+	    return bar;
+	}
+	
 	@Override
 	public String toString() {
 		return name + ", Location: " + location + ", Tech Level: " + techLevel

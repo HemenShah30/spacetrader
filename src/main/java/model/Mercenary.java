@@ -15,6 +15,22 @@ public class Mercenary {
 	private double wage;
 	
 	/**
+     * Constructor for the mercenary
+     * 
+     * @param name
+     *            The name of the mercenary
+    **/
+	public Mercenary(String name) {
+	    this.name = name;
+	    pilotSkill = (int) (Math.random() * 10);
+	    fighterSkill = (int) (Math.random() * 10);
+	    traderSkill = (int) (Math.random() * 10);
+	    engineerSkill = (int) (Math.random() * 10);
+	    investorSkill = (int) (Math.random() * 10);
+	    wage = generateWage();
+	}
+	
+	/**
 	 * Constructor for the mercenary taking all the appropriate instance variables
 	 * 
 	 * @param name

@@ -20,6 +20,10 @@ public class Bar {
 		mercenaries = new ArrayList<Mercenary>();
 	}
 	
+	public Bar(List<Mercenary> mercenaries) {
+	    this.mercenaries = mercenaries;
+	}
+	
 	public List<Mercenary> getMercenaries() {
 		return mercenaries;
 	}
@@ -32,11 +36,11 @@ public class Bar {
 		return wages;
 	}
 	
-	public void hireMercenary(Mercenary m) {
+	public void removeMercenary(Mercenary m) {
 		mercenaries.remove(m);
 	}
 	
-	public void fireMercenary(Mercenary m) {
+	public void addMercenary(Mercenary m) {
 		mercenaries.add(m);
 	}
 }
