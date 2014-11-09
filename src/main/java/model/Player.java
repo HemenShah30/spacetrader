@@ -104,7 +104,7 @@ public class Player {
 	 * @return The player's piloting skill
 	 */
 	public int getPilotSkill() {
-		return pilotSkill;
+		return Math.max(pilotSkill, ship.getMercenaryPilot());
 	}
 
 	/**
@@ -113,7 +113,7 @@ public class Player {
 	 * @return The player's fighter skill
 	 */
 	public int getFighterSkill() {
-		return fighterSkill;
+	    return Math.max(fighterSkill, ship.getMercenaryFighter());
 	}
 
 	/**
@@ -122,7 +122,7 @@ public class Player {
 	 * @return The player's trader skill
 	 */
 	public int getTraderSkill() {
-		return traderSkill;
+	    return Math.max(traderSkill, ship.getMercenaryTrader());
 	}
 
 	/**
@@ -131,7 +131,7 @@ public class Player {
 	 * @return The player's engineer skill
 	 */
 	public int getEngineerSkill() {
-		return engineerSkill;
+		return Math.max(engineerSkill, ship.getMercenaryEngineer());
 	}
 
 	/**
@@ -140,7 +140,7 @@ public class Player {
 	 * @return The player's investor skill
 	 */
 	public int getInvestorSkill() {
-		return investorSkill;
+	    return Math.max(investorSkill, ship.getMercenaryInvestor());
 	}
 
 	/**

@@ -628,7 +628,7 @@ public class Ship {
      * 
      * @return highest Highest investor skill among all mercenaries
      */
-    public int getInvestorFighter() {
+    public int getMercenaryInvestor() {
         int highest = 0;
         for (Mercenary m: mercenaries) {
             if (highest < m.getInvestorSkill()) {
