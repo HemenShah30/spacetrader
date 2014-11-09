@@ -87,23 +87,12 @@ public class Universe {
 			// int x = (int) (Math.random() * universeLength);
 			// int y = (int) (Math.random() * universeWidth);
 			
-			//create a new Bar using the list of mercenary names
-			
 			if (Math.random() < percentNoneCondition) {
 				c = 0;
 			}
 
 			if (Math.random() < percentNoSpecialResource) {
 				r = 0;
-			}
-
-			if (Math.random() < percentWithMercenaries) {
-			    List<Mercenary> mercenaries = new ArrayList<>();
-			    do {
-			        String name = mercenaryNames.get(currentMercenaryIndex);
-			        Mercenary m = new Mercenary(name);
-			        mercenaries.add(m);
-			    } while((Math.random()) < 0.5);
 			}
 			
 			/*
@@ -133,8 +122,25 @@ public class Universe {
 			Color col = approvedColors[rand.nextInt(approvedColors.length)];
 			Planet p = new Planet(planetNames.get(i), levels[t], resources[r],
 					governments[g], l, conditions[c], encounterRates[police],
-					encounterRates[pirate], encounterRates[trader], size, col);
+					encounterRates[pirate], encounterRates[trader],
+					size, col);
 			uniqueLocations.add(l);
+			
+			//handles mercenary generation
+			List<Mercenary> mercenaries = new ArrayList<>();
+            if (levels[t].getValue() > 5 && currentMercenaryIndex < mercenaryNames.size()) {
+                do {
+                    String name = mercenaryNames.get(currentMercenaryIndex);
+                    Mercenary m = new Mercenary(name, p);
+                    mercenaries.add(m);
+                    currentMercenaryIndex++;
+                } while((Math.random()) < 0.5 && mercenaries.size() < maximumNumberOfMercenaries);
+                //number of mercenaries a planet can be randomly given is capped
+            }
+            Bar b = new Bar(mercenaries);
+            p.setBar(b);
+            
+			System.out.println(p);
 			planets.add(p);
 		}
 		planetLocations = new BoundaryTree(400, 400, planets);

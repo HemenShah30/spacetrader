@@ -13,6 +13,7 @@ public class Mercenary {
 	private int pilotSkill, fighterSkill, traderSkill, engineerSkill,
 	investorSkill;
 	private double wage;
+	private Planet homePlanet;
 	
 	/**
      * Constructor for the mercenary
@@ -20,7 +21,7 @@ public class Mercenary {
      * @param name
      *            The name of the mercenary
     **/
-	public Mercenary(String name) {
+	public Mercenary(String name, Planet planet) {
 	    this.name = name;
 	    pilotSkill = (int) (Math.random() * 10);
 	    fighterSkill = (int) (Math.random() * 10);
@@ -28,6 +29,7 @@ public class Mercenary {
 	    engineerSkill = (int) (Math.random() * 10);
 	    investorSkill = (int) (Math.random() * 10);
 	    wage = generateWage();
+	    homePlanet = planet;
 	}
 	
 	/**
@@ -123,6 +125,15 @@ public class Mercenary {
 	}
 	
 	/**
+     * Returns the mercenary's home planet
+     * 
+     * @return The mercenary's home planet
+     */
+    public Planet getHomePlanet() {
+        return homePlanet;
+    }
+	
+	/**
 	 * Calculates the mercenary's wage based on their skill level
 	 * 
 	 * @return The mercenary's wage
@@ -131,5 +142,18 @@ public class Mercenary {
 		double wage = pilotSkill + fighterSkill + traderSkill + engineerSkill + investorSkill;
 		wage = wage * 2 * (Math.random() - .5) * wageVariation;
 		return wage;
+	}
+	
+	/**
+     * Returns string giving all characteristics of this mercenary
+     * 
+     * @return String description
+     */
+	@Override
+	public String toString() {
+	    String s = "Name: " + name + ", pilot:" + pilotSkill + ", fighter:" + fighterSkill +
+	            ", trader:" + traderSkill + ", engineer: " + engineerSkill + ", investor: " +
+	            investorSkill + "\n";
+	    return s;
 	}
 }

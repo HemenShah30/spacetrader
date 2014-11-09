@@ -32,7 +32,10 @@ public class PlanetScreenController {
 
 	@FXML
 	Button toShipyardBtn;
-
+	
+	@FXML
+	Button toBarBtn;
+	
 	@FXML
 	Button toSpaceBtn;
 
@@ -130,6 +133,41 @@ public class PlanetScreenController {
 		}
 	}
 
+	 /**
+     * Sends the player to the Bar view
+     * 
+     * @param e
+     *            The event that fired the method
+     */
+    @FXML
+    private void goToBar(Event e) {
+//        if (MultiPageController.isValidAction(e)) {
+//            if (GameEngine.getGameEngine().getPlayer().getPlanet()
+//                    .getTechLevel().getValue() > 5) {
+//                try {
+//                    Stage stage = (Stage) toBarBtn.getScene().getWindow();
+//                    stage.hide();
+//                    FXMLLoader loader = new FXMLLoader(
+//                            ClassLoader
+//                                    .getSystemResource("view/BarScreen.fxml"));
+//                    Parent newScene = loader.load();
+//                    stage.setScene(new Scene(newScene, 600, 400));
+//                    BarScreenController controller = loader
+//                            .getController();
+//                    controller.initializePage();
+//                    stage.show();
+//                } catch (IOException ie) {
+//                    ie.printStackTrace();
+//                }
+//            } else {
+//                Dialogs.create().owner(toBarBtn.getScene().getWindow())
+//                        .title("Bar")
+//                        .message("This planet does not have a bar")
+//                        .showInformation();
+//            }
+//        }
+    }
+	
 	/**
 	 * Sends the player to the menu for going to another planet
 	 * 

@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 import model.Enum.Condition;
 import model.Enum.EncounterRate;
 import model.Enum.Government;
@@ -59,8 +61,8 @@ public class Planet implements Boundary {
 	 */
 	public Planet(String n, TechLevel tech, SpecialResource r, Government g,
 			Location l, Condition c, EncounterRate policeRate,
-			EncounterRate pirateRate, EncounterRate traderRate, int size,
-			Color color) {
+			EncounterRate pirateRate, EncounterRate traderRate,
+			int size, Color color) {
 		setName(n);
 		setTechLevel(tech);
 		setResource(r);
@@ -273,11 +275,21 @@ public class Planet implements Boundary {
 	    return bar;
 	}
 	
+	/**
+     * Setter for the bar for the planet
+     * 
+     * @param bar
+     *          The bar for the planet
+     */
+    public void setBar(Bar bar) {
+        this.bar = bar;
+    }
+	
 	@Override
 	public String toString() {
 		return name + ", Location: " + location + ", Tech Level: " + techLevel
 				+ ", Resource: " + resource + ", Goverment: " + government
-				+ ", Condition: " + condition;
+				+ ", Condition: " + condition + ", Mercenaries: " + bar;
 	}
 
 	@Override

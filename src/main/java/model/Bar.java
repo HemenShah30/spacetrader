@@ -43,4 +43,13 @@ public class Bar {
 	public void addMercenary(Mercenary m) {
 		mercenaries.add(m);
 	}
+	
+	@Override
+	public String toString() {
+	    String s = "\n";
+	    for (Mercenary m: mercenaries) {
+	        s += m.toString();
+	    }
+	    return s;
+	}
 }
