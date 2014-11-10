@@ -11,6 +11,7 @@ import model.Ship;
 import model.Enum.Condition;
 import model.Enum.EncounterRate;
 import model.Enum.EncounterType;
+import model.Enum.GoodType;
 import model.Enum.Government;
 import model.Enum.ShipType;
 import model.Enum.SpecialResource;
@@ -79,5 +80,48 @@ public class FightEngineTest {
         encounter = new NPCEncounter(EncounterType.POLICE, police);
         engine.bribePolice(encounter, 10);
         assertEquals("Player police rep not increased by correct amount", 50, player.getPoliceRep());
+    }
+    
+	@Test
+    public void noIllegalGoodsTest() {
+		police = new Police(player.getPoliceRep(), player.getCredits());
+        encounter = new NPCEncounter(EncounterType.POLICE, police);
+        assertFalse("Search turned out positive when it should have been negative", engine.consentToSearch(encounter));
+    }
+    
+    @Test
+    public void carryingNarcoticsTest() {
+        ship.addToCargo(GoodType.NARCOTICS, 1);
+        police = new Police(player.getPoliceRep(), player.getCredits());
+        encounter = new NPCEncounter(EncounterType.POLICE, police);
+        assertTrue("Search turned out negative when it should have been positive", engine.consentToSearch(encounter));
+    }
+    
+    @Test
+    public void carryingFirearmsTest() {
+        ship.addToCargo(GoodType.FIREARMS, 1);
+        police = new Police(player.getPoliceRep(), player.getCredits());
+        encounter = new NPCEncounter(EncounterType.POLICE, police);
+        assertTrue("Search turned out negative when it should have been positive", engine.consentToSearch(encounter));
+    }
+    
+    @Test
+    public void MinPoliceRepTest() {
+        player.setPoliceRep(1);
+        police = new Police(player.getPoliceRep(), player.getCredits());
+        encounter = new NPCEncounter(EncounterType.POLICE, police);
+        engine.consentToSearch(encounter);
+        assertFalse("Search turned out positive when it should have been negative", engine.consentToSearch(encounter));
+        assertEquals("Player police rep not set to lowest possible rep", 1, player.getPoliceRep());
+    }
+    
+    @Test
+    public void IncreasePoliceRepTest() {
+    	player.setPoliceRep(50);
+    	ship.addToCargo(GoodType.NARCOTICS, 1);
+        police = new Police(player.getPoliceRep(), player.getCredits());
+        encounter = new NPCEncounter(EncounterType.POLICE, police);
+        engine.consentToSearch(encounter);
+        assertEquals("Player police rep not increased by correct amount", 55, player.getPoliceRep());
     }
 }

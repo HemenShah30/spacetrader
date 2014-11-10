@@ -42,8 +42,8 @@ public class Player {
 		this.investorSkill = investor;
 		this.ship = ship;
 		credits = 1000;
-		traderRep = 1;
-		policeRep = 1;
+		traderRep = 50;
+		policeRep = 30;
 		pirateRep = 1;
 	}
 
