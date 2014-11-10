@@ -1,6 +1,6 @@
 package model.Enum;
 
-import model.Sellable;
+import model.ShipUpgrade;
 import model.Ship;
 
 /**
@@ -9,7 +9,7 @@ import model.Ship;
  * @author Caroline Zhang
  *
  */
-public enum ShieldType implements Sellable {
+public enum ShieldType implements ShipUpgrade {
 
 	ENERGYSHIELD(50, 10000, 4, 20, 30, 30, 80, 101, 101), REFLECTIVESHIELD(100,
 			35000, 5, 40, 50, 50, 101, 101, 101);

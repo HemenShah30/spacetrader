@@ -255,10 +255,11 @@ public class FightEngine {
 	 *            The amount of credits the player is offering
 	 * @return The success of the bribe attempt
 	 */
-	public boolean bribePolice(NPCEncounter encounter, int credits) {
+	public boolean bribePolice(NPCEncounter encounter, double credits) {
 		Police police = (Police) encounter.getNPC();
 		regenExtraShields();
 		encounter.takeTurn();
+		credits = credits * player.getPlanet().getGovernment().getBribeFactor();
 		if (police.willAcceptBribe(credits)) {
 			player.decreaseCredits(credits);
 			return true;

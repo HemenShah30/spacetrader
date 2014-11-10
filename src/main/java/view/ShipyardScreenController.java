@@ -8,7 +8,7 @@ import org.controlsfx.dialog.Dialogs;
 import controller.GameEngine;
 import model.Gadget;
 import model.Player;
-import model.Sellable;
+import model.ShipUpgrade;
 import model.Ship;
 import model.Enum.LaserType;
 import model.Enum.ShieldType;
@@ -341,7 +341,7 @@ public class ShipyardScreenController {
 	@FXML
 	private void buySellable(Event event) {
 		if (MultiPageController.isValidAction(event)) {
-			Sellable sellable = null;
+			ShipUpgrade sellable = null;
 			Button btn = (Button) event.getSource();
 			String id = btn.getId();
 			switch (id) {
@@ -359,7 +359,7 @@ public class ShipyardScreenController {
 			}
 			}
 			List<String> errors = GameEngine.getGameEngine()
-					.tradeSellableWithShipyard(sellable, true);
+					.tradeShipUpgradeWithShipyard(sellable, true);
 			String errorMsg = "";
 			for (String error : errors)
 				errorMsg += error + "\n";
@@ -378,7 +378,7 @@ public class ShipyardScreenController {
 	@FXML
 	private void sellSellable(Event event) {
 		if (MultiPageController.isValidAction(event)) {
-			Sellable sellable = null;
+			ShipUpgrade sellable = null;
 			Button btn = (Button) event.getSource();
 			String id = btn.getId();
 			switch (id) {
@@ -396,7 +396,7 @@ public class ShipyardScreenController {
 			}
 			}
 			List<String> errors = GameEngine.getGameEngine()
-					.tradeSellableWithShipyard(sellable, false);
+					.tradeShipUpgradeWithShipyard(sellable, false);
 			String errorMsg = "";
 			for (String error : errors)
 				errorMsg += error + "\n";

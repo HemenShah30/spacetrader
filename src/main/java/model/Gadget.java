@@ -9,7 +9,7 @@ import java.util.List;
  * @author Caroline Zhang
  *
  */
-public class Gadget implements Sellable {
+public class Gadget implements ShipUpgrade {
 	private int minTechLevel;
 	private double price;
 

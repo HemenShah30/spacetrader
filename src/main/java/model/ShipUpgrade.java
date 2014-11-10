@@ -1,6 +1,6 @@
 package model;
 
-public interface Sellable {
+public interface ShipUpgrade {
 	
 	/**
 	 * 

@@ -1,6 +1,6 @@
 package model.Enum;
 
-import model.Sellable;
+import model.ShipUpgrade;
 import model.Ship;
 
 /**
@@ -9,7 +9,7 @@ import model.Ship;
  * @author Caroline Zhang
  *
  */
-public enum LaserType implements Sellable {
+public enum LaserType implements ShipUpgrade {
 
 	PULSELASER(20, 5000, 4, 0, 0, 10, 40, 60, 101), BEAMLASER(35, 15000, 5, 20,
 			30, 30, 101, 101, 101), MILITARYLASER(60, 35000, 6, 40, 40, 50,

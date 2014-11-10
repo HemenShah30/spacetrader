@@ -12,7 +12,7 @@ import model.MaxCapacityException;
 import model.NPCEncounter;
 import model.Planet;
 import model.Player;
-import model.Sellable;
+import model.ShipUpgrade;
 import model.Ship;
 import model.Trader;
 import model.Universe;
@@ -375,20 +375,21 @@ public class GameEngine {
 	}
 
 	/**
-	 * Initiates a Sellable transaction between a player and the shipyard
+	 * Initiates a ShipUpgrade transaction between a player and the shipyard
 	 * 
-	 * @param sell
-	 *            The sellable being transacted
+	 * @param upgrade
+	 *            The ShipUpgrade being transacted
 	 * @param isBuying
 	 *            True for a buy, false for a sell
 	 * @return A list of errors, if any
 	 */
-	public List<String> tradeSellableWithShipyard(Sellable sell,
+	public List<String> tradeShipUpgradeWithShipyard(ShipUpgrade upgrade,
 			boolean isBuying) {
 		if (isBuying)
-			return tradeEngine.buySellable(sell, player.getPlanet()
+			return tradeEngine.buyShipUpgrade(upgrade, player.getPlanet()
 					.getShipyard());
-		return tradeEngine.sellSellable(sell, player.getPlanet().getShipyard());
+		return tradeEngine.sellShipUpgrade(upgrade, player.getPlanet()
+				.getShipyard());
 	}
 
 	/**

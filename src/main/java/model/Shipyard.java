@@ -65,28 +65,28 @@ public class Shipyard {
 	}
 
 	/**
-	 * Returns buy price of a given Sellable in the shipyard
+	 * Returns buy price of a given ShipUpgrade in the shipyard
 	 * 
-	 * @param sell
-	 *            the Sellable being purchased
+	 * @param upgrade
+	 *            the ShipUpgrade being purchased
 	 * @return the price in double
 	 */
-	public double getSellableBuy(Sellable sell) {
-		if (sell.getMinTechLevel() > planet.getTechLevel().getValue()) {
+	public double getShipUpgradeBuyPrice(ShipUpgrade upgrade) {
+		if (upgrade.getMinTechLevel() > planet.getTechLevel().getValue()) {
 			return -1;
 		}
-		return sell.getPrice();
+		return upgrade.getPrice();
 	}
 
 	/**
-	 * Returns the sell price of a given Sellable in the shipyard, with the
+	 * Returns the sell price of a given ShipUpgrade in the shipyard, with the
 	 * penalty applied
 	 * 
-	 * @param sell
-	 *            the Sellable being sold
+	 * @param upgrade
+	 *            the ShipUpgrade being sold
 	 * @return the sell price in double
 	 */
-	public double getSellableSell(Sellable sell) {
-		return sell.getPrice() * sellPricePenalty;
+	public double getSellableSell(ShipUpgrade upgrade) {
+		return upgrade.getPrice() * sellPricePenalty;
 	}
 }

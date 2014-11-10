@@ -450,65 +450,67 @@ public class Ship {
 	}
 
 	/**
-	 * Adds the sellable to the ship
+	 * Adds the ShipUpgrade to the ship
 	 * 
 	 * @param sell
-	 *            The sellable being added
+	 *            The ShipUpgrade being added
 	 */
-	public void addSellable(Sellable sell) {
-		switch (sell.getType()) {
+	public void addShipUpgrade(ShipUpgrade upgrade) {
+		switch (upgrade.getType()) {
 		case 0:
-			ShieldType shield = (ShieldType) sell;
+			ShieldType shield = (ShieldType) upgrade;
 			addShield(shield);
 			break;
 		case 1:
-			LaserType laser = (LaserType) sell;
+			LaserType laser = (LaserType) upgrade;
 			addLaser(laser);
 			break;
 		case 2:
-			Gadget gadget = (Gadget) sell;
+			Gadget gadget = (Gadget) upgrade;
 			addGadget(gadget);
 			break;
 		}
 	}
 
 	/**
-	 * Removes the sellable from the ship
+	 * Removes the ShipUpgrade from the ship
 	 * 
 	 * @param sell
-	 *            The sellable being removed
+	 *            The ShipUpgrade being removed
 	 */
-	public void removeSellable(Sellable sell) {
-		switch (sell.getType()) {
+	public void removeShipUpgrade(ShipUpgrade upgrade) {
+		switch (upgrade.getType()) {
 		case 0:
-			ShieldType shield = (ShieldType) sell;
+			ShieldType shield = (ShieldType) upgrade;
 			shields.remove(shield);
 			break;
 		case 1:
-			LaserType laser = (LaserType) sell;
+			LaserType laser = (LaserType) upgrade;
 			lasers.remove(laser);
 			break;
 		case 2:
-			Gadget gadget = (Gadget) sell;
+			Gadget gadget = (Gadget) upgrade;
 			gadgets.remove(gadget);
 			break;
 		}
 	}
-	
+
 	/**
 	 * Checks to see if the specified laser exists in the ship
 	 * 
-	 * @param l The specified laser
+	 * @param l
+	 *            The specified laser
 	 * @return boolean result
 	 */
 	public boolean hasLaser(LaserType l) {
 		return lasers.contains(l);
 	}
-	 
+
 	/**
 	 * Checks to see if the specified shield exists in the ship
 	 * 
-	 * @param l The specified shield
+	 * @param l
+	 *            The specified shield
 	 * @return boolean result
 	 */
 	public boolean hasShield(ShieldType s) {
@@ -517,143 +519,146 @@ public class Ship {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * Checks to see if the specificed gadget exists in the ship
 	 * 
-	 * @param l The specified gadget
+	 * @param l
+	 *            The specified gadget
 	 * @return boolean result
 	 */
 	public boolean hasGadget(Gadget g) {
 		return gadgets.contains(g);
 	}
-	
+
 	/**
-     * Returns the largest number of crew this ship can house
-     * 
-     * @return The largest number of crew this ship can house
-     */
+	 * Returns the largest number of crew this ship can house
+	 * 
+	 * @return The largest number of crew this ship can house
+	 */
 	public int getCrewSpace() {
-	    return shipType.getCrewSpace();
+		return shipType.getCrewSpace();
 	}
-	
+
 	/**
-     * Returns the current number of crew this ship has
-     * 
-     * @return The current number of crew this ship has
-     */
+	 * Returns the current number of crew this ship has
+	 * 
+	 * @return The current number of crew this ship has
+	 */
 	public int getCrewCurrentSize() {
-	    return mercenaries.size();
+		return mercenaries.size();
 	}
-	
-	 /**
-     * Adds a mercenary to the ship
-     * 
-     * @param m Mercenary to be added
-     */
+
+	/**
+	 * Adds a mercenary to the ship
+	 * 
+	 * @param m
+	 *            Mercenary to be added
+	 */
 	public void addToCrew(Mercenary m) {
-	    mercenaries.add(m);
+		mercenaries.add(m);
 	}
-	
-    /**
-    * Removes a mercenary to the ship
-    * 
-    * @param m Mercenary to be removed
-    */
+
+	/**
+	 * Removes a mercenary to the ship
+	 * 
+	 * @param m
+	 *            Mercenary to be removed
+	 */
 	public void removeFromCrew(Mercenary m) {
-	    mercenaries.remove(m);
+		mercenaries.remove(m);
 	}
-	
-    /**
-     * Returns the highest pilot skill among all mercenaries
-     * 
-     * @return highest Highest pilot skill among all mercenaries
-     */
+
+	/**
+	 * Returns the highest pilot skill among all mercenaries
+	 * 
+	 * @return highest Highest pilot skill among all mercenaries
+	 */
 	public int getMercenaryPilot() {
-	    int highest = 0;
-	    if (mercenaries.isEmpty()) {
-	        return highest;
-	    }
-	    for (Mercenary m: mercenaries) {
-	        if (highest < m.getPilotSkill()) {
-	            highest = m.getPilotSkill();
-	        }
-	    }
-	    return highest;
+		int highest = 0;
+		if (mercenaries.isEmpty()) {
+			return highest;
+		}
+		for (Mercenary m : mercenaries) {
+			if (highest < m.getPilotSkill()) {
+				highest = m.getPilotSkill();
+			}
+		}
+		return highest;
 	}
 
-    /**
-     * Returns the highest engineer skill among all mercenaries
-     * 
-     * @return highest Highest engineer skill among all mercenaries
-     */
-    public int getMercenaryEngineer() {
-        int highest = 0;
-        if (mercenaries.isEmpty()) {
-            return highest;
-        }
-        for (Mercenary m: mercenaries) {
-            if (highest < m.getEngineerSkill()) {
-                highest = m.getEngineerSkill();
-            }
-        }
-        return highest;
-    }
+	/**
+	 * Returns the highest engineer skill among all mercenaries
+	 * 
+	 * @return highest Highest engineer skill among all mercenaries
+	 */
+	public int getMercenaryEngineer() {
+		int highest = 0;
+		if (mercenaries.isEmpty()) {
+			return highest;
+		}
+		for (Mercenary m : mercenaries) {
+			if (highest < m.getEngineerSkill()) {
+				highest = m.getEngineerSkill();
+			}
+		}
+		return highest;
+	}
 
-    /**
-     * Returns the highest trader skill among all mercenaries
-     * 
-     * @return highest Highest trader skill among all mercenaries
-     */
-    public int getMercenaryTrader() {
-        int highest = 0;
-        if (mercenaries.isEmpty()) {
-            return highest;
-        }
-        for (Mercenary m: mercenaries) {
-            if (highest < m.getTraderSkill()) {
-                highest = m.getTraderSkill();
-            }
-        }
-        return highest;
-    }
-    
-    /**
-     * Returns the highest fighter skill among all mercenaries
-     * 
-     * @return highest Highest fighter skill among all mercenaries
-     */
-    public int getMercenaryFighter() {
-        int highest = 0;
-        if (mercenaries.isEmpty()) {
-            return highest;
-        }
-        for (Mercenary m: mercenaries) {
-            if (highest < m.getFighterSkill()) {
-                highest = m.getFighterSkill();
-            }
-        }
-        return highest;
-    }
-    
-    /**
-     * Returns the highest investor skill among all mercenaries
-     * 
-     * @return highest Highest investor skill among all mercenaries
-     */
-    public int getMercenaryInvestor() {
-        int highest = 0;
-        if (mercenaries.isEmpty()) {
-            return highest;
-        }
-        for (Mercenary m: mercenaries) {
-            if (highest < m.getInvestorSkill()) {
-                highest = m.getInvestorSkill();
-            }
-        }
-        return highest;
-    }
-    
+	/**
+	 * Returns the highest trader skill among all mercenaries
+	 * 
+	 * @return highest Highest trader skill among all mercenaries
+	 */
+	public int getMercenaryTrader() {
+		int highest = 0;
+		if (mercenaries.isEmpty()) {
+			return highest;
+		}
+		for (Mercenary m : mercenaries) {
+			if (highest < m.getTraderSkill()) {
+				highest = m.getTraderSkill();
+			}
+		}
+		return highest;
+	}
+
+	/**
+	 * Returns the highest fighter skill among all mercenaries
+	 * 
+	 * @return highest Highest fighter skill among all mercenaries
+	 */
+	public int getMercenaryFighter() {
+		int highest = 0;
+		if (mercenaries.isEmpty()) {
+			return highest;
+		}
+		for (Mercenary m : mercenaries) {
+			if (highest < m.getFighterSkill()) {
+				highest = m.getFighterSkill();
+			}
+		}
+		return highest;
+	}
+
+	/**
+	 * Returns the highest investor skill among all mercenaries
+	 * 
+	 * @return highest Highest investor skill among all mercenaries
+	 */
+	public int getMercenaryInvestor() {
+		int highest = 0;
+		if (mercenaries.isEmpty()) {
+			return highest;
+		}
+		for (Mercenary m : mercenaries) {
+			if (highest < m.getInvestorSkill()) {
+				highest = m.getInvestorSkill();
+			}
+		}
+		return highest;
+	}
+
 	@Override
 	public String toString() {
 		String msg = "";
