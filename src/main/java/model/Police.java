@@ -20,14 +20,14 @@ public class Police extends NPC {
 	 * @param playerCred
 	 *            The amount of credits the player has
 	 */
-	public Police(int rep, double playerCred) {
+	public Police(int rep) {
 		setPilotSkill((int) (rep * .09));
 		setFighterSkill((int) (rep * .09));
 		setTraderSkill(1);
 		setEngineerSkill(3);
 		setInvestorSkill(1);
 		generateShip(rep, EncounterType.POLICE);
-		minimumBribe = (double) (rep * playerCred / 10);
+		minimumBribe = (double) (rep * (Math.random() * 90) + 100);
 	}
 
 	/**

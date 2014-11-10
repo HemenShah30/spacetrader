@@ -157,7 +157,7 @@ public class FlightEngine {
 					player.getTraderRep()));
 		} else {
 			return new NPCEncounter(EncounterType.POLICE, new Police(
-					player.getPoliceRep(), player.getCredits()));
+					player.getPoliceRep()));
 		}
 	}
 

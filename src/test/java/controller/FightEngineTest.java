@@ -50,14 +50,14 @@ public class FightEngineTest {
     
     @Test
     public void acceptBribeTest() {
-        police = new Police(player.getPoliceRep(), player.getCredits());
+        police = new Police(player.getPoliceRep());
         encounter = new NPCEncounter(EncounterType.POLICE, police);
         assertTrue("Bribe failed when it should have succeeded", engine.bribePolice(encounter, 10000));
     }
     
     @Test
     public void rejectBribeTest() {
-        police = new Police(player.getPoliceRep(), player.getCredits());
+        police = new Police(player.getPoliceRep());
         encounter = new NPCEncounter(EncounterType.POLICE, police);
         assertFalse("Bribe succeeded when it should have failed", engine.bribePolice(encounter, 10));
     }
@@ -65,7 +65,7 @@ public class FightEngineTest {
     @Test
     public void playerMaxRepTest() {
         player.setPoliceRep(99);
-        police = new Police(player.getPoliceRep(), player.getCredits());
+        police = new Police(player.getPoliceRep());
         encounter = new NPCEncounter(EncounterType.POLICE, police);
         engine.bribePolice(encounter, 10);
         //System.out.println(player.getPoliceRep());
@@ -76,7 +76,7 @@ public class FightEngineTest {
     @Test
     public void playerIncreasedRepTest() {
         player.setPoliceRep(45);
-        police = new Police(player.getPoliceRep(), player.getCredits());
+        police = new Police(player.getPoliceRep());
         encounter = new NPCEncounter(EncounterType.POLICE, police);
         engine.bribePolice(encounter, 10);
         assertEquals("Player police rep not increased by correct amount", 50, player.getPoliceRep());
@@ -84,7 +84,7 @@ public class FightEngineTest {
     
 	@Test
     public void noIllegalGoodsTest() {
-		police = new Police(player.getPoliceRep(), player.getCredits());
+		police = new Police(player.getPoliceRep());
         encounter = new NPCEncounter(EncounterType.POLICE, police);
         assertFalse("Search turned out positive when it should have been negative", engine.consentToSearch(encounter));
     }
@@ -92,7 +92,7 @@ public class FightEngineTest {
     @Test
     public void carryingNarcoticsTest() {
         ship.addToCargo(GoodType.NARCOTICS, 1);
-        police = new Police(player.getPoliceRep(), player.getCredits());
+        police = new Police(player.getPoliceRep());
         encounter = new NPCEncounter(EncounterType.POLICE, police);
         assertTrue("Search turned out negative when it should have been positive", engine.consentToSearch(encounter));
     }
@@ -100,7 +100,7 @@ public class FightEngineTest {
     @Test
     public void carryingFirearmsTest() {
         ship.addToCargo(GoodType.FIREARMS, 1);
-        police = new Police(player.getPoliceRep(), player.getCredits());
+        police = new Police(player.getPoliceRep());
         encounter = new NPCEncounter(EncounterType.POLICE, police);
         assertTrue("Search turned out negative when it should have been positive", engine.consentToSearch(encounter));
     }
@@ -108,7 +108,7 @@ public class FightEngineTest {
     @Test
     public void MinPoliceRepTest() {
         player.setPoliceRep(1);
-        police = new Police(player.getPoliceRep(), player.getCredits());
+        police = new Police(player.getPoliceRep());
         encounter = new NPCEncounter(EncounterType.POLICE, police);
         engine.consentToSearch(encounter);
         assertFalse("Search turned out positive when it should have been negative", engine.consentToSearch(encounter));
@@ -119,7 +119,7 @@ public class FightEngineTest {
     public void IncreasePoliceRepTest() {
     	player.setPoliceRep(50);
     	ship.addToCargo(GoodType.NARCOTICS, 1);
-        police = new Police(player.getPoliceRep(), player.getCredits());
+        police = new Police(player.getPoliceRep());
         encounter = new NPCEncounter(EncounterType.POLICE, police);
         engine.consentToSearch(encounter);
         assertEquals("Player police rep not increased by correct amount", 55, player.getPoliceRep());
