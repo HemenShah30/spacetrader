@@ -1,4 +1,4 @@
-package jUnit;
+package controller;
 
 import static org.junit.Assert.*;
 
@@ -20,7 +20,7 @@ import controller.FightEngine;
  * @author Larry He
  * 
  */
-public class FightEngineBribePoliceTest {
+public class FightEngineTest {
     Ship ship;
     Player player;
     FightEngine engine;
