@@ -1,9 +1,5 @@
-/* 
-    Document   : controlStyle1
-*/
-
 .background {
-    -fx-background-color: #191970;
+    -fx-background-color: #0F0F54;
 }
 
 .label {
@@ -14,7 +10,7 @@
 
 .slider{
     -fx-border-width: 2;
-    -fx-color: #865FF0;
+    -fx-color: #04A2E6;
 }
 
 .slider .track {

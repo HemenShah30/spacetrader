@@ -1,0 +1,15 @@
+.background {
+     -fx-background-image: url("shiptest.png");
+}
+
+.button {
+    -fx-text-fill: #B08DF6;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-weight: bold;
+    -fx-background-image: url('startbutton.png');
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(#0F0F54, #2C2C9A);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6), 5, 0.0 , 0 , 1 );
+}

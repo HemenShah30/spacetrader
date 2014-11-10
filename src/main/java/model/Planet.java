@@ -30,8 +30,8 @@ public class Planet implements Boundary {
 	private EncounterRate traderEncounterRate;
 	private int diameter, chances;
 	private Color color;
-	public final static Color[] approvedColors = { Color.PALETURQUOISE, Color.MEDIUMVIOLETRED,
-			Color.DARKCYAN, Color.SPRINGGREEN };
+	public final static Color[] approvedColors = { Color.DARKCYAN, Color.MEDIUMVIOLETRED,
+			Color.AQUAMARINE, Color.SPRINGGREEN, Color.YELLOWGREEN };
 
 	/**
 	 * Planet constructor taking in all the instance variable values
@@ -162,10 +162,10 @@ public class Planet implements Boundary {
 	 * @param i
 	 */
 	private void setDiameter(int i) {
-		if (2 < i && i < 8) {
+		if (2 < i && i < 9) {
 			diameter = i;
 		} else {
-			diameter = 3;
+			diameter = 5;
 		}
 	}
 

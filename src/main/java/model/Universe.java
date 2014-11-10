@@ -115,7 +115,7 @@ public class Universe {
 					l = new Location(x, y);
 				}
 			}
-			int size = 3 + rand.nextInt(4);
+			int size = 3 + rand.nextInt(5);
 			Color col = approvedColors[rand.nextInt(approvedColors.length)];
 			Planet p = new Planet(planetNames.get(i), levels[t], resources[r],
 					governments[g], l, conditions[c], encounterRates[police],

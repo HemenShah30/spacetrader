@@ -10,6 +10,6 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.StartScreenController">
    <children>
-      <Button fx:id="beginButton" mnemonicParsing="false" onKeyPressed="#begin" onMouseClicked="#begin" prefHeight="400.0" prefWidth="600.0" text="Click Anywhere to Begin" />
+      <Button fx:id="beginButton" layoutX="81.0" layoutY="57.0" mnemonicParsing="false" onKeyPressed="#begin" onMouseClicked="#begin" prefHeight="330.0" prefWidth="503.0" stylesheets="@/view/StartStyleSheet.css" text="Click Anywhere to Begin" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
    </children>
 </AnchorPane>

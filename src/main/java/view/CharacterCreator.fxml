@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<StackPane stylesheets="/view/styleAttempt.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.CharacterCreatorController">
+<StackPane styleClass="background" stylesheets="@/view/CharacterStyleSheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.CharacterCreatorController">
    <children>
-      <VBox prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@/view/styleAttempt.css">
+      <VBox prefHeight="400.0" prefWidth="600.0">
          <children>
             <TextField fx:id="name" promptText="What should the universe know you as?" />
             <Label text="Where do your strengths lie?">

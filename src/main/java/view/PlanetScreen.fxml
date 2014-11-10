@@ -6,13 +6,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.PlanetScreenController">
+<BorderPane prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@/view/PlanetStyleSheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.PlanetScreenController">
    <center>
       <AnchorPane prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="marketplaceBtn" layoutX="244.0" layoutY="117.0" mnemonicParsing="false" onKeyPressed="#goToMarketplace" onMouseClicked="#goToMarketplace" text="Go to Marketplace" />
-            <Button fx:id="toShipyardBtn" layoutX="252.0" layoutY="148.0" mnemonicParsing="false" onKeyPressed="#goToShipyard" onMouseClicked="#goToShipyard" text="Go to Shipyard" />
-            <Button fx:id="toBarBtn" layoutX="268.0" layoutY="180.0" mnemonicParsing="false" onKeyPressed="#goToBar" onMouseClicked="#goToBar" prefHeight="0.0" prefWidth="67.0" text="Go to Bar" />
+            <Button fx:id="marketplaceBtn" layoutX="243.0" layoutY="102.0" mnemonicParsing="false" onKeyPressed="#goToMarketplace" onMouseClicked="#goToMarketplace" text="Go to Marketplace" />
+            <Button fx:id="toShipyardBtn" layoutX="252.0" layoutY="139.0" mnemonicParsing="false" onKeyPressed="#goToShipyard" onMouseClicked="#goToShipyard" text="Go to Shipyard" />
+            <Button fx:id="toBarBtn" layoutX="269.0" layoutY="175.0" mnemonicParsing="false" onKeyPressed="#goToBar" onMouseClicked="#goToBar" prefHeight="0.0" text="Go to Bar" />
             <Button fx:id="toSpaceBtn" layoutX="257.0" layoutY="211.0" mnemonicParsing="false" onKeyPressed="#goToSpace" onMouseClicked="#goToSpace" text="Fly Into Space" />
             <Button fx:id="saveGameBtn" layoutX="520.0" layoutY="294.0" mnemonicParsing="false" onKeyPressed="#saveGame" onMouseClicked="#saveGame" text="Save Game" />
             <Button fx:id="refuelBtn" layoutX="14.0" layoutY="130.0" mnemonicParsing="false" onKeyPressed="#refuelShip" onMouseClicked="#refuelShip" text="Refuel Ship for 0 credits" />
