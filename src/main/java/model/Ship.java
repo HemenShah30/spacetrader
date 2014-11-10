@@ -56,6 +56,7 @@ public class Ship {
 		shields = new HashMap<ShieldType, Integer>();
 		lasers = new ArrayList<LaserType>();
 		gadgets = new ArrayList<Gadget>();
+		mercenaries = new ArrayList<Mercenary>();
 	}
 
 	/**
@@ -570,6 +571,9 @@ public class Ship {
      */
 	public int getMercenaryPilot() {
 	    int highest = 0;
+	    if (mercenaries.isEmpty()) {
+	        return highest;
+	    }
 	    for (Mercenary m: mercenaries) {
 	        if (highest < m.getPilotSkill()) {
 	            highest = m.getPilotSkill();
@@ -585,6 +589,9 @@ public class Ship {
      */
     public int getMercenaryEngineer() {
         int highest = 0;
+        if (mercenaries.isEmpty()) {
+            return highest;
+        }
         for (Mercenary m: mercenaries) {
             if (highest < m.getEngineerSkill()) {
                 highest = m.getEngineerSkill();
@@ -600,6 +607,9 @@ public class Ship {
      */
     public int getMercenaryTrader() {
         int highest = 0;
+        if (mercenaries.isEmpty()) {
+            return highest;
+        }
         for (Mercenary m: mercenaries) {
             if (highest < m.getTraderSkill()) {
                 highest = m.getTraderSkill();
@@ -615,6 +625,9 @@ public class Ship {
      */
     public int getMercenaryFighter() {
         int highest = 0;
+        if (mercenaries.isEmpty()) {
+            return highest;
+        }
         for (Mercenary m: mercenaries) {
             if (highest < m.getFighterSkill()) {
                 highest = m.getFighterSkill();
@@ -630,6 +643,9 @@ public class Ship {
      */
     public int getMercenaryInvestor() {
         int highest = 0;
+        if (mercenaries.isEmpty()) {
+            return highest;
+        }
         for (Mercenary m: mercenaries) {
             if (highest < m.getInvestorSkill()) {
                 highest = m.getInvestorSkill();
