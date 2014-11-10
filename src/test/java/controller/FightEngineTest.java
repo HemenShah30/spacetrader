@@ -1,13 +1,20 @@
 package controller;
 
 import static org.junit.Assert.*;
-
+import javafx.scene.paint.Color;
+import model.Location;
 import model.NPCEncounter;
+import model.Planet;
 import model.Player;
 import model.Police;
 import model.Ship;
+import model.Enum.Condition;
+import model.Enum.EncounterRate;
 import model.Enum.EncounterType;
+import model.Enum.Government;
 import model.Enum.ShipType;
+import model.Enum.SpecialResource;
+import model.Enum.TechLevel;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,6 +28,7 @@ import controller.FightEngine;
  * 
  */
 public class FightEngineTest {
+    Planet planet;
     Ship ship;
     Player player;
     FightEngine engine;
@@ -28,8 +36,13 @@ public class FightEngineTest {
     NPCEncounter encounter;
     @Before
     public void setUp() throws Exception {
+        Location l = new Location(50,50);
+        planet = new Planet("test", TechLevel.HITECH, SpecialResource.DESERT,
+                Government.DEMOCRACY, l, Condition.BOREDOM, EncounterRate.FEW,
+                EncounterRate.FEW, EncounterRate.FEW, 1, Color.AQUA);
         ship = new Ship(ShipType.FLEA);
         player = new Player("Test", 5, 5, 5, 5, 5, ship);
+        player.setPlanet(planet);
         player.increaseCredits(10000);
         engine = new FightEngine(player);
     }
