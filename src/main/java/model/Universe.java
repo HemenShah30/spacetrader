@@ -61,9 +61,6 @@ public class Universe {
 		List<String> planetNames = reader
 				.readFile("model/PlanetNames.txt");
 		Collections.shuffle(planetNames);
-		List<String> mercenaryNames = reader.readFile("model/MercenaryNames.txt");
-        Collections.shuffle(mercenaryNames);
-		int currentMercenaryIndex = 0;
 		Set<Location> uniqueLocations = new HashSet<Location>();
 		Random rand = new Random();
 		int x, y;
@@ -127,6 +124,9 @@ public class Universe {
 			uniqueLocations.add(l);
 			
 			//handles mercenary generation
+			List<String> mercenaryNames = reader.readFile("model/MercenaryNames.txt");
+	        Collections.shuffle(mercenaryNames);
+	        int currentMercenaryIndex = 0;
 			List<Mercenary> mercenaries = new ArrayList<>();
             if (levels[t].getValue() > 5 && currentMercenaryIndex < mercenaryNames.size()) {
                 do {

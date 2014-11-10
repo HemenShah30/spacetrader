@@ -35,6 +35,7 @@ public class GameEngine {
 	private FlightEngine flightEngine;
 	private FightEngine fightEngine;
 	private ShipyardEngine shipyardEngine;
+	private MercenaryEngine mercenaryEngine;
 	private Universe universe;
 	private Player player;
 
@@ -91,6 +92,7 @@ public class GameEngine {
 		flightEngine = new FlightEngine(player, universe);
 		fightEngine = new FightEngine(player);
 		shipyardEngine = new ShipyardEngine(player);
+		mercenaryEngine = new MercenaryEngine(player);
 	}
 
 	/**
@@ -141,6 +143,7 @@ public class GameEngine {
 		flightEngine = new FlightEngine(player, universe);
 		fightEngine = new FightEngine(player);
 		shipyardEngine = new ShipyardEngine(player);
+		mercenaryEngine = new MercenaryEngine(player);
 	}
 
 	/**
