@@ -4,7 +4,6 @@
 
 .label {
     -fx-font-size: 8pt;
-    -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: #D2E2F5;
 }
 
@@ -23,4 +22,25 @@
 
 .slider .axis {
     -fx-tick-label-fill: #97C3D5;
+}
+
+
+.button {
+    -fx-background-color: #191985;
+    -fx-text-fill: #d8d8d8;
+}
+
+.button:hover {
+    -fx-background-color: #191970;
+}
+
+.button:pressed, .button:default:hover:pressed {
+  -fx-background-color: #7676C2;
+  -fx-text-fill: #191970;
+}
+
+.button:disabled, .button:default:disabled {
+    -fx-opacity: 0.4;
+    -fx-background-color: #191970;
+    -fx-text-fill: white;
 }

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ShipyardScreenController">
+<BorderPane prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@/view/SpaceTraderStyleSheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ShipyardScreenController">
    <bottom>
       <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -49,6 +49,7 @@
                      <children>
                         <VBox prefHeight="200.0" prefWidth="90.0">
                            <children>
+                              <Label text="Current Ship" />
                               <Label fx:id="playerShipNameLbl" text="ShipName" />
                               <Label fx:id="playerShipFuelLbl" text="Fuel" />
                               <Label fx:id="playerShipHPLbl" text="Hp" />
@@ -61,7 +62,8 @@
                         </VBox>
                         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="120.0">
                            <children>
-                              <Label text="&lt;-Yours, Buying-&gt;" />
+                              <Label />
+                              <Label />
                               <Label text="Range/ Fuel Capacity" />
                               <Label text="Hull Points" />
                               <Label text="Cargo Size" />
@@ -74,6 +76,7 @@
                         </VBox>
                         <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="90.0">
                            <children>
+                              <Label text="Available to Buy" />
                               <Label fx:id="shipyardShipNameLbl" text="Label" />
                               <Label fx:id="shipyardShipFuelLbl" text="Label" />
                               <Label fx:id="shipyardShipHPLbl" text="Label" />

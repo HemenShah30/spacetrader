@@ -7,14 +7,13 @@
     -fx-border-color: #e2e2e2;
     -fx-border-width: 2;
     -fx-background-radius: 0;
-    -fx-background-color: #191970;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-background-color: #191985;
     -fx-font-size: 12pt;
     -fx-text-fill: #d8d8d8;
 }
 
 .button:hover {
-    -fx-background-color: #343492;
+    -fx-background-color: #191970;
 }
 
 .button:pressed, .button:default:hover:pressed {

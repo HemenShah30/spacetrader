@@ -1,10 +1,6 @@
-.background {
-     -fx-background-image: url("shiptest.png");
-}
-
 .button {
     -fx-text-fill: #B08DF6;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Lucida Console";
     -fx-font-weight: bold;
     -fx-background-image: url('startbutton.png');
 }

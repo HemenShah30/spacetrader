@@ -3,24 +3,25 @@
 }
 
 .label {
-    -fx-font-size: 8pt;
-    -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: #D2E2F5;
 }
 
-.slider{
-    -fx-border-width: 2;
-    -fx-color: #04A2E6;
+.button {
+    -fx-background-color: #191985;
+    -fx-text-fill: #d8d8d8;
 }
 
-.slider .track {
-    -fx-background-color: #C6DCF8;
+.button:hover {
+    -fx-background-color: #343492;
 }
 
-.slider .axis .axis-tick-mark{
-    -fx-stroke: #97C3D5;
+.button:pressed, .button:default:hover:pressed {
+  -fx-background-color: #7676C2;
+  -fx-text-fill: #191970;
 }
 
-.slider .axis {
-    -fx-tick-label-fill: #97C3D5;
+.button:disabled, .button:default:disabled {
+    -fx-opacity: 0.4;
+    -fx-background-color: #191970;
+    -fx-text-fill: white;
 }

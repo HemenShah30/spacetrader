@@ -14,7 +14,7 @@
             <Button fx:id="toShipyardBtn" layoutX="252.0" layoutY="139.0" mnemonicParsing="false" onKeyPressed="#goToShipyard" onMouseClicked="#goToShipyard" text="Go to Shipyard" />
             <Button fx:id="toBarBtn" layoutX="269.0" layoutY="175.0" mnemonicParsing="false" onKeyPressed="#goToBar" onMouseClicked="#goToBar" prefHeight="0.0" text="Go to Bar" />
             <Button fx:id="toSpaceBtn" layoutX="257.0" layoutY="211.0" mnemonicParsing="false" onKeyPressed="#goToSpace" onMouseClicked="#goToSpace" text="Fly Into Space" />
-            <Button fx:id="saveGameBtn" layoutX="520.0" layoutY="294.0" mnemonicParsing="false" onKeyPressed="#saveGame" onMouseClicked="#saveGame" text="Save Game" />
+            <Button fx:id="saveGameBtn" layoutX="520.0" layoutY="294.0" mnemonicParsing="false" onKeyPressed="#saveGame" onMouseClicked="#saveGame" text="Save Game" AnchorPane.rightAnchor="10.0" />
             <Button fx:id="refuelBtn" layoutX="14.0" layoutY="130.0" mnemonicParsing="false" onKeyPressed="#refuelShip" onMouseClicked="#refuelShip" text="Refuel Ship for 0 credits" />
             <Button fx:id="repairBtn" layoutX="14.0" layoutY="167.0" mnemonicParsing="false" onKeyPressed="#repairShip" onMouseClicked="#repairShip" text="Repair Ship for 0 credits" />
          </children>
