@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ShipyardScreenController">
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.BarScreenController">
    <bottom>
       <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -44,147 +44,65 @@
          <children>
             <VBox alignment="TOP_CENTER" prefWidth="300.0">
                <children>
-                  <ComboBox fx:id="shipDropDown" editable="true" onAction="#selectShip" onKeyPressed="#selectShip" onMouseClicked="#selectShip" prefWidth="200.0" promptText="What ship do you want to buy" />
-                  <HBox prefHeight="183.0" prefWidth="300.0">
-                     <children>
-                        <VBox prefHeight="200.0" prefWidth="90.0">
-                           <children>
-                              <Label fx:id="playerShipNameLbl" text="ShipName" />
-                              <Label fx:id="playerShipFuelLbl" text="Fuel" />
-                              <Label fx:id="playerShipHPLbl" text="Hp" />
-                              <Label fx:id="playerShipCargoSizeLbl" text="cargo size" />
-                              <Label fx:id="playerShipWeaponSlotsLbl" text="Label" />
-                              <Label fx:id="playerShipShieldSlotsLbl" text="Label" />
-                              <Label fx:id="playerShipGadgetSlotsLbl" text="Label" />
-                              <Label fx:id="playerShipCrewSpaceLbl" text="Label" />
-                           </children>
-                        </VBox>
-                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="120.0">
-                           <children>
-                              <Label text="&lt;-Yours, Buying-&gt;" />
-                              <Label text="Range/ Fuel Capacity" />
-                              <Label text="Hull Points" />
-                              <Label text="Cargo Size" />
-                              <Label text="Weapon Slots" />
-                              <Label text="Shield Slots" />
-                              <Label text="Gadget Slots" />
-                              <Label text="Crew Space" />
-                              <Button fx:id="buyShipBtn" mnemonicParsing="false" onKeyPressed="#buyShipFromShipyard" onMouseClicked="#buyShipFromShipyard" text="Buy for 0 credits" />
-                           </children>
-                        </VBox>
-                        <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="90.0">
-                           <children>
-                              <Label fx:id="shipyardShipNameLbl" text="Label" />
-                              <Label fx:id="shipyardShipFuelLbl" text="Label" />
-                              <Label fx:id="shipyardShipHPLbl" text="Label" />
-                              <Label fx:id="shipyardShipCargoSizeLbl" text="Label" />
-                              <Label fx:id="shipyardShipWeaponSlotsLbl" text="Label" />
-                              <Label fx:id="shipyardShipShieldSlotsLbl" text="Label" />
-                              <Label fx:id="shipyardShipGadgetSlotsLbl" text="Label" />
-                              <Label fx:id="shipyardShipCrewSpaceLbl" text="Label" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <ImageView fx:id="playerShipImage" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="shipyardShipImage" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
-                     </children>
-                  </HBox>
+                  <ComboBox fx:id="hireDropDown" editable="true" onAction="#selectHire" onKeyPressed="#selectHire" onMouseClicked="#selectHire" prefWidth="200.0" promptText="Select mercenary in bar to hire" />
+                  <Button fx:id="hireMercBtn" mnemonicParsing="false" onKeyPressed="#hireMerc" onMouseClicked="#hireMerc" prefHeight="10.0" prefWidth="124.0" text="Hire mercenary" />
+                  <HBox prefHeight="121.0" prefWidth="300.0" />
+                  <ComboBox fx:id="fireDropDown" editable="true" layoutX="60.0" layoutY="10.0" onAction="#selectFire" onKeyPressed="#selectFire" onMouseClicked="#selectFire" prefWidth="200.0" promptText="Select mercenary in crew to fire" />
+                  <Button fx:id="fireMercBtn" layoutX="98.0" layoutY="35.0" mnemonicParsing="false" onKeyPressed="#fireMerc" onMouseClicked="#fireMerc" prefHeight="10.0" prefWidth="124.0" text="Fire mercenary" />
                </children>
             </VBox>
             <VBox prefHeight="200.0" prefWidth="300.0">
                <children>
-                  <TabPane prefHeight="320.0" prefWidth="300.0" tabClosingPolicy="UNAVAILABLE">
-                    <tabs>
-                      <Tab text="Weapons">
-                           <content>
-                              <HBox prefHeight="100.0" prefWidth="200.0">
-                                 <children>
-                                    <VBox alignment="TOP_CENTER">
-                                       <children>
-                                          <ListView fx:id="buyWeaponList" prefHeight="200.0" prefWidth="150.0" />
-                                          <Button fx:id="buyWeaponBtn" mnemonicParsing="false" onKeyPressed="#buySellable" onMouseClicked="#buySellable" text="Buy">
-                                             <VBox.margin>
-                                                <Insets top="10.0" />
-                                             </VBox.margin>
-                                          </Button>
-                                       </children>
-                                    </VBox>
-                                    <VBox alignment="TOP_CENTER">
-                                       <children>
-                                          <ListView fx:id="sellWeaponList" prefHeight="200.0" prefWidth="150.0" />
-                                          <Button fx:id="sellWeaponBtn" mnemonicParsing="false" onKeyPressed="#sellSellable" onMouseClicked="#sellSellable" text="Sell">
-                                             <VBox.margin>
-                                                <Insets top="10.0" />
-                                             </VBox.margin>
-                                          </Button>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                              </HBox>
-                           </content>
-                      </Tab>
-                        <Tab text="Shields">
-                           <content>
-                              <HBox prefHeight="100.0" prefWidth="200.0">
-                                 <children>
-                                    <VBox alignment="TOP_CENTER">
-                                       <children>
-                                          <ListView fx:id="buyShieldList" prefHeight="200.0" prefWidth="150.0" />
-                                          <Button fx:id="buyShieldBtn" mnemonicParsing="false" onKeyPressed="#buySellable" onMouseClicked="#buySellable" text="Buy">
-                                             <VBox.margin>
-                                                <Insets top="10.0" />
-                                             </VBox.margin>
-                                          </Button>
-                                       </children>
-                                    </VBox>
-                                    <VBox alignment="TOP_CENTER">
-                                       <children>
-                                          <ListView fx:id="sellShieldList" prefHeight="200.0" prefWidth="150.0" />
-                                          <Button fx:id="sellShieldBtn" mnemonicParsing="false" onKeyPressed="#sellSellable" onMouseClicked="#sellSellable" text="Sell">
-                                             <VBox.margin>
-                                                <Insets top="10.0" />
-                                             </VBox.margin>
-                                          </Button>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                              </HBox>
-                           </content>
-                        </Tab>
-                        <Tab text="Gadgets">
-                           <content>
-                              <HBox prefHeight="100.0" prefWidth="200.0">
-                                 <children>
-                                    <VBox alignment="TOP_CENTER">
-                                       <children>
-                                          <ListView fx:id="buyGadgetList" prefHeight="200.0" prefWidth="150.0" />
-                                          <Button fx:id="buyGadgetBtn" mnemonicParsing="false" onKeyPressed="#buySellable" onMouseClicked="#buySellable" text="Buy">
-                                             <VBox.margin>
-                                                <Insets top="10.0" />
-                                             </VBox.margin>
-                                          </Button>
-                                       </children>
-                                    </VBox>
-                                    <VBox alignment="TOP_CENTER">
-                                       <children>
-                                          <ListView fx:id="sellGadgetList" prefHeight="200.0" prefWidth="150.0" />
-                                          <Button fx:id="sellGadgetBtn" mnemonicParsing="false" onKeyPressed="#sellSellable" onMouseClicked="#sellSellable" text="Sell">
-                                             <VBox.margin>
-                                                <Insets top="10.0" />
-                                             </VBox.margin>
-                                          </Button>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                              </HBox>
-                           </content>
-                        </Tab>
-                    </tabs>
-                  </TabPane>
+                  <Label text="Current selected mercenary" />
+                  <HBox prefHeight="165.0" prefWidth="300.0">
+                     <children>
+                        <VBox prefHeight="247.0" prefWidth="148.0">
+                           <children>
+                              <Label text="Name" />
+                              <Label text="Pilot" />
+                              <Label text="Trade" />
+                              <Label text="Fight" />
+                              <Label text="Engineer" />
+                              <Label text="Invest" />
+                              <Label text="Wage" />
+                           </children>
+                        </VBox>
+                        <VBox layoutX="10.0" layoutY="10.0" prefHeight="247.0" prefWidth="94.0">
+                           <children>
+                              <Label fx:id="mercNameLbl" text="Name" />
+                              <Label fx:id="mercPilotLbl" text="Pilot" />
+                              <Label fx:id="mercTradeLbl" text="Trade" />
+                              <Label fx:id="mercFightLbl" text="Fight" />
+                              <Label fx:id="mercEngiLbl" text="Engineer" />
+                              <Label fx:id="mercInvestLbl" text="Invest" />
+                              <Label fx:id="mercWageLbl" text="Wage" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <Label layoutX="10.0" layoutY="10.0" text="Player skill" />
+                  <HBox layoutX="10.0" layoutY="27.0" prefHeight="165.0" prefWidth="300.0">
+                     <children>
+                        <VBox prefHeight="247.0" prefWidth="148.0">
+                           <children>
+                              <Label text="Pilot" />
+                              <Label text="Trade" />
+                              <Label text="Fight" />
+                              <Label text="Engineer" />
+                              <Label text="Invest" />
+                           </children>
+                        </VBox>
+                        <VBox layoutX="10.0" layoutY="10.0" prefHeight="247.0" prefWidth="94.0">
+                           <children>
+                              <Label fx:id="playerPilotLbl" text="Pilot" />
+                              <Label fx:id="playerTradeLbl" text="Trade" />
+                              <Label fx:id="playerFightLbl" text="Fight" />
+                              <Label fx:id="playerEngiLbl" text="Engineer" />
+                              <Label fx:id="playerInvestLbl" text="Invest" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
                </children>
             </VBox>
          </children>

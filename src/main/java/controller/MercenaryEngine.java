@@ -52,4 +52,11 @@ public class MercenaryEngine {
 	    ship.removeFromCrew(m);
 	    bar.addMercenary(m);
 	}
+	
+	public List<Mercenary> getPlanetMercenaries() {
+	    if (player.getPlanet().getBar() != null) {
+	        return player.getPlanet().getBar().getMercenaries();
+	    }
+	    return null;
+	}
 }

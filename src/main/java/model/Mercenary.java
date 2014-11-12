@@ -140,7 +140,8 @@ public class Mercenary {
 	 */
 	private double generateWage() {
 		double wage = pilotSkill + fighterSkill + traderSkill + engineerSkill + investorSkill;
-		wage = wage * 2 * (Math.random() - .5) * wageVariation;
+		wage += wage * (Math.random() - .5) * wageVariation;
+		wage = 5 * Math.round(wage);
 		return wage;
 	}
 	

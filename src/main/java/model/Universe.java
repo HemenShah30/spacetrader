@@ -75,6 +75,7 @@ public class Universe {
 			EncounterRate[] encounterRates = EncounterRate.values();
 
 			int t = (int) (Math.random() * levels.length);
+			//int t = 6;
 			int r = (int) (Math.random() * resources.length);
 			int g = (int) (Math.random() * governments.length);
 			int c = (int) (Math.random() * conditions.length);

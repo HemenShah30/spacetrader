@@ -9,6 +9,7 @@ import model.Encounter;
 import model.Gadget;
 import model.Location;
 import model.MaxCapacityException;
+import model.Mercenary;
 import model.NPCEncounter;
 import model.Planet;
 import model.Player;
@@ -440,5 +441,19 @@ public class GameEngine {
 		if (player.getPlanet().getShipyard() != null)
 			return shipyardEngine.getAvailableGadgets();
 		return null;
+	}
+	
+	public List<Mercenary> getPlanetMercenaries() {
+	    if (player.getPlanet().getBar() != null)
+	        return mercenaryEngine.getPlanetMercenaries();
+	    return null;
+	}
+	
+	public List<String> hireMercenary(Mercenary m) {
+	    return mercenaryEngine.hire(m, player.getPlanet().getBar());
+	}
+	
+	public void fireMercenary(Mercenary m) {
+	    mercenaryEngine.fire(m, player.getPlanet().getBar());
 	}
 }
