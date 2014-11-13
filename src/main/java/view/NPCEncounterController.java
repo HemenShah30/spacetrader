@@ -19,8 +19,8 @@ import model.NPCEncounter;
 import model.Player;
 import model.Ship;
 import model.Trader;
-import model.Enum.EncounterResult;
-import model.Enum.EncounterType;
+import model.enums.EncounterResult;
+import model.enums.EncounterType;
 
 /**
  * Controller for the encounter screen with NPCs

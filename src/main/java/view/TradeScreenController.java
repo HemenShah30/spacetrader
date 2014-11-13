@@ -1,12 +1,13 @@
 package view;
 
-import java.io.IOException;
-
 import controller.GameEngine;
+import model.enums.GoodType;
 import model.Marketplace;
 import model.Planet;
 import model.Player;
-import model.Enum.GoodType;
+
+import java.io.IOException;
+
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
 
 /**
  * Controller for the TradeScreen view

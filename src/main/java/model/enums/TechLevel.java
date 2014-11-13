@@ -1,4 +1,4 @@
-package model.Enum;
+package model.enums;
 
 /**
  * Enum representing the tech level of a planet

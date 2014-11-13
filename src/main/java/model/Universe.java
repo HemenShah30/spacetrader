@@ -8,11 +8,11 @@ import java.util.Random;
 import java.util.Set;
 
 import fileIO.FileReader;
-import model.Enum.Condition;
-import model.Enum.EncounterRate;
-import model.Enum.Government;
-import model.Enum.SpecialResource;
-import model.Enum.TechLevel;
+import model.enums.Condition;
+import model.enums.EncounterRate;
+import model.enums.Government;
+import model.enums.SpecialResource;
+import model.enums.TechLevel;
 import javafx.scene.paint.Color;
 
 /**

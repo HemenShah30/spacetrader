@@ -1,4 +1,4 @@
-package model.Enum;
+package model.enums;
 
 /**
  * Enum representing the number of pirates/police you can expect to encounter

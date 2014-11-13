@@ -1,20 +1,20 @@
-package model.Enum;
+package model.enums;
 
 import model.ShipUpgrade;
 import model.Ship;
 
 /**
- * Enum representing the various lasers that a ship can have
+ * Enum representing the various shields
  * 
  * @author Caroline Zhang
  *
  */
-public enum LaserType implements ShipUpgrade {
+public enum ShieldType implements ShipUpgrade {
 
-    PULSELASER(20, 5000, 4, 0, 0, 10, 40, 60, 101), BEAMLASER(35, 15000, 5, 20, 30, 30, 101, 101,
-            101), MILITARYLASER(60, 35000, 6, 40, 40, 50, 101, 101, 101);
+    ENERGYSHIELD(50, 10000, 4, 20, 30, 30, 80, 101, 101), REFLECTIVESHIELD(100, 35000, 5, 40, 50,
+            50, 101, 101, 101);
 
-    private int baseDamage;
+    private int shieldHP;
     private int minTechLevel;
     private double price;
     private int minPoliceRep;
@@ -25,30 +25,30 @@ public enum LaserType implements ShipUpgrade {
     private int maxTraderRep;
 
     /**
-     * Constructor for the Laser Enum
+     * Constructor for the shield enums
      * 
      * @param d
-     *            The damage dealt by the laser
+     *            The damage dealt by the shield
      * @param p
-     *            The price of the laser
+     *            The price of the shield
      * @param mtl
-     *            The minimum tech level required for a laser
+     *            The minimum tech level required for a shield
      * @param minPoliceRep
-     *            The minimum Police rep needed for the police to have this laser
+     *            The minimum police rep needed for the police to have this shield
      * @param minPirateRep
-     *            The minimum Pirate rep needed for the pirate to have this laser
+     *            The minimum pirate rep needed for the pirate to have this shield
      * @param minTraderRep
-     *            The minimum Trader rep needed for the trader to have this laser
+     *            The minimum trader rep needed for the trader to have this shield
      * @param maxPoliceRep
-     *            The maximum Police rep needed for the police to have this laser
+     *            The maximum police rep needed for the police to have this shield
      * @param maxPirateRep
-     *            The maximum Pirate rep needed for the pirate to have this laser
+     *            The maximum pirate rep needed for the pirate to have this shield
      * @param maxTraderRep
-     *            The maximum Trader rep needed for the trader to have this laser
+     *            The maximum trader rep needed for the trader to have this shield
      */
-    private LaserType(int bd, int price, int mtl, int minPoliceRep, int minPirateRep,
+    private ShieldType(int hp, int price, int mtl, int minPoliceRep, int minPirateRep,
             int minTraderRep, int maxPoliceRep, int maxPirateRep, int maxTraderRep) {
-        baseDamage = bd;
+        shieldHP = hp;
         this.price = price;
         minTechLevel = mtl;
         this.minPoliceRep = minPoliceRep;
@@ -60,27 +60,27 @@ public enum LaserType implements ShipUpgrade {
     }
 
     /**
-     * Returns the damage done by the laser
+     * Returns the additional hp contributed by the shield
      * 
-     * @return The damage done by the laser
+     * @return The additional hp contributed by the shield
      */
-    public int getBaseDamage() {
-        return baseDamage;
+    public int getShieldHP() {
+        return shieldHP;
     }
 
     /**
-     * Gets the minimum tech level for the laser
+     * Gets the minimum tech level for the shield
      * 
-     * @return The minimum tech level for the laser
+     * @return The minimum tech level for the shield
      */
     public int getMinTechLevel() {
         return minTechLevel;
     }
 
     /**
-     * Returns the price of the laser
+     * Returns the price of the shield
      * 
-     * @return The price of the laser
+     * @return The price of the shield
      */
     public double getPrice() {
         return price;
@@ -122,44 +122,40 @@ public enum LaserType implements ShipUpgrade {
         return 0;
     }
 
+    @Override
+    public String toString() {
+        switch (this) {
+        case ENERGYSHIELD:
+            return "Energy Shield";
+        case REFLECTIVESHIELD:
+            return "Reflective Shield";
+        default:
+            return "";
+        }
+    }
+
     /**
-     * Returns the valid LaserType from the passed in string value
+     * Returns the valid ShieldType from the passed in string value
      * 
      * @param value
-     *            The string representation of the needed LaserType
-     * @return The LaserType that matches the given string value
+     *            The string representation of the needed ShieldType
+     * @return The ShieldType that matches the given string value
      */
-    public static LaserType getEnum(String value) {
+    public static ShieldType getEnum(String value) {
         value = value.toLowerCase();
         switch (value) {
-        case "beam laser":
-            return LaserType.BEAMLASER;
-        case "military laser":
-            return LaserType.MILITARYLASER;
-        case "pulse laser":
-            return LaserType.PULSELASER;
+        case "reflective shield":
+            return ShieldType.REFLECTIVESHIELD;
+        case "energy shield":
+            return ShieldType.ENERGYSHIELD;
         default:
             return null;
         }
     }
 
     @Override
-    public String toString() {
-        switch (this) {
-        case PULSELASER:
-            return "Pulse Laser";
-        case BEAMLASER:
-            return "Beam Laser";
-        case MILITARYLASER:
-            return "Military Laser";
-        default:
-            return "";
-        }
-    }
-
-    @Override
     public boolean canBuy(Ship ship) {
-        if (ship.getNumLasers() + 1 > ship.getShipType().getWeaponSlots()) {
+        if (ship.getNumShields() + 1 > ship.getShipType().getShieldSlots()) {
             return false;
         }
         return true;
@@ -167,11 +163,11 @@ public enum LaserType implements ShipUpgrade {
 
     @Override
     public boolean canSell(Ship ship) {
-        return ship.hasLaser(this);
+        return ship.hasShield(this);
     }
 
     @Override
     public int getType() {
-        return 1;
+        return 0;
     }
 }

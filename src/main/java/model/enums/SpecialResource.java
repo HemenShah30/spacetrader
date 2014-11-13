@@ -1,4 +1,4 @@
-package model.Enum;
+package model.enums;
 
 /**
  * Enum representing the resource of a planet
