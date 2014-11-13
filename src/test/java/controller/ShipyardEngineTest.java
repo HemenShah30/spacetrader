@@ -73,8 +73,8 @@ public class ShipyardEngineTest {
 		player.setPlanet(planet);
 
 		List<ShipType> available = engine.getAvailableShips();
-		assertEquals("Number of ships dont match", available.size(),
-				expectedShipTypesTechLevel0.length);
+		assertEquals("Number of ships dont match",
+				expectedShipTypesTechLevel0.length, available.size());
 		for (ShipType expected : expectedShipTypesTechLevel0) {
 			assertTrue("At least one of the expected ships is not returned",
 					available.contains(expected));
@@ -90,8 +90,8 @@ public class ShipyardEngineTest {
 		player.setPlanet(planet);
 
 		List<ShipType> available = engine.getAvailableShips();
-		assertEquals("Number of ships dont match", available.size(),
-				expectedShipTypesTechLevel1.length);
+		assertEquals("Number of ships dont match",
+				expectedShipTypesTechLevel1.length, available.size());
 		for (ShipType expected : expectedShipTypesTechLevel1) {
 			assertTrue("At least one of the expected ships is not returned",
 					available.contains(expected));
@@ -107,8 +107,8 @@ public class ShipyardEngineTest {
 		player.setPlanet(planet);
 
 		List<ShipType> available = engine.getAvailableShips();
-		assertEquals("Number of ships dont match", available.size(),
-				expectedShipTypesTechLevel2.length);
+		assertEquals("Number of ships dont match",
+				expectedShipTypesTechLevel2.length, available.size());
 		for (ShipType expected : expectedShipTypesTechLevel2) {
 			assertTrue("At least one of the expected ships is not returned",
 					available.contains(expected));
@@ -124,8 +124,8 @@ public class ShipyardEngineTest {
 		player.setPlanet(planet);
 
 		List<ShipType> available = engine.getAvailableShips();
-		assertEquals("Number of ships dont match", available.size(),
-				expectedShipTypesTechLevel3.length);
+		assertEquals("Number of ships dont match",
+				expectedShipTypesTechLevel3.length, available.size());
 		for (ShipType expected : expectedShipTypesTechLevel3) {
 			assertTrue("At least one of the expected ships is not returned",
 					available.contains(expected));
@@ -141,8 +141,8 @@ public class ShipyardEngineTest {
 		player.setPlanet(planet);
 
 		List<ShipType> available = engine.getAvailableShips();
-		assertEquals("Number of ships dont match", available.size(),
-				expectedShipTypesTechLevel4.length);
+		assertEquals("Number of ships dont match",
+				expectedShipTypesTechLevel4.length, available.size());
 		for (ShipType expected : expectedShipTypesTechLevel4) {
 			assertTrue("At least one of the expected ships is not returned",
 					available.contains(expected));
@@ -158,8 +158,8 @@ public class ShipyardEngineTest {
 		player.setPlanet(planet);
 
 		List<ShipType> available = engine.getAvailableShips();
-		assertEquals("Number of ships dont match", available.size(),
-				expectedShipTypesTechLevel5.length);
+		assertEquals("Number of ships dont match",
+				expectedShipTypesTechLevel5.length, available.size());
 		for (ShipType expected : expectedShipTypesTechLevel5) {
 			assertTrue("At least one of the expected ships is not returned",
 					available.contains(expected));
@@ -175,8 +175,8 @@ public class ShipyardEngineTest {
 		player.setPlanet(planet);
 
 		List<ShipType> available = engine.getAvailableShips();
-		assertEquals("Number of ships dont match", available.size(),
-				expectedShipTypesTechLevel6.length);
+		assertEquals("Number of ships dont match",
+				expectedShipTypesTechLevel6.length, available.size());
 		for (ShipType expected : expectedShipTypesTechLevel6) {
 			assertTrue("At least one of the expected ships is not returned",
 					available.contains(expected));
@@ -192,8 +192,8 @@ public class ShipyardEngineTest {
 		player.setPlanet(planet);
 
 		List<ShipType> available = engine.getAvailableShips();
-		assertEquals("Number of ships dont match", available.size(),
-				expectedShipTypesTechLevel7.length);
+		assertEquals("Number of ships dont match",
+				expectedShipTypesTechLevel7.length, available.size());
 		for (ShipType expected : expectedShipTypesTechLevel7) {
 			assertTrue("At least one of the expected ships is not returned",
 					available.contains(expected));
