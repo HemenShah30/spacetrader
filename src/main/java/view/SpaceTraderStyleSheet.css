@@ -1,5 +1,5 @@
 .background {
-    -fx-background-color: #0F0F54;
+    -fx-background-color: #010055;
 }
 
 .label {
@@ -7,7 +7,12 @@
 }
 
 .button {
-    -fx-background-color: #191985;
+    -fx-background-color:
+        #191985,
+        linear-gradient(#3E82CB, #034183),
+        linear-gradient(#2222B2, #191985);
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
     -fx-text-fill: #d8d8d8;
 }
 
@@ -24,4 +29,21 @@
     -fx-opacity: 0.4;
     -fx-background-color: #191970;
     -fx-text-fill: white;
+}
+
+.slider{
+    -fx-border-width: 2;
+    -fx-color: #DDE8F7;
+}
+
+.slider .track {
+    -fx-background-color: #0E82C6;
+}
+
+.slider .axis .axis-tick-mark{
+    -fx-stroke: #97C3D5;
+}
+
+.slider .axis {
+    -fx-tick-label-fill: #97C3D5;
 }
