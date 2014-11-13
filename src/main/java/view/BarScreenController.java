@@ -7,10 +7,7 @@ import org.controlsfx.dialog.Dialogs;
 
 import controller.GameEngine;
 import model.Mercenary;
-import model.Planet;
 import model.Player;
-import model.Enum.ShipType;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

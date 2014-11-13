@@ -15,10 +15,6 @@ import model.Enum.ShipType;
  * 
  */
 public abstract class NPC {
-    private int threatLevel; // represents how dangerous the ship is.
-                             // ex. if player has bad reputation, the
-                             // threatlevel of police ships will be higher,
-                             // resulting in a tougher enemy
     private int pilotSkill;
     private int fighterSkill;
     private int traderSkill;

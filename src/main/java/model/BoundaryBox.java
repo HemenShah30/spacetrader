@@ -166,7 +166,8 @@ public class BoundaryBox implements Boundary {
             return recursiveGetBoundaryObject(location, box.getTopRight());
         } else if (box.getBottomLeft() != null && box.getBottomLeft().isLocationInside(location)) {
             return recursiveGetBoundaryObject(location, box.getBottomLeft());
-        } else if (box.getBottomRight() != null && box.getBottomRight().isLocationInside(location)) {
+        } else if (box.getBottomRight() != null 
+                && box.getBottomRight().isLocationInside(location)) {
             return recursiveGetBoundaryObject(location, box.getBottomRight());
         }
         return null;

@@ -3,12 +3,12 @@ package controller;
 import java.util.List;
 
 import model.DeathException;
+import model.NPC;
 import model.NPCEncounter;
 import model.Pirate;
 import model.Player;
 import model.Police;
 import model.Ship;
-import model.NPC;
 import model.Trader;
 import model.Enum.EncounterResult;
 import model.Enum.GoodType;
