@@ -8,24 +8,29 @@
     -fx-text-fill: #D2E2F5;
 }
 
-.button {
-    -fx-background-color: #191985;
+.button {  
+    -fx-background-color:
+        #191985,
+        linear-gradient(#3E82CB, #034183),
+        linear-gradient(#2222B2, #191985);
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-text-fill: #d8d8d8;
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 10pt;
-    -fx-text-fill: #d8d8d8;
 }
 
 .button:hover {
-    -fx-background-color: #343492;
+    -fx-background-color:
+        #191985,
+        linear-gradient(#033872, #3B74B0),
+        linear-gradient(#161675, #1F1FA1);
 }
 
 .button:pressed, .button:default:hover:pressed {
-  -fx-background-color: #7676C2;
-  -fx-text-fill: #191970;
-}
-
-.button:disabled, .button:default:disabled {
-    -fx-opacity: 0.4;
-    -fx-background-color: #191970;
-    -fx-text-fill: white;
+  -fx-background-color:
+        #191985,
+        linear-gradient(#022A55, #2E5B8C),
+        linear-gradient(#11115A, #19197B);
+  -fx-text-fill: #8C8C94;
 }
