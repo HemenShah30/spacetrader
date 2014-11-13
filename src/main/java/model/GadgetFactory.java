@@ -16,16 +16,18 @@ public class GadgetFactory {
      * @return The Gadget with the given name
      */
     public static Gadget createGadget(String gadgetName) {
+        Gadget gadget;
         if (gadgetName.equals("Auto Repair System")) {
-            return new AutoRepairSystem();
+            gadget = new AutoRepairSystem();
         } else if (gadgetName.equals("Navigating System")) {
-            return new NavigatingSystem();
+            gadget = new NavigatingSystem();
         } else if (gadgetName.equals("Five Extra Cargo Spaces")) {
-            return new FiveExtraCargo();
+            gadget =  new FiveExtraCargo();
         } else if (gadgetName.equals("Targeting System")) {
-            return new TargetingSystem();
+            gadget =  new TargetingSystem();
         } else {
-            return new CloakingDevice();
+            gadget =  new CloakingDevice();
         }
+        return gadget;
     }
 }

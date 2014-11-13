@@ -12,3 +12,5 @@ temp/
 .gradle/
 gradle/
 build/
+/.nb-gradle/private/
+.nb-gradle/profiles/private/aux-config
