@@ -153,7 +153,7 @@ public enum LaserType implements ShipUpgrade {
         case MILITARYLASER:
             return "Military Laser";
         default:
-            return null;
+            return "";
         }
     }
 

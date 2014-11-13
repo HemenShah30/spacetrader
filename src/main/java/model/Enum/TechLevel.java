@@ -51,7 +51,7 @@ public enum TechLevel {
         case HITECH:
             return "High Tech";
         default:
-            return null;
+            return "";
         }
     }
 

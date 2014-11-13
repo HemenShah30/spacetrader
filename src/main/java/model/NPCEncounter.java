@@ -79,7 +79,7 @@ public class NPCEncounter extends Encounter {
         case POLICE:
             return "Police";
         default:
-            return null;
+            return "";
         }
     }
 }

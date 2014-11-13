@@ -40,7 +40,7 @@ public enum SpecialResource {
         case NOSPECIALRESOURCES:
             return "No Special Resource";
         default:
-            return null;
+            return "";
         }
     }
 

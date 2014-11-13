@@ -29,7 +29,7 @@ public enum Condition {
         case LACKOFWORKERS:
             return "Lack of Workers";
         default:
-            return null;
+            return "";
         }
     }
 

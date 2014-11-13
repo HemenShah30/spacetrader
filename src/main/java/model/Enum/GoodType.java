@@ -247,7 +247,7 @@ public enum GoodType {
         case ROBOTS:
             return "Robots";
         default:
-            return null;
+            return "";
         }
     }
 }

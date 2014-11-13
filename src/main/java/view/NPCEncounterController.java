@@ -71,7 +71,7 @@ public class NPCEncounterController implements Controller {
      *            The NPCEncounter that is happening
      */
     public void initializePage(TravelScreenController tsc, NPCEncounter encounter) {
-        encounter = encounter;
+        this.encounter = encounter;
         parent = tsc;
         Player player = GameEngine.getGameEngine().getPlayer();
         Ship ship = player.getShip();

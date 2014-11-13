@@ -337,7 +337,7 @@ public enum ShipType {
         case MANTIS:
             return "Mantis";
         default:
-            return null;
+            return "";
         }
     }
 }

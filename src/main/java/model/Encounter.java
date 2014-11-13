@@ -119,7 +119,7 @@ public class Encounter {
                 return "An asteroid crashes into your cargo hold, but you have no cargo to lose";
             }
 
-            GoodType good = cargo.get((int) Math.random() * cargo.size());
+            GoodType good = cargo.get((int) (Math.random() * cargo.size()));
             int quantity = (int) Math.ceil(ship.amountInCargo(good) * Math.random()
                     * percentOfCargoLost);
             ship.removeFromCargo(good, quantity);

@@ -95,7 +95,7 @@ public enum Government {
         case THEOCRACY:
             return "Theocracy";
         default:
-            return null;
+            return "";
         }
     }
 }

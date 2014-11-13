@@ -130,7 +130,7 @@ public enum ShieldType implements ShipUpgrade {
         case REFLECTIVESHIELD:
             return "Reflective Shield";
         default:
-            return null;
+            return "";
         }
     }
 

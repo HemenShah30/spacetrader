@@ -44,7 +44,7 @@ public enum EncounterRate {
         case SWARMS:
             return "Swarms";
         default:
-            return null;
+            return "";
         }
     }
 }
