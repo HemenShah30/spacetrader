@@ -25,8 +25,6 @@ import model.Enum.TechLevel;
 import org.junit.Before;
 import org.junit.Test;
 
-import controller.FightEngine;
-
 /**
  * JUnit test for bribing the police in FightEngine
  * 

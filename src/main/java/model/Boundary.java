@@ -14,12 +14,12 @@ public interface Boundary {
      *            The location either inside or outside the boundary
      * @return Whether or not the location is inside the boundary or not
      */
-    public boolean isLocationInside(Location location);
+    boolean isLocationInside(Location location);
 
     /**
      * Returns the location of the boundary
      * 
      * @return The location of the boundary
      */
-    public Location getLocation();
+    Location getLocation();
 }

@@ -6,31 +6,31 @@ public interface ShipUpgrade {
      * 
      * @return
      */
-    public double getPrice();
+    double getPrice();
 
     /**
      * 
      * @param ship
      * @return
      */
-    public boolean canBuy(Ship ship);
+    boolean canBuy(Ship ship);
 
     /**
      * 
      * @param ship
      * @return
      */
-    public boolean canSell(Ship ship);
+    boolean canSell(Ship ship);
 
     /**
      * 
      * @return
      */
-    public int getMinTechLevel();
+    int getMinTechLevel();
 
     /**
      * 
      * @return
      */
-    public int getType();
+    int getType();
 }

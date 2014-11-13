@@ -12,3 +12,4 @@ temp/
 .gradle/
 gradle/
 build/
+/nbproject/private/

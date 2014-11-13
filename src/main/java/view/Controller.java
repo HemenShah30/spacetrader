@@ -10,5 +10,5 @@ public interface Controller {
     /**
      * Causes the controller to update its given UI page
      */
-    public void updatePage();
+    void updatePage();
 }
