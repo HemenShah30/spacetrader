@@ -7,44 +7,44 @@ package model.Enum;
  * 
  */
 public enum EncounterRate {
-	NONE(0), FEW(1), SOME(2), MANY(3), SWARMS(4);
+    NONE(0), FEW(1), SOME(2), MANY(3), SWARMS(4);
 
-	private int value;
+    private int value;
 
-	/**
-	 * Constructor for the EncounterRate taking in the integer value of the enum
-	 * 
-	 * @param v
-	 *            The integer value of the enum
-	 */
-	private EncounterRate(int v) {
-		value = v;
-	}
+    /**
+     * Constructor for the EncounterRate taking in the integer value of the enum
+     * 
+     * @param v
+     *            The integer value of the enum
+     */
+    private EncounterRate(int value) {
+        this.value = value;
+    }
 
-	/**
-	 * Returns the integer value of the enum
-	 * 
-	 * @return The integer value of the enum
-	 */
-	public int getValue() {
-		return value;
-	}
+    /**
+     * Returns the integer value of the enum
+     * 
+     * @return The integer value of the enum
+     */
+    public int getValue() {
+        return value;
+    }
 
-	@Override
-	public String toString() {
-		switch (this) {
-		case NONE:
-			return "None";
-		case FEW:
-			return "Few";
-		case SOME:
-			return "Some";
-		case MANY:
-			return "Many";
-		case SWARMS:
-			return "Swarms";
-		default:
-			return null;
-		}
-	}
+    @Override
+    public String toString() {
+        switch (this) {
+        case NONE:
+            return "None";
+        case FEW:
+            return "Few";
+        case SOME:
+            return "Some";
+        case MANY:
+            return "Many";
+        case SWARMS:
+            return "Swarms";
+        default:
+            return null;
+        }
+    }
 }

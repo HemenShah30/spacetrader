@@ -72,11 +72,11 @@ public class Universe {
             Condition[] conditions = Condition.values();
             EncounterRate[] encounterRates = EncounterRate.values();
 
-            int t = (int) (Math.random() * levels.length);
+            int techlevel = (int) (Math.random() * levels.length);
             // int t = 6;
-            int r = (int) (Math.random() * resources.length);
-            int g = (int) (Math.random() * governments.length);
-            int c = (int) (Math.random() * conditions.length);
+            int resource = (int) (Math.random() * resources.length);
+            int government = (int) (Math.random() * governments.length);
+            int condition = (int) (Math.random() * conditions.length);
             int pirate = (int) (Math.random() * encounterRates.length);
             int police = (int) (Math.random() * encounterRates.length);
             int trader = (int) (Math.random() * encounterRates.length);
@@ -84,11 +84,11 @@ public class Universe {
             // int y = (int) (Math.random() * universeWidth);
 
             if (Math.random() < percentNoneCondition) {
-                c = 0;
+                condition = 0;
             }
 
             if (Math.random() < percentNoSpecialResource) {
-                r = 0;
+                resource = 0;
             }
 
             /*
@@ -115,8 +115,9 @@ public class Universe {
             }
             int size = 3 + rand.nextInt(5);
             Color col = approvedColors[rand.nextInt(approvedColors.length)];
-            Planet p = new Planet(planetNames.get(i), levels[t], resources[r], governments[g], location,
-                    conditions[c], encounterRates[police], encounterRates[pirate],
+            Planet planet = new Planet(planetNames.get(i), levels[techlevel], resources[resource], 
+                    governments[government], location,
+                    conditions[condition], encounterRates[police], encounterRates[pirate],
                     encounterRates[trader], size, col);
             uniqueLocations.add(location);
 
@@ -125,20 +126,20 @@ public class Universe {
             Collections.shuffle(mercenaryNames);
             int currentMercenaryIndex = 0;
             List<Mercenary> mercenaries = new ArrayList<>();
-            if (levels[t].getValue() > 5 && currentMercenaryIndex < mercenaryNames.size()) {
+            if (levels[techlevel].getValue() > 5 && currentMercenaryIndex < mercenaryNames.size()) {
                 do {
                     String name = mercenaryNames.get(currentMercenaryIndex);
-                    Mercenary m = new Mercenary(name, p);
-                    mercenaries.add(m);
+                    Mercenary merc = new Mercenary(name, planet);
+                    mercenaries.add(merc);
                     currentMercenaryIndex++;
                 } while ((Math.random()) < 0.5 && mercenaries.size() < maximumNumberOfMercenaries);
                 // number of mercenaries a planet can be randomly given is capped
             }
-            Bar b = new Bar(mercenaries);
-            p.setBar(b);
+            Bar bar = new Bar(mercenaries);
+            planet.setBar(bar);
 
-            System.out.println(p);
-            planets.add(p);
+            System.out.println(planet);
+            planets.add(planet);
         }
         planetLocations = new BoundaryTree(400, 400, planets);
     }

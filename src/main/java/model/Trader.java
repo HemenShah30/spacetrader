@@ -12,7 +12,7 @@ import model.Enum.GoodType;
  * 
  */
 public class Trader extends NPC {
-    private final static double percentBuying = 0.5;
+    private static final double percentBuying = 0.5;
     private int quantity;
     private int price;
     private boolean isBuying; // determines if the Trader wants to sell

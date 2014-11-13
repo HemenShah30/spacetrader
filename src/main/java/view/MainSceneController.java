@@ -21,75 +21,71 @@ import javafx.stage.Stage;
  * 
  */
 public class MainSceneController {
-	@FXML
-	Button newGame;
-	@FXML
-	Button loadGame;
-	@FXML
-	Button settings;
+    @FXML
+    Button newGame;
+    @FXML
+    Button loadGame;
+    @FXML
+    Button settings;
 
-	/**
-	 * Goes to character creator screen
-	 * 
-	 * @param e
-	 *            Event that fired the method
-	 */
-	@FXML
-	private void startNewGame(Event e) {
-		if (MultiPageController.isValidAction(e)) {
-			MultiPageController.loadView(newGame, "CharacterCreator");
-		}
-	}
+    /**
+     * Goes to character creator screen
+     * 
+     * @param e
+     *            Event that fired the method
+     */
+    @FXML
+    private void startNewGame(Event event) {
+        if (MultiPageController.isValidAction(event)) {
+            MultiPageController.loadView(newGame, "CharacterCreator");
+        }
+    }
 
-	@FXML
-	/**
-	 * Method for loading a previously saved game
-	 * @param e The event that fired the method
-	 */
-	private void loadGame(Event e) {
-		if (MultiPageController.isValidAction(e)) {
-			GameEngine game = GameEngine.getGameEngine();
-			if (game.userExists()) {
-				try {
-					Optional<String> player = Dialogs.create()
-							.owner(loadGame.getScene().getWindow())
-							.title("Player Select")
-							.message("Please select your character")
-							.showChoices(game.getUserPlayers());
+    @FXML
+    /**
+     * Method for loading a previously saved game
+     * @param e The event that fired the method
+     */
+    private void loadGame(Event event) {
+        if (MultiPageController.isValidAction(event)) {
+            GameEngine game = GameEngine.getGameEngine();
+            if (game.userExists()) {
+                try {
+                    Optional<String> player = Dialogs.create()
+                            .owner(loadGame.getScene().getWindow()).title("Player Select")
+                            .message("Please select your character")
+                            .showChoices(game.getUserPlayers());
 
-					if (player.isPresent()) {
-						game.loadGame(player.get());
-						Stage stage = (Stage) loadGame.getScene().getWindow();
-						stage.hide();
-						FXMLLoader loader = new FXMLLoader(
-								ClassLoader
-										.getSystemResource("view/PlanetScreen.fxml"));
-						Parent newScene = loader.load();
-						stage.setScene(new Scene(newScene, 600, 400));
-						PlanetScreenController controller = loader
-								.getController();
-						controller.initializePage();
-						stage.show();
-					}
-				} catch (IOException ioe) {
-					ioe.printStackTrace();
-				}
-			} else {
-				Dialogs.create().owner(loadGame.getScene().getWindow())
-						.title("Error").message("You do not have a saved game")
-						.showError();
-			}
-		}
-	}
+                    if (player.isPresent()) {
+                        game.loadGame(player.get());
+                        Stage stage = (Stage) loadGame.getScene().getWindow();
+                        stage.hide();
+                        FXMLLoader loader = new FXMLLoader(
+                                ClassLoader.getSystemResource("view/PlanetScreen.fxml"));
+                        Parent newScene = loader.load();
+                        stage.setScene(new Scene(newScene, 600, 400));
+                        PlanetScreenController controller = loader.getController();
+                        controller.initializePage();
+                        stage.show();
+                    }
+                } catch (IOException ioe) {
+                    ioe.printStackTrace();
+                }
+            } else {
+                Dialogs.create().owner(loadGame.getScene().getWindow()).title("Error")
+                        .message("You do not have a saved game").showError();
+            }
+        }
+    }
 
-	@FXML
-	/**
-	 * Method for opening the settings menu
-	 * @param e The event that fired the method
-	 */
-	private void openSettingsMenu(Event e) {
-		if (MultiPageController.isValidAction(e)) {
-			System.out.println("Open Settings");
-		}
-	}
+    @FXML
+    /**
+     * Method for opening the settings menu
+     * @param e The event that fired the method
+     */
+    private void openSettingsMenu(Event e) {
+        if (MultiPageController.isValidAction(e)) {
+            System.out.println("Open Settings");
+        }
+    }
 }

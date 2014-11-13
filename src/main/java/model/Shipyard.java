@@ -46,8 +46,9 @@ public class Shipyard {
      * @return The purchase price of the ship in the shipyard
      */
     public double getBuyPrice(ShipType type) {
-        if (type.getMinTechLevel() > planet.getTechLevel().getValue())
+        if (type.getMinTechLevel() > planet.getTechLevel().getValue()) {
             return -1;
+        }
         return prices.get(type);
     }
 

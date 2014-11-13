@@ -33,8 +33,8 @@ public class Ship {
      * @param sT
      *            The ShipType for the ship
      */
-    public Ship(ShipType sT) {
-        this(sT, sT.getTotalHP(), sT.getFuel());
+    public Ship(ShipType shiptype) {
+        this(shiptype, shiptype.getTotalHP(), shiptype.getFuel());
     }
 
     /**
@@ -47,14 +47,15 @@ public class Ship {
      * @param f
      *            The fuel for the ship
      */
-    public Ship(ShipType sT, int hp, int f) {
-        setShipType(sT);
+    public Ship(ShipType shiptype, int hp, int fuel) {
+        setShipType(shiptype);
         cargo = new HashMap<GoodType, Integer>();
-        for (GoodType type : GoodType.values())
+        for (GoodType type : GoodType.values()) {
             cargo.put(type, 0);
-        fuel = f;
+        }
+        this.fuel = fuel;
         currHP = hp;
-        cargoSize = sT.getCargoSize();
+        cargoSize = shiptype.getCargoSize();
         shields = new HashMap<ShieldType, Integer>();
         lasers = new ArrayList<LaserType>();
         gadgets = new ArrayList<Gadget>();
@@ -77,8 +78,9 @@ public class Ship {
             damage -= absorbed;
         }
         currHP -= damage;
-        if (currHP <= 0)
+        if (currHP <= 0) {
             throw new DeathException();
+        }
     }
 
     /**
@@ -173,8 +175,8 @@ public class Ship {
      * @param f
      *            The new fuel for the ship
      */
-    public void setFuel(int f) {
-        this.fuel = f;
+    public void setFuel(int fuel) {
+        this.fuel = fuel;
     }
 
     /**
@@ -250,9 +252,9 @@ public class Ship {
      */
     public int getCurrCargo() {
         int currCargo = 0;
-        for (GoodType good : cargo.keySet())
+        for (GoodType good : cargo.keySet()) {
             currCargo += cargo.get(good);
-
+        }
         return currCargo;
     }
 
@@ -311,10 +313,11 @@ public class Ship {
      * @param sT
      *            The ship type the ship will have
      */
-    private void setShipType(ShipType sT) {
-        if (sT == null)
+    private void setShipType(ShipType shiptype) {
+        if (shiptype == null) {
             throw new IllegalArgumentException();
-        shipType = sT;
+        }
+        shipType = shiptype;
     }
 
     /**
@@ -351,9 +354,9 @@ public class Ship {
      * @param g
      *            The gadget to be added to the ship
      */
-    public void addGadget(Gadget g) {
+    public void addGadget(Gadget gadget) {
         if (shipType.getGadgetSlots() > gadgets.size()) {
-            gadgets.add(g);
+            gadgets.add(gadget);
             return;
         }
         throw new MaxCapacityException("Already has max gadgets");
@@ -469,6 +472,8 @@ public class Ship {
             Gadget gadget = (Gadget) upgrade;
             addGadget(gadget);
             break;
+        default:
+            break;
         }
     }
 
@@ -492,6 +497,8 @@ public class Ship {
             Gadget gadget = (Gadget) upgrade;
             gadgets.remove(gadget);
             break;
+        default:
+            break;
         }
     }
 
@@ -502,8 +509,8 @@ public class Ship {
      *            The specified laser
      * @return boolean result
      */
-    public boolean hasLaser(LaserType l) {
-        return lasers.contains(l);
+    public boolean hasLaser(LaserType laser) {
+        return lasers.contains(laser);
     }
 
     /**
@@ -513,8 +520,8 @@ public class Ship {
      *            The specified shield
      * @return boolean result
      */
-    public boolean hasShield(ShieldType s) {
-        if (!shields.containsKey(s)) {
+    public boolean hasShield(ShieldType shield) {
+        if (!shields.containsKey(shield)) {
             return false;
         }
         return true;
@@ -527,8 +534,8 @@ public class Ship {
      *            The specified gadget
      * @return boolean result
      */
-    public boolean hasGadget(Gadget g) {
-        return gadgets.contains(g);
+    public boolean hasGadget(Gadget gadget) {
+        return gadgets.contains(gadget);
     }
 
     /**
@@ -555,8 +562,8 @@ public class Ship {
      * @param m
      *            Mercenary to be added
      */
-    public void addToCrew(Mercenary m) {
-        mercenaries.add(m);
+    public void addToCrew(Mercenary merc) {
+        mercenaries.add(merc);
     }
 
     /**
@@ -565,8 +572,8 @@ public class Ship {
      * @param m
      *            Mercenary to be removed
      */
-    public void removeFromCrew(Mercenary m) {
-        mercenaries.remove(m);
+    public void removeFromCrew(Mercenary merc) {
+        mercenaries.remove(merc);
     }
 
     /**

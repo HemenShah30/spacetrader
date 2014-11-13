@@ -7,8 +7,8 @@ package view;
  *
  */
 public interface Controller {
-	/**
-	 * Causes the controller to update its given UI page
-	 */
-	public void updatePage();
+    /**
+     * Causes the controller to update its given UI page
+     */
+    public void updatePage();
 }

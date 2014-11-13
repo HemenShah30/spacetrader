@@ -27,8 +27,8 @@ public class TradeEngine {
      * @param p
      *            The player that will be trading with the marketplace
      */
-    public TradeEngine(Player p) {
-        player = p;
+    public TradeEngine(Player player) {
+        this.player = player;
     }
 
     /**

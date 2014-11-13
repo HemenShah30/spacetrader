@@ -19,7 +19,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
@@ -31,7 +30,7 @@ import javafx.util.StringConverter;
  */
 public class BarScreenController {
     private boolean hireDropDownJustPressed = true;
-    private Player p;
+    private Player player;
 
     @FXML
     private Label mercNameLbl;
@@ -102,17 +101,18 @@ public class BarScreenController {
     @FXML
     public void initializePage() {
         GameEngine game = GameEngine.getGameEngine();
-        Player player = game.getPlayer();
-        p = player;
+        Player playerCur = game.getPlayer();
+        player = playerCur;
         List<Mercenary> mercenariesPlanet = game.getPlanetMercenaries();
         hireDropDown.getItems().addAll(mercenariesPlanet);
         hireDropDown.setConverter(new StringConverter<Mercenary>() {
 
             @Override
-            public String toString(Mercenary m) {
-                if (m == null)
+            public String toString(Mercenary merc) {
+                if (merc == null) {
                     return null;
-                return m.getName();
+                }
+                return merc.getName();
             }
 
             @Override
@@ -133,10 +133,11 @@ public class BarScreenController {
         fireDropDown.setConverter(new StringConverter<Mercenary>() {
 
             @Override
-            public String toString(Mercenary m) {
-                if (m == null)
+            public String toString(Mercenary merc) {
+                if (merc == null) {
                     return null;
-                return m.getName();
+                }
+                return merc.getName();
             }
 
             @Override
@@ -155,15 +156,13 @@ public class BarScreenController {
             fireDropDown.setValue(null);
         }
         planetNameLbl.setText(player.getPlanet().getName());
-        planetTechLevelLbl.setText("Tech Level: "
-                + player.getPlanet().getTechLevel().toString());
-        planetResourceLbl.setText("Resource: "
-                + player.getPlanet().getResource().toString());
+        planetTechLevelLbl.setText("Tech Level: " + player.getPlanet().getTechLevel().toString());
+        planetResourceLbl.setText("Resource: " + player.getPlanet().getResource().toString());
         playerNameLbl.setText(player.getName());
         playerCreditsLbl.setText("Credits: " + player.getCredits());
         updateMercenaryLabels();
     }
-    
+
     @FXML
     private void selectHire(Event event) {
         hireDropDownJustPressed = true;
@@ -175,25 +174,26 @@ public class BarScreenController {
         hireDropDownJustPressed = false;
         updateMercenaryLabels();
     }
-    
+
     @FXML
     private void hireMerc(Event event) {
         if (MultiPageController.isValidAction(event)) {
-            Mercenary m = hireDropDown.getValue();
-            List<String> errors = GameEngine.getGameEngine().hireMercenary(m);
+            Mercenary merc = hireDropDown.getValue();
+            List<String> errors = GameEngine.getGameEngine().hireMercenary(merc);
             String errorMsg = "";
-            for (String error : errors)
+            for (String error : errors) {
                 errorMsg += error + "\n";
+            }
             if (errors.size() > 0) {
                 displayHireError(errorMsg);
             } else {
-                hireDropDown.getItems().remove(m);
+                hireDropDown.getItems().remove(merc);
                 if (hireDropDown.getItems().size() != 0) {
                     hireDropDown.setValue(hireDropDown.getItems().get(0));
                 } else {
                     hireDropDown.setValue(null);
                 }
-                fireDropDown.getItems().add(m);
+                fireDropDown.getItems().add(merc);
                 if (fireDropDown.getItems().size() != 0) {
                     fireDropDown.setValue(fireDropDown.getItems().get(0));
                 } else {
@@ -202,19 +202,19 @@ public class BarScreenController {
             }
         }
     }
-    
+
     @FXML
     private void fireMerc(Event event) {
         if (MultiPageController.isValidAction(event)) {
-            Mercenary m = fireDropDown.getValue();
-            GameEngine.getGameEngine().fireMercenary(m);
-            fireDropDown.getItems().remove(m);
+            Mercenary merc = fireDropDown.getValue();
+            GameEngine.getGameEngine().fireMercenary(merc);
+            fireDropDown.getItems().remove(merc);
             if (fireDropDown.getItems().size() != 0) {
                 fireDropDown.setValue(fireDropDown.getItems().get(0));
             } else {
                 fireDropDown.setValue(null);
             }
-            hireDropDown.getItems().add(m);
+            hireDropDown.getItems().add(merc);
             if (hireDropDown.getItems().size() != 0) {
                 hireDropDown.setValue(hireDropDown.getItems().get(0));
             } else {
@@ -224,10 +224,10 @@ public class BarScreenController {
     }
 
     private void displayHireError(String msg) {
-        Dialogs.create().owner(hireMercBtn.getScene().getWindow())
-        .title("Error").message(msg).showError();
+        Dialogs.create().owner(hireMercBtn.getScene().getWindow()).title("Error").message(msg)
+                .showError();
     }
-    
+
     private void updateMercenaryLabels() {
         if (hireDropDownJustPressed) {
             if (hireDropDown.getValue() == null) {
@@ -239,14 +239,14 @@ public class BarScreenController {
                 mercPilotLbl.setText(Integer.toString(0));
                 mercInvestLbl.setText(Integer.toString(0));
             } else if (hireDropDown.getItems().size() > 0) {
-                Mercenary m = hireDropDown.getValue();
-                mercNameLbl.setText(m.getName());
-                mercWageLbl.setText(Double.toString(m.getWage()));
-                mercEngiLbl.setText(Integer.toString(m.getEngineerSkill()));
-                mercTradeLbl.setText(Integer.toString(m.getTraderSkill()));
-                mercFightLbl.setText(Integer.toString(m.getFighterSkill()));
-                mercPilotLbl.setText(Integer.toString(m.getPilotSkill()));
-                mercInvestLbl.setText(Integer.toString(m.getInvestorSkill()));
+                Mercenary merc = hireDropDown.getValue();
+                mercNameLbl.setText(merc.getName());
+                mercWageLbl.setText(Double.toString(merc.getWage()));
+                mercEngiLbl.setText(Integer.toString(merc.getEngineerSkill()));
+                mercTradeLbl.setText(Integer.toString(merc.getTraderSkill()));
+                mercFightLbl.setText(Integer.toString(merc.getFighterSkill()));
+                mercPilotLbl.setText(Integer.toString(merc.getPilotSkill()));
+                mercInvestLbl.setText(Integer.toString(merc.getInvestorSkill()));
             }
         } else {
             if (fireDropDown.getValue() == null) {
@@ -258,21 +258,21 @@ public class BarScreenController {
                 mercPilotLbl.setText(Integer.toString(0));
                 mercInvestLbl.setText(Integer.toString(0));
             } else if (fireDropDown.getItems().size() > 0) {
-                Mercenary m = fireDropDown.getValue();
-                mercNameLbl.setText(m.getName());
-                mercWageLbl.setText(Double.toString(m.getWage()));
-                mercEngiLbl.setText(Integer.toString(m.getEngineerSkill()));
-                mercTradeLbl.setText(Integer.toString(m.getTraderSkill()));
-                mercFightLbl.setText(Integer.toString(m.getFighterSkill()));
-                mercPilotLbl.setText(Integer.toString(m.getPilotSkill()));
-                mercInvestLbl.setText(Integer.toString(m.getInvestorSkill()));
+                Mercenary merc = fireDropDown.getValue();
+                mercNameLbl.setText(merc.getName());
+                mercWageLbl.setText(Double.toString(merc.getWage()));
+                mercEngiLbl.setText(Integer.toString(merc.getEngineerSkill()));
+                mercTradeLbl.setText(Integer.toString(merc.getTraderSkill()));
+                mercFightLbl.setText(Integer.toString(merc.getFighterSkill()));
+                mercPilotLbl.setText(Integer.toString(merc.getPilotSkill()));
+                mercInvestLbl.setText(Integer.toString(merc.getInvestorSkill()));
             }
         }
-        playerTradeLbl.setText(Integer.toString(p.getTraderSkill()));
-        playerEngiLbl.setText(Integer.toString(p.getEngineerSkill()));
-        playerPilotLbl.setText(Integer.toString(p.getPilotSkill()));
-        playerInvestLbl.setText(Integer.toString(p.getInvestorSkill()));
-        playerFightLbl.setText(Integer.toString(p.getFighterSkill()));
+        playerTradeLbl.setText(Integer.toString(player.getTraderSkill()));
+        playerEngiLbl.setText(Integer.toString(player.getEngineerSkill()));
+        playerPilotLbl.setText(Integer.toString(player.getPilotSkill()));
+        playerInvestLbl.setText(Integer.toString(player.getInvestorSkill()));
+        playerFightLbl.setText(Integer.toString(player.getFighterSkill()));
     }
 
     /**
@@ -282,8 +282,8 @@ public class BarScreenController {
      *            The event that fired the method
      */
     @FXML
-    private void toPlanetScreen(Event e) {
-        if (MultiPageController.isValidAction(e)) {
+    private void toPlanetScreen(Event event) {
+        if (MultiPageController.isValidAction(event)) {
             try {
                 Stage stage = (Stage) backToPlanetBtn.getScene().getWindow();
                 stage.hide();
