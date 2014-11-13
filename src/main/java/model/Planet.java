@@ -91,8 +91,9 @@ public class Planet implements Boundary {
      *            The name of the planet to be set
      */
     private void setName(String name) {
-        if (name == null || name.equals(""))
+        if (name == null || name.equals("")) {
             throw new IllegalArgumentException();
+        }
         this.name = name;
     }
 
@@ -103,8 +104,9 @@ public class Planet implements Boundary {
      *            The tech level of the planet to be set
      */
     private void setTechLevel(TechLevel tl) {
-        if (tl == null)
+        if (tl == null) {
             throw new IllegalArgumentException();
+        }
         techLevel = tl;
     }
 
