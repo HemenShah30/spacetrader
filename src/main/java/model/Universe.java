@@ -61,7 +61,8 @@ public class Universe {
         Collections.shuffle(planetNames);
         Set<Location> uniqueLocations = new HashSet<Location>();
         Random rand = new Random();
-        int x, y;
+        int x;
+        int y;
         int uniSize = (int) Math.sqrt(planetNames.size());
         int uniSize2 = uniSize * uniSize;
         Location location = new Location(0, 0);

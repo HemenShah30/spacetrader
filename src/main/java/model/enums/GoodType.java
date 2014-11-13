@@ -214,12 +214,13 @@ public enum GoodType {
     }
 
     public int getNPCAmount(EncounterType type) {
-        if (type == EncounterType.POLICE)
+        if (type == EncounterType.POLICE) {
             return (int) (policeAmount * Math.random() * NPCMaxVariation);
-        else if (type == EncounterType.PIRATE)
+        } else if (type == EncounterType.PIRATE) {
             return (int) (pirateAmount * Math.random() * NPCMaxVariation);
-        else if (type == EncounterType.TRADER)
+        } else if (type == EncounterType.TRADER) {
             return (int) (traderAmount * Math.random() * NPCMaxVariation);
+        }
         return 0;
     }
 
