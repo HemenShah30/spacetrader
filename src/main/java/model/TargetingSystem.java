@@ -8,29 +8,29 @@ package model;
  */
 public class TargetingSystem extends Gadget {
 
-	public static final int PRICE = 25000;
-	public static final int MIN_TECH_LEVEL = 5;
+    public static final int PRICE = 25000;
+    public static final int MIN_TECH_LEVEL = 5;
 
-	/**
-	 * Constructor for the TargetingSystem that passes the price and TechLevel
-	 * to the Gadget superclass
-	 */
-	public TargetingSystem() {
-		super(PRICE, MIN_TECH_LEVEL);
-	}
+    /**
+     * Constructor for the TargetingSystem that passes the price and TechLevel to the Gadget
+     * superclass
+     */
+    public TargetingSystem() {
+        super(PRICE, MIN_TECH_LEVEL);
+    }
 
-	@Override
-	public boolean equals(Object other) {
-		return other instanceof TargetingSystem;
-	}
+    @Override
+    public boolean equals(Object other) {
+        return other instanceof TargetingSystem;
+    }
 
-	@Override
-	public int hashCode() {
-		return toString().hashCode();
-	}
+    @Override
+    public int hashCode() {
+        return toString().hashCode();
+    }
 
-	@Override
-	public String toString() {
-		return "Targeting System";
-	}
+    @Override
+    public String toString() {
+        return "Targeting System";
+    }
 }

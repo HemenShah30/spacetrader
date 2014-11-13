@@ -7,5 +7,5 @@ package model;
  *
  */
 public class DeathException extends Exception {
-	private static final long serialVersionUID = -1147212593370969314L;
+    private static final long serialVersionUID = -1147212593370969314L;
 }
