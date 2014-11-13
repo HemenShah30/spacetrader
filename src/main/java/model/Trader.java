@@ -12,7 +12,7 @@ import model.Enum.GoodType;
  * 
  */
 public class Trader extends NPC {
-	private final double percentBuying = 0.5;
+	private final static double percentBuying = 0.5;
 	private int quantity, price;
 	private boolean isBuying; // determines if the Trader wants to sell
 								// something to the player or wants to buy
@@ -28,6 +28,20 @@ public class Trader extends NPC {
 	 *            The TraderReputation for the player
 	 */
 	public Trader(int rep) {
+		this(rep, (Math.random() < percentBuying));
+	}
+
+	/**
+	 * A second Trader constructor taking in player rep and whether or not the
+	 * trader is buying the good
+	 * 
+	 * @param rep
+	 *            The reputation of the player with traders
+	 * @param buying
+	 *            Whether or not the trader is buying from the player
+	 */
+	public Trader(int rep, boolean buying) {
+		isBuying = buying;
 		setPilotSkill(1);
 		setFighterSkill((int) (rep * .08));
 		setTraderSkill(1);
@@ -35,22 +49,9 @@ public class Trader extends NPC {
 		setInvestorSkill(1);
 		generateShip(rep, EncounterType.TRADER);
 		generateCredits(rep);
-		generateIsBuying();
 		generateGood();
 		generatePrice();
 		generateQuantity(rep);
-	}
-
-	/**
-	 * Determines if the Trader wants to sell or buy or sell from the player
-	 * 
-	 */
-	private void generateIsBuying() {
-		if (Math.random() < percentBuying) {
-			isBuying = true;
-		} else {
-			isBuying = false;
-		}
 	}
 
 	/**

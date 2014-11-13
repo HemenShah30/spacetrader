@@ -20,7 +20,6 @@ import model.Enum.GoodType;
 public class TradeEngine {
 
 	private Player player;
-	private Ship ship;
 
 	/**
 	 * Constructor for the TradeEngine, taking in the main game player
@@ -30,7 +29,6 @@ public class TradeEngine {
 	 */
 	public TradeEngine(Player p) {
 		player = p;
-		ship = p.getShip();
 	}
 
 	/**
@@ -45,6 +43,7 @@ public class TradeEngine {
 	 * @return The errors from the transaction, if any
 	 */
 	public List<String> buy(GoodType tradeGood, int quantity, Marketplace market) {
+		Ship ship = player.getShip();
 		double cost = market.getBuyPrice(tradeGood, player) * quantity;
 		List<String> errors = validateBuy(cost, quantity);
 		if (errors.isEmpty()) {
@@ -66,6 +65,7 @@ public class TradeEngine {
 	 * @return Any errors from the buy, if any
 	 */
 	private List<String> validateBuy(double cost, int quantity) {
+		Ship ship = player.getShip();
 		List<String> errors = new ArrayList<String>();
 
 		if (player.getCredits() < cost) {
@@ -92,6 +92,7 @@ public class TradeEngine {
 	 */
 	public List<String> sell(GoodType tradeGood, int quantity,
 			Marketplace market) {
+		Ship ship = player.getShip();
 		double cost = market.getSellPrice(tradeGood) * quantity;
 		List<String> errors = validateSell(tradeGood, quantity, market);
 		if (errors.isEmpty()) {
@@ -119,6 +120,7 @@ public class TradeEngine {
 	 */
 	private List<String> validateSell(GoodType tradeGood, int quantity,
 			Marketplace market) {
+		Ship ship = player.getShip();
 		List<String> errors = new ArrayList<String>();
 
 		if (ship.amountInCargo(tradeGood) == 0) {
@@ -141,6 +143,7 @@ public class TradeEngine {
 	 * @return The amount of the good the user can buy
 	 */
 	public int getMaximumBuyGoodAmount(GoodType good) {
+		Ship ship = player.getShip();
 		Marketplace market = player.getPlanet().getMarketplace();
 		if (market.getBuyPrice(good, player) == -1)
 			return 0;
@@ -159,6 +162,7 @@ public class TradeEngine {
 	 * @return The amount of a good that a user can sell
 	 */
 	public int getMaximumSellGoodAmount(GoodType good) {
+		Ship ship = player.getShip();
 		Marketplace market = player.getPlanet().getMarketplace();
 		if (market.getSellPrice(good) == -1)
 			return 0;
@@ -174,6 +178,7 @@ public class TradeEngine {
 	 * @return The maximum transaction amount with the player
 	 */
 	public int getMaximumTraderTradeAmount(Trader trader) {
+		Ship ship = player.getShip();
 		if (trader.isBuying()) {
 			return Math.min(ship.amountInCargo(trader.getGoodOfInterest()),
 					trader.getQuantity());
@@ -196,6 +201,7 @@ public class TradeEngine {
 	 * @return The list of errors, if any, with the trade
 	 */
 	public List<String> tradeWithTrader(Trader trader, int quantity) {
+		Ship ship = player.getShip();	
 		List<String> errors = new ArrayList<String>();
 		if (quantity > trader.getQuantity())
 			errors.add("Trader will not "
@@ -238,6 +244,7 @@ public class TradeEngine {
 	 * @return The errors from the transaction, if any
 	 */
 	public List<String> buyShipUpgrade(ShipUpgrade upgrade, Shipyard shipyard) {
+		Ship ship = player.getShip();
 		double cost = shipyard.getShipUpgradeBuyPrice(upgrade);
 		List<String> errors = validateShipUpgradeBuy(cost, upgrade);
 		if (errors.isEmpty()) {
@@ -258,6 +265,7 @@ public class TradeEngine {
 	 * @return List<String> of errors
 	 */
 	private List<String> validateShipUpgradeBuy(double cost, ShipUpgrade upgrade) {
+		Ship ship = player.getShip();
 		List<String> errors = new ArrayList<String>();
 
 		if (player.getCredits() < cost) {
@@ -282,6 +290,7 @@ public class TradeEngine {
 	 * @return The errors from the sell, if any
 	 */
 	public List<String> sellShipUpgrade(ShipUpgrade upgrade, Shipyard shipyard) {
+		Ship ship = player.getShip();
 		double cost = shipyard.getSellableSell(upgrade);
 		List<String> errors = validateShipUpgradeSell(cost, upgrade);
 		if (errors.isEmpty()) {
@@ -301,6 +310,7 @@ public class TradeEngine {
 	 * @return The errors from the sell, if any
 	 */
 	private List<String> validateShipUpgradeSell(double cost, ShipUpgrade upgrade) {
+		Ship ship = player.getShip();
 		List<String> errors = new ArrayList<String>();
 
 		if (!upgrade.canSell(ship)) {
