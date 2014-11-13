@@ -1,19 +1,23 @@
 package controller;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javafx.scene.paint.Color;
+import junit.framework.Assert;
 import model.Gadget;
 import model.Location;
 import model.Planet;
 import model.Player;
 import model.Ship;
 import model.Shipyard;
+import model.Trader;
 import model.Enum.Condition;
 import model.Enum.EncounterRate;
+import model.Enum.GoodType;
 import model.Enum.Government;
 import model.Enum.ShipType;
 import model.Enum.SpecialResource;
@@ -38,7 +42,7 @@ public class TradeEngineTest {
 	Shipyard shipyard;
 
 	@Before
-	public void initialSetUp() throws Exception {
+	public void setup() throws Exception {
 		Location l = new Location(50, 50);
 		planet = new Planet("test", TechLevel.HITECH, SpecialResource.DESERT,
 				Government.DEMOCRACY, l, Condition.BOREDOM, EncounterRate.FEW,
@@ -77,16 +81,54 @@ public class TradeEngineTest {
 		assertTrue("Player should not have sufficient money", engine
 				.buyShipUpgrade(g, shipyard).contains("Not enough credits"));
 	}
-	
+
 	@Test
 	public void addShipUpgradeTechLevelTest() {
 		Gadget g = new Gadget(100.0, 3);
 		Location l = new Location(55, 55);
-		planet = new Planet("test", TechLevel.PREAGRICULTURE, SpecialResource.DESERT,
-				Government.DEMOCRACY, l, Condition.BOREDOM, EncounterRate.FEW,
-				EncounterRate.FEW, EncounterRate.FEW, 1, Color.AQUA);
+		planet = new Planet("test", TechLevel.PREAGRICULTURE,
+				SpecialResource.DESERT, Government.DEMOCRACY, l,
+				Condition.BOREDOM, EncounterRate.FEW, EncounterRate.FEW,
+				EncounterRate.FEW, 1, Color.AQUA);
 		player.setPlanet(planet);
 		shipyard = new Shipyard(planet);
-		assertTrue("Planet should not be able to sell this ShipUpgrade", engine.buyShipUpgrade(g, shipyard).contains("Planet cannot sell this upgrade"));
+		assertTrue(
+				"Planet should not be able to sell this ShipUpgrade",
+				engine.buyShipUpgrade(g, shipyard).contains(
+						"Planet cannot sell this upgrade"));
+	}
+
+	@Test
+	public void testTradeWithTrader() {
+		try {
+			Trader trader = new Trader(10, true);
+			int quantity = trader.getQuantity();
+			player.setShip(new Ship(ShipType.GNAT));
+			String error = engine.tradeWithTrader(trader, quantity + 1).get(0);
+			assertEquals("Trader will not "
+					+ (trader.isBuying() ? "buy" : "sell") + " this much "
+					+ trader.getGoodOfInterest(), error);
+			error = engine.tradeWithTrader(trader, quantity).get(0);
+			assertEquals(
+					"You do not have " + quantity + " "
+							+ trader.getGoodOfInterest() + " to sell", error);
+			trader = new Trader(10, false);
+			quantity = trader.getQuantity();
+			player.decreaseCredits(player.getCredits());
+			error = engine.tradeWithTrader(trader, quantity).get(0);
+			assertEquals("You do not have enough credits to buy " + quantity
+					+ " " + trader.getGoodOfInterest(), error);
+			player.getShip().addToCargo(GoodType.FIREARMS, 15);
+			player.increaseCredits(1000000);
+			error = engine.tradeWithTrader(trader, quantity).get(0);
+			assertEquals("Your ship cannot hold " + quantity + " more "
+					+ trader.getGoodOfInterest(), error);
+			player.getShip().removeFromCargo(GoodType.FIREARMS, 15);
+			List<String> errors = engine.tradeWithTrader(trader, 1);
+			assertTrue(errors.isEmpty());
+		} catch (IndexOutOfBoundsException ie) {
+			ie.printStackTrace();
+			fail(ie.getMessage());
+		}
 	}
 }
