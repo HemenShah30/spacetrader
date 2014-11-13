@@ -46,11 +46,12 @@ public class Encounter {
     public String doEncounter() {
         Player player = GameEngine.getGameEngine().getPlayer();
         Ship ship = player.getShip();
+        Random rand = new Random();
         switch (encounterType) {
         case GAINCREDITS: {
             int creditStandardDeviation = 300;
             int creditAverage = 1000;
-            int amount = (int) (new Random().nextGaussian() * creditStandardDeviation 
+            int amount = (int) (rand.nextGaussian() * creditStandardDeviation 
                     + creditAverage);
             if (amount < 1) {
                 amount = 1;
@@ -76,7 +77,7 @@ public class Encounter {
             if (ship.getLasers().size() < ship.getShipType().getWeaponSlots()) {
                 LaserType[] lasers = LaserType.values();
                 int laserIndex = Math.min(lasers.length,
-                        (int) Math.abs(new Random().nextGaussian() / (2 / lasers.length)));
+                        (int) Math.abs(rand.nextGaussian() / (2 / lasers.length)));
                 try {
                     ship.addLaser(lasers[laserIndex]);
                     return "You find a " + lasers[laserIndex]

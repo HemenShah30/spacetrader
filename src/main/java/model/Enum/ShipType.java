@@ -94,7 +94,7 @@ public enum ShipType {
      *            The maximum Trader rep needed for the trader to have this ship
      */
     private ShipType(int fuel, int thp, int cs, int ws, int ss, int gs, int crewS, int mtl, int fc,
-            int price, int bounty, int occurence, int pm, int pirateM, int tm, int rc, int size,
+            int price, int bounty, int occurrence, int pm, int pirateM, int tm, int rc, int size,
             int minPoliceRep, int minPirateRep, int minTraderRep, int maxPoliceRep, 
             int maxPirateRep, int maxTraderRep) {
         this.fuel = fuel;
