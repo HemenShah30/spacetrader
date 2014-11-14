@@ -1,9 +1,9 @@
 package model;
 
+import model.enums.ShipType;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import model.enums.ShipType;
 
 /**
  * Class representing the shipyard of a planet

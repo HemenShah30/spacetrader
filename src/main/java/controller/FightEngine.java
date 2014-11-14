@@ -8,6 +8,7 @@ import model.Player;
 import model.Police;
 import model.Ship;
 import model.Trader;
+
 import model.enums.EncounterResult;
 import model.enums.GoodType;
 import model.enums.LaserType;

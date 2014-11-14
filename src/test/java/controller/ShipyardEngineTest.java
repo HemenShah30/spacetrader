@@ -9,12 +9,14 @@ import model.Planet;
 import model.Player;
 import model.Police;
 import model.Ship;
+
 import model.enums.Condition;
 import model.enums.EncounterRate;
 import model.enums.Government;
 import model.enums.ShipType;
 import model.enums.SpecialResource;
 import model.enums.TechLevel;
+
 import org.junit.Before;
 import org.junit.Test;
 

@@ -1,10 +1,12 @@
 package view;
 
 import controller.GameEngine;
+
 import org.controlsfx.dialog.Dialogs;
 
 import java.io.IOException;
 import java.util.List;
+
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

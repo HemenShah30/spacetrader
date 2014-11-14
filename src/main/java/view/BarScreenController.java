@@ -2,8 +2,10 @@ package view;
 
 
 import controller.GameEngine;
+
 import model.Mercenary;
 import model.Player;
+
 import org.controlsfx.dialog.Dialogs;
 
 import java.io.IOException;
