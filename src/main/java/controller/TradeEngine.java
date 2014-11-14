@@ -1,15 +1,16 @@
 package controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import model.Marketplace;
 import model.Player;
-import model.ShipUpgrade;
 import model.Ship;
+import model.ShipUpgrade;
 import model.Shipyard;
 import model.Trader;
+
 import model.enums.GoodType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class providing methods for trade interactions

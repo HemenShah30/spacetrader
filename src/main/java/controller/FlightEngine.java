@@ -1,10 +1,5 @@
 package controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import model.Encounter;
 import model.NPCEncounter;
 import model.Pirate;
@@ -14,7 +9,13 @@ import model.Police;
 import model.Ship;
 import model.Trader;
 import model.Universe;
+
 import model.enums.EncounterType;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Controller for traveling in game and calculating encounters during traveling
