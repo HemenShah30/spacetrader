@@ -1,15 +1,16 @@
 package controller;
 
-import javafx.scene.paint.Color;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
 import model.Location;
 import model.NPCEncounter;
 import model.Planet;
 import model.Player;
 import model.Police;
 import model.Ship;
+
 import model.enums.Condition;
 import model.enums.EncounterRate;
 import model.enums.EncounterType;
@@ -21,6 +22,8 @@ import model.enums.TechLevel;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import javafx.scene.paint.Color;
 
 /**
  * JUnit test for bribing the police in FightEngine
@@ -38,9 +41,10 @@ public class FightEngineTest {
 
     @Before
     public void setUp() throws Exception {
-        Location l = new Location(50, 50);
-        planet = new Planet("test", TechLevel.HITECH, SpecialResource.DESERT, Government.DEMOCRACY,
-                l, Condition.BOREDOM, EncounterRate.FEW, EncounterRate.FEW, EncounterRate.FEW, 1,
+        Location loc = new Location(50, 50);
+        planet = new Planet("test", TechLevel.HITECH, SpecialResource.DESERT,
+                Government.DEMOCRACY, loc, Condition.BOREDOM,
+                EncounterRate.FEW, EncounterRate.FEW, EncounterRate.FEW, 1,
                 Color.AQUA);
         ship = new Ship(ShipType.FLEA);
         player = new Player("Test", 5, 5, 5, 5, 5, ship);
@@ -61,7 +65,8 @@ public class FightEngineTest {
     public void rejectBribeTest() {
         police = new Police(player.getPoliceRep());
         encounter = new NPCEncounter(EncounterType.POLICE, police);
-        assertFalse("Bribe succeeded when it should have failed", engine.bribePolice(encounter, 10));
+        assertFalse("Bribe succeeded when it should have failed",
+                engine.bribePolice(encounter, 10));
     }
 
     @Test
@@ -83,14 +88,16 @@ public class FightEngineTest {
         police = new Police(player.getPoliceRep());
         encounter = new NPCEncounter(EncounterType.POLICE, police);
         engine.bribePolice(encounter, 10);
-        assertEquals("Player police rep not increased by correct amount", 50, player.getPoliceRep());
+        assertEquals("Player police rep not increased by correct amount", 50,
+                player.getPoliceRep());
     }
 
     @Test
     public void noIllegalGoodsTest() {
         police = new Police(player.getPoliceRep());
         encounter = new NPCEncounter(EncounterType.POLICE, police);
-        assertFalse("Search turned out positive when it should have been negative",
+        assertFalse(
+                "Search turned out positive when it should have been negative",
                 engine.consentToSearch(encounter));
     }
 
@@ -99,7 +106,8 @@ public class FightEngineTest {
         ship.addToCargo(GoodType.NARCOTICS, 1);
         police = new Police(player.getPoliceRep());
         encounter = new NPCEncounter(EncounterType.POLICE, police);
-        assertTrue("Search turned out negative when it should have been positive",
+        assertTrue(
+                "Search turned out negative when it should have been positive",
                 engine.consentToSearch(encounter));
     }
 
@@ -108,7 +116,8 @@ public class FightEngineTest {
         ship.addToCargo(GoodType.FIREARMS, 1);
         police = new Police(player.getPoliceRep());
         encounter = new NPCEncounter(EncounterType.POLICE, police);
-        assertTrue("Search turned out negative when it should have been positive",
+        assertTrue(
+                "Search turned out negative when it should have been positive",
                 engine.consentToSearch(encounter));
     }
 
@@ -118,9 +127,11 @@ public class FightEngineTest {
         police = new Police(player.getPoliceRep());
         encounter = new NPCEncounter(EncounterType.POLICE, police);
         engine.consentToSearch(encounter);
-        assertFalse("Search turned out positive when it should have been negative",
+        assertFalse(
+                "Search turned out positive when it should have been negative",
                 engine.consentToSearch(encounter));
-        assertEquals("Player police rep not set to lowest possible rep", 1, player.getPoliceRep());
+        assertEquals("Player police rep not set to lowest possible rep", 1,
+                player.getPoliceRep());
     }
 
     @Test
@@ -130,6 +141,7 @@ public class FightEngineTest {
         police = new Police(player.getPoliceRep());
         encounter = new NPCEncounter(EncounterType.POLICE, police);
         engine.consentToSearch(encounter);
-        assertEquals("Player police rep not increased by correct amount", 55, player.getPoliceRep());
+        assertEquals("Player police rep not increased by correct amount", 55,
+                player.getPoliceRep());
     }
 }
