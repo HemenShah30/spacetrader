@@ -127,7 +127,11 @@ public class BarScreenController {
         });
         //Code may be breaking here - hemen
         //TODO: try/catch around the setvalue
-        hireDropDown.setValue(mercenariesPlanet.get(0));
+        if (mercenariesPlanet.size() != 0) {
+            hireDropDown.setValue(mercenariesPlanet.get(0));
+        } else {
+            hireDropDown.setValue(null);
+        }
         final List<Mercenary> mercenariesPlayer = player.getShip().getMercenaries();
         fireDropDown.getItems().addAll(mercenariesPlayer);
         fireDropDown.setConverter(new StringConverter<Mercenary>() {
