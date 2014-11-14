@@ -3,15 +3,13 @@ package controller;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.List;
-
-import javafx.scene.paint.Color;
 import model.Location;
 import model.NPCEncounter;
 import model.Planet;
 import model.Player;
 import model.Police;
 import model.Ship;
+
 import model.enums.Condition;
 import model.enums.EncounterRate;
 import model.enums.Government;
@@ -21,6 +19,10 @@ import model.enums.TechLevel;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.List;
+
+import javafx.scene.paint.Color;
 
 /**
  * JUnit test class for ShipyardEngine

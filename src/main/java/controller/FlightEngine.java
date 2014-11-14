@@ -9,6 +9,7 @@ import model.Police;
 import model.Ship;
 import model.Trader;
 import model.Universe;
+
 import model.enums.EncounterType;
 
 import java.util.ArrayList;

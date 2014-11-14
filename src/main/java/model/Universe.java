@@ -1,6 +1,7 @@
 package model;
 
 import fileinput.FileReader;
+
 import model.enums.Condition;
 import model.enums.EncounterRate;
 import model.enums.Government;

@@ -1,10 +1,12 @@
 package view;
 
 import controller.GameEngine;
-import model.enums.GoodType;
+
 import model.Marketplace;
 import model.Planet;
 import model.Player;
+
+import model.enums.GoodType;
 
 import java.io.IOException;
 

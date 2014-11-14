@@ -1,6 +1,7 @@
 package model;
 
 import controller.GameEngine;
+
 import model.enums.EncounterType;
 import model.enums.GoodType;
 import model.enums.LaserType;

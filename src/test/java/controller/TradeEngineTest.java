@@ -4,9 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.List;
-
-import javafx.scene.paint.Color;
 import model.Gadget;
 import model.Location;
 import model.Planet;
@@ -14,6 +11,7 @@ import model.Player;
 import model.Ship;
 import model.Shipyard;
 import model.Trader;
+
 import model.enums.Condition;
 import model.enums.EncounterRate;
 import model.enums.GoodType;
@@ -25,7 +23,9 @@ import model.enums.TechLevel;
 import org.junit.Before;
 import org.junit.Test;
 
-import controller.TradeEngine;
+import java.util.List;
+
+import javafx.scene.paint.Color;
 
 /**
  * JUnit Test for trading Eric - Buying ShipUpgrade tests

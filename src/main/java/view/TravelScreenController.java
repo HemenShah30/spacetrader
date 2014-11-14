@@ -1,6 +1,7 @@
 package view;
 
 import controller.GameEngine;
+
 import model.Encounter;
 import model.Location;
 import model.NPCEncounter;
@@ -8,6 +9,7 @@ import model.Planet;
 import model.Player;
 import model.Ship;
 import model.Universe;
+
 import org.controlsfx.dialog.Dialogs;
 
 import java.io.IOException;

@@ -1,13 +1,15 @@
 package view;
 
-import java.io.IOException;
-
-import org.controlsfx.dialog.Dialogs;
+import controller.GameEngine;
 
 import model.Planet;
 import model.Player;
 import model.Ship;
-import controller.GameEngine;
+
+import org.controlsfx.dialog.Dialogs;
+
+import java.io.IOException;
+
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
