@@ -12,9 +12,4 @@ temp/
 .gradle/
 gradle/
 build/
-<<<<<<< HEAD
-/nbproject/private/
-=======
-/.nb-gradle/private/
-.nb-gradle/profiles/private/aux-config
->>>>>>> 059e5b5544cd1050a9d22fe0bd48ca3aab54bc44
+.checkstyle
