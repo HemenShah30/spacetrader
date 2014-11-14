@@ -41,9 +41,9 @@ public class FightEngineTest {
 
     @Before
     public void setUp() throws Exception {
-        Location l = new Location(50, 50);
+        Location loc = new Location(50, 50);
         planet = new Planet("test", TechLevel.HITECH, SpecialResource.DESERT,
-                Government.DEMOCRACY, l, Condition.BOREDOM, EncounterRate.FEW,
+                Government.DEMOCRACY, loc, Condition.BOREDOM, EncounterRate.FEW,
                 EncounterRate.FEW, EncounterRate.FEW, 1, Color.AQUA);
         ship = new Ship(ShipType.FLEA);
         player = new Player("Test", 5, 5, 5, 5, 5, ship);

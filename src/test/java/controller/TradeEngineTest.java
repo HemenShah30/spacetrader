@@ -42,9 +42,9 @@ public class TradeEngineTest {
 
     @Before
     public void setup() throws Exception {
-        Location l = new Location(50, 50);
+        Location loc = new Location(50, 50);
         planet = new Planet("test", TechLevel.HITECH, SpecialResource.DESERT,
-                Government.DEMOCRACY, l, Condition.BOREDOM, EncounterRate.FEW,
+                Government.DEMOCRACY, loc, Condition.BOREDOM, EncounterRate.FEW,
                 EncounterRate.FEW, EncounterRate.FEW, 1, Color.AQUA);
         ship = new Ship(ShipType.FLEA);
         player = new Player("Test", 5, 5, 5, 5, 5, ship);
@@ -76,24 +76,24 @@ public class TradeEngineTest {
     @Test
     public void addShipUpgradeCostTest() {
         ship = new Ship(ShipType.MANTIS);
-        Gadget g = new Gadget(1000000.0, 1);
+        Gadget gadget = new Gadget(1000000.0, 1);
         assertTrue("Player should not have sufficient money", engine
-                .buyShipUpgrade(g, shipyard).contains("Not enough credits"));
+                .buyShipUpgrade(gadget, shipyard).contains("Not enough credits"));
     }
 
     @Test
     public void addShipUpgradeTechLevelTest() {
-        Gadget g = new Gadget(100.0, 3);
-        Location l = new Location(55, 55);
+        Location loc = new Location(55, 55);
         planet = new Planet("test", TechLevel.PREAGRICULTURE,
-                SpecialResource.DESERT, Government.DEMOCRACY, l,
+                SpecialResource.DESERT, Government.DEMOCRACY, loc,
                 Condition.BOREDOM, EncounterRate.FEW, EncounterRate.FEW,
                 EncounterRate.FEW, 1, Color.AQUA);
         player.setPlanet(planet);
         shipyard = new Shipyard(planet);
+        Gadget gadget = new Gadget(100.0, 3);
         assertTrue(
                 "Planet should not be able to sell this ShipUpgrade",
-                engine.buyShipUpgrade(g, shipyard).contains(
+                engine.buyShipUpgrade(gadget, shipyard).contains(
                         "Planet cannot sell this upgrade"));
     }
 
