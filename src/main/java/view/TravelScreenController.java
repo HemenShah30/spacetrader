@@ -123,11 +123,11 @@ public class TravelScreenController implements Controller {
     @FXML
     private void selectPlanet(Event eve) {
         MouseEvent event = (MouseEvent) eve;
-        double x = event.getX() / (mapSize / universeSize);
-        double y = event.getY() / (mapSize / universeSize);
-        Planet p = game.getPlanetAtLocation(new Location((int) x, (int) y));
-        if (p != null) {
-            selectedPlanet = p;
+        double xpos = event.getX() / (mapSize / universeSize);
+        double ypos = event.getY() / (mapSize / universeSize);
+        Planet planet = game.getPlanetAtLocation(new Location((int) xpos, (int) ypos));
+        if (planet != null) {
+            selectedPlanet = planet;
             setPlanetInfo();
         }
     }
@@ -237,17 +237,17 @@ public class TravelScreenController implements Controller {
         game = GameEngine.getGameEngine();
         Universe uni = game.getUniverse();
         universeSize = uni.getUniverseSize();
-        int x;
-        int y;
+        int xpos;
+        int ypos;
         int radius;
         localGraphicsContext.setFill(Color.BLACK);
         localGraphicsContext.fillRect(0, 0, 400, 400);
         for (Planet p : uni.getPlanets()) {
-            x = p.getLocation().getX() * (mapSize / universeSize);
-            y = p.getLocation().getY() * (mapSize / universeSize);
+            xpos = p.getLocation().getX() * (mapSize / universeSize);
+            ypos = p.getLocation().getY() * (mapSize / universeSize);
             radius = p.getDiameter();
             localGraphicsContext.setFill(p.getColor());
-            localGraphicsContext.fillOval(x, y, radius, radius);
+            localGraphicsContext.fillOval(xpos, ypos, radius, radius);
         }
         selectedPlanet = game.getPlayer().getPlanet();
         setPlanetInfo();
