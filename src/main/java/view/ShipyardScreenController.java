@@ -388,6 +388,8 @@ public class ShipyardScreenController {
                 sellable = sellGadgetList.getSelectionModel().getSelectedItem();
                 break;
             }
+            default:
+                break;
             }
             List<String> errors = GameEngine.getGameEngine().tradeShipUpgradeWithShipyard(sellable,
                     false);
