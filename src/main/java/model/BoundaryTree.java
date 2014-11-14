@@ -113,6 +113,10 @@ public class BoundaryTree {
      *            The BoundaryBox being subdivided
      */
     private void subdivide(BoundaryBox box) {
+        Boundary topLeft = box.getTopLeft();
+        Boundary topRight = box.getTopRight();
+        Boundary bottomLeft = box.getBottomLeft();
+        Boundary bottomRight = box.getBottomRight();
         
         int midpointX = (box.getBottomRightCorner().getX() + box.getTopLeftCorner().getX()) / 2;
         int midpointY = (box.getBottomRightCorner().getY() + box.getTopLeftCorner().getY()) / 2;
@@ -137,10 +141,6 @@ public class BoundaryTree {
 
         // insert old values into new boxes, since we're never hitting planets
         // here, cast is safe
-        Boundary topLeft = box.getTopLeft();
-        Boundary topRight = box.getTopRight();
-        Boundary bottomLeft = box.getBottomLeft();
-        Boundary bottomRight = box.getBottomRight();
         
         insert((BoundaryBox) topLeft, box, topLeft.getLocation());
         insert((BoundaryBox) topRight, box, topRight.getLocation());

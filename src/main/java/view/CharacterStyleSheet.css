@@ -9,11 +9,10 @@
 
 .slider{
     -fx-border-width: 2;
-    -fx-color: #04A2E6;
 }
 
 .slider .track {
-    -fx-background-color: #8CBAF5;
+    -fx-background-color: #04A2E6;
 }
 
 .slider .axis .axis-tick-mark{
