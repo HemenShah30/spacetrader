@@ -187,7 +187,7 @@ public class TravelScreenController implements Controller {
             doEncounters();
         } else {
             Ship ship = game.getPlayer().getShip();
-            ship.addShieldHP(ship.getMaxShieldHP());
+            ship.addShieldHp(ship.getMaxShieldHp());
         }
     }
 

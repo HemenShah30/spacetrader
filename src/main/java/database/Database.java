@@ -280,7 +280,7 @@ public class Database {
                 String shipId = playerShipSet.getString("ShipId");
                 Ship ship = player.getShip();
                 String updateShipCmd = "UPDATE \"Ship\" SET \"CurrentHullPoints\"="
-                        + ship.getCurrHP() + ", \"CurrentFuel\"=" + ship.getFuel()
+                        + ship.getCurrHp() + ", \"CurrentFuel\"=" + ship.getFuel()
                         + ", \"ShipTypeId\"=(SELECT \"ShipTypeId\" "
                         + "FROM \"ShipType\" WHERE \"ShipTypeName\"='"
                         + ship.getShipType().toString() + "')" + " WHERE \"ShipId\"='" + shipId
@@ -349,7 +349,7 @@ public class Database {
                 shipTypeUUIDObject.setValue(shipTypeValues.get(ship.getShipType().toString()));
                 shipInsertStatement.setObject(2, shipTypeUUIDObject);
 
-                shipInsertStatement.setInt(3, ship.getCurrHP());
+                shipInsertStatement.setInt(3, ship.getCurrHp());
                 shipInsertStatement.setInt(4, ship.getFuel());
                 shipInsertStatement.execute();
 

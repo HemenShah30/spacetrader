@@ -80,11 +80,11 @@ public class NPCEncounterController implements Controller {
         Ship ship = player.getShip();
         Ship NPCShip = encounter.getNPC().getShip();
         playerShipLbl.setText("Ship Type: " + ship.getShipType().toString());
-        playerHPLbl.setText("HP: " + ship.getCurrHP());
-        playerShieldsLbl.setText("Shields: " + ship.getCurrShieldHP());
+        playerHPLbl.setText("HP: " + ship.getCurrHp());
+        playerShieldsLbl.setText("Shields: " + ship.getCurrShieldHp());
         NPCShipLbl.setText("Ship Type: " + NPCShip.getShipType().toString());
-        NPCHPLbl.setText("HP: " + NPCShip.getCurrHP());
-        NPCShieldsLbl.setText("Shields: " + NPCShip.getCurrShieldHP());
+        NPCHPLbl.setText("HP: " + NPCShip.getCurrHp());
+        NPCShieldsLbl.setText("Shields: " + NPCShip.getCurrShieldHp());
         if (encounter.getEncounterType() == EncounterType.PIRATE) {
             bribeBtn.setVisible(false);
         } else if (encounter.getEncounterType() == EncounterType.POLICE) {
@@ -102,10 +102,10 @@ public class NPCEncounterController implements Controller {
     private void updateShipLabels() {
         Player player = GameEngine.getGameEngine().getPlayer();
         Ship ship = player.getShip();
-        playerHPLbl.setText("HP: " + Integer.toString(ship.getCurrHP()));
-        playerShieldsLbl.setText("Shields: " + Integer.toString(ship.getCurrShieldHP()));
-        NPCHPLbl.setText("HP: " + encounter.getNPC().getShip().getCurrHP());
-        NPCShieldsLbl.setText("Shields: " + encounter.getNPC().getShip().getCurrShieldHP());
+        playerHPLbl.setText("HP: " + Integer.toString(ship.getCurrHp()));
+        playerShieldsLbl.setText("Shields: " + Integer.toString(ship.getCurrShieldHp()));
+        NPCHPLbl.setText("HP: " + encounter.getNPC().getShip().getCurrHp());
+        NPCShieldsLbl.setText("Shields: " + encounter.getNPC().getShip().getCurrShieldHp());
     }
 
     /**
