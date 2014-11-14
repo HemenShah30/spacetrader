@@ -42,19 +42,19 @@ public class ShipyardEngineTest {
     // These are ship types that are expected on a planet given a tech level.
     // These arrays may need to be changed if more ship types are added or if
     // values within certain shiptypes change
-    ShipType expectedShipTypesTechLevel0[] = {};
-    ShipType expectedShipTypesTechLevel1[] = {};
-    ShipType expectedShipTypesTechLevel2[] = {};
-    ShipType expectedShipTypesTechLevel3[] = {};
-    ShipType expectedShipTypesTechLevel4[] = { ShipType.FLEA };
-    ShipType expectedShipTypesTechLevel5[] = { ShipType.FLEA, ShipType.GNAT,
+    ShipType[] expectedShipTypesTechLevel0 = {};
+    ShipType[] expectedShipTypesTechLevel1 = {};
+    ShipType[] expectedShipTypesTechLevel2 = {};
+    ShipType[] expectedShipTypesTechLevel3 = {};
+    ShipType[] expectedShipTypesTechLevel4 = { ShipType.FLEA };
+    ShipType[] expectedShipTypesTechLevel5 = { ShipType.FLEA, ShipType.GNAT,
             ShipType.FIREFLY, ShipType.MOSQUITO, ShipType.BUMBLEBEE,
             ShipType.BEETLE };
-    ShipType expectedShipTypesTechLevel6[] = { ShipType.FLEA, ShipType.GNAT,
+    ShipType[] expectedShipTypesTechLevel6 = { ShipType.FLEA, ShipType.GNAT,
             ShipType.FIREFLY, ShipType.MOSQUITO, ShipType.BUMBLEBEE,
             ShipType.BEETLE, ShipType.HORNET, ShipType.GRASSHOPPER,
             ShipType.TERMITE };
-    ShipType expectedShipTypesTechLevel7[] = { ShipType.FLEA, ShipType.GNAT,
+    ShipType[] expectedShipTypesTechLevel7 = { ShipType.FLEA, ShipType.GNAT,
             ShipType.FIREFLY, ShipType.MOSQUITO, ShipType.BUMBLEBEE,
             ShipType.BEETLE, ShipType.HORNET, ShipType.GRASSHOPPER,
             ShipType.TERMITE, ShipType.WASP, ShipType.MANTIS };
