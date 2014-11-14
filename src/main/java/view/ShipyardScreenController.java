@@ -1,18 +1,21 @@
 package view;
 
-import java.io.IOException;
-import java.util.List;
-
-import org.controlsfx.dialog.Dialogs;
-
 import controller.GameEngine;
+
 import model.Gadget;
 import model.Player;
-import model.ShipUpgrade;
 import model.Ship;
+import model.ShipUpgrade;
+
 import model.enums.LaserType;
 import model.enums.ShieldType;
 import model.enums.ShipType;
+
+import org.controlsfx.dialog.Dialogs;
+
+import java.io.IOException;
+import java.util.List;
+
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,10 +25,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
-import javafx.scene.image.ImageView;
-import javafx.scene.image.Image;
 
 /**
  * Controller for the Shipyard screen

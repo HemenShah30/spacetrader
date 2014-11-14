@@ -1,8 +1,12 @@
 package view;
 
-import java.util.List;
+import controller.GameEngine;
+
+import model.enums.GoodType;
 
 import org.controlsfx.dialog.Dialogs;
+
+import java.util.List;
 
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -10,8 +14,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import controller.GameEngine;
-import model.enums.GoodType;
 
 /**
  * Controller for the popup window that allows a user to buy or sell goods, with the marketplace or

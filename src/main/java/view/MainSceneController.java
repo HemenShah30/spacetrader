@@ -82,8 +82,8 @@ public class MainSceneController {
      * Method for opening the settings menu
      * @param e The event that fired the method
      */
-    private void openSettingsMenu(Event e) {
-        if (MultiPageController.isValidAction(e)) {
+    private void openSettingsMenu(Event event) {
+        if (MultiPageController.isValidAction(event)) {
             System.out.println("Open Settings");
         }
     }
