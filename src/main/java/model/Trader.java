@@ -1,9 +1,9 @@
 package model;
 
-import java.util.Random;
-
 import model.enums.EncounterType;
 import model.enums.GoodType;
+
+import java.util.Random;
 
 /**
  * Class representing Traders.
@@ -12,7 +12,7 @@ import model.enums.GoodType;
  * 
  */
 public class Trader extends NPC {
-    private static final double percentBuying = 0.5;
+    private static final double PERCENTBUYING = 0.5;
     private int quantity;
     private int price;
     private boolean isBuying; // determines if the Trader wants to sell
@@ -29,7 +29,7 @@ public class Trader extends NPC {
      *            The TraderReputation for the player
      */
     public Trader(int rep) {
-        this(rep, (Math.random() < percentBuying));
+        this(rep, (Math.random() < PERCENTBUYING));
     }
 
     /**
