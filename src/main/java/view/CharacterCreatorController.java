@@ -123,12 +123,12 @@ public class CharacterCreatorController {
     /**
      * Returns the game to the main menu
      * 
-     * @param e
+     * @param event
      *            The event that fired the method
      */
     @FXML
-    private void backToMainMenu(Event e) {
-        if (MultiPageController.isValidAction(e)) {
+    private void backToMainMenu(Event event) {
+        if (MultiPageController.isValidAction(event)) {
             MultiPageController.loadView(back, "MainScene");
         }
     }
