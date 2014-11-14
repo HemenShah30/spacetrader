@@ -1,14 +1,14 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import model.enums.GoodType;
 import model.enums.LaserType;
 import model.enums.ShieldType;
 import model.enums.ShipType;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Class representing a player's ship
@@ -214,7 +214,7 @@ public class Ship {
      *            amount used in the repair
      */
     public void repair(double credits) {
-        currHP += (credits / shipType.getRepairCost());
+        currHP += credits / shipType.getRepairCost();
     }
 
     /**
