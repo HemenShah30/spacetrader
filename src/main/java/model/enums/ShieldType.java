@@ -1,7 +1,8 @@
 package model.enums;
 
-import model.ShipUpgrade;
 import model.Ship;
+import model.ShipUpgrade;
+
 
 /**
  * Enum representing the various shields

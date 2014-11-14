@@ -1,19 +1,11 @@
 package model;
 
-<<<<<<< HEAD
-import model.Enum.Condition;
-import model.Enum.EncounterRate;
-import model.Enum.Government;
-import model.Enum.SpecialResource;
-import model.Enum.TechLevel;
-=======
 import javafx.scene.paint.Color;
 import model.enums.Condition;
 import model.enums.EncounterRate;
 import model.enums.Government;
 import model.enums.SpecialResource;
 import model.enums.TechLevel;
->>>>>>> e90ebb872aa73979907705f9600e7a4f2e0ed882
 
 import javafx.scene.paint.Color;
 

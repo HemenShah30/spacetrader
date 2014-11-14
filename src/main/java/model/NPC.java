@@ -1,12 +1,5 @@
 package model;
 
-<<<<<<< HEAD
-import model.Enum.EncounterType;
-import model.Enum.GoodType;
-import model.Enum.LaserType;
-import model.Enum.ShieldType;
-import model.Enum.ShipType;
-=======
 import java.util.ArrayList;
 
 import model.enums.EncounterType;
@@ -14,7 +7,6 @@ import model.enums.GoodType;
 import model.enums.LaserType;
 import model.enums.ShieldType;
 import model.enums.ShipType;
->>>>>>> e90ebb872aa73979907705f9600e7a4f2e0ed882
 
 import java.util.ArrayList;
 
