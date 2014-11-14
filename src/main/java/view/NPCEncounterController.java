@@ -1,11 +1,20 @@
 package view;
 
-import java.io.IOException;
-import java.util.Optional;
+import controller.GameEngine;
+
+import model.NPCEncounter;
+import model.Player;
+import model.Ship;
+import model.Trader;
+
+import model.enums.EncounterResult;
+import model.enums.EncounterType;
 
 import org.controlsfx.dialog.Dialogs;
 
-import controller.GameEngine;
+import java.io.IOException;
+import java.util.Optional;
+
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,12 +24,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.NPCEncounter;
-import model.Player;
-import model.Ship;
-import model.Trader;
-import model.enums.EncounterResult;
-import model.enums.EncounterType;
 
 /**
  * Controller for the encounter screen with NPCs
@@ -77,11 +80,11 @@ public class NPCEncounterController implements Controller {
         Ship ship = player.getShip();
         Ship NPCShip = encounter.getNPC().getShip();
         playerShipLbl.setText("Ship Type: " + ship.getShipType().toString());
-        playerHPLbl.setText("HP: " + ship.getCurrHP());
-        playerShieldsLbl.setText("Shields: " + ship.getCurrShieldHP());
+        playerHPLbl.setText("HP: " + ship.getCurrHp());
+        playerShieldsLbl.setText("Shields: " + ship.getCurrShieldHp());
         NPCShipLbl.setText("Ship Type: " + NPCShip.getShipType().toString());
-        NPCHPLbl.setText("HP: " + NPCShip.getCurrHP());
-        NPCShieldsLbl.setText("Shields: " + NPCShip.getCurrShieldHP());
+        NPCHPLbl.setText("HP: " + NPCShip.getCurrHp());
+        NPCShieldsLbl.setText("Shields: " + NPCShip.getCurrShieldHp());
         if (encounter.getEncounterType() == EncounterType.PIRATE) {
             bribeBtn.setVisible(false);
         } else if (encounter.getEncounterType() == EncounterType.POLICE) {
@@ -99,10 +102,10 @@ public class NPCEncounterController implements Controller {
     private void updateShipLabels() {
         Player player = GameEngine.getGameEngine().getPlayer();
         Ship ship = player.getShip();
-        playerHPLbl.setText("HP: " + Integer.toString(ship.getCurrHP()));
-        playerShieldsLbl.setText("Shields: " + Integer.toString(ship.getCurrShieldHP()));
-        NPCHPLbl.setText("HP: " + encounter.getNPC().getShip().getCurrHP());
-        NPCShieldsLbl.setText("Shields: " + encounter.getNPC().getShip().getCurrShieldHP());
+        playerHPLbl.setText("HP: " + Integer.toString(ship.getCurrHp()));
+        playerShieldsLbl.setText("Shields: " + Integer.toString(ship.getCurrShieldHp()));
+        NPCHPLbl.setText("HP: " + encounter.getNPC().getShip().getCurrHp());
+        NPCShieldsLbl.setText("Shields: " + encounter.getNPC().getShip().getCurrShieldHp());
     }
 
     /**

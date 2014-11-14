@@ -1,5 +1,17 @@
 package view;
 
+import controller.GameEngine;
+
+import model.Encounter;
+import model.Location;
+import model.NPCEncounter;
+import model.Planet;
+import model.Player;
+import model.Ship;
+import model.Universe;
+
+import org.controlsfx.dialog.Dialogs;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -18,16 +30,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
-import controller.GameEngine;
-import model.Encounter;
-import model.Location;
-import model.NPCEncounter;
-import model.Planet;
-import model.Player;
-import model.Ship;
-import model.Universe;
-import org.controlsfx.dialog.Dialogs;
 
 /**
  * Controller for the screen directing travel between planets
@@ -107,10 +109,9 @@ public class TravelScreenController implements Controller {
      */
     @FXML
     private void selectRegionOfSpace(Event eve) {
-        MouseEvent event = (MouseEvent) eve;
-        double x = event.getX();
-        double y = event.getY();
-        System.out.println("You clicked (" + x + ", " + y + ")");
+//        MouseEvent event = (MouseEvent) eve;
+//        double x = event.getX();
+//        double y = event.getY();
     }
 
     /**
@@ -122,11 +123,11 @@ public class TravelScreenController implements Controller {
     @FXML
     private void selectPlanet(Event eve) {
         MouseEvent event = (MouseEvent) eve;
-        double x = event.getX() / (mapSize / universeSize);
-        double y = event.getY() / (mapSize / universeSize);
-        Planet p = game.getPlanetAtLocation(new Location((int) x, (int) y));
-        if (p != null) {
-            selectedPlanet = p;
+        double xpos = event.getX() / (mapSize / universeSize);
+        double ypos = event.getY() / (mapSize / universeSize);
+        Planet planet = game.getPlanetAtLocation(new Location((int) xpos, (int) ypos));
+        if (planet != null) {
+            selectedPlanet = planet;
             setPlanetInfo();
         }
     }
@@ -186,7 +187,7 @@ public class TravelScreenController implements Controller {
             doEncounters();
         } else {
             Ship ship = game.getPlayer().getShip();
-            ship.addShieldHP(ship.getMaxShieldHP());
+            ship.addShieldHp(ship.getMaxShieldHp());
         }
     }
 
@@ -194,8 +195,8 @@ public class TravelScreenController implements Controller {
      * Method for continuously displaying the next encounter to the player
      */
     private void doEncounters() {
-        boolean NPCEncounter = false;
-        while (encounters.size() != 0 && !NPCEncounter) {
+        boolean npcEncounter = false;
+        while (encounters.size() != 0 && !npcEncounter) {
             Encounter encounter = encounters.remove(0);
             Dialogs.create().owner(goBtn.getScene().getWindow()).title("Encounter")
                     .message(encounter.doEncounter()).showInformation();
@@ -220,7 +221,7 @@ public class TravelScreenController implements Controller {
                     });
                     encounterPopup.show();
 
-                    NPCEncounter = true;
+                    npcEncounter = true;
                 } catch (IOException ie) {
                     ie.printStackTrace();
                 }
@@ -236,17 +237,17 @@ public class TravelScreenController implements Controller {
         game = GameEngine.getGameEngine();
         Universe uni = game.getUniverse();
         universeSize = uni.getUniverseSize();
-        int x;
-        int y;
+        int xpos;
+        int ypos;
         int radius;
         localGraphicsContext.setFill(Color.BLACK);
         localGraphicsContext.fillRect(0, 0, 400, 400);
         for (Planet p : uni.getPlanets()) {
-            x = p.getLocation().getX() * (mapSize / universeSize);
-            y = p.getLocation().getY() * (mapSize / universeSize);
+            xpos = p.getLocation().getX() * (mapSize / universeSize);
+            ypos = p.getLocation().getY() * (mapSize / universeSize);
             radius = p.getDiameter();
             localGraphicsContext.setFill(p.getColor());
-            localGraphicsContext.fillOval(x, y, radius, radius);
+            localGraphicsContext.fillOval(xpos, ypos, radius, radius);
         }
         selectedPlanet = game.getPlayer().getPlanet();
         setPlanetInfo();

@@ -7,40 +7,40 @@ package model;
  * 
  */
 public class Location {
-    private int x;
-    private int y;
+    private int xpos;
+    private int ypos;
 
     /**
      * Basic Location constructor taking in coordinate values
      * 
-     * @param x
+     * @param xpos
      *            The x coordinate of the planet
-     * @param y
+     * @param ypos
      *            The y coordinate of the planet
      */
-    public Location(int x, int y) {
-        setX(x);
-        setY(y);
+    public Location(int xpos, int ypos) {
+        setX(xpos);
+        setY(ypos);
     }
 
     /**
      * Private setter for x coordinate
      * 
-     * @param x
+     * @param xpos
      *            The x coordinate of the planet
      */
-    private void setX(int x) {
-        this.x = x;
+    private void setX(int xpos) {
+        this.xpos = xpos;
     }
 
     /**
      * Private setter for y coordinate
      * 
-     * @param y
+     * @param ypos
      *            The y coordinate of the planet
      */
-    private void setY(int y) {
-        this.y = y;
+    private void setY(int ypos) {
+        this.ypos = ypos;
     }
 
     /**
@@ -49,7 +49,7 @@ public class Location {
      * @return The x coordinate of the planet
      */
     public int getX() {
-        return x;
+        return xpos;
     }
 
     /**
@@ -58,7 +58,7 @@ public class Location {
      * @return The y coordinate of the planet
      */
     public int getY() {
-        return y;
+        return ypos;
     }
 
     @Override
@@ -77,6 +77,6 @@ public class Location {
 
     @Override
     public String toString() {
-        return "(" + x + ", " + y + ")";
+        return "(" + xpos + ", " + ypos + ")";
     }
 }

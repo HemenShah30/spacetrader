@@ -2,8 +2,10 @@ package view;
 
 
 import controller.GameEngine;
+
 import model.Mercenary;
 import model.Player;
+
 import org.controlsfx.dialog.Dialogs;
 
 import java.io.IOException;
@@ -101,7 +103,7 @@ public class BarScreenController {
         GameEngine game = GameEngine.getGameEngine();
         Player playerCur = game.getPlayer();
         player = playerCur;
-        List<Mercenary> mercenariesPlanet = game.getPlanetMercenaries();
+        final List<Mercenary> mercenariesPlanet = game.getPlanetMercenaries();
         hireDropDown.getItems().addAll(mercenariesPlanet);
         hireDropDown.setConverter(new StringConverter<Mercenary>() {
 
@@ -117,16 +119,16 @@ public class BarScreenController {
             public Mercenary fromString(String string) {
                 for (int i = 0; i < mercenariesPlanet.size(); i++) {
                     if (mercenariesPlanet.get(i).getName().equalsIgnoreCase(string)) {
-                        System.out.println("Match found!");
                         return mercenariesPlanet.get(i);
                     }
                 }
-                System.out.println("Returned null");
                 return null;
             }
         });
+        //Code may be breaking here - hemen
+        //TODO: try/catch around the setvalue
         hireDropDown.setValue(mercenariesPlanet.get(0));
-        List<Mercenary> mercenariesPlayer = player.getShip().getMercenaries();
+        final List<Mercenary> mercenariesPlayer = player.getShip().getMercenaries();
         fireDropDown.getItems().addAll(mercenariesPlayer);
         fireDropDown.setConverter(new StringConverter<Mercenary>() {
 

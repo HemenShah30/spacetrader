@@ -1,5 +1,13 @@
 package model;
 
+import fileinput.FileReader;
+
+import model.enums.Condition;
+import model.enums.EncounterRate;
+import model.enums.Government;
+import model.enums.SpecialResource;
+import model.enums.TechLevel;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -7,12 +15,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-import filereader.FileReader;
-import model.enums.Condition;
-import model.enums.EncounterRate;
-import model.enums.Government;
-import model.enums.SpecialResource;
-import model.enums.TechLevel;
 import javafx.scene.paint.Color;
 
 /**
@@ -36,7 +38,7 @@ public class Universe {
      */
     public Universe() {
         planets = new ArrayList<Planet>();
-        approvedColors = Planet.approvedColors;
+        approvedColors = Planet.APPROVEDCOLORS;
     }
 
     /**
@@ -48,7 +50,7 @@ public class Universe {
     public Universe(List<Planet> planets) {
         this.planets = planets;
         planetLocations = new BoundaryTree(400, 400, planets);
-        approvedColors = Planet.approvedColors;
+        approvedColors = Planet.APPROVEDCOLORS;
     }
 
     /**
@@ -61,8 +63,8 @@ public class Universe {
         Collections.shuffle(planetNames);
         Set<Location> uniqueLocations = new HashSet<Location>();
         Random rand = new Random();
-        int x;
-        int y;
+        int xpos;
+        int ypos;
         int uniSize = (int) Math.sqrt(planetNames.size());
         int uniSize2 = uniSize * uniSize;
         Location location = new Location(0, 0);
@@ -100,18 +102,18 @@ public class Universe {
              */
 
             if (i < uniSize2) {
-                x = i / uniSize;
-                y = i % uniSize;
-                x = (int) (x * universeSize / uniSize);
-                y = (int) (y * universeSize / uniSize);
-                x = x + rand.nextInt(uniSize) + (uniSize / 4);
-                y = y + rand.nextInt(uniSize) + (uniSize / 4);
-                location = new Location(x, y);
+                xpos = i / uniSize;
+                ypos = i % uniSize;
+                xpos = (int) (xpos * universeSize / uniSize);
+                ypos = (int) (ypos * universeSize / uniSize);
+                xpos = xpos + rand.nextInt(uniSize) + (uniSize / 4);
+                ypos = ypos + rand.nextInt(uniSize) + (uniSize / 4);
+                location = new Location(xpos, ypos);
             } else {
                 while (uniqueLocations.contains(location)) {
-                    x = rand.nextInt((int) universeSize);
-                    y = rand.nextInt((int) universeSize);
-                    location = new Location(x, y);
+                    xpos = rand.nextInt((int) universeSize);
+                    ypos = rand.nextInt((int) universeSize);
+                    location = new Location(xpos, ypos);
                 }
             }
             int size = 3 + rand.nextInt(5);

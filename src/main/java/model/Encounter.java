@@ -1,6 +1,7 @@
 package model;
 
 import controller.GameEngine;
+
 import model.enums.EncounterType;
 import model.enums.GoodType;
 import model.enums.LaserType;
@@ -136,9 +137,9 @@ public class Encounter {
         }
         case LOSEHEALTH: {
             int maxHealthLost = 5;
-            int healthLost = Math.min(ship.getCurrHP() - 1,
+            int healthLost = Math.min(ship.getCurrHp() - 1,
                     (int) (Math.ceil(Math.random() * maxHealthLost)));
-            ship.setCurrHP(ship.getCurrHP() - healthLost);
+            ship.setCurrHp(ship.getCurrHp() - healthLost);
             return "An asteroid glances off your ship's hull, doing " + healthLost + " damage!";
         }
         default:

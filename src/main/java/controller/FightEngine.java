@@ -8,6 +8,7 @@ import model.Player;
 import model.Police;
 import model.Ship;
 import model.Trader;
+
 import model.enums.EncounterResult;
 import model.enums.GoodType;
 import model.enums.LaserType;
@@ -173,7 +174,7 @@ public class FightEngine {
      * @return The result of the NPC turn
      */
     private EncounterResult npcTurn(NPC npc) {
-        double healthRatio = (double) npcShip.getCurrHP() / (double) npcShip.getMaxHP();
+        double healthRatio = (double) npcShip.getCurrHp() / (double) npcShip.getMaxHp();
         if (healthRatio <= .2) {
             int npilot = npc.getPilotSkill() + npcShip.getPilotBonus();
             int ppilot = player.getPilotSkill() + playerShip.getPilotBonus();
@@ -272,7 +273,7 @@ public class FightEngine {
      * Regenerates a portion of the player's shields based on engineer skill
      */
     private void regenShields() {
-        playerShip.addShieldHP((int) (playerShip.getMaxShieldHP()
+        playerShip.addShieldHp((int) (playerShip.getMaxShieldHp()
                 * (player.getEngineerSkill() + playerShip.getEngineerBonus()) / 100.));
     }
 

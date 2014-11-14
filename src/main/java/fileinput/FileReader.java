@@ -1,4 +1,4 @@
-package filereader;
+package fileinput;
 
 import model.Universe;
 

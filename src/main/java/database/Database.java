@@ -1,5 +1,25 @@
 package database;
 
+import model.Gadget;
+import model.GadgetFactory;
+import model.Location;
+import model.Planet;
+import model.Player;
+import model.Ship;
+import model.Universe;
+
+import model.enums.Condition;
+import model.enums.EncounterRate;
+import model.enums.GoodType;
+import model.enums.Government;
+import model.enums.LaserType;
+import model.enums.ShieldType;
+import model.enums.ShipType;
+import model.enums.SpecialResource;
+import model.enums.TechLevel;
+
+import org.postgresql.util.PGobject;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,25 +34,6 @@ import java.util.Map;
 import java.util.UUID;
 
 import javafx.scene.paint.Color;
-
-import org.postgresql.util.PGobject;
-
-import model.Gadget;
-import model.GadgetFactory;
-import model.Location;
-import model.Planet;
-import model.Player;
-import model.Ship;
-import model.Universe;
-import model.enums.Condition;
-import model.enums.EncounterRate;
-import model.enums.GoodType;
-import model.enums.Government;
-import model.enums.LaserType;
-import model.enums.ShieldType;
-import model.enums.ShipType;
-import model.enums.SpecialResource;
-import model.enums.TechLevel;
 
 /**
  * Class that handles all input and output to the database
@@ -91,11 +92,9 @@ public class Database {
         // System.out.println("PostgreSQL JDBC Driver Registered!");
 
         try {
-            connection = DriverManager
-                    .getConnection(
-                            "jdbc:postgresql://spacetraders.cucctpybeipt.us-west-2.rds."
-                            + "amazonaws.com:5432/SpaceTraders",
-                            "meep366", "chromium");
+            connection = DriverManager.getConnection(
+                    "jdbc:postgresql://spacetraders.cucctpybeipt.us-west-2.rds."
+                            + "amazonaws.com:5432/SpaceTraders", "meep366", "chromium");
         } catch (SQLException e) {
             System.out.println("Connection Failed! Check output console");
             e.printStackTrace();
@@ -115,17 +114,15 @@ public class Database {
                         techLevels.getString("TechLevelId"));
             }
 
-            ResultSet specialResources = statement
-                    .executeQuery("SELECT \"SpecialResourceId\","
-                            + " \"SpecialResourceName\"FROM \"SpecialResource\"");
+            ResultSet specialResources = statement.executeQuery("SELECT \"SpecialResourceId\","
+                    + " \"SpecialResourceName\"FROM \"SpecialResource\"");
             while (specialResources.next()) {
                 specialResourceValues.put(specialResources.getString("SpecialResourceName"),
                         specialResources.getString("SpecialResourceId"));
             }
 
-            ResultSet governments = statement
-                    .executeQuery("SELECT \"GovernmentId\","
-                            + " \"GovernmentName\" FROM \"Government\"");
+            ResultSet governments = statement.executeQuery("SELECT \"GovernmentId\","
+                    + " \"GovernmentName\" FROM \"Government\"");
             while (governments.next()) {
                 governmentValues.put(governments.getString("GovernmentName"),
                         governments.getString("GovernmentId"));
@@ -138,9 +135,8 @@ public class Database {
                         conditions.getString("ConditionId"));
             }
 
-            ResultSet encounterRates = statement
-                    .executeQuery("SELECT \"EncounterRateId\","
-                            + " \"EncounterRateName\" FROM \"EncounterRate\"");
+            ResultSet encounterRates = statement.executeQuery("SELECT \"EncounterRateId\","
+                    + " \"EncounterRateName\" FROM \"EncounterRate\"");
             while (encounterRates.next()) {
                 encounterRateValues.put(encounterRates.getString("EncounterRateName"),
                         encounterRates.getString("EncounterRateId"));
@@ -207,8 +203,7 @@ public class Database {
         try {
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT \"UserId\""
-                    + "FROM \"User\" WHERE \"Username\"='"
-                    + username + "'");
+                    + "FROM \"User\" WHERE \"Username\"='" + username + "'");
             return resultset.next();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -227,8 +222,8 @@ public class Database {
         try {
             Statement statement = connection.createStatement();
             String playerQuery = "SELECT up.\"PlayerId\" FROM \"UserPlayers\" up INNER JOIN"
-                    + "\"User\" u ON u.\"UserId\"=up.\"UserId\" WHERE u.\"Username\"='"
-                    + username + "' AND up.\"PlayerName\"='" + playerName + "'";
+                    + "\"User\" u ON u.\"UserId\"=up.\"UserId\" WHERE u.\"Username\"='" + username
+                    + "' AND up.\"PlayerName\"='" + playerName + "'";
             ResultSet resultset = statement.executeQuery(playerQuery);
             return resultset.next();
         } catch (SQLException s) {
@@ -254,12 +249,11 @@ public class Database {
                         + "FROM \"User\" u INNER JOIN \"UserPlayers\" up "
                         + "ON up.\"UserId\"=u.\"UserId\""
                         + "INNER JOIN \"Player\" p ON p.\"PlayerId\"=up.\"PlayerId\""
-                        + "WHERE u.\"Username\"='"
-                        + username + "' AND up.\"PlayerName\"='" + player.getName() + "'";
+                        + "WHERE u.\"Username\"='" + username + "' AND up.\"PlayerName\"='"
+                        + player.getName() + "'";
                 ResultSet playerShipSet = playerShipStatment.executeQuery(playerShipQuery);
                 playerShipSet.next();
                 String playerId = playerShipSet.getString("PlayerId");
-                
 
                 ResultSet planetSet = playerShipStatment
                         .executeQuery("SELECT \"PlanetId\" FROM \"Planet\" WHERE \"PlanetName\"='"
@@ -286,9 +280,7 @@ public class Database {
                 String shipId = playerShipSet.getString("ShipId");
                 Ship ship = player.getShip();
                 String updateShipCmd = "UPDATE \"Ship\" SET \"CurrentHullPoints\"="
-                        + ship.getCurrHP()
-                        + ", \"CurrentFuel\"="
-                        + ship.getFuel()
+                        + ship.getCurrHp() + ", \"CurrentFuel\"=" + ship.getFuel()
                         + ", \"ShipTypeId\"=(SELECT \"ShipTypeId\" "
                         + "FROM \"ShipType\" WHERE \"ShipTypeName\"='"
                         + ship.getShipType().toString() + "')" + " WHERE \"ShipId\"='" + shipId
@@ -322,12 +314,9 @@ public class Database {
 
                 for (GoodType g : GoodType.values()) {
                     String updateShipCargoCmd = "UPDATE \"ShipCargo\" SET \"GoodTypeQuantity\"="
-                            + ship.amountInCargo(g)
-                            + " WHERE \"ShipId\"='"
-                            + shipId
+                            + ship.amountInCargo(g) + " WHERE \"ShipId\"='" + shipId
                             + "' AND \"GoodTypeId\" = (SELECT \"GoodTypeId\" FROM \"GoodType\""
-                            + " WHERE \"GoodTypeName\"='"
-                            + g.toString() + "')";
+                            + " WHERE \"GoodTypeName\"='" + g.toString() + "')";
                     statement.execute(updateShipCargoCmd);
                 }
                 connection.commit();
@@ -353,14 +342,14 @@ public class Database {
                 shipUUIDObject.setType("uuid");
                 shipUUIDObject.setValue(shipUUID.toString());
                 shipInsertStatement.setObject(1, shipUUIDObject);
-                
+
                 Ship ship = player.getShip();
                 PGobject shipTypeUUIDObject = new PGobject();
                 shipTypeUUIDObject.setType("uuid");
                 shipTypeUUIDObject.setValue(shipTypeValues.get(ship.getShipType().toString()));
                 shipInsertStatement.setObject(2, shipTypeUUIDObject);
 
-                shipInsertStatement.setInt(3, ship.getCurrHP());
+                shipInsertStatement.setInt(3, ship.getCurrHp());
                 shipInsertStatement.setInt(4, ship.getFuel());
                 shipInsertStatement.execute();
 
@@ -604,8 +593,7 @@ public class Database {
             Statement statement = connection.createStatement();
             String playerQuery = "SELECT up.\"PlayerName\" FROM \"User\""
                     + "u INNER JOIN \"UserPlayers\" up ON u.\"UserId\"=up.\"UserId\""
-                    + " WHERE u.\"Username\"='"
-                    + username + "'";
+                    + " WHERE u.\"Username\"='" + username + "'";
             ResultSet playerSet = statement.executeQuery(playerQuery);
             while (playerSet.next()) {
                 players.add(playerSet.getString("PlayerName"));
@@ -641,8 +629,8 @@ public class Database {
                     + " ON p.\"PlayerId\"=up.\"PlayerId\" INNER JOIN \"Ship\" s"
                     + " ON p.\"ShipId\"=s.\"ShipId\" INNER JOIN \"ShipType\" st"
                     + " ON s.\"ShipTypeId\"=st.\"ShipTypeId\" INNER JOIN \"Planet\" plan"
-                    + " ON p.\"PlanetId\"=plan.\"PlanetId\" WHERE u.\"Username\"='"
-                    + username + "' AND up.\"PlayerName\"='" + playerName + "'";
+                    + " ON p.\"PlanetId\"=plan.\"PlanetId\" WHERE u.\"Username\"='" + username
+                    + "' AND up.\"PlayerName\"='" + playerName + "'";
 
             ResultSet playerInfo = statement.executeQuery(execPlayerStatement);
             playerInfo.next();
@@ -661,24 +649,21 @@ public class Database {
                     playerInfo.getInt("PoliceReputation"), playerInfo.getInt("PirateReputation"));
 
             String shipLaserCmd = "SELECT \"LaserName\" FROM \"Laser\" l INNER JOIN \"ShipLasers\""
-                    + " sl ON l.\"LaserId\"=sl.\"LaserId\" WHERE sl.\"ShipId\"='"
-                    + shipId + "'";
+                    + " sl ON l.\"LaserId\"=sl.\"LaserId\" WHERE sl.\"ShipId\"='" + shipId + "'";
             ResultSet lasers = statement.executeQuery(shipLaserCmd);
             while (lasers.next()) {
                 ship.addLaser(LaserType.getEnum(lasers.getString("LaserName")));
             }
             String shipShieldCmd = "SELECT \"ShieldName\" FROM \"Shield\" s "
                     + "INNER JOIN \"ShipShields\""
-                    + " ss ON s.\"ShieldId\"=ss.\"ShieldId\" WHERE ss.\"ShipId\"='"
-                    + shipId + "'";
+                    + " ss ON s.\"ShieldId\"=ss.\"ShieldId\" WHERE ss.\"ShipId\"='" + shipId + "'";
             ResultSet shields = statement.executeQuery(shipShieldCmd);
             while (shields.next()) {
                 ship.addShield(ShieldType.getEnum(shields.getString("ShieldName")));
             }
             String shipGadgetCmd = "SELECT \"GadgetName\" FROM \"Gadget\" g "
                     + "INNER JOIN \"ShipGadgets\""
-                    + " sg ON g.\"GadgetId\"=sg.\"GadgetId\" WHERE sg.\"ShipId\"='"
-                    + shipId + "'";
+                    + " sg ON g.\"GadgetId\"=sg.\"GadgetId\" WHERE sg.\"ShipId\"='" + shipId + "'";
             ResultSet gadgets = statement.executeQuery(shipGadgetCmd);
             while (gadgets.next()) {
                 ship.addGadget(GadgetFactory.createGadget((gadgets.getString("GadgetName"))));
@@ -688,8 +673,7 @@ public class Database {
                     .executeQuery("SELECT goods.\"GoodTypeName\", cargo.\"GoodTypeQuantity\" "
                             + "FROM \"ShipCargo\" cargo INNER JOIN \"GoodType\" goods "
                             + "ON cargo.\"GoodTypeId\"=goods.\"GoodTypeId\" "
-                            + "WHERE cargo.\"ShipId\"='"
-                            + shipId + "'");
+                            + "WHERE cargo.\"ShipId\"='" + shipId + "'");
 
             while (shipCargo.next()) {
                 ship.addToCargo(
@@ -714,8 +698,7 @@ public class Database {
                     + "ON pirEr.\"EncounterRateId\"=p.\"PirateEncounterRateId\" "
                     + "INNER JOIN \"EncounterRate\" traEr "
                     + "ON traEr.\"EncounterRateId\"=p.\"TraderEncounterRateId\" "
-                    + "WHERE pp.\"PlayerId\"='"
-                    + playerId + "'";
+                    + "WHERE pp.\"PlayerId\"='" + playerId + "'";
             ResultSet planets = statement.executeQuery(execPlanetStatement);
             List<Planet> planetList = new ArrayList<Planet>();
             while (planets.next()) {

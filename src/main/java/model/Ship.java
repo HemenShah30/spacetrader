@@ -1,14 +1,14 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import model.enums.GoodType;
 import model.enums.LaserType;
 import model.enums.ShieldType;
 import model.enums.ShipType;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Class representing a player's ship
@@ -18,7 +18,7 @@ import model.enums.ShipType;
  */
 public class Ship {
     private ShipType shipType;
-    private int currHP;
+    private int currHp;
     private int fuel;
     private int cargoSize;
     private Map<ShieldType, Integer> shields;
@@ -54,7 +54,7 @@ public class Ship {
             cargo.put(type, 0);
         }
         this.fuel = fuel;
-        currHP = hp;
+        currHp = hp;
         cargoSize = shiptype.getCargoSize();
         shields = new HashMap<ShieldType, Integer>();
         lasers = new ArrayList<LaserType>();
@@ -72,13 +72,13 @@ public class Ship {
      */
     public void takeDamage(int damage) throws DeathException {
         for (ShieldType shield : shields.keySet()) {
-            int shieldHP = shields.get(shield);
-            int absorbed = Math.min(damage, shieldHP);
-            shields.put(shield, shieldHP - absorbed);
+            int shieldHp = shields.get(shield);
+            int absorbed = Math.min(damage, shieldHp);
+            shields.put(shield, shieldHp - absorbed);
             damage -= absorbed;
         }
-        currHP -= damage;
-        if (currHP <= 0) {
+        currHp -= damage;
+        if (currHp <= 0) {
             throw new DeathException();
         }
     }
@@ -89,11 +89,11 @@ public class Ship {
      * @param amount
      *            The amount the shields need to be increased by
      */
-    public void addShieldHP(int amount) {
+    public void addShieldHp(int amount) {
         for (ShieldType shield : shields.keySet()) {
-            int newShieldHP = Math.min(amount + shields.get(shield), shield.getShieldHP());
-            amount -= newShieldHP - shields.get(shield);
-            shields.put(shield, newShieldHP);
+            int newShieldHp = Math.min(amount + shields.get(shield), shield.getShieldHP());
+            amount -= newShieldHp - shields.get(shield);
+            shields.put(shield, newShieldHp);
         }
     }
 
@@ -102,7 +102,7 @@ public class Ship {
      * 
      * @return the max hp of the ship
      */
-    public int getMaxHP() {
+    public int getMaxHp() {
         return shipType.getTotalHP();
     }
 
@@ -111,10 +111,10 @@ public class Ship {
      * 
      * @return The current shield hp of the ship
      */
-    public int getCurrShieldHP() {
+    public int getCurrShieldHp() {
         int sum = 0;
-        for (int shieldHP : shields.values()) {
-            sum += shieldHP;
+        for (int shieldHp : shields.values()) {
+            sum += shieldHp;
         }
         return sum;
     }
@@ -124,12 +124,12 @@ public class Ship {
      * 
      * @return The maximum shield hp for the ship
      */
-    public int getMaxShieldHP() {
-        int shieldHP = 0;
+    public int getMaxShieldHp() {
+        int shieldHp = 0;
         for (ShieldType shield : shields.keySet()) {
-            shieldHP += shield.getShieldHP();
+            shieldHp += shield.getShieldHP();
         }
-        return shieldHP;
+        return shieldHp;
     }
 
     /**
@@ -137,18 +137,18 @@ public class Ship {
      * 
      * @return the currentHP of the ship
      */
-    public int getCurrHP() {
-        return currHP;
+    public int getCurrHp() {
+        return currHp;
     }
 
     /**
      * Sets the current hull points for the ship
      * 
-     * @param currHP
+     * @param currHp
      *            The new hull points for the ship
      */
-    public void setCurrHP(int currHP) {
-        this.currHP = currHP;
+    public void setCurrHp(int currHp) {
+        this.currHp = currHp;
     }
 
     /**
@@ -194,7 +194,7 @@ public class Ship {
      * @return The cost to repair the ship
      */
     public double getRepairCost() {
-        return (shipType.getTotalHP() - currHP) * shipType.getRepairCost();
+        return (shipType.getTotalHP() - currHp) * shipType.getRepairCost();
     }
 
     /**
@@ -214,7 +214,7 @@ public class Ship {
      *            amount used in the repair
      */
     public void repair(double credits) {
-        currHP += (credits / shipType.getRepairCost());
+        currHp += credits / shipType.getRepairCost();
     }
 
     /**
