@@ -1,6 +1,6 @@
 package model;
 
-import model.Enum.EncounterType;
+import model.enums.EncounterType;
 
 /**
  * Encounter with a player that involves an NPC

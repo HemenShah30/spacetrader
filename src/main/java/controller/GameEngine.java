@@ -1,12 +1,11 @@
 package controller;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import database.Database;
 import model.Encounter;
-import model.Enum.EncounterResult;
-import model.Enum.GoodType;
-import model.Enum.LaserType;
-import model.Enum.ShieldType;
-import model.Enum.ShipType;
 import model.Gadget;
 import model.Location;
 import model.MaxCapacityException;
@@ -18,10 +17,11 @@ import model.Ship;
 import model.ShipUpgrade;
 import model.Trader;
 import model.Universe;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import model.enums.EncounterResult;
+import model.enums.GoodType;
+import model.enums.LaserType;
+import model.enums.ShieldType;
+import model.enums.ShipType;
 
 /**
  * The main game coordinator that will connect the views and the controllers

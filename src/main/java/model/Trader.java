@@ -2,8 +2,8 @@ package model;
 
 import java.util.Random;
 
-import model.Enum.EncounterType;
-import model.Enum.GoodType;
+import model.enums.EncounterType;
+import model.enums.GoodType;
 
 /**
  * Class representing Traders.

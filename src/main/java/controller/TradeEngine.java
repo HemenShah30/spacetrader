@@ -9,7 +9,7 @@ import model.ShipUpgrade;
 import model.Ship;
 import model.Shipyard;
 import model.Trader;
-import model.Enum.GoodType;
+import model.enums.GoodType;
 
 /**
  * Class providing methods for trade interactions

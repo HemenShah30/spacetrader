@@ -1,9 +1,15 @@
 package model;
 
 import controller.GameEngine;
+<<<<<<< HEAD
 import model.Enum.EncounterType;
 import model.Enum.GoodType;
 import model.Enum.LaserType;
+=======
+import model.enums.EncounterType;
+import model.enums.GoodType;
+import model.enums.LaserType;
+>>>>>>> e90ebb872aa73979907705f9600e7a4f2e0ed882
 
 import java.util.ArrayList;
 import java.util.List;

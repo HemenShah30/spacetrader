@@ -3,24 +3,24 @@ package controller;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import model.Enum.Condition;
-import model.Enum.EncounterRate;
-import model.Enum.Government;
-import model.Enum.ShipType;
-import model.Enum.SpecialResource;
-import model.Enum.TechLevel;
+import java.util.List;
 
+import javafx.scene.paint.Color;
 import model.Location;
 import model.NPCEncounter;
 import model.Planet;
 import model.Player;
 import model.Police;
 import model.Ship;
+import model.enums.Condition;
+import model.enums.EncounterRate;
+import model.enums.Government;
+import model.enums.ShipType;
+import model.enums.SpecialResource;
+import model.enums.TechLevel;
+
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.List;
-import javafx.scene.paint.Color;
 
 /**
  * JUnit test class for ShipyardEngine

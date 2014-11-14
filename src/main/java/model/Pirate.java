@@ -1,6 +1,6 @@
 package model;
 
-import model.Enum.EncounterType;
+import model.enums.EncounterType;
 
 /**
  * Class representing Pirates

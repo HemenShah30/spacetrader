@@ -1,4 +1,4 @@
-package model.Enum;
+package model.enums;
 
 /**
  * Enum representing possible outcomes of an action in an encounter

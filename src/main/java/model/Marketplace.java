@@ -1,10 +1,10 @@
 package model;
 
-import model.Enum.GoodType;
-import model.Enum.TechLevel;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import model.enums.GoodType;
+import model.enums.TechLevel;
 
 /**
  * Class representing the marketplace of a planet
