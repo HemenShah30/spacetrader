@@ -1,11 +1,11 @@
 package fileinput;
 
+import model.Universe;
+
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
-import model.Universe;
 
 /**
  * A class for reading in text files
