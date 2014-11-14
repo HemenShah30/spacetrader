@@ -1,9 +1,9 @@
 package model;
 
+import model.enums.ShipType;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import model.enums.ShipType;
 
 /**
  * Class representing the shipyard of a planet
@@ -12,7 +12,7 @@ import model.enums.ShipType;
  * 
  */
 public class Shipyard {
-    private static final double sellPricePenalty = 0.9;
+    private static final double SELLPRICEPENALTY = 0.9;
     private Map<ShipType, Double> prices;
     private Planet planet;
 
@@ -61,7 +61,7 @@ public class Shipyard {
      * @return The sell price of the ship in the shipyard
      */
     public double getSellPrice(ShipType type) {
-        return prices.get(type) * sellPricePenalty;
+        return prices.get(type) * SELLPRICEPENALTY;
     }
 
     /**
@@ -86,6 +86,6 @@ public class Shipyard {
      * @return the sell price in double
      */
     public double getSellableSell(ShipUpgrade upgrade) {
-        return upgrade.getPrice() * sellPricePenalty;
+        return upgrade.getPrice() * SELLPRICEPENALTY;
     }
 }
