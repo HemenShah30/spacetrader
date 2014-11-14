@@ -8,7 +8,7 @@ package model;
  */
 public class Mercenary {
     // Wages can vary from being 80% of the expected cost to 120%
-    private static final double wageVariation = 0.2;
+    private static final double WAGEVARIATION = 0.2;
     private String name;
     private int pilotSkill;
     private int fighterSkill;
@@ -142,7 +142,7 @@ public class Mercenary {
      */
     private double generateWage() {
         double wage = pilotSkill + fighterSkill + traderSkill + engineerSkill + investorSkill;
-        wage += wage * (Math.random() - .5) * wageVariation;
+        wage += wage * (Math.random() - .5) * WAGEVARIATION;
         wage = 5 * Math.round(wage);
         return wage;
     }
