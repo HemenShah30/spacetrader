@@ -42,9 +42,9 @@ public class TradeEngineTest {
 
     @Before
     public void setup() throws Exception {
-        Location l = new Location(50, 50);
+        Location loc = new Location(50, 50);
         planet = new Planet("test", TechLevel.HITECH, SpecialResource.DESERT, Government.DEMOCRACY,
-                l, Condition.BOREDOM, EncounterRate.FEW, EncounterRate.FEW, EncounterRate.FEW, 1,
+                loc, Condition.BOREDOM, EncounterRate.FEW, EncounterRate.FEW, EncounterRate.FEW, 1,
                 Color.AQUA);
         ship = new Ship(ShipType.FLEA);
         player = new Player("Test", 5, 5, 5, 5, 5, ship);
@@ -77,21 +77,21 @@ public class TradeEngineTest {
     public void addShipUpgradeCostTest() {
         ship = new Ship(ShipType.MANTIS);
         Gadget gadget = new Gadget(1000000.0, 1);
-        assertTrue("Player should not have sufficient money", engine.buyShipUpgrade(gadget, shipyard)
-                .contains("Not enough credits"));
+        assertTrue("Player should not have sufficient money",
+                engine.buyShipUpgrade(gadget, shipyard).contains("Not enough credits"));
     }
 
     @Test
     public void addShipUpgradeTechLevelTest() {
-        Gadget gadget = new Gadget(100.0, 3);
         Location location = new Location(55, 55);
+        Gadget gdt = new Gadget(100.0, 3);
         planet = new Planet("test", TechLevel.PREAGRICULTURE, SpecialResource.DESERT,
-                Government.DEMOCRACY, location, Condition.BOREDOM, EncounterRate.FEW, EncounterRate.FEW,
-                EncounterRate.FEW, 1, Color.AQUA);
+                Government.DEMOCRACY, location, Condition.BOREDOM, EncounterRate.FEW,
+                EncounterRate.FEW, EncounterRate.FEW, 1, Color.AQUA);
         player.setPlanet(planet);
         shipyard = new Shipyard(planet);
         assertTrue("Planet should not be able to sell this ShipUpgrade",
-                engine.buyShipUpgrade(gadget, shipyard).contains("Planet cannot sell this upgrade"));
+                engine.buyShipUpgrade(gdt, shipyard).contains("Planet cannot sell this upgrade"));
     }
 
     @Test
