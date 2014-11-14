@@ -1,6 +1,5 @@
 package model;
 
-import javafx.scene.paint.Color;
 import model.enums.Condition;
 import model.enums.EncounterRate;
 import model.enums.Government;
@@ -31,7 +30,7 @@ public class Planet implements Boundary {
     private int diameter;
     private int chances;
     private Color color;
-    public static final Color[] approvedColors = { Color.DARKCYAN, Color.MEDIUMVIOLETRED,
+    public static final Color[] APPROVEDCOLORS = { Color.DARKCYAN, Color.MEDIUMVIOLETRED,
             Color.AQUAMARINE, Color.SPRINGGREEN, Color.YELLOWGREEN };
 
     /**
@@ -184,7 +183,7 @@ public class Planet implements Boundary {
      */
     private void setColor(Color co) {
         boolean isSet = false;
-        for (Color col : approvedColors) {
+        for (Color col : APPROVEDCOLORS) {
             if (col.equals(co)) {
                 color = co;
                 isSet = true;
@@ -192,7 +191,7 @@ public class Planet implements Boundary {
             }
         }
         if (!isSet) {
-            color = approvedColors[2];
+            color = APPROVEDCOLORS[2];
         }
     }
 

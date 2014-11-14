@@ -36,7 +36,7 @@ public class Universe {
      */
     public Universe() {
         planets = new ArrayList<Planet>();
-        approvedColors = Planet.approvedColors;
+        approvedColors = Planet.APPROVEDCOLORS;
     }
 
     /**
@@ -48,7 +48,7 @@ public class Universe {
     public Universe(List<Planet> planets) {
         this.planets = planets;
         planetLocations = new BoundaryTree(400, 400, planets);
-        approvedColors = Planet.approvedColors;
+        approvedColors = Planet.APPROVEDCOLORS;
     }
 
     /**
