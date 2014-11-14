@@ -143,8 +143,7 @@ public abstract class NPC {
         boolean shipTypeGenerated = false;
         while (!shipTypeGenerated) {
             index = (int) (Math.random() * shipTypes.length);
-            if (shipTypes[index].getMinRep(type) <= rep
-                && shipTypes[index].getMaxRep(type) >= rep) {
+            if (shipTypes[index].getMinRep(type) <= rep && shipTypes[index].getMaxRep(type) >= rep) {
                 generatedShip = new Ship(shipTypes[index]);
                 shipTypeGenerated = true;
                 setShip(generatedShip);
@@ -158,11 +157,7 @@ public abstract class NPC {
             index = (int) (Math.random() * laserTypes.length);
             if (laserTypes[index].getMinRep(type) <= rep
                     && laserTypes[index].getMaxRep(type) >= rep) {
-                try {
-                    ship.addLaser(laserTypes[index]);
-                } catch (MaxCapacityException m) {
-                    m.printStackTrace();
-                }
+                ship.addLaser(laserTypes[index]);
             }
         }
 
@@ -173,11 +168,7 @@ public abstract class NPC {
             index = (int) (Math.random() * shieldTypes.length);
             if (shieldTypes[index].getMinRep(type) <= rep
                     && shieldTypes[index].getMaxRep(type) >= rep) {
-                try {
-                    ship.addShield(shieldTypes[index]);
-                } catch (MaxCapacityException m) {
-                    m.printStackTrace();
-                }
+                ship.addShield(shieldTypes[index]);
             }
         }
 
@@ -208,11 +199,7 @@ public abstract class NPC {
         int gadgetCapacity = getShip().getShipType().getGadgetSlots();
         for (int i = 0; i < gadgetCapacity; i++) {
             index = (int) (Math.random() * shieldTypes.length);
-            try {
-                ship.addGadget(gadgetTypes.get(index));
-            } catch (MaxCapacityException m) {
-                m.printStackTrace();
-            }
+            ship.addGadget(gadgetTypes.get(index));
         }
     }
 
