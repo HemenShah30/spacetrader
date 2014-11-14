@@ -1,14 +1,13 @@
 package view;
 
-import java.io.IOException;
-import java.util.List;
-
+import controller.GameEngine;
 import org.controlsfx.dialog.Dialogs;
 
-import controller.GameEngine;
+import java.io.IOException;
+import java.util.List;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.event.Event;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -126,8 +125,8 @@ public class CharacterCreatorController {
      *            The event that fired the method
      */
     @FXML
-    private void backToMainMenu(Event e) {
-        if (MultiPageController.isValidAction(e)) {
+    private void backToMainMenu(Event event) {
+        if (MultiPageController.isValidAction(event)) {
             MultiPageController.loadView(back, "MainScene");
         }
     }
