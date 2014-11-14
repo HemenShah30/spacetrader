@@ -1,7 +1,5 @@
 package model;
 
-import java.util.ArrayList;
-
 import model.enums.EncounterType;
 import model.enums.GoodType;
 import model.enums.LaserType;
@@ -145,7 +143,8 @@ public abstract class NPC {
         boolean shipTypeGenerated = false;
         while (!shipTypeGenerated) {
             index = (int) (Math.random() * shipTypes.length);
-            if (shipTypes[index].getMinRep(type) <= rep && shipTypes[index].getMaxRep(type) >= rep) {
+            if (shipTypes[index].getMinRep(type) <= rep
+                && shipTypes[index].getMaxRep(type) >= rep) {
                 generatedShip = new Ship(shipTypes[index]);
                 shipTypeGenerated = true;
                 setShip(generatedShip);
@@ -162,7 +161,6 @@ public abstract class NPC {
                 try {
                     ship.addLaser(laserTypes[index]);
                 } catch (MaxCapacityException m) {
-                    System.out.println("Over the max capacity for lasers!");
                     m.printStackTrace();
                 }
             }
@@ -178,7 +176,6 @@ public abstract class NPC {
                 try {
                     ship.addShield(shieldTypes[index]);
                 } catch (MaxCapacityException m) {
-                    System.out.println("Over the max capacity for shields!");
                     m.printStackTrace();
                 }
             }
@@ -214,12 +211,9 @@ public abstract class NPC {
             try {
                 ship.addGadget(gadgetTypes.get(index));
             } catch (MaxCapacityException m) {
-                System.out.println("Over the max capacity for gadgets!");
                 m.printStackTrace();
             }
         }
-        System.out.println("Encounter type: " + type);
-        System.out.println("Ship description\n" + ship.toString());
     }
 
     /**
