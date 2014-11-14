@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-import fileIO.FileReader;
+import fileinput.FileReader;
 import model.enums.Condition;
 import model.enums.EncounterRate;
 import model.enums.Government;
