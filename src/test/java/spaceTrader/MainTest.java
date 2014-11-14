@@ -1,4 +1,4 @@
-package spaceTrader;
+package spacetrader;
 
 import org.junit.Assert;
 import org.junit.Test;

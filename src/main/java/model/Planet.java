@@ -1,6 +1,5 @@
 package model;
 
-import javafx.scene.paint.Color;
 import model.enums.Condition;
 import model.enums.EncounterRate;
 import model.enums.Government;

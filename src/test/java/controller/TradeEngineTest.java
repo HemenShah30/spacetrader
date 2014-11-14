@@ -83,7 +83,6 @@ public class TradeEngineTest {
 
     @Test
     public void addShipUpgradeTechLevelTest() {
-        Gadget gadget = new Gadget(100.0, 3);
         Location loc = new Location(55, 55);
         planet = new Planet("test", TechLevel.PREAGRICULTURE,
                 SpecialResource.DESERT, Government.DEMOCRACY, loc,
@@ -91,6 +90,7 @@ public class TradeEngineTest {
                 EncounterRate.FEW, 1, Color.AQUA);
         player.setPlanet(planet);
         shipyard = new Shipyard(planet);
+        Gadget gadget = new Gadget(100.0, 3);
         assertTrue(
                 "Planet should not be able to sell this ShipUpgrade",
                 engine.buyShipUpgrade(gadget, shipyard).contains(

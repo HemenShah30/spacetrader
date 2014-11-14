@@ -1,4 +1,4 @@
-package spaceTrader;
+package spacetrader;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
