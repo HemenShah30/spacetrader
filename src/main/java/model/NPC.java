@@ -1,7 +1,5 @@
 package model;
 
-import java.util.ArrayList;
-
 import model.enums.EncounterType;
 import model.enums.GoodType;
 import model.enums.LaserType;
