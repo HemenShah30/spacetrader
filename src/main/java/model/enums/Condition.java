@@ -1,4 +1,4 @@
-package model.Enum;
+package model.enums;
 
 /**
  * Class representing the condition of a planet

@@ -2,11 +2,11 @@ package model;
 
 import java.util.ArrayList;
 
-import model.Enum.EncounterType;
-import model.Enum.GoodType;
-import model.Enum.LaserType;
-import model.Enum.ShieldType;
-import model.Enum.ShipType;
+import model.enums.EncounterType;
+import model.enums.GoodType;
+import model.enums.LaserType;
+import model.enums.ShieldType;
+import model.enums.ShipType;
 
 /**
  * Abstract class representing NPCs.

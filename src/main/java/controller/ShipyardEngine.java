@@ -7,9 +7,9 @@ import model.Gadget;
 import model.Player;
 import model.Ship;
 import model.Shipyard;
-import model.Enum.LaserType;
-import model.Enum.ShieldType;
-import model.Enum.ShipType;
+import model.enums.LaserType;
+import model.enums.ShieldType;
+import model.enums.ShipType;
 
 /**
  * Class providing methods for shipyard interactions

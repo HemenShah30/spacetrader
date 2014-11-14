@@ -14,7 +14,7 @@ import model.Police;
 import model.Ship;
 import model.Trader;
 import model.Universe;
-import model.Enum.EncounterType;
+import model.enums.EncounterType;
 
 /**
  * Controller for traveling in game and calculating encounters during traveling

@@ -1,4 +1,4 @@
-package model.Enum;
+package model.enums;
 
 /**
  * Enum for representing the type of encounter a player is having

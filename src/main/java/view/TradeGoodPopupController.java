@@ -11,7 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import controller.GameEngine;
-import model.Enum.GoodType;
+import model.enums.GoodType;
 
 /**
  * Controller for the popup window that allows a user to buy or sell goods, with the marketplace or

@@ -9,7 +9,7 @@ import model.ShipUpgrade;
 import model.Ship;
 import model.Shipyard;
 import model.Trader;
-import model.Enum.GoodType;
+import model.enums.GoodType;
 
 /**
  * Class providing methods for trade interactions
@@ -74,8 +74,9 @@ public class TradeEngine {
         if (ship.getCurrCargo() + quantity > ship.getCargoSize()) {
             errors.add("Not enough space in your ship");
         }
-        if (cost == -1)
+        if (cost == -1) {
             errors.add("Planet cannot sell this good");
+        }
         return errors;
     }
 
@@ -128,9 +129,9 @@ public class TradeEngine {
         } else if (ship.amountInCargo(tradeGood) - quantity < 0) {
             errors.add("You do not have that many of " + tradeGood);
         }
-        if (market.getSellPrice(tradeGood) == -1)
+        if (market.getSellPrice(tradeGood) == -1) {
             errors.add("Planet cannot purchase this good");
-
+        }
         return errors;
     }
 
@@ -145,8 +146,9 @@ public class TradeEngine {
     public int getMaximumBuyGoodAmount(GoodType good) {
         Ship ship = player.getShip();
         Marketplace market = player.getPlanet().getMarketplace();
-        if (market.getBuyPrice(good, player) == -1)
+        if (market.getBuyPrice(good, player) == -1) {
             return 0;
+        }
         return Math.min(Math.min(ship.getCargoSize() - ship.getCurrCargo(),
                 market.getQuantity(good)),
                 ((int) player.getCredits() / (int) market.getBuyPrice(good,
@@ -164,8 +166,9 @@ public class TradeEngine {
     public int getMaximumSellGoodAmount(GoodType good) {
         Ship ship = player.getShip();
         Marketplace market = player.getPlanet().getMarketplace();
-        if (market.getSellPrice(good) == -1)
+        if (market.getSellPrice(good) == -1) {
             return 0;
+        }
         return ship.amountInCargo(good);
     }
 
@@ -203,22 +206,25 @@ public class TradeEngine {
     public List<String> tradeWithTrader(Trader trader, int quantity) {
         Ship ship = player.getShip();   
         List<String> errors = new ArrayList<String>();
-        if (quantity > trader.getQuantity())
+        if (quantity > trader.getQuantity()) {
             errors.add("Trader will not "
                     + (trader.isBuying() ? "buy" : "sell") + " this much "
                     + trader.getGoodOfInterest());
+        }
         if (trader.isBuying()) {
             if (ship.amountInCargo(trader.getGoodOfInterest()) < quantity) {
                 errors.add("You do not have " + quantity + " "
                         + trader.getGoodOfInterest() + " to sell");
             }
         } else {
-            if (player.getCredits() < quantity * trader.getPrice())
+            if (player.getCredits() < quantity * trader.getPrice()) {
                 errors.add("You do not have enough credits to buy " + quantity
                         + " " + trader.getGoodOfInterest());
-            if (ship.getCargoSize() - ship.getCurrCargo() < quantity)
+            }
+            if (ship.getCargoSize() - ship.getCurrCargo() < quantity) {
                 errors.add("Your ship cannot hold " + quantity + " more "
                         + trader.getGoodOfInterest());
+            }
         }
 
         if (errors.size() == 0) {
@@ -274,8 +280,9 @@ public class TradeEngine {
         if (!upgrade.canBuy(ship)) {
             errors.add("Not enough space in your ship");
         }
-        if (cost == -1)
+        if (cost == -1) {
             errors.add("Planet cannot sell this upgrade");
+        }
         return errors;
     }
 
@@ -316,8 +323,9 @@ public class TradeEngine {
         if (!upgrade.canSell(ship)) {
             errors.add("You do not have any to sell");
         }
-        if (cost == -1)
+        if (cost == -1) {
             errors.add("Planet cannot purchase this upgrade");
+        }
 
         return errors;
     }

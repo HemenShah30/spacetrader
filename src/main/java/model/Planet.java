@@ -1,12 +1,11 @@
 package model;
 
 import javafx.scene.paint.Color;
-
-import model.Enum.Condition;
-import model.Enum.EncounterRate;
-import model.Enum.Government;
-import model.Enum.SpecialResource;
-import model.Enum.TechLevel;
+import model.enums.Condition;
+import model.enums.EncounterRate;
+import model.enums.Government;
+import model.enums.SpecialResource;
+import model.enums.TechLevel;
 
 /**
  * Class representing a planet in the Universe
@@ -91,8 +90,9 @@ public class Planet implements Boundary {
      *            The name of the planet to be set
      */
     private void setName(String name) {
-        if (name == null || name.equals(""))
+        if (name == null || name.equals("")) {
             throw new IllegalArgumentException();
+        }
         this.name = name;
     }
 
@@ -103,8 +103,9 @@ public class Planet implements Boundary {
      *            The tech level of the planet to be set
      */
     private void setTechLevel(TechLevel tl) {
-        if (tl == null)
+        if (tl == null) {
             throw new IllegalArgumentException();
+        }
         techLevel = tl;
     }
 
