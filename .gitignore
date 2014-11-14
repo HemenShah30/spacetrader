@@ -13,3 +13,4 @@ temp/
 gradle/
 build/
 .checkstyle
+.eclipse-pmd
