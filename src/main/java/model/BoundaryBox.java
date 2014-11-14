@@ -175,10 +175,10 @@ public class BoundaryBox implements Boundary {
 
     @Override
     public boolean isLocationInside(Location location) {
-        int xPosition = location.getX();
-        int yPosition = location.getY();
-        return xPosition >= topLeftCorner.getX() && xPosition <= bottomRightCorner.getX()
-                && yPosition <= bottomRightCorner.getY() && yPosition >= topLeftCorner.getY();
+        int xpos = location.getX();
+        int ypos = location.getY();
+        return xpos >= topLeftCorner.getX() && xpos <= bottomRightCorner.getX()
+                && ypos <= bottomRightCorner.getY() && ypos >= topLeftCorner.getY();
     }
 
     @Override
