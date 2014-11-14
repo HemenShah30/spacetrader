@@ -1,5 +1,15 @@
 package view;
 
+import controller.GameEngine;
+import model.Encounter;
+import model.Location;
+import model.NPCEncounter;
+import model.Planet;
+import model.Player;
+import model.Ship;
+import model.Universe;
+import org.controlsfx.dialog.Dialogs;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -18,16 +28,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
-import controller.GameEngine;
-import model.Encounter;
-import model.Location;
-import model.NPCEncounter;
-import model.Planet;
-import model.Player;
-import model.Ship;
-import model.Universe;
-import org.controlsfx.dialog.Dialogs;
 
 /**
  * Controller for the screen directing travel between planets
@@ -107,10 +107,9 @@ public class TravelScreenController implements Controller {
      */
     @FXML
     private void selectRegionOfSpace(Event eve) {
-        MouseEvent event = (MouseEvent) eve;
-        double x = event.getX();
-        double y = event.getY();
-        System.out.println("You clicked (" + x + ", " + y + ")");
+//        MouseEvent event = (MouseEvent) eve;
+//        double x = event.getX();
+//        double y = event.getY();
     }
 
     /**
@@ -194,8 +193,8 @@ public class TravelScreenController implements Controller {
      * Method for continuously displaying the next encounter to the player
      */
     private void doEncounters() {
-        boolean NPCEncounter = false;
-        while (encounters.size() != 0 && !NPCEncounter) {
+        boolean npcEncounter = false;
+        while (encounters.size() != 0 && !npcEncounter) {
             Encounter encounter = encounters.remove(0);
             Dialogs.create().owner(goBtn.getScene().getWindow()).title("Encounter")
                     .message(encounter.doEncounter()).showInformation();
@@ -220,7 +219,7 @@ public class TravelScreenController implements Controller {
                     });
                     encounterPopup.show();
 
-                    NPCEncounter = true;
+                    npcEncounter = true;
                 } catch (IOException ie) {
                     ie.printStackTrace();
                 }
