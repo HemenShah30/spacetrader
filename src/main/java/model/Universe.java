@@ -1,5 +1,12 @@
 package model;
 
+import fileinput.FileReader;
+import model.enums.Condition;
+import model.enums.EncounterRate;
+import model.enums.Government;
+import model.enums.SpecialResource;
+import model.enums.TechLevel;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -7,12 +14,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-import fileinput.FileReader;
-import model.enums.Condition;
-import model.enums.EncounterRate;
-import model.enums.Government;
-import model.enums.SpecialResource;
-import model.enums.TechLevel;
 import javafx.scene.paint.Color;
 
 /**
