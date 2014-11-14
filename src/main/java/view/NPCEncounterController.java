@@ -1,11 +1,17 @@
 package view;
 
-import java.io.IOException;
-import java.util.Optional;
+import controller.GameEngine;
+import model.NPCEncounter;
+import model.Player;
+import model.Ship;
+import model.Trader;
+import model.Enum.EncounterResult;
+import model.Enum.EncounterType;
 
 import org.controlsfx.dialog.Dialogs;
 
-import controller.GameEngine;
+import java.io.IOException;
+import java.util.Optional;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,12 +21,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.NPCEncounter;
-import model.Player;
-import model.Ship;
-import model.Trader;
-import model.Enum.EncounterResult;
-import model.Enum.EncounterType;
+
 
 /**
  * Controller for the encounter screen with NPCs

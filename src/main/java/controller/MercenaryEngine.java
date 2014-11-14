@@ -1,12 +1,12 @@
 package controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import model.Bar;
 import model.Mercenary;
 import model.Player;
 import model.Ship;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class providing methods for mercenary interactions

@@ -1,12 +1,12 @@
 package model;
 
-import javafx.scene.paint.Color;
-
 import model.Enum.Condition;
 import model.Enum.EncounterRate;
 import model.Enum.Government;
 import model.Enum.SpecialResource;
 import model.Enum.TechLevel;
+
+import javafx.scene.paint.Color;
 
 /**
  * Class representing a planet in the Universe

@@ -1,17 +1,8 @@
 package controller;
 
-import javafx.scene.paint.Color;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
-import model.Location;
-import model.NPCEncounter;
-import model.Planet;
-import model.Player;
-import model.Police;
-import model.Ship;
 
 import model.Enum.Condition;
 import model.Enum.EncounterRate;
@@ -21,9 +12,17 @@ import model.Enum.Government;
 import model.Enum.ShipType;
 import model.Enum.SpecialResource;
 import model.Enum.TechLevel;
+import model.Location;
+import model.NPCEncounter;
+import model.Planet;
+import model.Player;
+import model.Police;
+import model.Ship;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import javafx.scene.paint.Color;
 
 /**
  * JUnit test for bribing the police in FightEngine

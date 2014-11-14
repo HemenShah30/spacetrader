@@ -1,14 +1,13 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import controller.GameEngine;
-
 import model.Enum.EncounterType;
 import model.Enum.GoodType;
 import model.Enum.LaserType;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Class representing an Encounter with an NPC or other

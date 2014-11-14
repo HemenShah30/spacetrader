@@ -1,8 +1,9 @@
 package controller;
 
-import java.util.List;
-
 import model.DeathException;
+import model.Enum.EncounterResult;
+import model.Enum.GoodType;
+import model.Enum.LaserType;
 import model.NPC;
 import model.NPCEncounter;
 import model.Pirate;
@@ -10,9 +11,9 @@ import model.Player;
 import model.Police;
 import model.Ship;
 import model.Trader;
-import model.Enum.EncounterResult;
-import model.Enum.GoodType;
-import model.Enum.LaserType;
+
+import java.util.List;
+
 
 /**
  * Class providing methods for NPC fights
