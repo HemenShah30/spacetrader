@@ -1,9 +1,5 @@
 package controller;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import database.Database;
 import model.Encounter;
 import model.Gadget;
@@ -22,6 +18,10 @@ import model.enums.GoodType;
 import model.enums.LaserType;
 import model.enums.ShieldType;
 import model.enums.ShipType;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * The main game coordinator that will connect the views and the controllers
