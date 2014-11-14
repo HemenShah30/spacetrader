@@ -52,8 +52,8 @@ public class Universe {
     }
 
     /**
-     * Method for creating all the planets for the universe, setting up their tech level and
-     * resources
+     * Method for creating all the planets for the universe, setting up their
+     * tech level and resources
      */
     public void createPlanets() {
         FileReader reader = new FileReader();
@@ -93,10 +93,11 @@ public class Universe {
             }
 
             /*
-             * boolean uniqueLocation = false; Location l = null; while (!uniqueLocation) { l = new
-             * Location(x, y); if (!uniqueLocations.contains(l)) uniqueLocation = true; else { x =
-             * (int) (Math.random() * universeLength); y = (int) (Math.random() * universeWidth); }
-             * }
+             * boolean uniqueLocation = false; Location l = null; while
+             * (!uniqueLocation) { l = new Location(x, y); if
+             * (!uniqueLocations.contains(l)) uniqueLocation = true; else { x =
+             * (int) (Math.random() * universeLength); y = (int) (Math.random()
+             * * universeWidth); } }
              */
 
             if (i < uniSize2) {
@@ -116,25 +117,29 @@ public class Universe {
             }
             int size = 3 + rand.nextInt(5);
             Color col = approvedColors[rand.nextInt(approvedColors.length)];
-            Planet planet = new Planet(planetNames.get(i), levels[techlevel], resources[resource], 
-                    governments[government], location,
-                    conditions[condition], encounterRates[police], encounterRates[pirate],
-                    encounterRates[trader], size, col);
+            Planet planet = new Planet(planetNames.get(i), levels[techlevel],
+                    resources[resource], governments[government], location,
+                    conditions[condition], encounterRates[police],
+                    encounterRates[pirate], encounterRates[trader], size, col);
             uniqueLocations.add(location);
 
             // handles mercenary generation
-            List<String> mercenaryNames = reader.readFile("model/MercenaryNames.txt");
+            List<String> mercenaryNames = reader
+                    .readFile("model/MercenaryNames.txt");
             Collections.shuffle(mercenaryNames);
             int currentMercenaryIndex = 0;
             List<Mercenary> mercenaries = new ArrayList<>();
-            if (levels[techlevel].getValue() > 5 && currentMercenaryIndex < mercenaryNames.size()) {
+            if (levels[techlevel].getValue() > 5
+                    && currentMercenaryIndex < mercenaryNames.size()) {
                 do {
                     String name = mercenaryNames.get(currentMercenaryIndex);
                     Mercenary merc = new Mercenary(name, planet);
                     mercenaries.add(merc);
                     currentMercenaryIndex++;
-                } while ((Math.random()) < 0.5 && mercenaries.size() < maximumNumberOfMercenaries);
-                // number of mercenaries a planet can be randomly given is capped
+                } while ((Math.random()) < 0.5
+                        && mercenaries.size() < maximumNumberOfMercenaries);
+                // number of mercenaries a planet can be randomly given is
+                // capped
             }
             Bar bar = new Bar(mercenaries);
             planet.setBar(bar);

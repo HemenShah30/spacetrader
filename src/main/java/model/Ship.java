@@ -68,7 +68,8 @@ public class Ship {
      * @param damage
      *            the amount of damage to be done
      * @throws DeathException
-     *             Thrown when the ship would have 0 or less health after taking damage
+     *             Thrown when the ship would have 0 or less health after taking
+     *             damage
      */
     public void takeDamage(int damage) throws DeathException {
         for (ShieldType shield : shields.keySet()) {
@@ -91,7 +92,8 @@ public class Ship {
      */
     public void addShieldHP(int amount) {
         for (ShieldType shield : shields.keySet()) {
-            int newShieldHP = Math.min(amount + shields.get(shield), shield.getShieldHP());
+            int newShieldHP = Math.min(amount + shields.get(shield),
+                    shield.getShieldHP());
             amount -= newShieldHP - shields.get(shield);
             shields.put(shield, newShieldHP);
         }

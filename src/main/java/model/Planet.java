@@ -31,8 +31,9 @@ public class Planet implements Boundary {
     private int diameter;
     private int chances;
     private Color color;
-    public static final Color[] approvedColors = { Color.DARKCYAN, Color.MEDIUMVIOLETRED,
-            Color.AQUAMARINE, Color.SPRINGGREEN, Color.YELLOWGREEN };
+    public static final Color[] approvedColors = { Color.DARKCYAN,
+            Color.MEDIUMVIOLETRED, Color.AQUAMARINE, Color.SPRINGGREEN,
+            Color.YELLOWGREEN };
 
     /**
      * Planet constructor taking in all the instance variable values
@@ -60,8 +61,8 @@ public class Planet implements Boundary {
      * @param color
      *            The color of the planet
      */
-    public Planet(String name, TechLevel tech, SpecialResource resource, 
-            Government government, Location location, Condition condition, 
+    public Planet(String name, TechLevel tech, SpecialResource resource,
+            Government government, Location location, Condition condition,
             EncounterRate policeRate, EncounterRate pirateRate,
             EncounterRate traderRate, int size, Color color) {
         setName(name);
@@ -177,7 +178,8 @@ public class Planet implements Boundary {
     }
 
     /**
-     * Private setter for color validation if color is not an approved color, it is set to green
+     * Private setter for color validation if color is not an approved color, it
+     * is set to green
      * 
      * @param c
      *            The color of the planet
@@ -197,7 +199,8 @@ public class Planet implements Boundary {
     }
 
     /**
-     * Sets the number of chances to have an encounter when traveling to the planet. Is random, 3-12
+     * Sets the number of chances to have an encounter when traveling to the
+     * planet. Is random, 3-12
      */
     private void setChances() {
         chances = (int) (Math.random() * 10) + 3;
@@ -292,9 +295,9 @@ public class Planet implements Boundary {
 
     @Override
     public String toString() {
-        return name + ", Location: " + location + ", Tech Level: " + techLevel + ", Resource: "
-                + resource + ", Goverment: " + government + ", Condition: " + condition
-                + ", Mercenaries: " + bar;
+        return name + ", Location: " + location + ", Tech Level: " + techLevel
+                + ", Resource: " + resource + ", Goverment: " + government
+                + ", Condition: " + condition + ", Mercenaries: " + bar;
     }
 
     @Override

@@ -1,7 +1,5 @@
 package model;
 
-import java.util.ArrayList;
-
 import model.enums.EncounterType;
 import model.enums.GoodType;
 import model.enums.LaserType;
@@ -145,7 +143,8 @@ public abstract class NPC {
         boolean shipTypeGenerated = false;
         while (!shipTypeGenerated) {
             index = (int) (Math.random() * shipTypes.length);
-            if (shipTypes[index].getMinRep(type) <= rep && shipTypes[index].getMaxRep(type) >= rep) {
+            if (shipTypes[index].getMinRep(type) <= rep
+                    && shipTypes[index].getMaxRep(type) >= rep) {
                 generatedShip = new Ship(shipTypes[index]);
                 shipTypeGenerated = true;
                 setShip(generatedShip);
@@ -190,7 +189,8 @@ public abstract class NPC {
         boolean addedAllowedGood = false;
         while (!addedAllowedGood) {
             index = (int) (Math.random() * goodTypes.length);
-            // -1 indicates that this type of NPC cannot have this kind of cargo on their ship
+            // -1 indicates that this type of NPC cannot have this kind of cargo
+            // on their ship
             if (goodTypes[index].getNPCAmount(type) != -1) {
                 int goodAmount = goodTypes[index].getNPCAmount(type);
                 if (goodAmount > cargoCapacity) {

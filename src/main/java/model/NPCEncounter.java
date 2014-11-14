@@ -46,7 +46,8 @@ public class NPCEncounter extends Encounter {
     }
 
     /**
-     * Causes the turn count to increment as a result of a turn being taken in the encounter
+     * Causes the turn count to increment as a result of a turn being taken in
+     * the encounter
      */
     public void takeTurn() {
         turnCount++;

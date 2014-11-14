@@ -27,8 +27,8 @@ public class Shipyard {
     }
 
     /**
-     * Generates the price of the ship to be sold by the player Note: This method was created in
-     * case we make other factors impact the price
+     * Generates the price of the ship to be sold by the player Note: This
+     * method was created in case we make other factors impact the price
      * 
      * @param type
      *            The ship whose price is being determined
@@ -39,7 +39,8 @@ public class Shipyard {
     }
 
     /**
-     * Returns the purchase price of a given ship in the shipyard to be bought by the player
+     * Returns the purchase price of a given ship in the shipyard to be bought
+     * by the player
      * 
      * @param type
      *            The type of ship in the shipyard
@@ -53,8 +54,8 @@ public class Shipyard {
     }
 
     /**
-     * Returns the sell price of a given ship in the shipyard to be sold by the player A penalty to
-     * the amount of credits you get back is applied
+     * Returns the sell price of a given ship in the shipyard to be sold by the
+     * player A penalty to the amount of credits you get back is applied
      * 
      * @param type
      *            The type of ship in the shipyard
@@ -79,7 +80,8 @@ public class Shipyard {
     }
 
     /**
-     * Returns the sell price of a given ShipUpgrade in the shipyard, with the penalty applied
+     * Returns the sell price of a given ShipUpgrade in the shipyard, with the
+     * penalty applied
      * 
      * @param upgrade
      *            the ShipUpgrade being sold

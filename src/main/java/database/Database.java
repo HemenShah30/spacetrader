@@ -1,5 +1,25 @@
 package database;
 
+import model.Gadget;
+import model.GadgetFactory;
+import model.Location;
+import model.Planet;
+import model.Player;
+import model.Ship;
+import model.Universe;
+
+import model.enums.Condition;
+import model.enums.EncounterRate;
+import model.enums.GoodType;
+import model.enums.Government;
+import model.enums.LaserType;
+import model.enums.ShieldType;
+import model.enums.ShipType;
+import model.enums.SpecialResource;
+import model.enums.TechLevel;
+
+import org.postgresql.util.PGobject;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,25 +34,6 @@ import java.util.Map;
 import java.util.UUID;
 
 import javafx.scene.paint.Color;
-
-import org.postgresql.util.PGobject;
-
-import model.Gadget;
-import model.GadgetFactory;
-import model.Location;
-import model.Planet;
-import model.Player;
-import model.Ship;
-import model.Universe;
-import model.enums.Condition;
-import model.enums.EncounterRate;
-import model.enums.GoodType;
-import model.enums.Government;
-import model.enums.LaserType;
-import model.enums.ShieldType;
-import model.enums.ShipType;
-import model.enums.SpecialResource;
-import model.enums.TechLevel;
 
 /**
  * Class that handles all input and output to the database

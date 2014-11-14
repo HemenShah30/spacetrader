@@ -33,8 +33,8 @@ public class Trader extends NPC {
     }
 
     /**
-     * A second Trader constructor taking in player rep and whether or not the trader is buying the
-     * good
+     * A second Trader constructor taking in player rep and whether or not the
+     * trader is buying the good
      * 
      * @param rep
      *            The reputation of the player with traders
@@ -88,8 +88,8 @@ public class Trader extends NPC {
     }
 
     /**
-     * Returns false if trader wants to sell to the player Returns true if the trader wants to buy
-     * from the player
+     * Returns false if trader wants to sell to the player Returns true if the
+     * trader wants to buy from the player
      * 
      * @return false if the trader wants to sell to the playerm true otherwise
      */
