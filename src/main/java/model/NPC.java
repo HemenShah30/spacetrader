@@ -137,14 +137,14 @@ public abstract class NPC {
      */
     protected void generateShip(int rep, EncounterType type) {
         Ship generatedShip;
-        int index;
+        int indx;
         // generate a ship type
         ShipType[] shipTypes = ShipType.values();
         boolean shipTypeGenerated = false;
         while (!shipTypeGenerated) {
-            index = (int) (Math.random() * shipTypes.length);
-            if (shipTypes[index].getMinRep(type) <= rep && shipTypes[index].getMaxRep(type) >= rep) {
-                generatedShip = new Ship(shipTypes[index]);
+            indx = (int) (Math.random() * shipTypes.length);
+            if (shipTypes[indx].getMinRep(type) <= rep && shipTypes[indx].getMaxRep(type) >= rep) {
+                generatedShip = new Ship(shipTypes[indx]);
                 shipTypeGenerated = true;
                 setShip(generatedShip);
             }
@@ -154,10 +154,10 @@ public abstract class NPC {
         LaserType[] laserTypes = LaserType.values();
         int weaponCapacity = getShip().getShipType().getWeaponSlots();
         for (int i = 0; i < weaponCapacity; i++) {
-            index = (int) (Math.random() * laserTypes.length);
-            if (laserTypes[index].getMinRep(type) <= rep
-                    && laserTypes[index].getMaxRep(type) >= rep) {
-                ship.addLaser(laserTypes[index]);
+            indx = (int) (Math.random() * laserTypes.length);
+            if (laserTypes[indx].getMinRep(type) <= rep
+                    && laserTypes[indx].getMaxRep(type) >= rep) {
+                ship.addLaser(laserTypes[indx]);
             }
         }
 
@@ -165,10 +165,10 @@ public abstract class NPC {
         ShieldType[] shieldTypes = ShieldType.values();
         int shieldCapacity = getShip().getShipType().getShieldSlots();
         for (int i = 0; i < shieldCapacity; i++) {
-            index = (int) (Math.random() * shieldTypes.length);
-            if (shieldTypes[index].getMinRep(type) <= rep
-                    && shieldTypes[index].getMaxRep(type) >= rep) {
-                ship.addShield(shieldTypes[index]);
+            indx = (int) (Math.random() * shieldTypes.length);
+            if (shieldTypes[indx].getMinRep(type) <= rep
+                    && shieldTypes[indx].getMaxRep(type) >= rep) {
+                ship.addShield(shieldTypes[indx]);
             }
         }
 
@@ -177,14 +177,14 @@ public abstract class NPC {
         int cargoCapacity = getShip().getShipType().getCargoSize();
         boolean addedAllowedGood = false;
         while (!addedAllowedGood) {
-            index = (int) (Math.random() * goodTypes.length);
+            indx = (int) (Math.random() * goodTypes.length);
             // -1 indicates that this type of NPC cannot have this kind of cargo on their ship
-            if (goodTypes[index].getNPCAmount(type) != -1) {
-                int goodAmount = goodTypes[index].getNPCAmount(type);
+            if (goodTypes[indx].getNPCAmount(type) != -1) {
+                int goodAmount = goodTypes[indx].getNPCAmount(type);
                 if (goodAmount > cargoCapacity) {
                     goodAmount = cargoCapacity;
                 }
-                ship.addToCargo(goodTypes[index], goodAmount);
+                ship.addToCargo(goodTypes[indx], goodAmount);
                 addedAllowedGood = true;
             }
         }
@@ -198,8 +198,8 @@ public abstract class NPC {
         gadgetTypes.add(new TargetingSystem());
         int gadgetCapacity = getShip().getShipType().getGadgetSlots();
         for (int i = 0; i < gadgetCapacity; i++) {
-            index = (int) (Math.random() * shieldTypes.length);
-            ship.addGadget(gadgetTypes.get(index));
+            indx = (int) (Math.random() * shieldTypes.length);
+            ship.addGadget(gadgetTypes.get(indx));
         }
     }
 
