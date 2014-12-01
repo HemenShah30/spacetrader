@@ -2,7 +2,7 @@
     -fx-text-fill: #B08DF6;
     -fx-font-family: "Lucida Console";
     -fx-font-weight: bold;
-    -fx-background-image: url('startbutton.png');
+    -fx-background-image: url("file:resources/startbutton.png");
 }
 
 .button:hover {
