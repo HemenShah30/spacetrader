@@ -586,9 +586,9 @@ public class Ship {
         if (mercenaries.isEmpty()) {
             return highest;
         }
-        for (Mercenary m : mercenaries) {
-            if (highest < m.getPilotSkill()) {
-                highest = m.getPilotSkill();
+        for (Mercenary merc : mercenaries) {
+            if (highest < merc.getPilotSkill()) {
+                highest = merc.getPilotSkill();
             }
         }
         return highest;
@@ -604,9 +604,9 @@ public class Ship {
         if (mercenaries.isEmpty()) {
             return highest;
         }
-        for (Mercenary m : mercenaries) {
-            if (highest < m.getEngineerSkill()) {
-                highest = m.getEngineerSkill();
+        for (Mercenary merc : mercenaries) {
+            if (highest < merc.getEngineerSkill()) {
+                highest = merc.getEngineerSkill();
             }
         }
         return highest;
@@ -622,9 +622,9 @@ public class Ship {
         if (mercenaries.isEmpty()) {
             return highest;
         }
-        for (Mercenary m : mercenaries) {
-            if (highest < m.getTraderSkill()) {
-                highest = m.getTraderSkill();
+        for (Mercenary merc : mercenaries) {
+            if (highest < merc.getTraderSkill()) {
+                highest = merc.getTraderSkill();
             }
         }
         return highest;
@@ -640,9 +640,9 @@ public class Ship {
         if (mercenaries.isEmpty()) {
             return highest;
         }
-        for (Mercenary m : mercenaries) {
-            if (highest < m.getFighterSkill()) {
-                highest = m.getFighterSkill();
+        for (Mercenary merc : mercenaries) {
+            if (highest < merc.getFighterSkill()) {
+                highest = merc.getFighterSkill();
             }
         }
         return highest;
@@ -658,14 +658,27 @@ public class Ship {
         if (mercenaries.isEmpty()) {
             return highest;
         }
-        for (Mercenary m : mercenaries) {
-            if (highest < m.getInvestorSkill()) {
-                highest = m.getInvestorSkill();
+        for (Mercenary merc : mercenaries) {
+            if (highest < merc.getInvestorSkill()) {
+                highest = merc.getInvestorSkill();
             }
         }
         return highest;
     }
-
+    
+    /**
+     * Returns the sum of the mercenaries' wages
+     * 
+     * @return payment The sum of the mercenaries' wages
+     */
+    public int getMercenaryPay() {
+        int payment = 0;
+        for (Mercenary merc : mercenaries) {
+            payment += merc.getWage();
+        }
+        return payment;
+    }
+    
     @Override
     public String toString() {
         String msg = "";

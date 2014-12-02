@@ -1,7 +1,6 @@
 package view;
 
 import controller.GameEngine;
-
 import model.Encounter;
 import model.Location;
 import model.NPCEncounter;
@@ -170,17 +169,34 @@ public class TravelScreenController implements Controller {
         Player player = game.getPlayer();
         if (selectedPlanet != player.getPlanet()) {
             if (player.getShip().getFuel() >= distance) {
+                payMercenaries();
                 encounters = game.goToPlanet(selectedPlanet);
                 doEncounters();
                 setPlanetInfo();
             } else {
-                displayError("You do not have enough fuel");
+                displayMessage("You do not have enough fuel", "Error");
             }
         } else {
-            displayError("You are already on this planet");
+            displayMessage("You are already on this planet", "Error");
         }
     }
 
+    /**
+     * Pays the mercenaries the player has hired. If the player can't afford to pay,
+     * the mercenaries return to their home planet
+     */
+    @FXML
+    private void payMercenaries() {
+        int payment = game.payMercenaries();
+        if (payment == -1) {
+            displayMessage("You do not have enough credits to pay for your mercenaries. "
+                    + "They leave your ship and return to their home planets.", "Mercenaries leave");
+        } else if (payment > 0) {
+            displayMessage("You have paid your mercenaries " + payment
+                    + " credits for their hard work.", "Mercenaries paid!");
+        }
+    }
+    
     @Override
     public void updatePage() {
         if (encounters.size() > 0) {
@@ -273,9 +289,16 @@ public class TravelScreenController implements Controller {
      * 
      * @param msg
      *            The message for the error dialog to display
+     * @param title
+     *            The title for the error dialog to display
      */
-    private void displayError(String msg) {
-        Dialogs.create().owner(goBtn.getScene().getWindow()).title("Error").message(msg)
-                .showError();
+    private void displayMessage(String msg, String title) {
+        if (title.equals("Error")) {
+            Dialogs.create().owner(goBtn.getScene().getWindow()).title(title).message(msg)
+            .showError();
+        } else {
+            Dialogs.create().owner(goBtn.getScene().getWindow()).title(title).message(msg);
+        }
+        
     }
 }

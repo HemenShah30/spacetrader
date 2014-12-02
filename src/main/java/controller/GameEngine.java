@@ -430,7 +430,11 @@ public class GameEngine {
         }
         return null;
     }
-
+    
+    /**
+     * Gets the planet's mercenaries
+     * @return list of mercenaries
+     */
     public List<Mercenary> getPlanetMercenaries() {
         if (player.getPlanet().getBar() != null) {
             return mercenaryEngine.getPlanetMercenaries();
@@ -438,11 +442,28 @@ public class GameEngine {
         return null;
     }
 
+    /**
+     * Hires a mercenary
+     * @param merc Mercenary to be hired
+     * @return errors List of errors that occurred
+     */
     public List<String> hireMercenary(Mercenary merc) {
         return mercenaryEngine.hire(merc, player.getPlanet().getBar());
     }
-
+    
+    /**
+     * Fires a mercenary
+     * @param merc Mercenary to be fired
+     */
     public void fireMercenary(Mercenary merc) {
         mercenaryEngine.fire(merc, player.getPlanet().getBar());
+    }
+    
+    /**
+     * Pays the mercenaries on the ship
+     * @return payment The payment the player makes. Returns -1 if the player can't afford.
+     */
+    public int payMercenaries() {
+        return mercenaryEngine.pay();
     }
 }
