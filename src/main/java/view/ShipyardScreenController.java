@@ -1,12 +1,10 @@
 package view;
 
 import controller.GameEngine;
-
 import model.Gadget;
 import model.Player;
 import model.Ship;
 import model.ShipUpgrade;
-
 import model.enums.LaserType;
 import model.enums.ShieldType;
 import model.enums.ShipType;
@@ -15,6 +13,7 @@ import org.controlsfx.dialog.Dialogs;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -151,7 +150,17 @@ public class ShipyardScreenController {
 
     @FXML
     private Button sellShieldBtn;
+    
+    private static final int numShipImages = 7;
 
+    private static String[] shipImageNames = { "resources/noShipImage.png",
+            "resources/ship1.png", "resources/ship2.png",
+            "resources/ship3.png", "resources/ship4.png",
+            "resources/ship5.png", "resources/ship6.png" };
+
+    private static Image[] shipImages;
+    
+    
     /**
      * Method for selecting a new ship from the drop down menu
      * 
@@ -244,14 +253,29 @@ public class ShipyardScreenController {
         playerCreditsLbl.setText("Credits: " + player.getCredits());
         updateShipLabels();
         updateSellableListViews();
-        Image test = new Image("view/shiptest.png");
-        playerShipImage.setImage(test);
+
+//        Image test = new Image("view/shiptest.png");
+//        playerShipImage.setImage(test);
+    }
+    
+    private void setShipImage(ImageView view, int shipImageNumber) {
+        try {
+            view.setImage(shipImages[shipImageNumber]);
+        } catch (Exception e){
+            view.setImage(shipImages[0]);
+        }
     }
 
     /**
      * Updates the various ship labels
      */
     private void updateShipLabels() {
+        if (shipImages == null) {
+            shipImages = new Image[numShipImages];
+            for(int i = 0; i < numShipImages; i++) {
+                shipImages[i] = new Image(shipImageNames[i]);
+            }
+        }
         if (shipDropDown.getItems().size() > 0) {
             GameEngine game = GameEngine.getGameEngine();
             ShipType playerShipType = game.getPlayer().getShip().getShipType();
@@ -276,6 +300,20 @@ public class ShipyardScreenController {
                     .setText("Buy For "
                             + (int) (selectedShipType.getPrice() - game.getPlayerAssetValue())
                             + " Credits");
+            int i;
+            try{
+                i = playerShipType.getShipImageNum();
+                setShipImage(playerShipImage, i);
+            } catch (Exception e) {
+                setShipImage(playerShipImage, 0);
+
+            }
+            try {
+                i = selectedShipType.getShipImageNum();
+                setShipImage(shipyardShipImage, i);
+            } catch (Exception e) {
+                setShipImage(shipyardShipImage, 0);
+            }
         }
     }
 
