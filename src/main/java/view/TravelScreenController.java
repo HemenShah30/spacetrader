@@ -11,6 +11,7 @@ import model.Universe;
 
 import org.controlsfx.dialog.Dialogs;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -25,6 +26,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -267,6 +270,9 @@ public class TravelScreenController implements Controller {
         }
         selectedPlanet = game.getPlayer().getPlanet();
         setPlanetInfo();
+        MediaPlayer mediaPlayer = new MediaPlayer(new Media(new File("resources/void.wav").toURI().toString()));
+    	mediaPlayer.setAutoPlay(true);
+    	mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
     }
 
     /**

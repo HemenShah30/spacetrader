@@ -1,17 +1,16 @@
 package view;
 
 import controller.GameEngine;
-
 import model.NPCEncounter;
 import model.Player;
 import model.Ship;
 import model.Trader;
-
 import model.enums.EncounterResult;
 import model.enums.EncounterType;
 
 import org.controlsfx.dialog.Dialogs;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -22,6 +21,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -189,6 +190,8 @@ public class NPCEncounterController implements Controller {
                 case PLAYERFLEESUCCESS: {
                     playerMsg = "You have successfully fled the fight";
                     encounterComplete = true;
+                    MediaPlayer mediaPlayer = new MediaPlayer(new Media(new File("resources/flee.wav").toURI().toString()));
+                	mediaPlayer.setAutoPlay(true);
                     break;
                 }
                 case NPCFLEESUCCESS: {

@@ -41,10 +41,10 @@ public class MainSceneController {
     @FXML
     private void startNewGame(Event event) {
         if (MultiPageController.isValidAction(event)) {
-            MediaPlayer mediaPlayer = new MediaPlayer(new Media(new File("resources/character.wav").toURI().toString()));
+            MultiPageController.loadView(newGame, "CharacterCreator");
+            MediaPlayer mediaPlayer = new MediaPlayer(new Media(new File("resources/void.wav").toURI().toString()));
         	mediaPlayer.setAutoPlay(true);
         	mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-            MultiPageController.loadView(newGame, "CharacterCreator");
         }
     }
 

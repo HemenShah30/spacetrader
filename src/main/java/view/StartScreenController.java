@@ -35,8 +35,9 @@ public class StartScreenController {
      */
     @FXML
     private void begin(Event event) {
-    	MediaPlayer mediaPlayer = new MediaPlayer(new Media(new File("resources/start.wav").toURI().toString()));
+    	MediaPlayer mediaPlayer = new MediaPlayer(new Media(new File("resources/spacetrader.wav").toURI().toString()));
     	mediaPlayer.setAutoPlay(true);
+    	mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         if (MultiPageController.isValidAction(event)) {
             Optional<String> response = Dialogs.create().owner(beginButton.getScene().getWindow())
                     .title("User").message("Please input your username").showTextInput();

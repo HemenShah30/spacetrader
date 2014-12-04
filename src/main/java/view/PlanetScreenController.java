@@ -1,13 +1,13 @@
 package view;
 
 import controller.GameEngine;
-
 import model.Planet;
 import model.Player;
 import model.Ship;
 
 import org.controlsfx.dialog.Dialogs;
 
+import java.io.File;
 import java.io.IOException;
 
 import javafx.event.Event;
@@ -17,6 +17,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 /**
@@ -226,6 +228,12 @@ public class PlanetScreenController {
         int repairAmount = (int) ship.getRepairCost();
         refuelBtn.setText("Refuel ship for " + refuelAmount + " credits");
         repairBtn.setText("Repair ship for " + repairAmount + " credits");
+//        MediaPlayer mediaPlayer = new MediaPlayer(new Media(new File("resources/background.wav").toURI().toString()));
+//    	mediaPlayer.setAutoPlay(true);
+//    	mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+//    	MediaPlayer trollPlayer = new MediaPlayer(new Media(new File("resources/spacetrader.wav").toURI().toString()));
+//    	trollPlayer.setAutoPlay(true);
+//    	trollPlayer.setCycleCount(MediaPlayer.INDEFINITE);
     }
 
 }
