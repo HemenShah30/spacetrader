@@ -60,7 +60,7 @@ public class TradeGoodPopupController {
             if (errors.isEmpty()) {
                 parentController.updatePage();
                 Stage popupStage = (Stage) tradeBtn.getScene().getWindow();
-                MediaPlayer mediaPlayer = new MediaPlayer(new Media(new File("resources/resource.wav").toURI().toString()));
+                MediaPlayer mediaPlayer = new MediaPlayer(new Media(new File("resources/purchase.wav").toURI().toString()));
             	mediaPlayer.setAutoPlay(true);
                 popupStage.close();
             } else {

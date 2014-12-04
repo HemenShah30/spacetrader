@@ -231,9 +231,6 @@ public class PlanetScreenController {
 //        MediaPlayer mediaPlayer = new MediaPlayer(new Media(new File("resources/background.wav").toURI().toString()));
 //    	mediaPlayer.setAutoPlay(true);
 //    	mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-//    	MediaPlayer trollPlayer = new MediaPlayer(new Media(new File("resources/spacetrader.wav").toURI().toString()));
-//    	trollPlayer.setAutoPlay(true);
-//    	trollPlayer.setCycleCount(MediaPlayer.INDEFINITE);
     }
 
 }

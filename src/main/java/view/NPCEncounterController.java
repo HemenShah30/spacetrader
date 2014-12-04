@@ -135,6 +135,8 @@ public class NPCEncounterController implements Controller {
             }
             case NPCATTACK: {
                 playerMsg = "The " + encounter.getNPC().toString() + " attacked you";
+                MediaPlayer mediaPlayer = new MediaPlayer(new Media(new File("resources/pewpew.wav").toURI().toString()));
+            	mediaPlayer.setAutoPlay(true);
                 break;
             }
             case NPCSURRENDER: {
