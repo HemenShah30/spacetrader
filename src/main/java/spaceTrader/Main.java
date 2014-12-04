@@ -1,10 +1,14 @@
 package spaceTrader;
 
+import java.io.File;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 /**
@@ -29,6 +33,9 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.getIcons().add(new Image("file:resources/spaceTraderIcon.png"));
         primaryStage.show();
+        MediaPlayer mediaPlayer = new MediaPlayer(new Media(new File("resources/background.wav").toURI().toString()));
+    	mediaPlayer.setAutoPlay(true);
+    	mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
     }
 
     /**

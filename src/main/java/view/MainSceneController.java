@@ -4,6 +4,7 @@ import controller.GameEngine;
 
 import org.controlsfx.dialog.Dialogs;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -13,6 +14,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 /**
@@ -38,6 +41,9 @@ public class MainSceneController {
     @FXML
     private void startNewGame(Event event) {
         if (MultiPageController.isValidAction(event)) {
+            MediaPlayer mediaPlayer = new MediaPlayer(new Media(new File("resources/character.wav").toURI().toString()));
+        	mediaPlayer.setAutoPlay(true);
+        	mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
             MultiPageController.loadView(newGame, "CharacterCreator");
         }
     }
