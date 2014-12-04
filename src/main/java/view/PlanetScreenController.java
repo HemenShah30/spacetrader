@@ -228,7 +228,7 @@ public class PlanetScreenController {
         int repairAmount = (int) ship.getRepairCost();
         refuelBtn.setText("Refuel ship for " + refuelAmount + " credits");
         repairBtn.setText("Repair ship for " + repairAmount + " credits");
-//        MediaPlayer mediaPlayer = new MediaPlayer(new Media(new File("resources/background.wav").toURI().toString()));
+//        MediaPlayer mediaPlayer = new MediaPlayer(new Media(new File("resources/music.wav").toURI().toString()));
 //    	mediaPlayer.setAutoPlay(true);
 //    	mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
     }

@@ -33,7 +33,7 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.getIcons().add(new Image("file:resources/spaceTraderIcon.png"));
         primaryStage.show();
-        MediaPlayer mediaPlayer = new MediaPlayer(new Media(new File("resources/background.wav").toURI().toString()));
+        MediaPlayer mediaPlayer = new MediaPlayer(new Media(new File("resources/music.wav").toURI().toString()));
     	mediaPlayer.setAutoPlay(true);
     	mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
     }
